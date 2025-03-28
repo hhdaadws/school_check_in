@@ -1,4 +1,4 @@
-# Arx - Django JWT Authentication System
+# Arx - Django Forum For School System
 
 A robust Django-based user authentication system using JWT (JSON Web Tokens) for secure, stateless authentication.
 
