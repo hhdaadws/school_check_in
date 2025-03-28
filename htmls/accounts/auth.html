@@ -10,28 +10,41 @@
     <!-- 引入Element UI -->
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!-- 引入Cloudflare Turnstile -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <!-- 引入自定义CSS -->
     <link rel="stylesheet" href="/static/accounts/css/styles.css">
+    <style>
+        .captcha-container {
+            margin: 15px 0;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
+        {% if dev_environment %}
+        <div style="background-color: #f0ad4e; color: white; padding: 10px; text-align: center; margin-bottom: 15px; border-radius: 4px;">
+            开发环境模式 - 人机验证将自动通过
+        </div>
+        {% endif %}
         {% verbatim %}
         <div class="auth-container">
             <div class="form-header">
-                <h2>{{ activeForm === 'login' ? '用户登录' : '用户注册' }}</h2>
+                <h2>{{ activeTab === 'login' ? '用户登录' : '用户注册' }}</h2>
             </div>
             
             <!-- 表单切换按钮 -->
-            <el-tabs v-model="activeForm" class="tabs" @tab-click="loading = false">
+            <el-tabs v-model="activeTab" class="tabs" @tab-click="loading = false">
                 <el-tab-pane label="登录" name="login"></el-tab-pane>
                 <el-tab-pane label="注册" name="register"></el-tab-pane>
             </el-tabs>
             
             <!-- 登录表单 -->
             <transition name="form-fade" mode="out-in">
-                <el-form v-if="activeForm === 'login'" 
+                <el-form v-if="activeTab === 'login'" 
                          :model="loginForm" 
-                         :rules="loginRules" 
                          ref="loginForm" 
                          label-width="80px">
                     <el-form-item label="用户名" prop="username">
@@ -42,22 +55,30 @@
                         <el-input v-model="loginForm.password" type="password" placeholder="密码"></el-input>
                     </el-form-item>
                     
+                    <!-- Cloudflare Turnstile验证 -->
+                    <div class="captcha-container">
+                        <div class="cf-turnstile" 
+                             data-action="login"
+                             data-callback="loginCaptchaCallback"
+                             id="login-turnstile"></div>
+                    </div>
+                    
                     <el-form-item>
                         <el-button type="primary" 
-                                  @click="submitForm('loginForm')" 
-                                  :loading="loading" 
+                                  @click="login()" 
+                                  :loading="loading"
+                                  :disabled="!loginForm.captchaToken"
                                   style="width: 100%">登录</el-button>
                     </el-form-item>
                     
                     <div class="form-footer">
-                        <p>还没有账号？<span class="register-link" @click="switchForm('register')">立即注册</span></p>
+                        <p>还没有账号？<span class="register-link" @click="switchTab('register')">立即注册</span></p>
                     </div>
                 </el-form>
                 
                 <!-- 注册表单 -->
                 <el-form v-else 
                          :model="registerForm" 
-                         :rules="registerRules" 
                          ref="registerForm" 
                          label-width="100px">
                     <el-form-item label="用户名" prop="username">
@@ -68,27 +89,48 @@
                         <el-input v-model="registerForm.password" type="password" placeholder="请输入密码"></el-input>
                     </el-form-item>
                     
-                    <el-form-item label="确认密码" prop="confirmPassword">
-                        <el-input v-model="registerForm.confirmPassword" type="password" placeholder="请再次输入密码"></el-input>
+                    <el-form-item label="确认密码">
+                        <el-input v-model="registerForm.password2" type="password" placeholder="请再次输入密码"></el-input>
                     </el-form-item>
                     
                     <el-form-item label="邮箱" prop="email">
                         <el-input v-model="registerForm.email" placeholder="请输入邮箱"></el-input>
                     </el-form-item>
                     
+                    <el-form-item label="验证码">
+                        <div style="display: flex;">
+                            <el-input v-model="registerForm.verification_code" placeholder="请输入验证码" style="flex: 1; margin-right: 10px;"></el-input>
+                            <el-button 
+                                type="primary" 
+                                :disabled="!canSendCode" 
+                                @click="sendVerificationCode">
+                                {{ countdown > 0 ? `${countdown}秒后重试` : '获取验证码' }}
+                            </el-button>
+                        </div>
+                    </el-form-item>
+                    
                     <el-form-item label="手机号码" prop="phone">
                         <el-input v-model="registerForm.phone" placeholder="请输入手机号码（选填）"></el-input>
                     </el-form-item>
                     
+                    <!-- Cloudflare Turnstile验证 -->
+                    <div class="captcha-container">
+                        <div class="cf-turnstile" 
+                             data-action="register"
+                             data-callback="registerCaptchaCallback"
+                             id="register-turnstile"></div>
+                    </div>
+                    
                     <el-form-item>
                         <el-button type="primary" 
-                                  @click="submitForm('registerForm')" 
+                                  @click="register()" 
                                   :loading="loading" 
+                                  :disabled="!canRegister || !registerForm.captchaToken"
                                   style="width: 100%">立即注册</el-button>
                     </el-form-item>
                     
                     <div class="form-footer">
-                        <p>已有账号？<span class="login-link" @click="switchForm('login')">立即登录</span></p>
+                        <p>已有账号？<span class="login-link" @click="switchTab('login')">立即登录</span></p>
                     </div>
                 </el-form>
             </transition>
@@ -98,5 +140,30 @@
 
     <!-- 引入自定义JS -->
     <script src="/static/accounts/js/auth.js"></script>
+    
+    <script>
+        // 定义环境变量
+        window.ENV = {
+            isDev: {% if dev_environment %}true{% else %}false{% endif %},
+            activeTab: '{% if active_tab %}{{ active_tab }}{% else %}login{% endif %}',
+            turnstileSiteKey: '{{ turnstile_site_key }}'
+        };
+        
+        // 初始化Vue实例属性
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.app) {
+                window.app.isDevEnvironment = window.ENV.isDev;
+                window.app.activeTab = window.ENV.activeTab;
+                
+                // 开发环境自动设置验证令牌
+                if (window.ENV.isDev) {
+                    setTimeout(function() {
+                        window.app.loginForm.captchaToken = 'dev_auto_token';
+                        window.app.registerForm.captchaToken = 'dev_auto_token';
+                    }, 1000);
+                }
+            }
+        });
+    </script>
 </body>
 </html> 

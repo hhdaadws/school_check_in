@@ -135,4 +135,26 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # JWT配置
-JWT_EXPIRY_DAYS = 1  # JWT令牌过期时间（天）
+JWT_EXPIRY_DAYS = 1
+
+# 邮件配置
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.qq.com'  # QQ邮箱SMTP服务器
+EMAIL_PORT = 465  # QQ邮箱SSL端口
+EMAIL_USE_SSL = True  # 使用SSL加密
+EMAIL_HOST_USER = '1933191436@qq.com'  # 发件人邮箱，需替换为实际QQ邮箱
+EMAIL_HOST_PASSWORD = 'saehjjmkuayieced'  # QQ邮箱授权码，需替换为实际授权码
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# 验证码配置
+VERIFICATION_CODE_EXPIRE_MINUTES = 10  # 验证码有效期（分钟）
+
+# Cloudflare Turnstile配置
+TURNSTILE_SITE_KEY = '1x00000000000000000000AA'  # 替换为你的站点密钥
+TURNSTILE_SECRET_KEY = 'YOUR_TURNSTILE_SECRET_KEY'  # 替换为你的密钥
+TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
+
+# 环境配置
+# 将此设置为True表示开发环境，人机验证会自动通过
+# 在生产环境中设置为False，使用真实验证
+DEV_ENVIRONMENT = True  # 开发环境标志

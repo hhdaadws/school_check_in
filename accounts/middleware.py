@@ -10,15 +10,19 @@ class JWTAuthMiddleware:
         self.get_response = get_response
         
     def __call__(self, request):
+        # 跳过Django admin路径的认证中间件
+        if request.path.startswith('/admin/'):
+            return self.get_response(request)
+            
         # 从请求头中获取JWT令牌
-        auth_header = request.META.get('HTTP_AUTHORIZATION', '')
+        auth_header = request.headers.get('Authorization')
         
         # 初始化请求对象的用户属性
         request.user = None
         request.auth = None
         
         # 如果存在认证头且以Bearer开头
-        if auth_header.startswith('Bearer '):
+        if auth_header and auth_header.startswith('Bearer '):
             # 提取令牌
             token = auth_header.split(' ')[1]
             

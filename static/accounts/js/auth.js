@@ -1,4 +1,5 @@
-new Vue({
+// 认证页面Vue应用
+window.app = new Vue({
     el: '#app',
     data() {
         // 自定义校验密码一致性
@@ -13,176 +14,266 @@ new Vue({
         };
         
         return {
-            activeForm: 'login', // 默认显示登录表单
-            
-            // 登录表单
+            activeTab: 'login',
             loginForm: {
                 username: '',
-                password: ''
+                password: '',
+                captchaToken: ''  // Cloudflare Turnstile令牌
             },
-            
-            // 注册表单
             registerForm: {
                 username: '',
                 password: '',
-                confirmPassword: '',
+                password2: '',
                 email: '',
-                phone: ''
+                phone: '',
+                verification_code: '',
+                captchaToken: ''  // Cloudflare Turnstile令牌
             },
-            
-            // 表单验证规则
-            loginRules: {
-                username: [
-                    { required: true, message: '请输入用户名或邮箱', trigger: 'blur' }
-                ],
-                password: [
-                    { required: true, message: '请输入密码', trigger: 'blur' },
-                    { min: 8, message: '密码长度至少为8个字符', trigger: 'blur' }
-                ]
-            },
-            
-            registerRules: {
-                username: [
-                    { required: true, message: '请输入用户名', trigger: 'blur' },
-                    { min: 3, max: 20, message: '长度在 3 到 20 个字符', trigger: 'blur' }
-                ],
-                password: [
-                    { required: true, message: '请输入密码', trigger: 'blur' },
-                    { min: 8, message: '密码长度至少为8个字符', trigger: 'blur' },
-                    { pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, message: '密码必须包含字母和数字', trigger: 'blur' }
-                ],
-                confirmPassword: [
-                    { required: true, message: '请再次输入密码', trigger: 'blur' },
-                    { validator: validatePass, trigger: 'blur' }
-                ],
-                email: [
-                    { required: true, message: '请输入邮箱地址', trigger: 'blur' },
-                    { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }
-                ],
-                phone: [
-                    { pattern: /^1\d{10}$/, message: '请输入正确的手机号码', trigger: 'blur' }
-                ]
-            },
-            
-            // 表单提交状态
-            loading: false
+            loading: false,
+            countdown: 0,
+            countdownTimer: null,
+            isDevEnvironment: false // 将由服务器传递的变量设置
         };
     },
-    
-    methods: {
-        // 切换表单
-        switchForm(formName) {
-            this.activeForm = formName;
+    computed: {
+        // 注册表单验证
+        canRegister() {
+            return this.registerForm.username &&
+                   this.registerForm.password &&
+                   this.registerForm.password === this.registerForm.password2 &&
+                   this.registerForm.email &&
+                   this.registerForm.verification_code;
         },
-        
-        // 提交表单
-        submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    if (formName === 'loginForm') {
-                        this.login();
-                    } else if (formName === 'registerForm') {
-                        this.register();
-                    }
-                } else {
-                    console.log('表单验证失败');
-                    return false;
+        // 是否可以发送验证码
+        canSendCode() {
+            return this.registerForm.email && !this.countdown;
+        }
+    },
+    mounted() {
+        // 在非开发环境中，渲染Turnstile组件
+        this.$nextTick(() => {
+            setTimeout(() => {
+                this.renderTurnstile();
+            }, 500);
+        });
+    },
+    created() {
+        // 检查是否已登录
+        const token = localStorage.getItem('token');
+        if (token) {
+            window.location.href = '/accounts/';
+        }
+    },
+    methods: {
+        // 渲染Turnstile组件
+        renderTurnstile() {
+            if (typeof turnstile !== 'undefined' && window.ENV && window.ENV.turnstileSiteKey) {
+                console.log('渲染Turnstile组件，密钥:', window.ENV.turnstileSiteKey);
+                
+                // 渲染登录验证
+                if (document.getElementById('login-turnstile')) {
+                    turnstile.render('#login-turnstile', {
+                        sitekey: window.ENV.turnstileSiteKey,
+                        callback: (token) => {
+                            console.log('登录验证成功');
+                            this.loginForm.captchaToken = token;
+                        }
+                    });
                 }
-            });
+                
+                // 渲染注册验证
+                if (document.getElementById('register-turnstile')) {
+                    turnstile.render('#register-turnstile', {
+                        sitekey: window.ENV.turnstileSiteKey,
+                        callback: (token) => {
+                            console.log('注册验证成功');
+                            this.registerForm.captchaToken = token;
+                        }
+                    });
+                }
+            } else {
+                console.error('Turnstile未加载或密钥未设置');
+                // 3秒后重试
+                setTimeout(() => {
+                    this.renderTurnstile();
+                }, 3000);
+            }
         },
         
         // 登录方法
         login() {
+            // 在生产环境中检查验证码
+            if (!this.isDevEnvironment && !this.loginForm.captchaToken) {
+                this.$message.warning('请完成人机验证');
+                return;
+            }
+
             this.loading = true;
             
-            axios.post('/accounts/login/', {
+            // 构建登录数据，包含人机验证令牌
+            const loginData = {
                 username: this.loginForm.username,
-                password: this.loginForm.password
-            })
-            .then(response => {
-                this.loading = false;
-                if (response.data.status === 'success') {
-                    this.$message.success('登录成功');
-                    
-                    // 保存用户信息和JWT令牌
-                    const userData = response.data.data;
-                    localStorage.setItem('user', JSON.stringify({
-                        username: userData.username,
-                        email: userData.email
-                    }));
-                    localStorage.setItem('token', userData.token);
-                    
-                    // 设置axios默认请求头，添加授权信息
-                    axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
-                    
-                    // 重定向到首页
-                    setTimeout(() => {
+                password: this.loginForm.password,
+                captcha_token: this.loginForm.captchaToken || 'dev_mode'
+            };
+            
+            axios.post('/accounts/login/', loginData)
+                .then(response => {
+                    if (response.data.status === 'success') {
+                        // 保存用户信息和令牌
+                        localStorage.setItem('token', response.data.token);
+                        localStorage.setItem('user', JSON.stringify({
+                            username: response.data.username,
+                            email: response.data.email
+                        }));
+                        
+                        // 设置默认请求头
+                        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+                        
+                        // 跳转到主页
                         window.location.href = '/accounts/';
-                    }, 1000);
-                } else {
-                    this.$message.error(response.data.message || '登录失败');
-                }
-            })
-            .catch(error => {
-                this.loading = false;
-                if (error.response) {
-                    this.$message.error(error.response.data.message || '登录失败');
-                } else {
-                    this.$message.error('网络错误，请稍后重试');
-                }
-            });
+                    } else {
+                        this.$message.error(response.data.message);
+                        // 重置验证码
+                        this.resetCaptcha('login');
+                    }
+                })
+                .catch(error => {
+                    this.$message.error('登录失败，请稍后重试');
+                    console.error(error);
+                    // 重置验证码
+                    this.resetCaptcha('login');
+                })
+                .finally(() => {
+                    this.loading = false;
+                });
         },
         
         // 注册方法
         register() {
-            this.loading = true;
-            
-            // 构造提交的数据对象
-            const postData = {
-                username: this.registerForm.username,
-                password: this.registerForm.password,
-                email: this.registerForm.email
-            };
-            
-            // 如果有手机号，则添加
-            if (this.registerForm.phone) {
-                postData.phone = this.registerForm.phone;
+            if (!this.canRegister) {
+                this.$message.warning('请完成所有必填项');
+                return;
             }
             
-            axios.post('/accounts/register/', postData)
-            .then(response => {
-                this.loading = false;
-                if (response.data.status === 'success') {
-                    this.$message.success('注册成功');
-                    // 切换到登录表单
-                    this.switchForm('login');
-                    // 自动填入刚注册的用户名
-                    this.loginForm.username = this.registerForm.username;
-                } else {
-                    this.$message.error(response.data.message || '注册失败');
-                }
-            })
-            .catch(error => {
-                this.loading = false;
-                if (error.response) {
-                    this.$message.error(error.response.data.message || '注册失败');
-                } else {
-                    this.$message.error('网络错误，请稍后重试');
-                }
-            });
-        }
-    },
-    
-    // 在组件创建时检查是否已登录
-    created() {
-        // 检查本地存储中是否有令牌
-        const token = localStorage.getItem('token');
-        if (token) {
-            // 设置axios默认请求头，添加授权信息
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            // 在生产环境中检查验证码
+            if (!this.isDevEnvironment && !this.registerForm.captchaToken) {
+                this.$message.warning('请完成人机验证');
+                return;
+            }
             
-            // 已登录状态下直接跳转到首页
-            window.location.href = '/accounts/';
+            this.loading = true;
+            
+            // 构建注册数据，包含人机验证令牌
+            const registerData = {
+                username: this.registerForm.username,
+                password: this.registerForm.password,
+                password2: this.registerForm.password2,
+                email: this.registerForm.email,
+                phone: this.registerForm.phone,
+                verification_code: this.registerForm.verification_code,
+                captcha_token: this.registerForm.captchaToken || 'dev_mode'
+            };
+            
+            axios.post('/accounts/register/', registerData)
+                .then(response => {
+                    if (response.data.status === 'success') {
+                        this.$message.success(response.data.message);
+                        
+                        // 保存用户信息和令牌
+                        localStorage.setItem('token', response.data.token);
+                        localStorage.setItem('user', JSON.stringify({
+                            username: response.data.username,
+                            email: response.data.email
+                        }));
+                        
+                        // 设置默认请求头
+                        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+                        
+                        // 跳转到主页
+                        window.location.href = '/accounts/';
+                    } else {
+                        this.$message.error(response.data.message);
+                        // 重置验证码
+                        this.resetCaptcha('register');
+                    }
+                })
+                .catch(error => {
+                    this.$message.error('注册失败，请稍后重试');
+                    console.error(error);
+                    // 重置验证码
+                    this.resetCaptcha('register');
+                })
+                .finally(() => {
+                    this.loading = false;
+                });
+        },
+        
+        // 发送验证码
+        sendVerificationCode() {
+            if (!this.registerForm.email) {
+                this.$message.warning('请先填写邮箱');
+                return;
+            }
+            
+            this.loading = true;
+            
+            axios.post('/accounts/send-verification-code/', { email: this.registerForm.email })
+                .then(response => {
+                    if (response.data.status === 'success') {
+                        this.$message.success(response.data.message);
+                        this.startCountdown();
+                    } else {
+                        this.$message.error(response.data.message);
+                    }
+                })
+                .catch(error => {
+                    this.$message.error('发送验证码失败，请稍后重试');
+                    console.error(error);
+                })
+                .finally(() => {
+                    this.loading = false;
+                });
+        },
+        
+        // 开始倒计时
+        startCountdown() {
+            this.countdown = 60;
+            this.countdownTimer = setInterval(() => {
+                this.countdown -= 1;
+                if (this.countdown <= 0) {
+                    clearInterval(this.countdownTimer);
+                }
+            }, 1000);
+        },
+        
+        // 切换标签页
+        switchTab(tab) {
+            this.activeTab = tab;
+            // 重置验证码
+            this.resetCaptcha('both');
+            
+            // 重新渲染Turnstile
+            this.$nextTick(() => {
+                this.renderTurnstile();
+            });
+        },
+        
+        // 重置Cloudflare Turnstile验证码
+        resetCaptcha(type) {
+            if (type === 'login' || type === 'both') {
+                this.loginForm.captchaToken = '';
+                if (typeof turnstile !== 'undefined') {
+                    turnstile.reset('#login-turnstile');
+                }
+            }
+            
+            if (type === 'register' || type === 'both') {
+                this.registerForm.captchaToken = '';
+                if (typeof turnstile !== 'undefined') {
+                    turnstile.reset('#register-turnstile');
+                }
+            }
         }
     }
 }); 

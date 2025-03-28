@@ -4,6 +4,10 @@ import re
 import jwt
 import datetime
 from django.conf import settings
+import uuid
+import random
+import string
+from django.utils import timezone
 
 # Create your models here.
 class User(models.Model):
@@ -133,3 +137,45 @@ class User(models.Model):
         )
         user.save()
         return user, "注册成功"
+
+# 验证码模型
+class VerificationCode(models.Model):
+    email = models.EmailField(verbose_name="邮箱")
+    code = models.CharField(max_length=6, verbose_name="验证码")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
+    is_used = models.BooleanField(default=False, verbose_name="是否已使用")
+    
+    class Meta:
+        verbose_name = "验证码"
+        verbose_name_plural = verbose_name
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"{self.email}的验证码"
+    
+    @classmethod
+    def generate_code(cls, email):
+        """生成并保存验证码"""
+        # 生成6位随机数字验证码
+        code = ''.join(random.choices(string.digits, k=6))
+        
+        # 失效旧的未使用验证码
+        cls.objects.filter(email=email, is_used=False).update(is_used=True)
+        
+        # 创建新验证码
+        verification = cls.objects.create(email=email, code=code)
+        return verification
+    
+    def is_valid(self):
+        """检查验证码是否有效"""
+        # 已使用的验证码无效
+        if self.is_used:
+            return False
+        
+        # 检查验证码是否过期
+        now = timezone.now()
+        expiry_time = self.created_at + datetime.timedelta(minutes=settings.VERIFICATION_CODE_EXPIRE_MINUTES)
+        if now > expiry_time:
+            return False
+        
+        return True
