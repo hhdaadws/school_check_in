@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+    <!-- 引入Vue.js和Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- 引入Element UI -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!-- 引入自定义样式 -->
+    <link rel="stylesheet" href="/static/accounts/css/styles.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="header">
+                <div class="welcome">欢迎使用账户管理系统</div>
+                <div class="user-info" v-if="isLoggedIn">
+                    <div class="avatar">{{ avatarInitial }}</div>
+                    <el-dropdown trigger="click">
+                        <span class="el-dropdown-link">
+                            {{ userInfo.username }}<i class="el-icon-arrow-down el-icon--right"></i>
+                        </span>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item @click.native="goToProfile">个人资料</el-dropdown-item>
+                            <el-dropdown-item @click.native="logout" divided>退出登录</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                </div>
+                <div v-else>
+                    <el-button type="primary" @click="goToLogin">登录/注册</el-button>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div v-if="isLoggedIn">
+                    <h2>个人资料</h2>
+                    <el-loading v-if="loading" element-loading-text="加载中..."></el-loading>
+                    <template v-else>
+                        <div class="info-item">
+                            <div class="info-label">用户名：</div>
+                            <div>{{ displayUsername }}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">邮箱：</div>
+                            <div>{{ displayEmail }}</div>
+                        </div>
+                        <div class="info-item" v-if="userInfo.phone">
+                            <div class="info-label">手机号码：</div>
+                            <div>{{ userInfo.phone }}</div>
+                        </div>
+                    </template>
+                </div>
+                <div class="no-auth" v-else>
+                    <h2>请先登录</h2>
+                    <p>登录后即可查看个人资料和使用更多功能</p>
+                    <el-button type="primary" @click="goToLogin">去登录</el-button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 引入自定义脚本 -->
+    <script src="/static/accounts/js/home.js"></script>
+</body>
+</html> 
