@@ -614,8 +614,7 @@
                 
                 <!-- 右侧按钮区域 -->
                 <div class="action-btn" v-if="currentTab === 'forum'">
-                    <i class="el-icon-edit" v-if="userInfo.is_editor" @click="dialogVisible = true; dialogType = 'post'; dialogTitle = '创建新帖子'"></i>
-                    <span v-else style="width: 20px;"></span>
+                    <i class="el-icon-chat-line-square" @click="enterChatRoom"></i>
                 </div>
                 <div class="action-btn" v-else-if="currentTab === 'checkin'">
                     <i class="el-icon-plus" @click="dialogVisible = true; dialogType = 'task'; dialogTitle = '创建新任务'"></i>
@@ -1631,6 +1630,16 @@
                             this.loading = false;
                             this.$message.error('获取论坛数据失败，请刷新页面重试');
                         });
+                    },
+                    enterChatRoom() {
+                        // 根据选择的学校进入相应的聊天室
+                        if (!this.selectedSchool || !this.selectedSchool.id) {
+                            this.$message.error('请先选择一个学校');
+                            return;
+                        }
+                        
+                        // 跳转到对应学校的聊天室
+                        window.location.href = `/chat/room/${this.selectedSchool.id}/`;
                     }
                 },
                 mounted() {

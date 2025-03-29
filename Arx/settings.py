@@ -28,10 +28,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+ASGI_APPLICATION = "Arx.asgi.application"
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 # Application definition
 
 INSTALLED_APPS = [
+    'simpleui',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,10 +46,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'admin_center',
+    'chat',
     'checkin',
     'forum',
     'messaging',
-    'notifications'
+    'notifications',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -129,6 +137,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+# 添加静态文件收集目录
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -158,3 +169,44 @@ TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverif
 # 将此设置为True表示开发环境，人机验证会自动通过
 # 在生产环境中设置为False，使用真实验证
 DEV_ENVIRONMENT = True  # 开发环境标志
+
+# 日志配置
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'chat': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}

@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d4a6a60d-b86d-45fd-8d44-a3bd5e188410" name="Changes" comment="add email and CAPTCHA verifications">
+    <list default="true" id="d4a6a60d-b86d-45fd-8d44-a3bd5e188410" name="Changes" comment="完成界面优化，打卡功能，论坛帖子功能，管理员审核功能，夜间模式，切换绑定邮箱功能，修复若干bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,20 +36,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/h1933/Downloads/Arx",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/h1933/Downloads/Arx&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Arx" type="Python.DjangoServer" factoryName="Django server">
       <module name="Arx" />
@@ -96,6 +96,8 @@
       <workItem from="1742967527322" duration="28000" />
       <workItem from="1743140038609" duration="306000" />
       <workItem from="1743166601863" duration="357000" />
+      <workItem from="1743235991058" duration="224000" />
+      <workItem from="1743236271898" duration="154000" />
     </task>
     <task id="LOCAL-00001" summary="create a template">
       <option name="closed" value="true" />
@@ -113,7 +115,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743166726970</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="完成界面优化，打卡功能，论坛帖子功能，管理员审核功能，夜间模式，切换绑定邮箱功能，修复若干bug">
+      <option name="closed" value="true" />
+      <created>1743236107498</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1743236107498</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,6 +132,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="create a template" />
     <MESSAGE value="add email and CAPTCHA verifications" />
-    <option name="LAST_COMMIT_MESSAGE" value="add email and CAPTCHA verifications" />
+    <MESSAGE value="完成界面优化，打卡功能，论坛帖子功能，管理员审核功能，夜间模式，切换绑定邮箱功能，修复若干bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成界面优化，打卡功能，论坛帖子功能，管理员审核功能，夜间模式，切换绑定邮箱功能，修复若干bug" />
   </component>
 </project>

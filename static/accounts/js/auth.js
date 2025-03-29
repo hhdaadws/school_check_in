@@ -143,7 +143,7 @@ window.app = new Vue({
                         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
                         
                         // 跳转到主页
-                        window.location.href = '/accounts/home/';
+                        window.location.href = '/accounts/';
                     } else {
                         this.$message.error(response.data.message);
                         // 重置验证码
