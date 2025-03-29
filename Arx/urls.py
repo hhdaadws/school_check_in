@@ -15,11 +15,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.shortcuts import redirect
+from forum.views import serve_post_html
+from admin_center.views import admin_link
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include(('accounts.urls', 'accounts'), namespace='accounts')),
     path('', lambda request: redirect('accounts:home_page'), name='root'),
+    path('forum/', include(('forum.urls', 'forum'), namespace='forum')),
+    path('checkin/', include(('checkin.urls', 'checkin'), namespace='checkin')),
+    path('admin_center/', include(('admin_center.urls', 'admin_center'), namespace='admin_center')),
+
+    
+    # 处理帖子HTML文件的路由
+    re_path(r'^post_(?P<post_id>\d+)\.html$', serve_post_html, name='post_detail_html'),
 ]

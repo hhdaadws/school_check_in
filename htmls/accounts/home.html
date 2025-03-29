@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>首页</title>
+    <title>校园APP</title>
     <!-- 引入Vue.js和Axios -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -12,58 +12,1668 @@
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     <!-- 引入自定义样式 -->
     <link rel="stylesheet" href="/static/accounts/css/styles.css">
+    
+
+    <style>
+        /* 添加v-cloak指令的CSS，防止闪现未编译的模板 */
+        [v-cloak] {
+            display: none;
+        }
+        
+        /* APP布局样式 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            max-width: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        /* 顶部导航栏 */
+        .top-bar {
+            background-color: #409EFF;
+            color: white;
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            height: 50px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .top-bar .title {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            flex: 1;
+        }
+        
+        .top-bar .action-btn {
+            font-size: 20px;
+            cursor: pointer;
+            min-width: 40px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        /* 内容区域 */
+        .content-area {
+            flex: 1;
+            margin-top: 74px;
+            margin-bottom: 60px;
+            padding: 15px;
+            overflow-y: auto;
+            z-index: 10; /* 确保内容区域在导航栏之下 */
+            position: relative;
+            transition: opacity 0.3s ease;
+        }
+        
+        /* 底部导航 */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        .nav-item {
+            text-align: center;
+            padding: 5px 0;
+            width: 33.33%;
+            cursor: pointer;
+            color: #666;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .nav-item.active {
+            color: #409EFF;
+        }
+        
+        .nav-icon {
+            font-size: 22px;
+            margin-bottom: 3px;
+        }
+        
+        /* 学校选择器 */
+        .school-selector {
+            background-color: white;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        /* 卡片样式 */
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .card-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* 论坛帖子 */
+        .post-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0;
+            border-radius: 4px;
+        }
+        
+        .post-item:hover {
+            background-color: #ecf5ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .post-item:last-child {
+            border-bottom: none;
+        }
+        
+        .post-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #303133;
+        }
+        
+        .title-text {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .post-item:hover .title-text {
+            color: #409EFF;
+        }
+        
+        .post-title i {
+            opacity: 0;
+            transition: all 0.3s ease;
+            margin-left: 5px;
+        }
+        
+        .post-item:hover .post-title i {
+            opacity: 1;
+            transform: translateX(3px);
+            color: #409EFF;
+        }
+        
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #909399;
+        }
+        
+        /* 打卡项目 */
+        .checkin-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .checkin-item:last-child {
+            border-bottom: none;
+        }
+        
+        .checkin-info {
+            flex: 1;
+        }
+        
+        .checkin-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .checkin-time {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        /* 个人中心菜单 */
+        .profile-menu {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0;
+            border-radius: 4px;
+        }
+        
+        .menu-item:hover {
+            background-color: #ecf5ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item i.el-icon-arrow-right {
+            opacity: 0;
+            transition: all 0.3s ease;
+            margin-left: 5px;
+        }
+        
+        .menu-item:hover i.el-icon-arrow-right {
+            opacity: 1;
+            transform: translateX(3px);
+            color: #409EFF;
+        }
+        
+        body.dark-mode .menu-item:hover {
+            background-color: #2a2a2a;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.dark-mode .menu-item:hover i.el-icon-arrow-right {
+            color: #87CEFA;
+        }
+        
+        .menu-item-left {
+            display: flex;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+        
+        .menu-item:hover .menu-item-left {
+            color: #409EFF;
+        }
+        
+        body.dark-mode .menu-item:hover .menu-item-left {
+            color: #87CEFA;
+        }
+        
+        .menu-icon {
+            margin-right: 10px;
+            color: #409EFF;
+            font-size: 18px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        
+        .menu-item:hover .menu-icon {
+            transform: scale(1.2);
+        }
+        
+        body.dark-mode .menu-icon {
+            color: #87CEFA;
+        }
+        
+        .avatar-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: #409EFF;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .user-name {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .user-info {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        /* 调试区域样式 */
+        #debug {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px;
+            font-family: monospace;
+            font-size: 12px;
+            position: fixed;
+            bottom: 70px;
+            left: 0;
+            right: 0;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 2000;
+            display: none; /* 默认隐藏调试信息 */
+        }
+        #debug-log {
+            max-height: 180px;
+            overflow-y: auto;
+        }
+        #debug-log p {
+            margin: 2px 0;
+            padding: 2px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .task-section {
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+        }
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .task-item {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+        .task-title {
+            font-weight: bold;
+        }
+        .task-info {
+            color: #666;
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+        .task-actions {
+            margin-top: 8px;
+        }
+        /* 打卡社区样式 */
+        .community-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .community-item:last-child {
+            border-bottom: none;
+        }
+        
+        .community-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .community-user {
+            font-weight: bold;
+            color: #409EFF;
+        }
+        
+        .community-time {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .community-content {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .community-task {
+            font-weight: bold;
+            color: #67C23A;
+        }
+        
+        /* 任务项目样式 */
+        .task-title {
+            font-weight: bold;
+        }
+        
+        .task-info {
+            color: #666;
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+        
+        .task-actions {
+            margin-top: 8px;
+        }
+        
+        /* 夜间模式样式 */
+        body {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .card, .top-bar, .post-header, .post-content, .school-selector, .bottom-nav, 
+        .el-dialog, .el-dropdown-menu, .el-button--default, .el-input__inner, .el-textarea__inner {
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .card-title, .post-title, .user-name, .post-meta, .user-info, .checkin-time, .menu-item, 
+        .checkin-item, .community-item, .task-item, .el-dropdown-menu__item, .el-dialog__title, .el-dialog__close {
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .top-bar {
+            background-color: #1f1f1f;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        body.dark-mode .card,
+        body.dark-mode .post-header,
+        body.dark-mode .post-content,
+        body.dark-mode .school-selector,
+        body.dark-mode .bottom-nav {
+            background-color: #1f1f1f;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        body.dark-mode .card-title,
+        body.dark-mode .post-title,
+        body.dark-mode .user-name {
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .post-meta,
+        body.dark-mode .user-info,
+        body.dark-mode .checkin-time {
+            color: #aaaaaa;
+        }
+        
+        body.dark-mode .post-item {
+            border-bottom: 1px solid #333;
+        }
+        
+        body.dark-mode .post-item:hover {
+            background-color: #2a2a2a;
+        }
+        
+        body.dark-mode .menu-item,
+        body.dark-mode .checkin-item,
+        body.dark-mode .community-item,
+        body.dark-mode .task-item {
+            border-bottom: 1px solid #333;
+        }
+        
+        body.dark-mode .el-dropdown-menu {
+            background-color: #1f1f1f;
+            border-color: #333;
+        }
+        
+        body.dark-mode .el-dropdown-menu__item {
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .el-dropdown-menu__item:hover {
+            background-color: #2a2a2a;
+            color: #409EFF;
+        }
+        
+        body.dark-mode .el-dialog {
+            background-color: #1f1f1f;
+            border-color: #333;
+        }
+        
+        body.dark-mode .el-dialog__title {
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .el-input__inner {
+            background-color: #2a2a2a;
+            border-color: #333;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .el-textarea__inner {
+            background-color: #2a2a2a;
+            border-color: #333;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .el-button--default {
+            background-color: #2a2a2a;
+            border-color: #333;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .el-dialog__headerbtn .el-dialog__close {
+            color: #e0e0e0;
+        }
+        
+        /* 内容过渡效果 */
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity 0.3s;
+        }
+        .fade-enter, .fade-leave-to {
+            opacity: 0;
+        }
+        
+        /* 加载遮罩层 */
+        .loading-overlay {
+            position: fixed;
+            top: 74px;
+            bottom: 60px;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+            transition: opacity 0.3s ease;
+        }
+        
+        body.dark-mode .loading-overlay {
+            background-color: rgba(31, 31, 31, 0.8);
+        }
+        
+        body.dark-mode .loading-overlay p {
+            color: #e0e0e0;
+        }
+    </style>
 </head>
 <body>
-    <div id="app">
-        <div class="container">
-            <div class="header">
-                <div class="welcome">欢迎使用账户管理系统</div>
-                <div class="user-info" v-if="isLoggedIn">
-                    <div class="avatar">{{ avatarInitial }}</div>
-                    <el-dropdown trigger="click">
-                        <span class="el-dropdown-link">
-                            {{ userInfo.username }}<i class="el-icon-arrow-down el-icon--right"></i>
-                        </span>
+    <!-- 添加v-cloak指令，防止Vue模板闪现 -->
+    <div id="app" v-cloak>
+        <div class="app-container">
+            <!-- 顶部导航栏 -->
+            <div class="top-bar">
+                <!-- 左侧区域 -->
+                <div class="action-btn" v-if="currentTab === 'forum'">
+                    <i class="el-icon-location"></i>
+                    <el-dropdown @command="changeSchool" trigger="click">
+                        <span class="title">{{ selectedSchool.name }} <i class="el-icon-arrow-down el-icon--right"></i></span>
                         <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item @click.native="goToProfile">个人资料</el-dropdown-item>
-                            <el-dropdown-item @click.native="logout" divided>退出登录</el-dropdown-item>
+                            <el-dropdown-item v-for="school in schools" :key="school.id" :command="school.id">
+                                {{ school.name }}
+                            </el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
                 </div>
-                <div v-else>
-                    <el-button type="primary" @click="goToLogin">登录/注册</el-button>
+                <div v-else style="width: 20px;"></div>
+                
+                <!-- 中间标题区域 -->
+                <div class="title" v-if="currentTab === 'profile'">个人中心</div>
+                <div class="title" v-else-if="currentTab === 'checkin'">打卡</div>
+                <div class="title" v-else-if="currentTab === 'tasks'">打卡动态</div>
+                <div class="title" v-else-if="currentTab === 'forum'"></div>
+                
+                <!-- 右侧按钮区域 -->
+                <div class="action-btn" v-if="currentTab === 'forum'">
+                    <i class="el-icon-edit" v-if="userInfo.is_editor" @click="dialogVisible = true; dialogType = 'post'; dialogTitle = '创建新帖子'"></i>
+                    <span v-else style="width: 20px;"></span>
+                </div>
+                <div class="action-btn" v-else-if="currentTab === 'checkin'">
+                    <i class="el-icon-plus" @click="dialogVisible = true; dialogType = 'task'; dialogTitle = '创建新任务'"></i>
+                </div>
+                <div class="action-btn" v-else-if="currentTab === 'tasks'">
+                    <i class="el-icon-refresh" @click="refreshCommunity"></i>
+                </div>
+                <div v-else style="width: 20px;"></div>
+            </div>
+            
+            <!-- 内容区域 -->
+            <div class="content-area">
+                <!-- 首页欢迎板块 -->
+                <div class="card" id="static-card" v-if="!initialized">
+                    <div class="card-title">欢迎访问校园APP</div>
+                    <div style="padding: 15px;">
+                        <p>页面加载中，请稍候...</p>
+                    </div>
+                </div>
+                
+                <!-- 加载遮罩层 -->
+                <transition name="fade">
+                    <div v-if="loading" class="loading-overlay">
+                        <div style="text-align: center;">
+                            <i class="el-icon-loading" style="font-size: 30px; color: #409EFF;"></i>
+                            <p style="margin-top: 10px; color: #606266;">加载中...</p>
+                        </div>
+                    </div>
+                </transition>
+                
+                <!-- 调试信息 -->
+                <div class="card" v-if="false">
+                    <div class="card-title">加载中...</div>
+                </div>
+                
+                <!-- 各模块内容 -->
+                <div v-show="!loading">
+                    <!-- 论坛板块 -->
+                    <div v-if="currentTab === 'forum'">
+                        <div class="card">
+                            <div class="card-title">
+                                热门帖子
+                                <el-button v-if="userInfo.is_editor" type="text" size="mini" @click="dialogVisible = true; dialogType = 'post'; dialogTitle = '创建新帖子'">
+                                    发布帖子
+                                </el-button>
+                            </div>
+                            <div class="post-item" v-for="post in filteredPosts" :key="post.id" @click="viewPostDetail(post)">
+                                <div class="post-title">
+                                    <span class="title-text">{{ post.title }}</span>
+                                    <i class="el-icon-arrow-right" style="font-size: 14px; color: #909399;"></i>
+                                </div>
+                                <div class="post-meta">
+                                    <span><i class="el-icon-user" style="margin-right: 4px;"></i>{{ post.author }}</span>
+                                    <span><i class="el-icon-time" style="margin-right: 4px;"></i>{{ post.time }}</span>
+                                </div>
+                            </div>
+                            <div v-if="filteredPosts.length === 0" style="text-align: center; padding: 20px 0; color: #999;">
+                                暂无帖子
+                            </div>
+                        </div>
+                        
+                        <!-- 用户自己发布的帖子 (包括待审核的) -->
+                        <div class="card" v-if="userPosts.length > 0">
+                            <div class="card-title">
+                                我的帖子
+                            </div>
+                            <div class="post-item" v-for="post in userPosts" :key="post.id" @click="viewPostDetail(post)">
+                                <div class="post-title">
+                                    <span class="title-text">{{ post.title }}</span>
+                                    <el-tag size="mini" :type="getStatusType(post.status)" style="margin-left: 10px;">
+                                        {{ post.status_display }}
+                                    </el-tag>
+                                </div>
+                                <div class="post-meta">
+                                    <span><i class="el-icon-user" style="margin-right: 4px;"></i>{{ post.author }}</span>
+                                    <span><i class="el-icon-time" style="margin-right: 4px;"></i>{{ post.time }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 打卡板块 -->
+                    <div v-if="currentTab === 'checkin'">
+                        <div class="card">
+                            <div class="card-title">
+                                打卡任务
+                                <el-button type="text" size="mini" @click="dialogVisible = true; dialogType = 'task'; dialogTitle = '创建新任务'">
+                                    创建任务
+                                </el-button>
+                            </div>
+                            <div class="task-item" v-for="checkin in filteredCheckins" :key="checkin.id">
+                                <div class="task-title">{{ checkin.title }}</div>
+                                <div class="task-info" v-if="checkin.time">时间要求: {{ checkin.time }}</div>
+                                <div class="task-info" v-if="checkin.description">{{ checkin.description }}</div>
+                                <div class="task-info" v-if="checkin.created_at">创建于: {{ checkin.created_at }}</div>
+                                <div class="task-actions">
+                                    <el-button 
+                                        size="mini" 
+                                        type="success" 
+                                        :disabled="checkin.checked_today" 
+                                        @click="doCheckin(checkin)">
+                                        {{ checkin.checked_today ? '今日已打卡' : '打卡' }}
+                                    </el-button>
+                                    <el-button 
+                                        size="mini" 
+                                        type="danger" 
+                                        v-if="checkin.is_creator"
+                                        @click="deleteCheckin(checkin)">
+                                        删除
+                                    </el-button>
+                                </div>
+                            </div>
+                            <div v-if="filteredCheckins.length === 0" style="text-align: center; padding: 20px 0; color: #999;">
+                                暂无打卡任务，创建一个新任务吧！
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 打卡社区板块 -->
+                    <div v-if="currentTab === 'tasks'">
+                        <div class="card">
+                            <div class="card-title">
+                                打卡动态
+                                <el-button type="text" size="mini" @click="refreshCommunity">刷新</el-button>
+                            </div>
+                            <div v-if="communityCheckins.length === 0" style="text-align: center; padding: 20px 0; color: #999;">
+                                暂无打卡动态
+                            </div>
+                            <div class="community-item" v-for="record in communityCheckins" :key="record.id">
+                                <div class="community-header">
+                                    <span class="community-user">{{ record.username }}</span>
+                                    <span class="community-time">{{ record.checked_at }}</span>
+                                </div>
+                                <div class="community-content">
+                                    打卡了 <span class="community-task">{{ record.checkin_title }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 个人中心板块 -->
+                    <div v-if="currentTab === 'profile'">
+                        <div class="card">
+                            <div class="avatar-container">
+                                <div class="avatar">{{ avatarInitial }}</div>
+                                <div class="user-name">{{ displayUsername }}</div>
+                                <div class="user-info">{{ userInfo.email }}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="profile-menu">
+                                <div class="menu-item" @click="showProfile">
+                                    <div class="menu-item-left">
+                                        <i class="el-icon-user menu-icon"></i>
+                                        <span>个人资料</span>
+                                    </div>
+                                    <i class="el-icon-arrow-right"></i>
+                                </div>
+                                <div class="menu-item" @click="showSettings">
+                                    <div class="menu-item-left">
+                                        <i class="el-icon-setting menu-icon"></i>
+                                        <span>设置</span>
+                                    </div>
+                                    <i class="el-icon-arrow-right"></i>
+                                </div>
+                                <div class="menu-item" @click="showSecurity">
+                                    <div class="menu-item-left">
+                                        <i class="el-icon-lock menu-icon"></i>
+                                        <span>安全中心</span>
+                                    </div>
+                                    <i class="el-icon-arrow-right"></i>
+                                </div>
+                                <div v-if="userInfo.is_staff" class="menu-item" @click="goToAdminPage">
+                                    <div class="menu-item-left">
+                                        <i class="el-icon-key menu-icon"></i>
+                                        <span>管理员后台</span>
+                                    </div>
+                                    <i class="el-icon-arrow-right"></i>
+                                </div>
+                                <div class="menu-item" @click="logout">
+                                    <div class="menu-item-left">
+                                        <i class="el-icon-switch-button menu-icon" style="color: #F56C6C;"></i>
+                                        <span style="color: #F56C6C;">退出登录</span>
+                                    </div>
+                                    <i class="el-icon-arrow-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="content">
-                <div v-if="isLoggedIn">
-                    <h2>个人资料</h2>
-                    <el-loading v-if="loading" element-loading-text="加载中..."></el-loading>
-                    <template v-else>
-                        <div class="info-item">
-                            <div class="info-label">用户名：</div>
-                            <div>{{ displayUsername }}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">邮箱：</div>
-                            <div>{{ displayEmail }}</div>
-                        </div>
-                        <div class="info-item" v-if="userInfo.phone">
-                            <div class="info-label">手机号码：</div>
-                            <div>{{ userInfo.phone }}</div>
-                        </div>
-                    </template>
+            <!-- 底部导航 -->
+            <div class="bottom-nav">
+                <div 
+                    class="nav-item" 
+                    :class="{ active: currentTab === 'forum' }" 
+                    @click="currentTab = 'forum'">
+                    <i class="nav-icon el-icon-chat-line-square"></i>
+                    <span>论坛</span>
                 </div>
-                <div class="no-auth" v-else>
-                    <h2>请先登录</h2>
-                    <p>登录后即可查看个人资料和使用更多功能</p>
-                    <el-button type="primary" @click="goToLogin">去登录</el-button>
+                <div 
+                    class="nav-item" 
+                    :class="{ active: currentTab === 'checkin' }" 
+                    @click="currentTab = 'checkin'">
+                    <i class="nav-icon el-icon-date"></i>
+                    <span>打卡</span>
+                </div>
+                <div 
+                    class="nav-item" 
+                    :class="{ active: currentTab === 'tasks' }" 
+                    @click="currentTab = 'tasks'">
+                    <i class="nav-icon el-icon-s-data"></i>
+                    <span>动态</span>
+                </div>
+                <div 
+                    class="nav-item" 
+                    :class="{ active: currentTab === 'profile' }" 
+                    @click="currentTab = 'profile'">
+                    <i class="nav-icon el-icon-user"></i>
+                    <span>我的</span>
                 </div>
             </div>
+            
+            <!-- 对话框 -->
+            <el-dialog 
+                :title="dialogTitle" 
+                :visible.sync="dialogVisible"
+                width="90%">
+                <div v-if="dialogType === 'profile'">
+                    <el-form label-width="80px">
+                        <el-form-item label="用户名">
+                            <el-input v-model="userInfo.username" disabled></el-input>
+                        </el-form-item>
+                        <el-form-item label="邮箱">
+                            <el-input v-model="userInfo.email" disabled></el-input>
+                        </el-form-item>
+                        <el-form-item label="手机号" v-if="userInfo.phone">
+                            <el-input v-model="userInfo.phone" disabled></el-input>
+                        </el-form-item>
+                    </el-form>
+                </div>
+                <div v-else-if="dialogType === 'security'">
+                    <div style="padding: 10px 0;">
+                        <div class="menu-item">
+                            <div class="menu-item-left">
+                                <i class="el-icon-message menu-icon"></i>
+                                <div>
+                                    <div>邮箱绑定</div>
+                                    <div style="font-size: 12px; color: #999;">{{ userInfo.email || '未绑定' }}</div>
+                                </div>
+                            </div>
+                            <el-button size="mini" type="text" @click="changeEmail">{{ userInfo.email ? '更换' : '绑定' }}</el-button>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-left">
+                                <i class="el-icon-mobile-phone menu-icon"></i>
+                                <div>
+                                    <div>手机绑定</div>
+                                    <div style="font-size: 12px; color: #999;">{{ userInfo.phone || '未绑定' }}</div>
+                                </div>
+                            </div>
+                            <el-button size="mini" type="text">{{ userInfo.phone ? '更换' : '绑定' }}</el-button>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-left">
+                                <i class="el-icon-key menu-icon"></i>
+                                <div>修改密码</div>
+                            </div>
+                            <el-button size="mini" type="text">修改</el-button>
+                        </div>
+                    </div>
+                </div>
+                <div v-else-if="dialogType === 'settings'">
+                    <div style="padding: 10px 0;">
+                        <div class="menu-item">
+                            <div class="menu-item-left">
+                                <i class="el-icon-bell menu-icon"></i>
+                                <span>消息通知</span>
+                            </div>
+                            <el-switch v-model="settings.notifications"></el-switch>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-left">
+                                <i class="el-icon-moon menu-icon"></i>
+                                <span>深色模式</span>
+                            </div>
+                            <el-switch v-model="settings.darkMode" @change="toggleDarkMode"></el-switch>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-left">
+                                <i class="el-icon-document menu-icon"></i>
+                                <span>隐私政策</span>
+                            </div>
+                            <i class="el-icon-arrow-right"></i>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-left">
+                                <i class="el-icon-question menu-icon"></i>
+                                <span>关于我们</span>
+                            </div>
+                            <i class="el-icon-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+                <div v-else-if="dialogType === 'task'">
+                    <el-form :model="newTask" label-width="80px">
+                        <el-form-item label="任务名称" required>
+                            <el-input v-model="newTask.title" placeholder="请输入任务名称"></el-input>
+                        </el-form-item>
+                        <el-form-item label="时间要求">
+                            <el-input v-model="newTask.time" placeholder="如：每天早上8点"></el-input>
+                        </el-form-item>
+                        <el-form-item label="任务描述">
+                            <el-input 
+                                type="textarea" 
+                                v-model="newTask.description" 
+                                placeholder="请输入任务描述"
+                                :rows="3"></el-input>
+                        </el-form-item>
+                    </el-form>
+                    <span slot="footer" class="dialog-footer">
+                        <el-button @click="dialogVisible = false">取 消</el-button>
+                        <el-button type="primary" @click="createTask">创 建</el-button>
+                    </span>
+                </div>
+                <div v-else-if="dialogType === 'changeEmail'">
+                    <el-form :model="emailForm" label-width="80px">
+                        <el-form-item label="原邮箱" required>
+                            <el-input v-model="userInfo.email" disabled></el-input>
+                        </el-form-item>
+                        <el-form-item label="验证码" required>
+                            <div style="display: flex;">
+                                <el-input v-model="emailForm.oldCode" placeholder="请输入验证码"></el-input>
+                                <el-button 
+                                    type="primary" 
+                                    size="small" 
+                                    style="margin-left: 10px; width: 120px;" 
+                                    :disabled="oldCodeSending"
+                                    @click="sendOldEmailCode">
+                                    {{ oldCodeSending ? `${oldCodeTimer}s` : '获取验证码' }}
+                                </el-button>
+                            </div>
+                        </el-form-item>
+                        <el-form-item label="新邮箱" required>
+                            <el-input v-model="emailForm.newEmail" placeholder="请输入新邮箱"></el-input>
+                        </el-form-item>
+                        <el-form-item label="验证码" required>
+                            <div style="display: flex;">
+                                <el-input v-model="emailForm.newCode" placeholder="请输入验证码"></el-input>
+                                <el-button 
+                                    type="primary" 
+                                    size="small" 
+                                    style="margin-left: 10px; width: 120px;" 
+                                    :disabled="newCodeSending || !emailForm.newEmail"
+                                    @click="sendNewEmailCode">
+                                    {{ newCodeSending ? `${newCodeTimer}s` : '获取验证码' }}
+                                </el-button>
+                            </div>
+                        </el-form-item>
+                    </el-form>
+                    <span slot="footer" class="dialog-footer">
+                        <el-button @click="dialogVisible = false">取 消</el-button>
+                        <el-button type="primary" @click="updateEmail">确 认</el-button>
+                    </span>
+                </div>
+                <div v-else-if="dialogType === 'post'">
+                    <el-form :model="newPost" label-width="80px">
+                        <el-form-item label="标题" required>
+                            <el-input v-model="newPost.title" placeholder="请输入帖子标题"></el-input>
+                        </el-form-item>
+                        <el-form-item label="内容" required>
+                            <el-input 
+                                type="textarea" 
+                                v-model="newPost.content" 
+                                placeholder="请输入帖子内容"
+                                :rows="5"></el-input>
+                        </el-form-item>
+                    </el-form>
+                    <span slot="footer" class="dialog-footer">
+                        <el-button @click="dialogVisible = false">取 消</el-button>
+                        <el-button type="primary" @click="createPost">发 布</el-button>
+                    </span>
+                </div>
+            </el-dialog>
         </div>
     </div>
-    
-    <!-- 引入自定义脚本 -->
-    <script src="/static/accounts/js/home.js"></script>
+
+    <!-- 整合的JavaScript脚本 -->
+    <script>
+        // 添加调试功能
+        console.originalLog = console.log;
+        console.log = function() {
+            console.originalLog.apply(console, arguments);
+            var message = Array.prototype.slice.call(arguments).join(' ');
+            var debugLog = document.getElementById('debug-log');
+            if (debugLog) {
+                var p = document.createElement('p');
+                p.textContent = message;
+                debugLog.appendChild(p);
+                debugLog.scrollTop = debugLog.scrollHeight;
+            }
+        };
+        
+        // 确保静态内容显示，直到Vue加载完成
+        var staticContent = document.getElementById('static-content');
+        if (staticContent) {
+            staticContent.style.display = 'block';
+        }
+        
+        // DOMContentLoaded事件后初始化Vue
+        document.addEventListener('DOMContentLoaded', function() {
+            // 创建Vue实例
+            window.vueApp = new Vue({
+                el: '#app',
+                data: {
+                    initialized: false,
+                    loading: false,
+                    isLoggedIn: false,
+                    userInfo: { username: '游客用户', email: '未登录' },
+                    currentTab: 'checkin',
+                    selectedSchool: { id: null, name: '请选择学校' },
+                    schools: [],
+                    dialogVisible: false,
+                    dialogType: '',
+                    dialogTitle: '',
+                    settings: {
+                        notifications: true,
+                        darkMode: false
+                    },
+                    posts: [],
+                    checkins: [],
+                    communityCheckins: [],
+                    activeTab: 'tasks',
+                    newTask: {
+                        title: '',
+                        time: '',
+                        description: ''
+                    },
+                    emailForm: {
+                        oldCode: '',
+                        newEmail: '',
+                        newCode: ''
+                    },
+                    oldCodeSending: false,
+                    oldCodeTimer: 60,
+                    newCodeSending: false,
+                    newCodeTimer: 60,
+                    newPost: {
+                        title: '',
+                        content: ''
+                    },
+                    userPosts: []
+                },
+                computed: {
+                    avatarInitial() {
+                        return this.userInfo.username ? this.userInfo.username[0].toUpperCase() : '?';
+                    },
+                    displayUsername() {
+                        return this.userInfo.username || '用户';
+                    },
+                    filteredPosts() {
+                        // 后端API已经按学校过滤，无需再次过滤
+                        return this.posts;
+                    },
+                    filteredCheckins() {
+                        // 后端API已经按学校过滤，无需再次过滤
+                        return this.checkins;
+                    }
+                },
+                watch: {
+                    currentTab(newTab, oldTab) {
+                        // 先显示加载状态
+                        this.loading = true;
+                        
+                        // 当切换到论坛标签时，加载论坛数据
+                        if (newTab === 'forum' && this.selectedSchool.id) {
+                            this.fetchForumData();
+                        }
+                        // 当切换到打卡标签时，加载打卡数据
+                        else if (newTab === 'checkin') {
+                            this.refreshCheckins();
+                        }
+                        // 当切换到动态标签时，加载动态数据
+                        else if (newTab === 'tasks') {
+                            this.refreshCommunity();
+                        } else {
+                            // 如果是其他标签（如个人中心），直接关闭加载状态，但添加短暂延迟
+                            setTimeout(() => {
+                                this.loading = false;
+                            }, 200);
+                        }
+                    }
+                },
+                methods: {
+                    fetchSchools() {
+                        this.loading = true;
+                        axios.get('/forum/api/schools/')
+                            .then(response => {
+                                this.schools = response.data;
+                                if (this.schools.length > 0 && !this.selectedSchool.id) {
+                                    this.selectedSchool = this.schools[0];
+                                }
+                                this.loading = false;
+                                // 获取初始学校的数据
+                                this.fetchSchoolData();
+                            })
+                            .catch(error => {
+                                console.error('获取学校列表失败:', error);
+                                this.loading = false;
+                                this.$message.error('获取学校数据失败，请刷新页面重试');
+                            });
+                    },
+                    fetchSchoolData() {
+                        if (!this.selectedSchool.id) return;
+                        
+                        this.loading = true;
+                        // 根据当前标签加载相应数据
+                        if (this.currentTab === 'forum') {
+                            this.fetchForumData();
+                        } else {
+                            // 并行请求打卡和社区数据
+                            Promise.all([
+                                axios.get(`/checkin/checkins/`),
+                                axios.get('/checkin/community/')
+                            ])
+                            .then(([checkinsResponse, communityResponse]) => {
+                                this.checkins = checkinsResponse.data;
+                                this.communityCheckins = communityResponse.data;
+                                this.loading = false;
+                            })
+                            .catch(error => {
+                                console.error('获取数据失败:', error);
+                                this.loading = false;
+                                this.$message.error('获取数据失败，请刷新页面重试');
+                            });
+                        }
+                    },
+                    changeSchool(schoolId) {
+                        const school = this.schools.find(s => s.id === schoolId);
+                        if (school) {
+                            this.selectedSchool = school;
+                            // 切换学校后重新获取论坛数据
+                            if (this.currentTab === 'forum') {
+                                this.fetchForumData();
+                            }
+                        }
+                    },
+                    showProfile() {
+                        this.dialogType = 'profile';
+                        this.dialogTitle = '个人资料';
+                        this.dialogVisible = true;
+                    },
+                    changeEmail() {
+                        this.dialogType = 'changeEmail';
+                        this.dialogTitle = '更换邮箱';
+                        this.dialogVisible = true;
+                    },
+                    showSecurity() {
+                        this.dialogType = 'security';
+                        this.dialogTitle = '安全中心';
+                        this.dialogVisible = true;
+                    },
+                    showSettings() {
+                        this.dialogType = 'settings';
+                        this.dialogTitle = '设置';
+                        this.dialogVisible = true;
+                    },
+                    logout() {
+                        localStorage.removeItem('user');
+                        localStorage.removeItem('token');
+                        delete axios.defaults.headers.common['Authorization'];
+                        this.$message.success('已退出登录');
+                        setTimeout(() => { window.location.href = '/accounts/auth/'; }, 500);
+                    },
+                    doCheckin(checkin) {
+                        this.loading = true;
+                        // 调用后端API进行打卡
+                        axios.post(`/checkin/checkins/${checkin.id}/check/`)
+                            .then(response => {
+                                // 更新本地打卡状态
+                                const index = this.checkins.findIndex(c => c.id === checkin.id);
+                                if (index !== -1) {
+                                    this.checkins[index].checked_today = true;
+                                    // 确保返回的数据包含checkin_record，并安全获取ID
+                                    const checkinRecord = response.data.checkin_record || {};
+                                    this.checkins[index].today_checkin_id = checkinRecord.id;
+                                    this.$message.success('打卡成功！');
+                                }
+                                
+                                // 刷新社区动态
+                                this.refreshCommunity();
+                                
+                                this.loading = false;
+                            })
+                            .catch(error => {
+                                console.error('打卡失败:', error);
+                                this.loading = false;
+                                this.$message.error('操作失败，请重试');
+                            });
+                    },
+                    refreshCheckins() {
+                        // 重新获取打卡数据
+                        this.loading = true;
+                        axios.get(`/checkin/checkins/`)
+                            .then(response => {
+                                this.checkins = response.data;
+                                setTimeout(() => {
+                                    this.loading = false;
+                                }, 200); // 添加短暂延迟，确保动画平滑
+                                this.$message.success('已刷新打卡列表');
+                            })
+                            .catch(error => {
+                                console.error('刷新打卡列表失败:', error);
+                                this.loading = false;
+                                this.$message.error('刷新失败，请重试');
+                            });
+                    },
+                    checkLoginStatus() {
+                        const token = localStorage.getItem('token');
+                        const user = localStorage.getItem('user');
+                        
+                        if (token && user) {
+                            try {
+                                this.userInfo = JSON.parse(user);
+                                this.isLoggedIn = true;
+                                
+                                // 设置Authorization头
+                                axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                                
+                                // 另外在每个请求中添加X-Auth-Token，确保在某些环境能被正确拦截
+                                axios.interceptors.request.use(config => {
+                                    config.headers['X-Auth-Token'] = token;
+                                    return config;
+                                });
+                                
+                            } catch (e) {
+                                console.error('解析用户信息失败:', e);
+                                this.isLoggedIn = false;
+                            }
+                        } else {
+                            this.isLoggedIn = false;
+                            this.userInfo = { username: '游客用户', email: '未登录' };
+                        }
+                    },
+                    fetchTasks() {
+                        this.loading = true;
+                        axios.get('/checkin/checkins/')
+                            .then(response => {
+                                this.checkins = response.data;
+                                this.loading = false;
+                            })
+                            .catch(error => {
+                                console.error('获取任务失败:', error);
+                                this.loading = false;
+                                this.$message.error('获取任务失败，请刷新页面重试');
+                            });
+                    },
+                    createTask() {
+                        if (!this.newTask.title) {
+                            this.$message.error('任务名称不能为空');
+                            return;
+                        }
+                        
+                        this.loading = true;
+                        axios.post('/checkin/checkins/create/', this.newTask)
+                            .then(response => {
+                                this.dialogVisible = false;
+                                this.checkins.unshift(response.data.checkin);
+                                this.$message.success('任务创建成功');
+                                
+                                // 重置表单
+                                this.newTask = {
+                                    title: '',
+                                    time: '',
+                                    description: ''
+                                };
+                                
+                                this.loading = false;
+                            })
+                            .catch(error => {
+                                console.error('创建任务失败:', error);
+                                this.loading = false;
+                                this.$message.error('创建任务失败，请重试');
+                            });
+                    },
+                    deleteCheckin(checkin) {
+                        this.$confirm('确定要删除此任务吗?', '提示', {
+                            confirmButtonText: '确定',
+                            cancelButtonText: '取消',
+                            type: 'warning'
+                        }).then(() => {
+                            this.loading = true;
+                            axios.delete(`/checkin/checkins/${checkin.id}/delete/`)
+                                .then(response => {
+                                    const index = this.checkins.findIndex(c => c.id === checkin.id);
+                                    if (index !== -1) {
+                                        this.checkins.splice(index, 1);
+                                    }
+                                    this.$message.success('任务已删除');
+                                    this.loading = false;
+                                })
+                                .catch(error => {
+                                    console.error('删除任务失败:', error);
+                                    this.loading = false;
+                                    this.$message.error('删除失败，请重试');
+                                });
+                        }).catch(() => {
+                            // 取消删除
+                        });
+                    },
+                    loadUserData() {
+                        this.loading = true;
+                        Promise.all([
+                            axios.get('/accounts/profile/'),
+                            axios.get('/checkin/checkins/'),
+                            axios.get('/checkin/community/')
+                        ])
+                        .then(([ profileResponse, checkinsResponse, communityResponse]) => {
+                        
+                            this.userInfo = profileResponse.data.data;
+                            this.checkins = checkinsResponse.data;
+                            this.communityCheckins = communityResponse.data;
+                            
+                            setTimeout(() => {
+                                this.loading = false;
+                            }, 200); // 添加短暂延迟，确保动画平滑
+                        })
+                        .catch(error => {
+                            console.error('加载用户数据失败:', error);
+                            this.loading = false;
+                            
+                            if (error.response && error.response.status === 401) {
+                                // 未登录，重定向到登录页
+                                this.loggedIn = false;
+                            } else {
+                                this.$message.error('加载用户数据失败，请刷新页面重试');
+                            }
+                        });
+                    },
+                    refreshCommunity() {
+                        this.loading = true;
+                        axios.get('/checkin/community/')
+                            .then(response => {
+                                this.communityCheckins = response.data;
+                                setTimeout(() => {
+                                    this.loading = false;
+                                }, 200); // 添加短暂延迟，确保动画平滑
+                                this.$message.success('已刷新打卡动态');
+                            })
+                            .catch(error => {
+                                console.error('刷新打卡动态失败:', error);
+                                this.loading = false;
+                                this.$message.error('刷新失败，请重试');
+                            });
+                    },
+                    sendOldEmailCode() {
+                        if (!this.userInfo.email) {
+                            this.$message.error('原邮箱为空，无法发送验证码');
+                            return;
+                        }
+                        
+                        axios.post('/accounts/send-verification-code/', {
+                            email: this.userInfo.email
+                        })
+                        .then(response => {
+                            this.$message.success('验证码已发送到原邮箱');
+                            this.oldCodeSending = true;
+                            this.oldCodeTimer = 60;
+                            
+                            // 倒计时
+                            const timer = setInterval(() => {
+                                this.oldCodeTimer -= 1;
+                                if (this.oldCodeTimer <= 0) {
+                                    clearInterval(timer);
+                                    this.oldCodeSending = false;
+                                }
+                            }, 1000);
+                        })
+                        .catch(error => {
+                            this.$message.error(error.response?.data?.error || '发送验证码失败');
+                        });
+                    },
+                    sendNewEmailCode() {
+                        if (!this.emailForm.newEmail) {
+                            this.$message.error('新邮箱不能为空');
+                            return;
+                        }
+                        
+                        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+                        if (!emailRegex.test(this.emailForm.newEmail)) {
+                            this.$message.error('请输入有效的邮箱地址');
+                            return;
+                        }
+                        
+                        axios.post('/accounts/send-verification-code/', {
+                            email: this.emailForm.newEmail
+                        })
+                        .then(response => {
+                            this.$message.success('验证码已发送到新邮箱');
+                            this.newCodeSending = true;
+                            this.newCodeTimer = 60;
+                            
+                            // 倒计时
+                            const timer = setInterval(() => {
+                                this.newCodeTimer -= 1;
+                                if (this.newCodeTimer <= 0) {
+                                    clearInterval(timer);
+                                    this.newCodeSending = false;
+                                }
+                            }, 1000);
+                        })
+                        .catch(error => {
+                            this.$message.error(error.response?.data?.error || '发送验证码失败');
+                        });
+                    },
+                    updateEmail() {
+                        // 验证表单
+                        if (!this.emailForm.oldCode) {
+                            this.$message.error('请输入原邮箱验证码');
+                            return;
+                        }
+                        
+                        if (!this.emailForm.newEmail) {
+                            this.$message.error('请输入新邮箱');
+                            return;
+                        }
+                        
+                        if (!this.emailForm.newCode) {
+                            this.$message.error('请输入新邮箱验证码');
+                            return;
+                        }
+                        
+                        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+                        if (!emailRegex.test(this.emailForm.newEmail)) {
+                            this.$message.error('请输入有效的邮箱地址');
+                            return;
+                        }
+                        
+                        this.loading = true;
+                        
+                        axios.post('/accounts/update-email/', {
+                            old_email: this.userInfo.email,
+                            old_code: this.emailForm.oldCode,
+                            new_email: this.emailForm.newEmail,
+                            new_code: this.emailForm.newCode
+                        })
+                        .then(response => {
+                            this.loading = false;
+                            this.dialogVisible = false;
+                            
+                            // 更新用户信息
+                            this.userInfo = response.data.user;
+                            
+                            // 更新本地存储
+                            localStorage.setItem('user', JSON.stringify(this.userInfo));
+                            
+                            this.$message.success('邮箱更新成功');
+                            
+                            // 重置表单
+                            this.emailForm = {
+                                oldCode: '',
+                                newEmail: '',
+                                newCode: ''
+                            };
+                        })
+                        .catch(error => {
+                            this.loading = false;
+                            this.$message.error(error.response?.data?.error || '更新邮箱失败');
+                        });
+                    },
+                    viewPostDetail(post) {
+                        // 跳转到帖子详情页
+                        window.location.href = `/post_${post.id}.html`;
+                    },
+                    createPost() {
+                        if (!this.newPost.title || !this.newPost.content) {
+                            this.$message.error('帖子标题和内容不能为空');
+                            return;
+                        }
+                        
+                        // 确保选择了学校
+                        if (!this.selectedSchool || !this.selectedSchool.id) {
+                            this.$message.error('请先选择一个学校');
+                            return;
+                        }
+                        
+                        // 添加学校ID到请求数据
+                        const postData = {
+                            ...this.newPost,
+                            school_id: this.selectedSchool.id
+                        };
+                        
+                        this.loading = true;
+                        axios.post('/forum/posts/create/', postData)
+                            .then(response => {
+                                this.dialogVisible = false;
+                                
+                                // 获取创建的帖子
+                                const newPost = response.data.post || response.data;
+                                
+                                // 将新帖子添加到用户帖子列表
+                                this.userPosts.unshift(newPost);
+                                
+                                this.$message.success('帖子发布成功，等待管理员审核');
+                                
+                                // 重置表单
+                                this.newPost = {
+                                    title: '',
+                                    content: ''
+                                };
+                                
+                                this.loading = false;
+                            })
+                            .catch(error => {
+                                console.error('发布帖子失败:', error);
+                                this.loading = false;
+                                this.$message.error('发布帖子失败，请重试');
+                            });
+                    },
+                    createPostDetailPage(post) {
+                        // 发送请求创建帖子详情页面
+                        axios.post('/forum/posts/generate-html/', { post_id: post.id })
+                            .then(response => {
+                                console.log('帖子详情页面已生成');
+                            })
+                            .catch(error => {
+                                console.error('生成帖子详情页面失败:', error);
+                            });
+                    },
+                    getStatusType(status) {
+                        // 根据帖子状态返回相应的标签类型
+                        switch (status) {
+                            case 'pending':
+                                return 'info';
+                            case 'approved':
+                                return 'success';
+                            case 'rejected':
+                                return 'danger';
+                            default:
+                                return 'info';
+                        }
+                    },
+                    goToAdminPage() {
+                        // 跳转到管理员页面
+                        window.location.href = '/admin_center/admin/';
+                    },
+                    toggleDarkMode() {
+                        // 实现夜间模式切换逻辑
+                        console.log('夜间模式切换', this.settings.darkMode);
+                        if (this.settings.darkMode) {
+                            document.body.classList.add('dark-mode');
+                            this.$message({
+                                message: '已开启夜间模式',
+                                type: 'success',
+                                duration: 1500,
+                                offset: 50
+                            });
+                        } else {
+                            document.body.classList.remove('dark-mode');
+                            this.$message({
+                                message: '已关闭夜间模式',
+                                type: 'info',
+                                duration: 1500,
+                                offset: 50
+                            });
+                        }
+                        
+                        // 保存设置到本地存储
+                        this.saveSettings();
+                    },
+                    saveSettings() {
+                        // 保存设置到本地存储
+                        localStorage.setItem('settings', JSON.stringify(this.settings));
+                    },
+                    loadSettings() {
+                        // 从本地存储加载设置
+                        const savedSettings = localStorage.getItem('settings');
+                        if (savedSettings) {
+                            try {
+                                const parsedSettings = JSON.parse(savedSettings);
+                                this.settings = { ...this.settings, ...parsedSettings };
+                                
+                                // 应用夜间模式设置
+                                if (this.settings.darkMode) {
+                                    document.body.classList.add('dark-mode');
+                                } else {
+                                    document.body.classList.remove('dark-mode');
+                                }
+                            } catch (e) {
+                                console.error('解析设置失败:', e);
+                            }
+                        }
+                    },
+                    fetchForumData() {
+                        if (!this.selectedSchool.id) return;
+                        
+                        this.loading = true;
+                        Promise.all([
+                            axios.get(`/forum/posts/?school_id=${this.selectedSchool.id}`),
+                            axios.get('/forum/posts/user/') // 获取用户自己的帖子
+                        ])
+                        .then(([postsResponse, userPostsResponse]) => {
+                            this.posts = postsResponse.data;
+                            this.userPosts = userPostsResponse.data;
+                            setTimeout(() => {
+                                this.loading = false;
+                            }, 200); // 添加短暂延迟，确保动画平滑
+                        })
+                        .catch(error => {
+                            console.error('获取论坛数据失败:', error);
+                            this.loading = false;
+                            this.$message.error('获取论坛数据失败，请刷新页面重试');
+                        });
+                    }
+                },
+                mounted() {
+                    console.log("Vue实例已挂载");
+                    // 检查登录状态
+                    this.checkLoginStatus();
+                    
+                    // 加载用户设置
+                    this.loadSettings();
+                    
+                    // 加载用户数据
+                    this.loading = true;
+                    this.loadUserData();
+                    
+                    // 获取学校列表
+                    this.fetchSchools();
+                    
+                    // 隐藏静态内容
+                    let staticContent = document.getElementById('static-content');
+                    if (staticContent) {
+                        staticContent.style.display = 'none';
+                    }
+                    
+                    // 标记初始化完成
+                    this.initialized = true;
+                }
+            });
+        });
+        
+        // 立即确保app显示
+        window.onload = function() {
+            var appElement = document.getElementById('app');
+            if (appElement) {
+                // 不在这里设置display:block，而是依赖v-cloak指令和Vue初始化后自动显示
+            }
+            
+            setTimeout(function() {
+                var staticContent = document.getElementById('static-content');
+                if (staticContent) {
+                    staticContent.style.display = 'none';
+                }
+            }, 500);
+        };
+    </script>
 </body>
 </html> 

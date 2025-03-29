@@ -17,7 +17,8 @@ class User(models.Model):
     phone = models.CharField(max_length=15, unique=True, null=True, blank=True, verbose_name="手机号码")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="更新时间")
-    
+    is_staff = models.BooleanField(default=False, verbose_name="是否管理员")
+    is_editor = models.BooleanField(default=False, verbose_name="是否博主")
     class Meta:
         verbose_name = "用户"
         verbose_name_plural = "用户"
@@ -48,6 +49,7 @@ class User(models.Model):
             'user_id': self.id,
             'username': self.username,
             'email': self.email,
+            'is_staff': self.is_staff,
             'exp': expiry
         }
         
@@ -179,3 +181,30 @@ class VerificationCode(models.Model):
             return False
         
         return True
+
+# JWT配置
+jwt_expiry_days = getattr(settings, 'JWT_EXPIRY_DAYS', 7)
+
+# 学校模型
+class School(models.Model):
+    name = models.CharField(max_length=100, verbose_name='学校名称')
+    address = models.CharField(max_length=200, verbose_name='地址', blank=True, null=True)
+    description = models.TextField(verbose_name='描述', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='更新时间')
+
+    class Meta:
+        verbose_name = '学校'
+        verbose_name_plural = '学校'
+        ordering = ['id']
+
+    def __str__(self):
+        return self.name
+        
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'address': self.address,
+            'description': self.description
+        }

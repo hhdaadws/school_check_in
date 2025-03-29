@@ -120,18 +120,30 @@ window.app = new Vue({
             axios.post('/accounts/login/', loginData)
                 .then(response => {
                     if (response.data.status === 'success') {
+                        console.log('Login response:', response.data);
+                        
                         // 保存用户信息和令牌
                         localStorage.setItem('token', response.data.token);
-                        localStorage.setItem('user', JSON.stringify({
+                        
+                        // 确保用户信息包含is_staff属性
+                        const userInfo = {
                             username: response.data.username,
-                            email: response.data.email
-                        }));
+                            email: response.data.email,
+                            is_staff: response.data.is_staff || false,
+                            id: response.data.user_id
+                        };
+                        
+                        console.log('保存用户信息:', userInfo);
+                        localStorage.setItem('user', JSON.stringify(userInfo));
+                        
+                        // 在cookie中也存储token (用于服务器端读取)
+                        document.cookie = `token=${response.data.token}; path=/; max-age=604800`;
                         
                         // 设置默认请求头
                         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
                         
                         // 跳转到主页
-                        window.location.href = '/accounts/';
+                        window.location.href = '/accounts/home/';
                     } else {
                         this.$message.error(response.data.message);
                         // 重置验证码

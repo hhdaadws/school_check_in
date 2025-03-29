@@ -3,12 +3,16 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 import requests
-from .models import User, VerificationCode
-from .decorators import login_required
+from .models import User, VerificationCode, School
+from .decorators import admin_required
 from django.template.loader import render_to_string
 import os
 from django.conf import settings
 from django.core.mail import send_mail
+import random
+import string
+from django.utils import timezone
+from django.views.decorators.http import require_POST
 
 # Cloudflare Turnstile配置
 TURNSTILE_SECRET_KEY = '0x4AAAAAABC3iatF16AlFFAM3lV-rxs58Mo'  # 替换为你的密钥
@@ -46,40 +50,44 @@ def verify_turnstile(token, remote_ip=None):
 # Create your views here.
 @csrf_exempt
 def send_verification_code(request):
-    """发送邮箱验证码"""
-    if request.method == 'POST':
+    """发送验证码到用户邮箱"""
+    if request.method != 'POST':
+        return JsonResponse({"error": "只支持POST请求"}, status=405)
+    
+    try:
+        data = json.loads(request.body)
+        email = data.get('email')
+        
+        if not email:
+            return JsonResponse({"error": "邮箱不能为空"}, status=400)
+        
+        # 生成验证码
+        code = ''.join(random.choices(string.digits, k=6))
+        
+        # 保存验证码到数据库
+        VerificationCode.objects.create(
+            email=email,
+            code=code,
+            created_at=timezone.now()
+        )
+        
+        # 发送验证码邮件
+        subject = '【Arx学习平台】邮箱验证码'
+        message = f'您的验证码是: {code}, 有效期10分钟。如非本人操作，请忽略此邮件。'
+        from_email = settings.EMAIL_HOST_USER
+        recipient_list = [email]
+        
         try:
-            data = json.loads(request.body)
-            email = data.get('email')
-            
-            if not email:
-                return JsonResponse({'status': 'error', 'message': '请提供邮箱地址'})
-            
-            # 检查邮箱是否已被注册
-            if User.objects.filter(email=email).exists():
-                return JsonResponse({'status': 'error', 'message': '该邮箱已被注册'})
-            
-            # 生成验证码
-            verification = VerificationCode.generate_code(email)
-            
-            # 发送邮件
-            subject = '账户注册验证码'
-            message = f'您的注册验证码是：{verification.code}，有效期{settings.VERIFICATION_CODE_EXPIRE_MINUTES}分钟，请勿泄露给他人。'
-            from_email = settings.DEFAULT_FROM_EMAIL
-            recipient_list = [email]
-            
-            try:
-                send_mail(subject, message, from_email, recipient_list)
-                return JsonResponse({'status': 'success', 'message': '验证码已发送到您的邮箱'})
-            except Exception as e:
-                return JsonResponse({'status': 'error', 'message': f'发送邮件失败: {str(e)}'})
-            
-        except json.JSONDecodeError:
-            return JsonResponse({'status': 'error', 'message': '无效的请求数据'})
+            send_mail(subject, message, from_email, recipient_list)
+            return JsonResponse({
+                "success": True,
+                "message": "验证码已发送，请查收邮件"
+            })
         except Exception as e:
-            return JsonResponse({'status': 'error', 'message': f'发送验证码失败: {str(e)}'})
-    else:
-        return JsonResponse({'status': 'error', 'message': '不支持的请求方法'})
+            return JsonResponse({"error": f"发送邮件失败: {str(e)}"}, status=500)
+            
+    except Exception as e:
+        return JsonResponse({"error": f"发送验证码失败: {str(e)}"}, status=500)
 
 @csrf_exempt
 def register(request):
@@ -172,11 +180,13 @@ def login(request):
                 token = user.generate_token()
                 
                 return JsonResponse({
-                    'status': 'success',
-                    'message': '登录成功',
+                    'status': 'success', 
+                    'message': '登录成功', 
                     'username': user.username,
                     'email': user.email,
-                    'token': token  # 返回JWT令牌
+                    'token': token,  # 返回JWT令牌
+                    'is_staff': user.is_staff,  # 添加是否管理员标志
+                    'user_id': user.id  # 添加用户ID
                 })
             else:
                 return JsonResponse({
@@ -195,7 +205,7 @@ def login(request):
         'message': '不支持的请求方法'
     }, status=405)
 
-@login_required
+
 def user_profile(request):
     """
     用户资料视图
@@ -211,13 +221,14 @@ def user_profile(request):
             'username': user.username,
             'email': user.email,
             'phone': user.phone,
-            'created_at': user.created_at,
-            'updated_at': user.updated_at
+            'is_staff': user.is_staff,
+            'is_editor': user.is_editor
         }
     })
 
+
 @csrf_exempt
-@login_required
+
 def update_profile(request):
     """
     更新用户资料
@@ -262,7 +273,7 @@ def update_profile(request):
 def home_page(request):
     """首页"""
     # 直接读取HTML文件并返回，完全跳过Django模板系统
-    home_html_path = os.path.join(settings.BASE_DIR, 'htmls', 'accounts', 'home.html')
+    home_html_path = os.path.join(settings.BASE_DIR, 'htmls','accounts','home.html')
     
     with open(home_html_path, 'r', encoding='utf-8') as f:
         html_content = f.read()
@@ -287,24 +298,85 @@ def auth_page(request):
     }
     return render(request, 'accounts/auth.html', context)
 
-def login_page(request):
-    """登录页面"""
-    # 重定向到认证页面并默认显示登录标签
-    context = {
-        'active_tab': 'login',
-        'turnstile_site_key': settings.TURNSTILE_SITE_KEY,
-        'dev_environment': settings.DEV_ENVIRONMENT
-    }
-    return render(request, 'accounts/auth.html', context)
+# 更新邮箱
+@csrf_exempt
 
-def register_page(request):
-    """注册页面"""
-    # 重定向到认证页面并默认显示注册标签
-    context = {
-        'active_tab': 'register',
-        'turnstile_site_key': settings.TURNSTILE_SITE_KEY,
-        'dev_environment': settings.DEV_ENVIRONMENT
-    }
-    return render(request, 'accounts/auth.html', context)
-
-
+@require_POST
+def update_email(request):
+    """更新用户邮箱"""
+    try:
+        data = json.loads(request.body)
+        old_email = data.get('old_email')
+        old_code = data.get('old_code')
+        new_email = data.get('new_email')
+        new_code = data.get('new_code')
+        
+        # 验证参数
+        if not all([old_email, old_code, new_email, new_code]):
+            return JsonResponse({"error": "所有字段都必须填写"}, status=400)
+            
+        # 验证原邮箱是否正确
+        if old_email != request.user.email:
+            return JsonResponse({"error": "原邮箱不正确"}, status=400)
+            
+        # 检查新邮箱是否已被使用
+        if User.objects.filter(email=new_email).exclude(id=request.user.id).exists():
+            return JsonResponse({"error": "该邮箱已被其他用户使用"}, status=400)
+            
+        # 验证原邮箱验证码
+        old_verification = VerificationCode.objects.filter(
+            email=old_email,
+            code=old_code,
+            is_used=False
+        ).order_by('-created_at').first()
+        
+        if not old_verification:
+            return JsonResponse({"error": "原邮箱验证码无效或已过期"}, status=400)
+            
+        # 验证新邮箱验证码
+        new_verification = VerificationCode.objects.filter(
+            email=new_email,
+            code=new_code,
+            is_used=False
+        ).order_by('-created_at').first()
+        
+        if not new_verification:
+            return JsonResponse({"error": "新邮箱验证码无效或已过期"}, status=400)
+            
+        # 检查验证码是否过期
+        now = timezone.now()
+        expiry_minutes = getattr(settings, 'VERIFICATION_CODE_EXPIRE_MINUTES', 10)
+        
+        if (now - old_verification.created_at).total_seconds() > expiry_minutes * 60:
+            return JsonResponse({"error": "原邮箱验证码已过期"}, status=400)
+            
+        if (now - new_verification.created_at).total_seconds() > expiry_minutes * 60:
+            return JsonResponse({"error": "新邮箱验证码已过期"}, status=400)
+            
+        # 更新用户邮箱
+        request.user.email = new_email
+        request.user.save(update_fields=['email'])
+        
+        # 标记验证码为已使用
+        old_verification.is_used = True
+        old_verification.save()
+        new_verification.is_used = True
+        new_verification.save()
+        
+        # 将更新后的用户信息返回
+        user_data = {
+            'id': request.user.id,
+            'username': request.user.username,
+            'email': request.user.email,
+            'phone': request.user.phone,
+            'date_joined': request.user.created_at.strftime('%Y-%m-%d %H:%M:%S')
+        }
+        
+        return JsonResponse({
+            "success": True,
+            "message": "邮箱更新成功",
+            "user": user_data
+        })
+        
+    except Exception as e:
+        return JsonResponse({"error": f"更新邮箱失败: {str(e)}"}, status=500)
