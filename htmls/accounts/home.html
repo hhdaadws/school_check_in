@@ -657,7 +657,7 @@
                         <div class="card">
                             <div class="card-title">
                                 热门帖子
-                                <el-button v-if="userInfo.is_editor" type="text" size="mini" @click="dialogVisible = true; dialogType = 'post'; dialogTitle = '创建新帖子'">
+                                <el-button v-if="isLoggedIn" type="text" size="mini" @click="dialogVisible = true; dialogType = 'post'; dialogTitle = '创建新帖子'">
                                     发布帖子
                                 </el-button>
                             </div>
@@ -1350,7 +1350,7 @@
                             
                             if (error.response && error.response.status === 401) {
                                 // 未登录，重定向到登录页
-                                this.loggedIn = false;
+                                this.isLoggedIn = false;
                             } else {
                                 this.$message.error('加载用户数据失败，请刷新页面重试');
                             }
