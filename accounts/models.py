@@ -208,3 +208,79 @@ class School(models.Model):
             'address': self.address,
             'description': self.description
         }
+
+# 专注会话模型
+class FocusSession(models.Model):
+    SESSION_TYPE_CHOICES = (
+        ('work', '工作'),
+        ('break', '休息'),
+    )
+    
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='focus_sessions', verbose_name='用户')
+    start_time = models.DateTimeField(auto_now_add=True, verbose_name='开始时间')
+    end_time = models.DateTimeField(null=True, blank=True, verbose_name='结束时间')
+    planned_duration = models.IntegerField(verbose_name='计划时长(分钟)')  
+    actual_duration = models.IntegerField(null=True, blank=True, verbose_name='实际时长(分钟)')
+    task_title = models.CharField(max_length=200, verbose_name='任务标题')
+    task_description = models.TextField(blank=True, verbose_name='任务描述')
+    completed = models.BooleanField(default=False, verbose_name='是否完成')
+    session_type = models.CharField(max_length=10, choices=SESSION_TYPE_CHOICES, default='work', verbose_name='会话类型')
+    interrupted = models.BooleanField(default=False, verbose_name='是否被中断')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='更新时间')
+    
+    class Meta:
+        verbose_name = '专注会话'
+        verbose_name_plural = '专注会话'
+        ordering = ['-start_time']
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.task_title} ({self.planned_duration}分钟)"
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'start_time': self.start_time.strftime('%Y-%m-%d %H:%M:%S') if self.start_time else None,
+            'end_time': self.end_time.strftime('%Y-%m-%d %H:%M:%S') if self.end_time else None,
+            'planned_duration': self.planned_duration,
+            'actual_duration': self.actual_duration,
+            'task_title': self.task_title,
+            'task_description': self.task_description,
+            'completed': self.completed,
+            'session_type': self.session_type,
+            'session_type_display': self.get_session_type_display(),
+            'interrupted': self.interrupted,
+        }
+
+# 专注设置模型
+class FocusSettings(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='focus_settings', verbose_name='用户')
+    work_duration = models.IntegerField(default=25, verbose_name='工作时长(分钟)')
+    break_duration = models.IntegerField(default=5, verbose_name='休息时长(分钟)')
+    long_break_duration = models.IntegerField(default=15, verbose_name='长休息时长(分钟)')
+    sessions_before_long_break = models.IntegerField(default=4, verbose_name='长休息前的会话数')
+    sound_enabled = models.BooleanField(default=True, verbose_name='启用声音提醒')
+    auto_start_breaks = models.BooleanField(default=False, verbose_name='自动开始休息')
+    auto_start_work = models.BooleanField(default=False, verbose_name='自动开始工作')
+    focus_theme = models.CharField(max_length=20, default='default', verbose_name='专注主题')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='更新时间')
+    
+    class Meta:
+        verbose_name = '专注设置'
+        verbose_name_plural = '专注设置'
+    
+    def __str__(self):
+        return f"{self.user.username}的专注设置"
+    
+    def to_dict(self):
+        return {
+            'work_duration': self.work_duration,
+            'break_duration': self.break_duration,
+            'long_break_duration': self.long_break_duration,
+            'sessions_before_long_break': self.sessions_before_long_break,
+            'sound_enabled': self.sound_enabled,
+            'auto_start_breaks': self.auto_start_breaks,
+            'auto_start_work': self.auto_start_work,
+            'focus_theme': self.focus_theme,
+        }
