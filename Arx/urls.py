@@ -32,6 +32,7 @@ urlpatterns = [
     path('checkin/', include(('checkin.urls', 'checkin'), namespace='checkin')),
     path('admin_center/', include(('admin_center.urls', 'admin_center'), namespace='admin_center')),
     path('chat/', include(('chat.urls', 'chat'), namespace='chat')),
+    path('focus/', include(('focus.urls', 'focus'), namespace='focus')),
 
     
     # 处理帖子HTML文件的路由

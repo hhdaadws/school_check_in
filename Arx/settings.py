@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'forum',
     'messaging',
     'notifications',
+    'focus',
     'channels',
 ]
 

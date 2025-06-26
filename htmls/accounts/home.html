@@ -583,8 +583,144 @@
         
         body.dark-mode .loading-overlay p {
             color: #e0e0e0;
-        }
-    </style>
+                    }
+            
+            /* 专注模式样式 */
+            .focus-stats {
+                display: flex;
+                justify-content: space-around;
+                padding: 20px 0;
+                margin-bottom: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                border-radius: 12px;
+                color: white;
+            }
+            
+            .stat-item {
+                text-align: center;
+            }
+            
+            .stat-number {
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 4px;
+            }
+            
+            .stat-label {
+                font-size: 12px;
+                opacity: 0.8;
+            }
+            
+            .focus-session-container {
+                padding: 40px 20px;
+                text-align: center;
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                border-radius: 20px;
+                color: white;
+                min-height: 60vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            
+            .focus-header h2 {
+                font-size: 28px;
+                margin-bottom: 10px;
+                color: white;
+            }
+            
+            .focus-header p {
+                font-size: 16px;
+                opacity: 0.9;
+                margin-bottom: 40px;
+            }
+            
+            .focus-timer {
+                margin: 40px 0;
+            }
+            
+            .timer-circle {
+                width: 200px;
+                height: 200px;
+                border: 8px solid rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin: 0 auto;
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(10px);
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            }
+            
+            .timer-display {
+                font-size: 48px;
+                font-weight: bold;
+                font-family: 'Courier New', monospace;
+                margin-bottom: 8px;
+            }
+            
+            .timer-type {
+                font-size: 14px;
+                opacity: 0.8;
+            }
+            
+            .focus-controls {
+                display: flex;
+                gap: 15px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .focus-controls .el-button {
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(10px);
+                color: white;
+                font-weight: bold;
+                min-width: 100px;
+            }
+            
+            .focus-controls .el-button:hover {
+                background: rgba(255, 255, 255, 0.2);
+                border-color: rgba(255, 255, 255, 0.5);
+            }
+            
+            .focus-history-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 0;
+                border-bottom: 1px solid #f0f0f0;
+            }
+            
+            .history-main {
+                flex: 1;
+            }
+            
+            .history-title {
+                font-weight: 500;
+                margin-bottom: 4px;
+            }
+            
+            .history-time {
+                font-size: 12px;
+                color: #999;
+            }
+            
+            .history-status {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 4px;
+            }
+            
+            .history-duration {
+                font-size: 12px;
+                color: #666;
+            }
+        </style>
 </head>
 <body>
     <!-- 添加v-cloak指令，防止Vue模板闪现 -->
@@ -610,6 +746,7 @@
                 <div class="title" v-if="currentTab === 'profile'">个人中心</div>
                 <div class="title" v-else-if="currentTab === 'checkin'">打卡</div>
                 <div class="title" v-else-if="currentTab === 'tasks'">打卡动态</div>
+                <div class="title" v-else-if="currentTab === 'focus'">专注模式</div>
                 <div class="title" v-else-if="currentTab === 'forum'"></div>
                 
                 <!-- 右侧按钮区域 -->
@@ -621,6 +758,9 @@
                 </div>
                 <div class="action-btn" v-else-if="currentTab === 'tasks'">
                     <i class="el-icon-refresh" @click="refreshCommunity"></i>
+                </div>
+                <div class="action-btn" v-else-if="currentTab === 'focus' && !focusMode.inSession">
+                    <i class="el-icon-setting" @click="showFocusSettings"></i>
                 </div>
                 <div v-else style="width: 20px;"></div>
             </div>
@@ -657,7 +797,7 @@
                         <div class="card">
                             <div class="card-title">
                                 热门帖子
-                                <el-button v-if="userInfo.is_editor" type="text" size="mini" @click="dialogVisible = true; dialogType = 'post'; dialogTitle = '创建新帖子'">
+                                <el-button v-if="isLoggedIn" type="text" size="mini" @click="dialogVisible = true; dialogType = 'post'; dialogTitle = '创建新帖子'">
                                     发布帖子
                                 </el-button>
                             </div>
@@ -755,6 +895,123 @@
                         </div>
                     </div>
                     
+                    <!-- 专注模式板块 -->
+                    <div v-if="currentTab === 'focus'">
+                        <!-- 非专注状态 - 显示开始界面 -->
+                        <div v-if="!focusMode.inSession">
+                            <div class="card">
+                                <div class="card-title">
+                                    🎯 专注模式
+                                    <el-button type="text" size="mini" @click="showFocusSettings">设置</el-button>
+                                </div>
+                                
+                                <!-- 今日统计 -->
+                                <div class="focus-stats">
+                                    <div class="stat-item">
+                                        <div class="stat-number">{{ focusMode.stats.today.completed_sessions || 0 }}</div>
+                                        <div class="stat-label">今日完成</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-number">{{ formatDuration(focusMode.stats.today.total_minutes || 0) }}</div>
+                                        <div class="stat-label">今日时长</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-number">{{ focusMode.stats.total.completed_sessions || 0 }}</div>
+                                        <div class="stat-label">总完成</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- 开始专注按钮 -->
+                                <div class="focus-start-section">
+                                    <el-button 
+                                        type="primary" 
+                                        size="large" 
+                                        round
+                                        @click="showStartFocusDialog"
+                                        style="width: 100%; height: 60px; font-size: 18px; margin-top: 20px;">
+                                        <i class="el-icon-timer" style="margin-right: 8px;"></i>
+                                        开始专注
+                                    </el-button>
+                                </div>
+                            </div>
+                            
+                            <!-- 历史记录 -->
+                            <div class="card" v-if="focusHistory.length > 0">
+                                <div class="card-title">
+                                    📊 最近记录
+                                    <el-button type="text" size="mini" @click="showAllHistory">查看全部</el-button>
+                                </div>
+                                <div class="focus-history-item" v-for="session in focusHistory.slice(0, 5)" :key="session.id">
+                                    <div class="history-main">
+                                        <div class="history-title">{{ session.task_title }}</div>
+                                        <div class="history-time">{{ session.start_time }}</div>
+                                    </div>
+                                    <div class="history-status">
+                                        <el-tag 
+                                            size="mini" 
+                                            :type="session.completed ? 'success' : (session.interrupted ? 'danger' : 'info')">
+                                            {{ session.completed ? '完成' : (session.interrupted ? '中断' : '进行中') }}
+                                        </el-tag>
+                                        <div class="history-duration">{{ session.actual_duration || session.planned_duration }}分钟</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 专注状态 - 显示计时器 -->
+                        <div v-else class="focus-session-container">
+                            <div class="focus-header">
+                                <h2>{{ focusMode.currentSession.task_title }}</h2>
+                                <p v-if="focusMode.currentSession.task_description">{{ focusMode.currentSession.task_description }}</p>
+                            </div>
+                            
+                            <div class="focus-timer">
+                                <div class="timer-circle">
+                                    <div class="timer-display">
+                                        {{ formatTime(focusMode.timer.remaining) }}
+                                    </div>
+                                    <div class="timer-type">
+                                        {{ focusMode.currentSession.session_type === 'work' ? '专注时间' : '休息时间' }}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="focus-controls">
+                                <el-button 
+                                    v-if="!focusMode.timer.isRunning" 
+                                    type="success" 
+                                    size="large" 
+                                    round
+                                    @click="startTimer">
+                                    <i class="el-icon-video-play"></i> 开始
+                                </el-button>
+                                <el-button 
+                                    v-else-if="!focusMode.timer.isPaused" 
+                                    type="warning" 
+                                    size="large" 
+                                    round
+                                    @click="pauseTimer">
+                                    <i class="el-icon-video-pause"></i> 暂停
+                                </el-button>
+                                <el-button 
+                                    v-else 
+                                    type="success" 
+                                    size="large" 
+                                    round
+                                    @click="resumeTimer">
+                                    <i class="el-icon-video-play"></i> 继续
+                                </el-button>
+                                <el-button 
+                                    type="danger" 
+                                    size="large" 
+                                    round
+                                    @click="stopSession">
+                                    <i class="el-icon-close"></i> 结束
+                                </el-button>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <!-- 个人中心板块 -->
                     <div v-if="currentTab === 'profile'">
                         <div class="card">
@@ -830,6 +1087,13 @@
                     @click="currentTab = 'tasks'">
                     <i class="nav-icon el-icon-s-data"></i>
                     <span>动态</span>
+                </div>
+                <div 
+                    class="nav-item" 
+                    :class="{ active: currentTab === 'focus' }" 
+                    @click="currentTab = 'focus'">
+                    <i class="nav-icon el-icon-timer"></i>
+                    <span>专注</span>
                 </div>
                 <div 
                     class="nav-item" 
@@ -1000,6 +1264,122 @@
                         <el-button type="primary" @click="createPost">发 布</el-button>
                     </span>
                 </div>
+                <div v-else-if="dialogType === 'startFocus'">
+                    <el-form :model="focusTaskForm" label-width="80px">
+                        <el-form-item label="任务标题" required>
+                            <el-input v-model="focusTaskForm.title" placeholder="请输入要专注的任务"></el-input>
+                        </el-form-item>
+                        <el-form-item label="任务描述">
+                            <el-input 
+                                type="textarea" 
+                                v-model="focusTaskForm.description" 
+                                placeholder="任务的详细描述（可选）"
+                                :rows="3"></el-input>
+                        </el-form-item>
+                        <el-form-item label="专注时长">
+                            <el-select v-model="focusTaskForm.duration" style="width: 100%;">
+                                <el-option label="15分钟" :value="15"></el-option>
+                                <el-option label="25分钟 (推荐)" :value="25"></el-option>
+                                <el-option label="30分钟" :value="30"></el-option>
+                                <el-option label="45分钟" :value="45"></el-option>
+                                <el-option label="60分钟" :value="60"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-form>
+                    <span slot="footer" class="dialog-footer">
+                        <el-button @click="dialogVisible = false">取 消</el-button>
+                        <el-button type="primary" @click="startFocusSession">开始专注</el-button>
+                    </span>
+                </div>
+                <div v-else-if="dialogType === 'focusSettings'">
+                    <el-form :model="focusMode.settings" label-width="120px">
+                        <el-form-item label="工作时长">
+                            <el-input-number 
+                                v-model="focusMode.settings.work_duration" 
+                                :min="5" 
+                                :max="120" 
+                                style="width: 100%;"
+                                controls-position="right">
+                            </el-input-number>
+                            <span style="color: #999; font-size: 12px;">分钟</span>
+                        </el-form-item>
+                        <el-form-item label="短休息时长">
+                            <el-input-number 
+                                v-model="focusMode.settings.break_duration" 
+                                :min="1" 
+                                :max="30" 
+                                style="width: 100%;"
+                                controls-position="right">
+                            </el-input-number>
+                            <span style="color: #999; font-size: 12px;">分钟</span>
+                        </el-form-item>
+                        <el-form-item label="长休息时长">
+                            <el-input-number 
+                                v-model="focusMode.settings.long_break_duration" 
+                                :min="5" 
+                                :max="60" 
+                                style="width: 100%;"
+                                controls-position="right">
+                            </el-input-number>
+                            <span style="color: #999; font-size: 12px;">分钟</span>
+                        </el-form-item>
+                        <el-form-item label="长休息间隔">
+                            <el-input-number 
+                                v-model="focusMode.settings.sessions_before_long_break" 
+                                :min="2" 
+                                :max="8" 
+                                style="width: 100%;"
+                                controls-position="right">
+                            </el-input-number>
+                            <span style="color: #999; font-size: 12px;">个专注会话后</span>
+                        </el-form-item>
+                        <el-form-item label="声音提醒">
+                            <el-switch v-model="focusMode.settings.sound_enabled"></el-switch>
+                        </el-form-item>
+                        <el-form-item label="自动开始休息">
+                            <el-switch v-model="focusMode.settings.auto_start_breaks"></el-switch>
+                        </el-form-item>
+                        <el-form-item label="自动开始工作">
+                            <el-switch v-model="focusMode.settings.auto_start_work"></el-switch>
+                        </el-form-item>
+                    </el-form>
+                    <span slot="footer" class="dialog-footer">
+                        <el-button @click="dialogVisible = false">取 消</el-button>
+                        <el-button type="primary" @click="updateFocusSettings">保 存</el-button>
+                    </span>
+                </div>
+                <div v-else-if="dialogType === 'focusHistory'">
+                    <div style="max-height: 400px; overflow-y: auto;">
+                        <div class="focus-history-item" v-for="session in focusHistory" :key="session.id">
+                            <div class="history-main">
+                                <div class="history-title">{{ session.task_title }}</div>
+                                <div class="history-time">{{ session.start_time }}</div>
+                                <div v-if="session.task_description" style="font-size: 12px; color: #999; margin-top: 4px;">
+                                    {{ session.task_description }}
+                                </div>
+                            </div>
+                            <div class="history-status">
+                                <el-tag 
+                                    size="mini" 
+                                    :type="session.completed ? 'success' : (session.interrupted ? 'danger' : 'info')">
+                                    {{ session.completed ? '完成' : (session.interrupted ? '中断' : '进行中') }}
+                                </el-tag>
+                                <div class="history-duration">
+                                    计划: {{ session.planned_duration }}分钟
+                                </div>
+                                <div class="history-duration" v-if="session.actual_duration">
+                                    实际: {{ session.actual_duration }}分钟
+                                </div>
+                            </div>
+                        </div>
+                        <div v-if="focusHistory.length === 0" style="text-align: center; padding: 40px 0; color: #999;">
+                            暂无专注记录
+                        </div>
+                    </div>
+                    <span slot="footer" class="dialog-footer">
+                        <el-button @click="dialogVisible = false">关 闭</el-button>
+                    </span>
+                </div>
             </el-dialog>
         </div>
     </div>
@@ -1068,7 +1448,42 @@
                         title: '',
                         content: ''
                     },
-                    userPosts: []
+                    userPosts: [],
+                    // 专注模式相关数据
+                    focusMode: {
+                        enabled: false,
+                        inSession: false,
+                        currentSession: null,
+                        timer: {
+                            duration: 0,
+                            remaining: 0,
+                            isRunning: false,
+                            isPaused: false
+                        },
+                        settings: {
+                            work_duration: 25,
+                            break_duration: 5,
+                            long_break_duration: 15,
+                            sessions_before_long_break: 4,
+                            sound_enabled: true,
+                            auto_start_breaks: false,
+                            auto_start_work: false,
+                            focus_theme: 'default'
+                        },
+                        stats: {
+                            today: { sessions_count: 0, completed_sessions: 0, total_minutes: 0 },
+                            week: { sessions_count: 0, completed_sessions: 0, total_minutes: 0 },
+                            month: { sessions_count: 0, completed_sessions: 0, total_minutes: 0 },
+                            total: { sessions_count: 0, completed_sessions: 0, total_minutes: 0 }
+                        }
+                    },
+                    focusTaskForm: {
+                        title: '',
+                        description: '',
+                        duration: 25
+                    },
+                    timerInterval: null,
+                    focusHistory: []
                 },
                 computed: {
                     avatarInitial() {
@@ -1261,6 +1676,282 @@
                             this.userInfo = { username: '游客用户', email: '未登录' };
                         }
                     },
+                    // ===== 专注模式相关方法 =====
+                    loadFocusData() {
+                        this.loadFocusSettings();
+                        this.loadFocusStats();
+                        this.loadFocusHistory();
+                        this.checkActiveSession();
+                    },
+                    loadFocusSettings() {
+                        axios.get('/focus/settings/')
+                            .then(response => {
+                                if (response.data.success) {
+                                    this.focusMode.settings = response.data.settings;
+                                }
+                            })
+                            .catch(error => {
+                                console.error('获取专注设置失败:', error);
+                            });
+                    },
+                    loadFocusStats() {
+                        axios.get('/focus/stats/')
+                            .then(response => {
+                                if (response.data.success) {
+                                    this.focusMode.stats = response.data.stats;
+                                }
+                            })
+                            .catch(error => {
+                                console.error('获取专注统计失败:', error);
+                            });
+                    },
+                    loadFocusHistory() {
+                        axios.get('/focus/history/')
+                            .then(response => {
+                                if (response.data.success) {
+                                    this.focusHistory = response.data.sessions;
+                                }
+                            })
+                            .catch(error => {
+                                console.error('获取专注历史失败:', error);
+                            });
+                    },
+                    checkActiveSession() {
+                        axios.get('/focus/session/active/')
+                            .then(response => {
+                                if (response.data.success && response.data.session) {
+                                    this.focusMode.currentSession = response.data.session;
+                                    this.focusMode.inSession = true;
+                                    this.setupTimerFromSession(response.data.session);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('检查活动会话失败:', error);
+                            });
+                    },
+                    showStartFocusDialog() {
+                        this.focusTaskForm = {
+                            title: '',
+                            description: '',
+                            duration: this.focusMode.settings.work_duration
+                        };
+                        this.dialogType = 'startFocus';
+                        this.dialogTitle = '开始专注';
+                        this.dialogVisible = true;
+                    },
+                    startFocusSession() {
+                        if (!this.focusTaskForm.title) {
+                            this.$message.error('请输入任务标题');
+                            return;
+                        }
+                        
+                        const data = {
+                            task_title: this.focusTaskForm.title,
+                            task_description: this.focusTaskForm.description,
+                            planned_duration: this.focusTaskForm.duration,
+                            session_type: 'work'
+                        };
+                        
+                        axios.post('/focus/session/start/', data)
+                            .then(response => {
+                                if (response.data.success) {
+                                    this.focusMode.currentSession = response.data.session;
+                                    this.focusMode.inSession = true;
+                                    this.initTimer(this.focusTaskForm.duration * 60);
+                                    this.dialogVisible = false;
+                                    this.$message.success('专注会话已创建，点击开始按钮开始计时');
+                                    // 注意：这里不自动开始计时器，等用户手动点击开始
+                                } else {
+                                    this.$message.error(response.data.error || '开始失败');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('开始专注失败:', error);
+                                this.$message.error('开始专注失败');
+                            });
+                    },
+                    initTimer(seconds) {
+                        this.focusMode.timer.duration = seconds;
+                        this.focusMode.timer.remaining = seconds;
+                        this.focusMode.timer.isRunning = false;
+                        this.focusMode.timer.isPaused = false;
+                    },
+                    setupTimerFromSession(session) {
+                        // 计算已过去的时间
+                        const startTime = new Date(session.start_time);
+                        const now = new Date();
+                        const elapsed = Math.floor((now - startTime) / 1000);
+                        const totalDuration = session.planned_duration * 60;
+                        const remaining = Math.max(0, totalDuration - elapsed);
+                        
+                        this.initTimer(totalDuration);
+                        this.focusMode.timer.remaining = remaining;
+                        
+                        if (remaining <= 0) {
+                            // 时间已到，自动结束会话
+                            this.$message.warning('检测到未完成的专注会话已超时，已自动结束');
+                            this.endSession(false, true);
+                        } else {
+                            // 显示恢复提示
+                            this.$confirm(`检测到未完成的专注会话："${session.task_title}"，剩余 ${this.formatTime(remaining)}，是否继续？`, '恢复专注会话', {
+                                confirmButtonText: '继续专注',
+                                cancelButtonText: '结束会话',
+                                type: 'info'
+                            }).then(() => {
+                                // 用户选择继续，自动开始计时器
+                                this.startTimer();
+                            }).catch(() => {
+                                // 用户选择结束会话
+                                this.endSession(false, true);
+                            });
+                        }
+                    },
+                    startTimer() {
+                        // 防止重复启动计时器
+                        if (this.timerInterval) {
+                            clearInterval(this.timerInterval);
+                            this.timerInterval = null;
+                        }
+                        
+                        this.focusMode.timer.isRunning = true;
+                        this.focusMode.timer.isPaused = false;
+                        
+                        this.timerInterval = setInterval(() => {
+                            if (this.focusMode.timer.remaining > 0) {
+                                this.focusMode.timer.remaining--;
+                            } else {
+                                this.timerComplete();
+                            }
+                        }, 1000);
+                    },
+                    pauseTimer() {
+                        this.focusMode.timer.isPaused = true;
+                        this.focusMode.timer.isRunning = false;
+                        if (this.timerInterval) {
+                            clearInterval(this.timerInterval);
+                            this.timerInterval = null;
+                        }
+                    },
+                    resumeTimer() {
+                        // 确保之前的计时器已经清除
+                        if (this.timerInterval) {
+                            clearInterval(this.timerInterval);
+                            this.timerInterval = null;
+                        }
+                        this.startTimer();
+                    },
+                    timerComplete() {
+                        this.pauseTimer();
+                        this.endSession(true);
+                        this.$message.success('专注时间结束！');
+                        
+                        // 播放声音提醒（如果启用）
+                        if (this.focusMode.settings.sound_enabled) {
+                            this.playNotificationSound();
+                        }
+                    },
+                    stopSession() {
+                        this.$confirm('确定要结束当前专注会话吗？', '确认', {
+                            confirmButtonText: '确定',
+                            cancelButtonText: '取消',
+                            type: 'warning'
+                        }).then(() => {
+                            this.endSession(false, true);
+                        });
+                    },
+                    endSession(completed = false, interrupted = false) {
+                        if (!this.focusMode.currentSession) return;
+                        
+                        const data = {
+                            session_id: this.focusMode.currentSession.id,
+                            completed: completed,
+                            interrupted: interrupted
+                        };
+                        
+                        axios.post('/focus/session/end/', data)
+                            .then(response => {
+                                if (response.data.success) {
+                                    this.focusMode.inSession = false;
+                                    this.focusMode.currentSession = null;
+                                    this.pauseTimer();
+                                    this.loadFocusData(); // 刷新数据
+                                    this.$message.success('专注会话已结束');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('结束会话失败:', error);
+                                this.$message.error('结束会话失败');
+                            });
+                    },
+                    formatTime(seconds) {
+                        // 确保seconds是一个有效的数字
+                        if (isNaN(seconds) || seconds < 0) {
+                            seconds = 0;
+                        }
+                        const minutes = Math.floor(seconds / 60);
+                        const remainingSeconds = seconds % 60;
+                        return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+                    },
+                    formatDuration(minutes) {
+                        // 格式化时长显示，如 "1h 30m" 或 "25m"
+                        if (isNaN(minutes) || minutes < 0) {
+                            minutes = 0;
+                        }
+                        const hours = Math.floor(minutes / 60);
+                        const remainingMinutes = minutes % 60;
+                        
+                        if (hours > 0) {
+                            return `${hours}h ${remainingMinutes}m`;
+                        } else {
+                            return `${remainingMinutes}m`;
+                        }
+                    },
+                    showFocusSettings() {
+                        this.dialogType = 'focusSettings';
+                        this.dialogTitle = '专注设置';
+                        this.dialogVisible = true;
+                    },
+                    updateFocusSettings() {
+                        axios.post('/focus/settings/update/', this.focusMode.settings)
+                            .then(response => {
+                                if (response.data.success) {
+                                    this.$message.success('设置已保存');
+                                    this.dialogVisible = false;
+                                }
+                            })
+                            .catch(error => {
+                                console.error('更新设置失败:', error);
+                                this.$message.error('保存设置失败');
+                            });
+                    },
+                    playNotificationSound() {
+                        // 简单的声音提醒实现
+                        try {
+                            const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvGIcBjuX2/LNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvGIcBjuX2/LNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvGIcBjuX2/LNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvGIcBjuX2/LNdBGdgLgVIkA=');
+                            audio.play();
+                        } catch (error) {
+                            console.log('播放提醒音失败:', error);
+                        }
+                    },
+                    showAllHistory() {
+                        this.dialogType = 'focusHistory';
+                        this.dialogTitle = '专注历史记录';
+                        this.dialogVisible = true;
+                        // 加载更多历史记录
+                        this.loadAllFocusHistory();
+                    },
+                    loadAllFocusHistory() {
+                        axios.get('/focus/history/?limit=100')
+                            .then(response => {
+                                if (response.data.success) {
+                                    this.focusHistory = response.data.sessions;
+                                }
+                            })
+                            .catch(error => {
+                                console.error('获取完整历史失败:', error);
+                                this.$message.error('获取历史记录失败');
+                            });
+                    },
                     fetchTasks() {
                         this.loading = true;
                         axios.get('/checkin/checkins/')
@@ -1350,7 +2041,7 @@
                             
                             if (error.response && error.response.status === 401) {
                                 // 未登录，重定向到登录页
-                                this.loggedIn = false;
+                                this.isLoggedIn = false;
                             } else {
                                 this.$message.error('加载用户数据失败，请刷新页面重试');
                             }
@@ -1642,6 +2333,13 @@
                         window.location.href = `/chat/room/${this.selectedSchool.id}/`;
                     }
                 },
+                beforeDestroy() {
+                    // 清理计时器
+                    if (this.timerInterval) {
+                        clearInterval(this.timerInterval);
+                        this.timerInterval = null;
+                    }
+                },
                 mounted() {
                     console.log("Vue实例已挂载");
                     // 检查登录状态
@@ -1653,6 +2351,11 @@
                     // 加载用户数据
                     this.loading = true;
                     this.loadUserData();
+                    
+                    // 加载专注模式数据
+                    if (this.isLoggedIn) {
+                        this.loadFocusData();
+                    }
                     
                     // 获取学校列表
                     this.fetchSchools();
