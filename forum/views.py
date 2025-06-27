@@ -22,7 +22,9 @@ def get_posts(request):
         school_id = int(school_id)
         # 只返回已审核通过的帖子
         posts = Post.objects.filter(school_id=school_id, status='approved').order_by('-time')
-        data = [post.to_dict() for post in posts]
+        # 获取当前登录用户（如果有的话）
+        current_user = getattr(request, 'user', None) if hasattr(request, 'user') else None
+        data = [post.to_dict(user=current_user) for post in posts]
         return JsonResponse(data, safe=False)
     except (ValueError, School.DoesNotExist):
         return JsonResponse({"error": "无效的学校ID"}, status=400)
@@ -41,7 +43,8 @@ def get_pending_posts(request):
             posts = Post.objects.all().order_by('-time')
         else:
             posts = Post.objects.filter(status=status).order_by('-time')
-        data = [post.to_dict() for post in posts]
+        current_user = getattr(request, 'user', None) if hasattr(request, 'user') else None
+        data = [post.to_dict(user=current_user) for post in posts]
         return JsonResponse(data, safe=False)
     except Exception as e:
         return JsonResponse({"error": f"获取帖子失败: {str(e)}"}, status=500)
@@ -76,10 +79,11 @@ def review_post(request, post_id):
         if status == 'approved':
             create_post_html(post)
             
+        current_user = getattr(request, 'user', None) if hasattr(request, 'user') else None
         return JsonResponse({
             "success": True,
             "message": "审核完成",
-            "post": post.to_dict()
+            "post": post.to_dict(user=current_user)
         })
     except Post.DoesNotExist:
         return JsonResponse({"error": "帖子不存在"}, status=404)
@@ -107,8 +111,9 @@ def get_post_detail(request, post_id):
         # 如果帖子未审核通过且当前用户不是管理员或帖子作者，则不允许查看
         if post.status != 'approved' and not (is_staff or is_author):
             return JsonResponse({"error": "该帖子尚未审核通过"}, status=403)
-            
-        return JsonResponse(post.to_dict())
+        
+        current_user = getattr(request, 'user', None) if hasattr(request, 'user') else None
+        return JsonResponse(post.to_dict(user=current_user))
     except Post.DoesNotExist:
         return JsonResponse({"error": "帖子不存在"}, status=404)
 
@@ -169,7 +174,7 @@ def create_post(request):
         return JsonResponse({
             "success": True,
             "message": "发布成功！帖子已通过自动审核",
-            "post": post.to_dict()
+            "post": post.to_dict(user=request.user)
         })
     except json.JSONDecodeError:
         return JsonResponse({"error": "无效的JSON数据"}, status=400)
@@ -395,7 +400,348 @@ def get_user_posts(request):
             return JsonResponse({"error": "用户未登录"}, status=401)
             
         posts = Post.objects.filter(user=request.user).order_by('-time')
-        data = [post.to_dict() for post in posts]
+        data = [post.to_dict(user=request.user) for post in posts]
         return JsonResponse(data, safe=False)
     except Exception as e:
         return JsonResponse({"error": f"获取帖子失败: {str(e)}"}, status=500)
+
+# ========== 点赞相关API ==========
+
+@csrf_exempt
+@login_required
+def toggle_post_like(request, post_id):
+    """切换帖子点赞状态（点赞/取消点赞）"""
+    if request.method != 'POST':
+        return JsonResponse({"error": "只支持POST请求"}, status=405)
+    
+    try:
+        from .models import Post, PostLike
+        
+        post = Post.objects.get(id=post_id, status='approved')
+        user = request.user
+        
+        # 检查是否已经点赞
+        like, created = PostLike.objects.get_or_create(
+            post=post,
+            user=user,
+            defaults={'created_at': timezone.now()}
+        )
+        
+        if not created:
+            # 如果已存在，则取消点赞
+            like.delete()
+            action = 'unliked'
+            message = '取消点赞成功'
+        else:
+            # 如果不存在，则点赞
+            action = 'liked'
+            message = '点赞成功'
+        
+        # 获取最新的点赞数
+        likes_count = post.likes.count()
+        
+        return JsonResponse({
+            "success": True,
+            "action": action,
+            "message": message,
+            "likes_count": likes_count,
+            "user_liked": action == 'liked'
+        })
+        
+    except Post.DoesNotExist:
+        return JsonResponse({"error": "帖子不存在或未审核通过"}, status=404)
+    except Exception as e:
+        return JsonResponse({"error": f"操作失败: {str(e)}"}, status=500)
+
+
+@csrf_exempt
+def get_post_likes(request, post_id):
+    """获取帖子的点赞用户列表"""
+    try:
+        from .models import Post, PostLike
+        
+        post = Post.objects.get(id=post_id, status='approved')
+        
+        # 分页参数
+        page = int(request.GET.get('page', 1))
+        page_size = int(request.GET.get('page_size', 20))
+        
+        # 获取点赞列表
+        likes = PostLike.objects.filter(post=post).order_by('-created_at')
+        
+        # 分页
+        start = (page - 1) * page_size
+        end = start + page_size
+        likes_page = likes[start:end]
+        
+        data = {
+            'total': likes.count(),
+            'page': page,
+            'page_size': page_size,
+            'likes': [like.to_dict() for like in likes_page]
+        }
+        
+        return JsonResponse(data)
+        
+    except Post.DoesNotExist:
+        return JsonResponse({"error": "帖子不存在或未审核通过"}, status=404)
+    except Exception as e:
+        return JsonResponse({"error": f"获取点赞列表失败: {str(e)}"}, status=500)
+
+
+@csrf_exempt
+@login_required
+def get_post_like_status(request, post_id):
+    """获取当前用户对帖子的点赞状态"""
+    try:
+        from .models import Post, PostLike
+        
+        post = Post.objects.get(id=post_id, status='approved')
+        user = request.user
+        
+        user_liked = PostLike.objects.filter(post=post, user=user).exists()
+        likes_count = post.likes.count()
+        
+        return JsonResponse({
+            "user_liked": user_liked,
+            "likes_count": likes_count
+        })
+        
+    except Post.DoesNotExist:
+        return JsonResponse({"error": "帖子不存在或未审核通过"}, status=404)
+    except Exception as e:
+        return JsonResponse({"error": f"获取点赞状态失败: {str(e)}"}, status=500)
+
+
+# ========== 评论相关API ==========
+
+@csrf_exempt
+@login_required
+def create_post_comment(request, post_id):
+    """发表评论"""
+    if request.method != 'POST':
+        return JsonResponse({"error": "只支持POST请求"}, status=405)
+    
+    try:
+        from .models import Post, PostComment
+        
+        post = Post.objects.get(id=post_id, status='approved')
+        user = request.user
+        
+        data = json.loads(request.body)
+        content = data.get('content', '').strip()
+        parent_id = data.get('parent_id')
+        
+        if not content:
+            return JsonResponse({"error": "评论内容不能为空"}, status=400)
+        
+        if len(content) > 1000:
+            return JsonResponse({"error": "评论内容不能超过1000个字符"}, status=400)
+        
+        # 检查父评论是否存在
+        parent = None
+        if parent_id:
+            try:
+                parent = PostComment.objects.get(id=parent_id, post=post, is_deleted=False)
+            except PostComment.DoesNotExist:
+                return JsonResponse({"error": "父评论不存在"}, status=400)
+        
+        # 🎯 新增：内容审核检测
+        from .moderation import moderation_service
+        is_valid, violations_list = moderation_service.check_text(content)
+        
+        if not is_valid:
+            # 生成错误信息
+            violation_categories = [v['category'] for v in violations_list]
+            error_message = f"包含{', '.join(set(violation_categories))}相关内容"
+            
+            return JsonResponse({
+                "error": f"评论内容包含违规内容：{error_message}",
+                "violation_details": violations_list
+            }, status=400)
+        
+        # 创建评论
+        comment = PostComment.objects.create(
+            post=post,
+            user=user,
+            parent=parent,
+            content=content
+        )
+        
+        # 返回评论数据
+        comment_data = comment.to_dict(include_replies=False)
+        comment_data['is_author'] = True  # 当前用户是评论作者
+        
+        return JsonResponse({
+            "success": True,
+            "message": "评论发表成功",
+            "comment": comment_data,
+            "comments_count": post.comments.filter(is_deleted=False).count()
+        })
+        
+    except Post.DoesNotExist:
+        return JsonResponse({"error": "帖子不存在或未审核通过"}, status=404)
+    except json.JSONDecodeError:
+        return JsonResponse({"error": "无效的JSON数据"}, status=400)
+    except Exception as e:
+        return JsonResponse({"error": f"发表评论失败: {str(e)}"}, status=500)
+
+
+@csrf_exempt
+def get_post_comments(request, post_id):
+    """获取帖子的评论列表"""
+    try:
+        from .models import Post, PostComment
+        
+        post = Post.objects.get(id=post_id, status='approved')
+        
+        # 分页参数
+        page = int(request.GET.get('page', 1))
+        page_size = int(request.GET.get('page_size', 10))
+        
+        # 获取顶级评论（没有父评论的评论）
+        comments = PostComment.objects.filter(
+            post=post, 
+            parent=None, 
+            is_deleted=False
+        ).order_by('-created_at')
+        
+        # 分页
+        start = (page - 1) * page_size
+        end = start + page_size
+        comments_page = comments[start:end]
+        
+        # 获取当前用户
+        current_user = getattr(request, 'user', None) if hasattr(request, 'user') else None
+        
+        # 转换为字典格式
+        comments_data = []
+        for comment in comments_page:
+            comment_dict = comment.to_dict(include_replies=True)
+            # 设置是否为当前用户的评论
+            comment_dict['is_author'] = (current_user and 
+                                       hasattr(current_user, 'id') and 
+                                       current_user.id == comment.user.id)
+            # 设置回复的作者标识
+            if 'replies' in comment_dict:
+                for reply in comment_dict['replies']:
+                    reply['is_author'] = (current_user and 
+                                        hasattr(current_user, 'id') and 
+                                        current_user.id == reply.get('user_id'))
+            comments_data.append(comment_dict)
+        
+        data = {
+            'total': comments.count(),
+            'page': page,
+            'page_size': page_size,
+            'comments': comments_data
+        }
+        
+        return JsonResponse(data)
+        
+    except Post.DoesNotExist:
+        return JsonResponse({"error": "帖子不存在或未审核通过"}, status=404)
+    except Exception as e:
+        return JsonResponse({"error": f"获取评论列表失败: {str(e)}"}, status=500)
+
+
+@csrf_exempt
+@login_required
+def update_comment(request, comment_id):
+    """编辑评论（仅作者可编辑）"""
+    if request.method != 'PUT':
+        return JsonResponse({"error": "只支持PUT请求"}, status=405)
+    
+    try:
+        from .models import PostComment
+        
+        comment = PostComment.objects.get(id=comment_id, is_deleted=False)
+        user = request.user
+        
+        # 检查是否为评论作者
+        if comment.user.id != user.id:
+            return JsonResponse({"error": "只能编辑自己的评论"}, status=403)
+        
+        data = json.loads(request.body)
+        content = data.get('content', '').strip()
+        
+        if not content:
+            return JsonResponse({"error": "评论内容不能为空"}, status=400)
+        
+        if len(content) > 1000:
+            return JsonResponse({"error": "评论内容不能超过1000个字符"}, status=400)
+        
+        # 🎯 内容审核检测
+        from .moderation import moderation_service
+        is_valid, violations_list = moderation_service.check_text(content)
+        
+        if not is_valid:
+            # 生成错误信息
+            violation_categories = [v['category'] for v in violations_list]
+            error_message = f"包含{', '.join(set(violation_categories))}相关内容"
+            
+            return JsonResponse({
+                "error": f"评论内容包含违规内容：{error_message}",
+                "violation_details": violations_list
+            }, status=400)
+        
+        # 更新评论
+        comment.content = content
+        comment.save()
+        
+        # 返回更新后的评论数据
+        comment_data = comment.to_dict(include_replies=False)
+        comment_data['is_author'] = True
+        
+        return JsonResponse({
+            "success": True,
+            "message": "评论更新成功",
+            "comment": comment_data
+        })
+        
+    except PostComment.DoesNotExist:
+        return JsonResponse({"error": "评论不存在"}, status=404)
+    except json.JSONDecodeError:
+        return JsonResponse({"error": "无效的JSON数据"}, status=400)
+    except Exception as e:
+        return JsonResponse({"error": f"更新评论失败: {str(e)}"}, status=500)
+
+
+@csrf_exempt
+@login_required
+def delete_comment(request, comment_id):
+    """删除评论（软删除，仅作者和管理员可删除）"""
+    if request.method != 'DELETE':
+        return JsonResponse({"error": "只支持DELETE请求"}, status=405)
+    
+    try:
+        from .models import PostComment
+        
+        comment = PostComment.objects.get(id=comment_id, is_deleted=False)
+        user = request.user
+        
+        # 检查权限：评论作者或管理员
+        is_author = comment.user.id == user.id
+        is_admin = getattr(user, 'is_staff', False)
+        
+        if not (is_author or is_admin):
+            return JsonResponse({"error": "没有权限删除此评论"}, status=403)
+        
+        # 软删除评论
+        comment.is_deleted = True
+        comment.save()
+        
+        # 更新帖子的评论数
+        post = comment.post
+        comments_count = post.comments.filter(is_deleted=False).count()
+        
+        return JsonResponse({
+            "success": True,
+            "message": "评论删除成功",
+            "comments_count": comments_count
+        })
+        
+    except PostComment.DoesNotExist:
+        return JsonResponse({"error": "评论不存在"}, status=404)
+    except Exception as e:
+        return JsonResponse({"error": f"删除评论失败: {str(e)}"}, status=500)

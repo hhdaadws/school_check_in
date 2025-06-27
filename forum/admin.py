@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils import timezone
-from .models import Post, ViolationWord, ModerationLog
+from .models import Post, ViolationWord, ModerationLog, PostLike, PostComment
 
 # Register your models here.
 
@@ -113,3 +113,56 @@ class ModerationLogAdmin(admin.ModelAdmin):
     def has_change_permission(self, request, obj=None):
         """禁止修改日志"""
         return False
+
+
+@admin.register(PostLike)
+class PostLikeAdmin(admin.ModelAdmin):
+    list_display = ['user', 'post', 'created_at']
+    list_filter = ['created_at', 'post__school']
+    search_fields = ['user__username', 'post__title']
+    readonly_fields = ['user', 'post', 'created_at']
+    
+    def has_add_permission(self, request):
+        """禁止手动添加点赞"""
+        return False
+    
+    def has_change_permission(self, request, obj=None):
+        """禁止修改点赞"""
+        return False
+
+
+@admin.register(PostComment)
+class PostCommentAdmin(admin.ModelAdmin):
+    list_display = ['user', 'post', 'parent', 'content_preview', 'is_deleted', 'created_at']
+    list_filter = ['is_deleted', 'created_at', 'post__school']
+    search_fields = ['user__username', 'post__title', 'content']
+    readonly_fields = ['user', 'post', 'created_at', 'updated_at']
+    list_editable = ['is_deleted']
+    
+    fieldsets = (
+        ('基本信息', {
+            'fields': ('user', 'post', 'parent', 'content')
+        }),
+        ('状态信息', {
+            'fields': ('is_deleted', 'created_at', 'updated_at')
+        })
+    )
+    
+    def content_preview(self, obj):
+        """显示评论内容预览"""
+        return obj.content[:50] + '...' if len(obj.content) > 50 else obj.content
+    content_preview.short_description = '评论内容预览'
+    
+    actions = ['delete_comments', 'restore_comments']
+    
+    def delete_comments(self, request, queryset):
+        """批量软删除评论"""
+        updated = queryset.update(is_deleted=True)
+        self.message_user(request, f'已删除 {updated} 条评论')
+    delete_comments.short_description = "删除选中的评论"
+    
+    def restore_comments(self, request, queryset):
+        """批量恢复评论"""
+        updated = queryset.update(is_deleted=False)
+        self.message_user(request, f'已恢复 {updated} 条评论')
+    restore_comments.short_description = "恢复选中的评论"

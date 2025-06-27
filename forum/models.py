@@ -33,7 +33,7 @@ class Post(models.Model):
     def __str__(self):
         return self.title
         
-    def to_dict(self):
+    def to_dict(self, user=None):
         return {
             'id': self.id,
             'school_id': self.school.id,
@@ -43,7 +43,11 @@ class Post(models.Model):
             'time': self.time.strftime('%Y-%m-%d %H:%M'),
             'status': self.status,
             'status_display': self.get_status_display(),
-            'tags': [tag.to_dict() for tag in self.post_tags.all()]
+            'tags': [tag.to_dict() for tag in self.post_tags.all()],
+            'likes_count': self.likes.count(),
+            'comments_count': self.comments.filter(is_deleted=False).count(),
+            'user_liked': self.likes.filter(user=user).exists() if user else False,
+            'recent_comments': [comment.to_dict() for comment in self.comments.filter(is_deleted=False)[:3]]
         }
 
 # 帖子标签关联模型
@@ -181,3 +185,66 @@ class ModerationLog(models.Model):
             'violation_category': self.violation_category,
             'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S')
         }
+
+# 帖子点赞模型
+class PostLike(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='likes', verbose_name='帖子')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_likes', verbose_name='用户')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='点赞时间')
+    
+    class Meta:
+        verbose_name = '帖子点赞'
+        verbose_name_plural = '帖子点赞'
+        unique_together = ('post', 'user')  # 防止重复点赞
+        ordering = ['-created_at']
+        
+    def __str__(self):
+        return f"{self.user.username} 赞了 {self.post.title}"
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user.id,
+            'username': self.user.username,
+            'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S')
+        }
+
+
+# 帖子评论模型
+class PostComment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments', verbose_name='帖子')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_comments', verbose_name='用户')
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, 
+                              related_name='replies', verbose_name='父评论')
+    content = models.TextField(verbose_name='评论内容')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='评论时间')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='更新时间')
+    is_deleted = models.BooleanField(default=False, verbose_name='是否删除')
+    
+    class Meta:
+        verbose_name = '帖子评论'
+        verbose_name_plural = '帖子评论'
+        ordering = ['-created_at']
+        
+    def __str__(self):
+        return f"{self.user.username} 评论了 {self.post.title}"
+    
+    def to_dict(self, include_replies=True):
+        data = {
+            'id': self.id,
+            'user_id': self.user.id,
+            'username': self.user.username,
+            'content': self.content,
+            'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S'),
+            'updated_at': self.updated_at.strftime('%Y-%m-%d %H:%M:%S'),
+            'is_author': False,  # 这个字段会在视图中根据当前用户设置
+            'parent_id': self.parent.id if self.parent else None,
+            'replies_count': self.replies.filter(is_deleted=False).count()
+        }
+        
+        # 如果包含回复且不是删除的评论，则加载回复
+        if include_replies and not self.is_deleted:
+            data['replies'] = [reply.to_dict(include_replies=False) for reply in 
+                              self.replies.filter(is_deleted=False)[:5]]  # 最多显示5条回复
+        
+        return data

@@ -200,6 +200,154 @@
             color: #409EFF;
         }
         
+        /* 帖子操作区域样式 */
+        .post-actions {
+            padding-top: 8px;
+            border-top: 1px solid #f0f0f0;
+            margin-top: 8px;
+        }
+        
+        .action-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .action-group .el-button {
+            color: #666;
+            padding: 4px 8px;
+            font-size: 13px;
+        }
+        
+        .action-group .el-button:hover {
+            color: #409EFF;
+            background-color: #ecf5ff;
+        }
+        
+        .action-group .el-button.liked {
+            color: #f39c12;
+        }
+        
+        .action-group .el-button.liked:hover {
+            color: #e67e22;
+        }
+        
+        /* 评论对话框样式 */
+        .comments-container {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .post-info {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .post-info h3 {
+            margin: 0 0 8px 0;
+            font-size: 18px;
+            color: #333;
+        }
+        
+        .post-author {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .comment-form {
+            margin-bottom: 20px;
+        }
+        
+        .form-actions {
+            margin-top: 10px;
+            text-align: right;
+        }
+        
+        .login-prompt {
+            text-align: center;
+            padding: 20px;
+            color: #999;
+            border: 2px dashed #ddd;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .comments-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .loading, .no-comments {
+            text-align: center;
+            padding: 40px 0;
+            color: #999;
+        }
+        
+        .comment-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comment-item:last-child {
+            border-bottom: none;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .comment-author {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .comment-time {
+            color: #999;
+            font-size: 12px;
+        }
+        
+        .comment-content {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 8px;
+            word-wrap: break-word;
+        }
+        
+        .comment-actions {
+            text-align: right;
+        }
+        
+        .comment-actions .el-button {
+            color: #999;
+            padding: 2px 6px;
+        }
+        
+        .comment-actions .el-button:hover {
+            color: #409EFF;
+        }
+        
+        .replies {
+            margin-left: 20px;
+            margin-top: 10px;
+            border-left: 3px solid #eee;
+            padding-left: 15px;
+        }
+        
+        .reply-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .reply-item:last-child {
+            border-bottom: none;
+        }
+        
         .post-meta {
             display: flex;
             justify-content: space-between;
@@ -801,14 +949,36 @@
                                     发布帖子
                                 </el-button>
                             </div>
-                            <div class="post-item" v-for="post in filteredPosts" :key="post.id" @click="viewPostDetail(post)">
-                                <div class="post-title">
+                            <div class="post-item" v-for="post in filteredPosts" :key="post.id">
+                                <div class="post-title" @click="viewPostDetail(post)">
                                     <span class="title-text">{{ post.title }}</span>
                                     <i class="el-icon-arrow-right" style="font-size: 14px; color: #909399;"></i>
                                 </div>
-                                <div class="post-meta">
+                                <div class="post-meta" @click="viewPostDetail(post)">
                                     <span><i class="el-icon-user" style="margin-right: 4px;"></i>{{ post.author }}</span>
                                     <span><i class="el-icon-time" style="margin-right: 4px;"></i>{{ post.time }}</span>
+                                </div>
+                                <!-- 点赞和评论区域 -->
+                                <div class="post-actions" @click.stop>
+                                    <div class="action-group">
+                                        <el-button 
+                                            type="text" 
+                                            size="mini" 
+                                            :class="{ 'liked': post.user_liked }"
+                                            @click="toggleLike(post)"
+                                            :disabled="!isLoggedIn">
+                                            <i class="el-icon-star-off" v-if="!post.user_liked"></i>
+                                            <i class="el-icon-star-on" v-else style="color: #f39c12;"></i>
+                                            {{ post.likes_count || 0 }}
+                                        </el-button>
+                                        <el-button 
+                                            type="text" 
+                                            size="mini"
+                                            @click="showComments(post)">
+                                            <i class="el-icon-chat-line-round"></i>
+                                            {{ post.comments_count || 0 }}
+                                        </el-button>
+                                    </div>
                                 </div>
                             </div>
                             <div v-if="filteredPosts.length === 0" style="text-align: center; padding: 20px 0; color: #999;">
@@ -821,16 +991,38 @@
                             <div class="card-title">
                                 我的帖子
                             </div>
-                            <div class="post-item" v-for="post in userPosts" :key="post.id" @click="viewPostDetail(post)">
-                                <div class="post-title">
+                            <div class="post-item" v-for="post in userPosts" :key="post.id">
+                                <div class="post-title" @click="viewPostDetail(post)">
                                     <span class="title-text">{{ post.title }}</span>
                                     <el-tag size="mini" :type="getStatusType(post.status)" style="margin-left: 10px;">
                                         {{ post.status_display }}
                                     </el-tag>
                                 </div>
-                                <div class="post-meta">
+                                <div class="post-meta" @click="viewPostDetail(post)">
                                     <span><i class="el-icon-user" style="margin-right: 4px;"></i>{{ post.author }}</span>
                                     <span><i class="el-icon-time" style="margin-right: 4px;"></i>{{ post.time }}</span>
+                                </div>
+                                <!-- 点赞和评论区域 -->
+                                <div class="post-actions" @click.stop v-if="post.status === 'approved'">
+                                    <div class="action-group">
+                                        <el-button 
+                                            type="text" 
+                                            size="mini" 
+                                            :class="{ 'liked': post.user_liked }"
+                                            @click="toggleLike(post)"
+                                            :disabled="!isLoggedIn">
+                                            <i class="el-icon-star-off" v-if="!post.user_liked"></i>
+                                            <i class="el-icon-star-on" v-else style="color: #f39c12;"></i>
+                                            {{ post.likes_count || 0 }}
+                                        </el-button>
+                                        <el-button 
+                                            type="text" 
+                                            size="mini"
+                                            @click="showComments(post)">
+                                            <i class="el-icon-chat-line-round"></i>
+                                            {{ post.comments_count || 0 }}
+                                        </el-button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1381,6 +1573,111 @@
                     </span>
                 </div>
             </el-dialog>
+            
+            <!-- 评论对话框 -->
+            <el-dialog
+                title="评论"
+                :visible.sync="commentsDialogVisible"
+                width="90%"
+                max-width="600px"
+                :close-on-click-modal="false">
+                
+                <div v-if="currentPost" class="comments-container">
+                    <!-- 帖子信息 -->
+                    <div class="post-info">
+                        <h3>{{ currentPost.title }}</h3>
+                        <p class="post-author">{{ currentPost.author }} · {{ currentPost.time }}</p>
+                    </div>
+                    
+                    <!-- 发表评论 -->
+                    <div class="comment-form" v-if="isLoggedIn">
+                        <el-input
+                            type="textarea"
+                            v-model="newComment.content"
+                            placeholder="写下你的评论..."
+                            :rows="3"
+                            maxlength="1000"
+                            show-word-limit>
+                        </el-input>
+                        <div class="form-actions">
+                            <el-button
+                                type="primary"
+                                size="small"
+                                @click="submitComment"
+                                :disabled="!newComment.content.trim()">
+                                发表评论
+                            </el-button>
+                            <el-button
+                                v-if="newComment.parent_id"
+                                size="small"
+                                @click="newComment.parent_id = null">
+                                取消回复
+                            </el-button>
+                        </div>
+                    </div>
+                    
+                    <div v-else class="login-prompt">
+                        <p>请登录后发表评论</p>
+                    </div>
+                    
+                    <!-- 评论列表 -->
+                    <div class="comments-list">
+                        <div v-if="commentsLoading" class="loading">
+                            <i class="el-icon-loading"></i> 加载中...
+                        </div>
+                        
+                        <div v-else-if="comments.length === 0" class="no-comments">
+                            <p>还没有评论，快来抢沙发吧！</p>
+                        </div>
+                        
+                        <div v-else>
+                            <div class="comment-item" v-for="comment in comments" :key="comment.id">
+                                <div class="comment-header">
+                                    <span class="comment-author">{{ comment.username }}</span>
+                                    <span class="comment-time">{{ comment.created_at }}</span>
+                                </div>
+                                <div class="comment-content">{{ comment.content }}</div>
+                                <div class="comment-actions">
+                                    <el-button 
+                                        type="text" 
+                                        size="mini"
+                                        @click="replyToComment(comment)"
+                                        v-if="isLoggedIn">
+                                        回复
+                                    </el-button>
+                                    <el-button 
+                                        type="text" 
+                                        size="mini"
+                                        @click="deleteComment(comment)"
+                                        v-if="comment.is_author || (userInfo && userInfo.is_staff)">
+                                        删除
+                                    </el-button>
+                                </div>
+                                
+                                <!-- 回复列表 -->
+                                <div class="replies" v-if="comment.replies && comment.replies.length > 0">
+                                    <div class="reply-item" v-for="reply in comment.replies" :key="reply.id">
+                                        <div class="comment-header">
+                                            <span class="comment-author">{{ reply.username }}</span>
+                                            <span class="comment-time">{{ reply.created_at }}</span>
+                                        </div>
+                                        <div class="comment-content">{{ reply.content }}</div>
+                                        <div class="comment-actions">
+                                            <el-button 
+                                                type="text" 
+                                                size="mini"
+                                                @click="deleteComment(reply)"
+                                                v-if="reply.is_author || (userInfo && userInfo.is_staff)">
+                                                删除
+                                            </el-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </el-dialog>
         </div>
     </div>
 
@@ -1483,7 +1780,16 @@
                         duration: 25
                     },
                     timerInterval: null,
-                    focusHistory: []
+                    focusHistory: [],
+                    // 评论相关数据
+                    commentsDialogVisible: false,
+                    currentPost: null,
+                    comments: [],
+                    newComment: {
+                        content: '',
+                        parent_id: null
+                    },
+                    commentsLoading: false
                 },
                 computed: {
                     avatarInitial() {
@@ -2338,6 +2644,126 @@
                         
                         // 跳转到对应学校的聊天室
                         window.location.href = `/chat/room/${this.selectedSchool.id}/`;
+                    },
+                    
+                    // ===== 点赞和评论相关方法 =====
+                    toggleLike(post) {
+                        if (!this.isLoggedIn) {
+                            this.$message.error('请先登录');
+                            return;
+                        }
+                        
+                        axios.post(`/forum/posts/${post.id}/like/`)
+                            .then(response => {
+                                if (response.data.success) {
+                                    // 更新帖子的点赞状态
+                                    post.user_liked = response.data.user_liked;
+                                    post.likes_count = response.data.likes_count;
+                                    
+                                    this.$message({
+                                        message: response.data.message,
+                                        type: 'success',
+                                        duration: 1500
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                console.error('点赞操作失败:', error);
+                                this.$message.error('操作失败，请重试');
+                            });
+                    },
+                    
+                    showComments(post) {
+                        this.currentPost = post;
+                        this.commentsDialogVisible = true;
+                        this.loadComments(post.id);
+                    },
+                    
+                    loadComments(postId) {
+                        this.commentsLoading = true;
+                        axios.get(`/forum/posts/${postId}/comments/`)
+                            .then(response => {
+                                this.comments = response.data.comments || [];
+                                this.commentsLoading = false;
+                            })
+                            .catch(error => {
+                                console.error('加载评论失败:', error);
+                                this.commentsLoading = false;
+                                this.$message.error('加载评论失败');
+                            });
+                    },
+                    
+                    submitComment() {
+                        if (!this.isLoggedIn) {
+                            this.$message.error('请先登录');
+                            return;
+                        }
+                        
+                        if (!this.newComment.content.trim()) {
+                            this.$message.error('评论内容不能为空');
+                            return;
+                        }
+                        
+                        const commentData = {
+                            content: this.newComment.content,
+                            parent_id: this.newComment.parent_id
+                        };
+                        
+                        axios.post(`/forum/posts/${this.currentPost.id}/comments/create/`, commentData)
+                            .then(response => {
+                                if (response.data.success) {
+                                    // 添加新评论到列表
+                                    this.comments.unshift(response.data.comment);
+                                    
+                                    // 更新帖子的评论数量
+                                    this.currentPost.comments_count = response.data.comments_count;
+                                    
+                                    // 重置评论表单
+                                    this.newComment.content = '';
+                                    this.newComment.parent_id = null;
+                                    
+                                    this.$message.success('评论发表成功');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('发表评论失败:', error);
+                                const errorMsg = error.response?.data?.error || '发表评论失败';
+                                this.$message.error(errorMsg);
+                            });
+                    },
+                    
+                    replyToComment(comment) {
+                        this.newComment.parent_id = comment.id;
+                        // 可以在这里添加更多回复逻辑，比如在评论框中显示@用户名
+                        this.$message.info(`回复 ${comment.username}`);
+                    },
+                    
+                    deleteComment(comment) {
+                        this.$confirm('确定要删除这条评论吗？', '提示', {
+                            confirmButtonText: '确定',
+                            cancelButtonText: '取消',
+                            type: 'warning'
+                        }).then(() => {
+                            axios.delete(`/forum/comments/${comment.id}/delete/`)
+                                .then(response => {
+                                    if (response.data.success) {
+                                        // 从列表中移除评论
+                                        const index = this.comments.findIndex(c => c.id === comment.id);
+                                        if (index !== -1) {
+                                            this.comments.splice(index, 1);
+                                        }
+                                        
+                                        // 更新帖子评论数量
+                                        this.currentPost.comments_count = response.data.comments_count;
+                                        
+                                        this.$message.success('评论已删除');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('删除评论失败:', error);
+                                    this.$message.error('删除失败，请重试');
+                                });
+                        });
                     }
                 },
                 beforeDestroy() {

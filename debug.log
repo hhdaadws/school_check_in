@@ -668,3 +668,158 @@ INFO 2025-06-28 02:20:45,349 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
 INFO 2025-06-28 02:20:45,349 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
 INFO 2025-06-28 02:20:46,694 basehttp "GET /forum/posts/?school_id=1 HTTP/1.1" 200 4145
 INFO 2025-06-28 02:20:46,694 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 4373
+INFO 2025-06-28 02:32:29,130 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:32:30,791 basehttp "GET /accounts/ HTTP/1.1" 200 108303
+INFO 2025-06-28 02:32:31,734 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-06-28 02:32:31,738 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-06-28 02:32:31,744 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-06-28 02:32:31,744 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 02:32:31,744 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
+INFO 2025-06-28 02:32:31,746 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-28 02:32:31,758 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 02:32:31,762 basehttp "GET /focus/stats/ HTTP/1.1" 200 338
+INFO 2025-06-28 02:32:31,767 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:32:31,774 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:32:33,241 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 6033
+INFO 2025-06-28 02:32:33,253 basehttp "GET /forum/posts/?school_id=1 HTTP/1.1" 200 5722
+INFO 2025-06-28 02:32:35,495 basehttp "GET /post_47.html HTTP/1.1" 200 2765
+INFO 2025-06-28 02:32:47,612 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-06-28 02:32:47,627 basehttp "GET /accounts/ HTTP/1.1" 200 108303
+INFO 2025-06-28 02:32:47,928 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-06-28 02:32:47,933 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-06-28 02:32:47,947 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
+INFO 2025-06-28 02:32:47,950 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:32:47,950 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-06-28 02:32:47,954 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-28 02:32:47,958 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 02:32:47,961 basehttp "GET /focus/stats/ HTTP/1.1" 200 338
+INFO 2025-06-28 02:32:47,989 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 02:32:47,991 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:32:49,914 basehttp "GET /forum/posts/?school_id=1 HTTP/1.1" 200 5722
+INFO 2025-06-28 02:32:49,942 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 6033
+INFO 2025-06-28 02:32:51,105 basehttp "GET /post_47.html HTTP/1.1" 200 2765
+INFO 2025-06-28 02:32:54,070 basehttp "GET /post_47.html HTTP/1.1" 200 2765
+INFO 2025-06-28 02:32:57,514 basehttp "GET /post_47.html HTTP/1.1" 200 2765
+INFO 2025-06-28 02:33:19,055 basehttp "GET /post_47.html HTTP/1.1" 200 2765
+INFO 2025-06-28 02:33:22,035 basehttp "GET /post_45.html HTTP/1.1" 200 2798
+INFO 2025-06-28 02:33:23,797 basehttp "GET /post_42.html HTTP/1.1" 200 2798
+INFO 2025-06-28 02:33:26,209 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 02:33:28,017 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:33:33,070 basehttp "GET /forum/posts/?school_id=1 HTTP/1.1" 200 5722
+INFO 2025-06-28 02:33:33,081 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 6033
+INFO 2025-06-28 02:34:10,395 basehttp "GET /post_47.html HTTP/1.1" 200 2765
+INFO 2025-06-28 02:34:13,440 basehttp "GET /accounts/ HTTP/1.1" 200 108303
+INFO 2025-06-28 02:34:13,528 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-06-28 02:34:13,546 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 02:34:13,553 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-06-28 02:34:13,555 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-06-28 02:34:13,565 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
+INFO 2025-06-28 02:34:13,569 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:34:13,575 basehttp "GET /focus/stats/ HTTP/1.1" 200 338
+INFO 2025-06-28 02:34:13,580 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-28 02:34:13,601 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 02:34:13,601 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:34:14,759 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:34:18,246 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+WARNING 2025-06-28 02:34:19,332 log Bad Request: /checkin/checkins/9/check/
+WARNING 2025-06-28 02:34:19,333 basehttp "POST /checkin/checkins/9/check/ HTTP/1.1" 400 61
+INFO 2025-06-28 02:34:20,586 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:39:14,319 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:39:15,515 basehttp "GET /accounts/ HTTP/1.1" 200 126846
+INFO 2025-06-28 02:39:16,407 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-06-28 02:39:16,416 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 02:39:16,420 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-06-28 02:39:16,424 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-28 02:39:16,425 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
+INFO 2025-06-28 02:39:16,429 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-06-28 02:39:16,433 basehttp "GET /focus/stats/ HTTP/1.1" 200 338
+INFO 2025-06-28 02:39:16,437 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 02:39:16,445 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:39:16,452 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:39:17,856 basehttp "GET /forum/posts/?school_id=1 HTTP/1.1" 200 5722
+INFO 2025-06-28 02:39:17,865 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 6033
+INFO 2025-06-28 02:39:20,726 basehttp "POST /forum/posts/47/like/ HTTP/1.1" 200 113
+INFO 2025-06-28 02:39:21,588 basehttp "POST /forum/posts/47/like/ HTTP/1.1" 200 128
+INFO 2025-06-28 02:39:21,951 basehttp "POST /forum/posts/47/like/ HTTP/1.1" 200 113
+INFO 2025-06-28 02:39:22,693 basehttp "POST /forum/posts/46/like/ HTTP/1.1" 200 113
+INFO 2025-06-28 02:39:24,054 basehttp "GET /forum/posts/47/comments/ HTTP/1.1" 200 56
+ERROR 2025-06-28 02:39:29,342 log Internal Server Error: /forum/posts/47/comments/create/
+ERROR 2025-06-28 02:39:29,343 basehttp "POST /forum/posts/47/comments/create/ HTTP/1.1" 500 98
+ERROR 2025-06-28 02:39:32,619 log Internal Server Error: /forum/posts/47/comments/create/
+ERROR 2025-06-28 02:39:32,621 basehttp "POST /forum/posts/47/comments/create/ HTTP/1.1" 500 98
+ERROR 2025-06-28 02:39:37,623 log Internal Server Error: /forum/posts/47/comments/create/
+ERROR 2025-06-28 02:39:37,623 basehttp "POST /forum/posts/47/comments/create/ HTTP/1.1" 500 98
+ERROR 2025-06-28 02:39:38,513 log Internal Server Error: /forum/posts/47/comments/create/
+ERROR 2025-06-28 02:39:38,514 basehttp "POST /forum/posts/47/comments/create/ HTTP/1.1" 500 98
+ERROR 2025-06-28 02:39:39,183 log Internal Server Error: /forum/posts/47/comments/create/
+ERROR 2025-06-28 02:39:39,184 basehttp "POST /forum/posts/47/comments/create/ HTTP/1.1" 500 98
+ERROR 2025-06-28 02:39:39,960 log Internal Server Error: /forum/posts/47/comments/create/
+ERROR 2025-06-28 02:39:39,961 basehttp "POST /forum/posts/47/comments/create/ HTTP/1.1" 500 98
+ERROR 2025-06-28 02:39:41,790 log Internal Server Error: /forum/posts/47/comments/create/
+ERROR 2025-06-28 02:39:41,792 basehttp "POST /forum/posts/47/comments/create/ HTTP/1.1" 500 98
+ERROR 2025-06-28 02:39:45,123 log Internal Server Error: /forum/posts/47/comments/create/
+ERROR 2025-06-28 02:39:45,124 basehttp "POST /forum/posts/47/comments/create/ HTTP/1.1" 500 98
+ERROR 2025-06-28 02:39:46,025 log Internal Server Error: /forum/posts/47/comments/create/
+ERROR 2025-06-28 02:39:46,026 basehttp "POST /forum/posts/47/comments/create/ HTTP/1.1" 500 98
+INFO 2025-06-28 02:40:26,334 basehttp "GET /forum/posts/47/comments/ HTTP/1.1" 200 56
+ERROR 2025-06-28 02:40:28,173 log Internal Server Error: /forum/posts/47/comments/create/
+ERROR 2025-06-28 02:40:28,175 basehttp "POST /forum/posts/47/comments/create/ HTTP/1.1" 500 98
+ERROR 2025-06-28 02:40:30,165 log Internal Server Error: /forum/posts/47/comments/create/
+ERROR 2025-06-28 02:40:30,166 basehttp "POST /forum/posts/47/comments/create/ HTTP/1.1" 500 98
+ERROR 2025-06-28 02:40:45,963 log Internal Server Error: /forum/posts/47/comments/create/
+ERROR 2025-06-28 02:40:45,964 basehttp "POST /forum/posts/47/comments/create/ HTTP/1.1" 500 98
+ERROR 2025-06-28 02:40:47,380 log Internal Server Error: /forum/posts/47/comments/create/
+ERROR 2025-06-28 02:40:47,381 basehttp "POST /forum/posts/47/comments/create/ HTTP/1.1" 500 98
+ERROR 2025-06-28 02:40:47,559 log Internal Server Error: /forum/posts/47/comments/create/
+ERROR 2025-06-28 02:40:47,560 basehttp "POST /forum/posts/47/comments/create/ HTTP/1.1" 500 98
+ERROR 2025-06-28 02:40:47,724 log Internal Server Error: /forum/posts/47/comments/create/
+ERROR 2025-06-28 02:40:47,725 basehttp "POST /forum/posts/47/comments/create/ HTTP/1.1" 500 98
+INFO 2025-06-28 02:42:08,351 autoreload D:\Github\Arx\forum\views.py changed, reloading.
+INFO 2025-06-28 02:42:08,370 autoreload D:\Github\Arx\forum\views.py changed, reloading.
+INFO 2025-06-28 02:42:09,278 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:42:09,278 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:42:29,195 autoreload D:\Github\Arx\forum\views.py changed, reloading.
+INFO 2025-06-28 02:42:29,243 autoreload D:\Github\Arx\forum\views.py changed, reloading.
+INFO 2025-06-28 02:42:30,038 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:42:30,084 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:43:16,315 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:43:17,541 basehttp "GET /accounts/ HTTP/1.1" 200 126846
+INFO 2025-06-28 02:43:18,740 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-06-28 02:43:18,754 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 02:43:18,756 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-06-28 02:43:18,765 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
+INFO 2025-06-28 02:43:18,769 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-06-28 02:43:18,771 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-28 02:43:18,772 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:43:18,779 basehttp "GET /focus/stats/ HTTP/1.1" 200 338
+INFO 2025-06-28 02:43:18,789 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 02:43:18,789 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:43:20,194 basehttp "GET /forum/posts/?school_id=1 HTTP/1.1" 200 5720
+INFO 2025-06-28 02:43:20,197 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 6031
+INFO 2025-06-28 02:43:22,011 basehttp "GET /forum/posts/47/comments/ HTTP/1.1" 200 56
+INFO 2025-06-28 02:43:26,394 basehttp "POST /forum/posts/47/comments/create/ HTTP/1.1" 200 309
+INFO 2025-06-28 02:43:28,561 basehttp "GET /forum/posts/47/comments/ HTTP/1.1" 200 278
+INFO 2025-06-28 02:44:19,574 autoreload D:\Github\Arx\forum\views.py changed, reloading.
+INFO 2025-06-28 02:44:19,870 autoreload D:\Github\Arx\forum\views.py changed, reloading.
+INFO 2025-06-28 02:44:20,210 autoreload D:\Github\Arx\forum\views.py changed, reloading.
+INFO 2025-06-28 02:44:20,437 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:44:20,716 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:44:21,072 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:44:33,801 basehttp "GET /accounts/ HTTP/1.1" 200 126846
+INFO 2025-06-28 02:44:34,644 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-06-28 02:44:34,656 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-06-28 02:44:34,662 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-06-28 02:44:34,664 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
+INFO 2025-06-28 02:44:34,665 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:44:34,667 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 02:44:34,669 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-28 02:44:34,680 basehttp "GET /focus/stats/ HTTP/1.1" 200 338
+INFO 2025-06-28 02:44:34,683 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 02:44:34,683 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:44:36,088 basehttp "GET /forum/posts/?school_id=1 HTTP/1.1" 200 5943
+INFO 2025-06-28 02:44:36,105 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 6254
+INFO 2025-06-28 02:44:37,507 basehttp "GET /forum/posts/47/comments/ HTTP/1.1" 200 278
+INFO 2025-06-28 02:44:41,319 basehttp "POST /forum/posts/47/comments/create/ HTTP/1.1" 200 303
+INFO 2025-06-28 02:44:44,629 basehttp "POST /forum/posts/47/comments/create/ HTTP/1.1" 200 309
+WARNING 2025-06-28 02:44:48,541 log Bad Request: /forum/posts/47/comments/create/
+WARNING 2025-06-28 02:44:48,542 basehttp "POST /forum/posts/47/comments/create/ HTTP/1.1" 400 234
