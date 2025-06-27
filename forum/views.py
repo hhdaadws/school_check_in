@@ -363,10 +363,15 @@ def create_post_html(post):
     return html_file_path
 
 # 获取用户自己的帖子
+@csrf_exempt
 @login_required
 def get_user_posts(request):
     """获取当前用户发布的所有帖子，包括待审核的"""
     try:
+        # 额外的安全检查
+        if not request.user or not hasattr(request.user, 'id') or request.user.id is None:
+            return JsonResponse({"error": "用户未登录"}, status=401)
+            
         posts = Post.objects.filter(user=request.user).order_by('-time')
         data = [post.to_dict() for post in posts]
         return JsonResponse(data, safe=False)

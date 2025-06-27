@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 import requests
 from .models import User, VerificationCode, School, InterestTag, UserInterest
-from .decorators import admin_required
+from .decorators import admin_required, login_required
 from django.template.loader import render_to_string
 import os
 from django.conf import settings
@@ -207,6 +207,7 @@ def login(request):
     }, status=405)
 
 
+@login_required
 def user_profile(request):
     """
     用户资料视图
