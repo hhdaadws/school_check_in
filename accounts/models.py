@@ -19,6 +19,8 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name="更新时间")
     is_staff = models.BooleanField(default=False, verbose_name="是否管理员")
     is_editor = models.BooleanField(default=False, verbose_name="是否博主")
+    interests_selected = models.BooleanField(default=False, verbose_name="是否已选择兴趣标签")
+    interests_selected_at = models.DateTimeField(null=True, blank=True, verbose_name="选择兴趣标签时间")
     class Meta:
         verbose_name = "用户"
         verbose_name_plural = "用户"
@@ -284,3 +286,46 @@ class FocusSettings(models.Model):
             'auto_start_work': self.auto_start_work,
             'focus_theme': self.focus_theme,
         }
+
+# 兴趣标签模型
+class InterestTag(models.Model):
+    name = models.CharField(max_length=50, unique=True, verbose_name="标签名称")
+    description = models.TextField(blank=True, verbose_name="标签描述")
+    color = models.CharField(max_length=7, default="#007bff", verbose_name="标签颜色")
+    category = models.CharField(max_length=50, verbose_name="标签分类")  # 如：学习、娱乐、生活等
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="更新时间")
+    is_active = models.BooleanField(default=True, verbose_name="是否启用")
+    
+    class Meta:
+        verbose_name = "兴趣标签"
+        verbose_name_plural = "兴趣标签"
+        ordering = ['category', 'name']
+    
+    def __str__(self):
+        return f"{self.category} - {self.name}"
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'color': self.color,
+            'category': self.category,
+            'is_active': self.is_active
+        }
+
+# 用户兴趣关联模型
+class UserInterest(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_interests', verbose_name="用户")
+    interest_tag = models.ForeignKey(InterestTag, on_delete=models.CASCADE, verbose_name="兴趣标签")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="选择时间")
+    
+    class Meta:
+        verbose_name = "用户兴趣"
+        verbose_name_plural = "用户兴趣"
+        unique_together = ('user', 'interest_tag')
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.interest_tag.name}"

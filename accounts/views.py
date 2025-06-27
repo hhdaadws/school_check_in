@@ -3,8 +3,8 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 import requests
-from .models import User, VerificationCode, School
-from .decorators import admin_required
+from .models import User, VerificationCode, School, InterestTag, UserInterest
+from .decorators import admin_required, login_required
 from django.template.loader import render_to_string
 import os
 from django.conf import settings
@@ -186,7 +186,8 @@ def login(request):
                     'email': user.email,
                     'token': token,  # 返回JWT令牌
                     'is_staff': user.is_staff,  # 添加是否管理员标志
-                    'user_id': user.id  # 添加用户ID
+                    'user_id': user.id,  # 添加用户ID
+                    'interests_selected': user.interests_selected  # 添加兴趣标签选择状态
                 })
             else:
                 return JsonResponse({
@@ -206,6 +207,7 @@ def login(request):
     }, status=405)
 
 
+@login_required
 def user_profile(request):
     """
     用户资料视图
@@ -380,3 +382,156 @@ def update_email(request):
         
     except Exception as e:
         return JsonResponse({"error": f"更新邮箱失败: {str(e)}"}, status=500)
+
+# =============== 兴趣标签相关视图 ===============
+
+@csrf_exempt
+def get_interest_tags(request):
+    """获取所有可用的兴趣标签"""
+    try:
+        tags = InterestTag.objects.filter(is_active=True).order_by('category', 'name')
+        
+        # 按分类分组
+        categories = {}
+        for tag in tags:
+            if tag.category not in categories:
+                categories[tag.category] = []
+            categories[tag.category].append(tag.to_dict())
+        
+        return JsonResponse({
+            'success': True,
+            'categories': categories
+        })
+    except Exception as e:
+        return JsonResponse({'error': f'获取兴趣标签失败: {str(e)}'}, status=500)
+
+@csrf_exempt
+def select_interests(request):
+    """用户选择兴趣标签"""
+    from .decorators import login_required
+    
+    # 手动检查用户登录状态
+    if not hasattr(request, 'user') or not request.user or request.user.id is None:
+        return JsonResponse({'error': '请先登录'}, status=401)
+    
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            interest_ids = data.get('interest_ids', [])
+            
+            if len(interest_ids) < 3:
+                return JsonResponse({'error': '至少选择3个兴趣标签'}, status=400)
+            
+            if len(interest_ids) > 10:
+                return JsonResponse({'error': '最多选择10个兴趣标签'}, status=400)
+            
+            # 验证标签ID是否有效
+            valid_tags = InterestTag.objects.filter(id__in=interest_ids, is_active=True)
+            if len(valid_tags) != len(interest_ids):
+                return JsonResponse({'error': '包含无效的兴趣标签'}, status=400)
+            
+            # 清除现有选择
+            UserInterest.objects.filter(user=request.user).delete()
+            
+            # 添加新选择
+            user_interests = []
+            for interest_id in interest_ids:
+                user_interests.append(UserInterest(
+                    user=request.user,
+                    interest_tag_id=interest_id
+                ))
+            
+            UserInterest.objects.bulk_create(user_interests)
+            
+            # 更新用户状态
+            request.user.interests_selected = True
+            request.user.interests_selected_at = timezone.now()
+            request.user.save(update_fields=['interests_selected', 'interests_selected_at'])
+            
+            return JsonResponse({
+                'success': True,
+                'message': '兴趣标签选择成功'
+            })
+            
+        except json.JSONDecodeError:
+            return JsonResponse({'error': '无效的JSON数据'}, status=400)
+        except Exception as e:
+            return JsonResponse({'error': f'选择兴趣标签失败: {str(e)}'}, status=500)
+    
+    return JsonResponse({'error': '不支持的请求方法'}, status=405)
+
+@csrf_exempt
+def get_user_interests(request):
+    """获取用户的兴趣标签"""
+    # 手动检查用户登录状态
+    if not hasattr(request, 'user') or not request.user or request.user.id is None:
+        return JsonResponse({'error': '请先登录'}, status=401)
+    
+    try:
+        user_interests = UserInterest.objects.filter(user=request.user).select_related('interest_tag')
+        interests = []
+        for ui in user_interests:
+            interests.append(ui.interest_tag.to_dict())
+        
+        return JsonResponse({
+            'success': True,
+            'interests': interests,
+            'interests_selected': request.user.interests_selected,
+            'interests_selected_at': request.user.interests_selected_at.isoformat() if request.user.interests_selected_at else None
+        })
+    except Exception as e:
+        return JsonResponse({'error': f'获取用户兴趣失败: {str(e)}'}, status=500)
+
+def interests_page(request):
+    """兴趣标签选择页面"""
+    # 如果用户未登录，重定向到登录页面
+    if not hasattr(request, 'user') or not request.user or request.user.id is None:
+        return redirect('accounts:auth_page')
+    
+    # 如果用户已经选择过兴趣标签，重定向到首页
+    if request.user.interests_selected:
+        return redirect('accounts:home_page')
+    
+    # 读取兴趣选择页面的HTML文件
+    interests_html_path = os.path.join(settings.BASE_DIR, 'htmls', 'accounts', 'interests.html')
+    
+    try:
+        with open(interests_html_path, 'r', encoding='utf-8') as f:
+            html_content = f.read()
+        return HttpResponse(html_content)
+    except FileNotFoundError:
+        # 如果HTML文件不存在，返回简单的错误页面
+        return HttpResponse("""
+        <!DOCTYPE html>
+        <html>
+        <head><title>兴趣标签选择</title></head>
+        <body>
+            <h1>兴趣标签选择页面</h1>
+            <p>页面正在建设中...</p>
+            <a href="/accounts/">返回首页</a>
+        </body>
+        </html>
+        """)
+
+@csrf_exempt  
+def skip_interests(request):
+    """跳过兴趣标签选择"""
+    # 手动检查用户登录状态
+    if not hasattr(request, 'user') or not request.user or request.user.id is None:
+        return JsonResponse({'error': '请先登录'}, status=401)
+    
+    if request.method == 'POST':
+        try:
+            # 更新用户状态为已选择兴趣（即使跳过了）
+            request.user.interests_selected = True
+            request.user.interests_selected_at = timezone.now()
+            request.user.save(update_fields=['interests_selected', 'interests_selected_at'])
+            
+            return JsonResponse({
+                'success': True,
+                'message': '已跳过兴趣标签选择'
+            })
+        except Exception as e:
+            return JsonResponse({'error': f'跳过兴趣标签选择失败: {str(e)}'}, status=500)
+    
+    return JsonResponse({'error': '不支持的请求方法'}, status=405)
