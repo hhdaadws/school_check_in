@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选择您的兴趣标签 - Arx</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .interests-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            width: 100%;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interests-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .progress-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 10px;
+        }
+
+        .progress-text {
+            font-size: 16px;
+            color: #666;
+            background: #f8f9fa;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .category-section {
+            margin-bottom: 30px;
+        }
+
+        .category-title {
+            color: #34495e;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #ecf0f1;
+            display: flex;
+            align-items: center;
+        }
+
+        .category-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .interest-tag {
+            padding: 12px 20px;
+            border: 2px solid #e0e6ed;
+            border-radius: 25px;
+            background: white;
+            color: #5a6c7d;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interest-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-color: #667eea;
+        }
+
+        .interest-tag.selected {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .interest-tag.selected::after {
+            content: '✓';
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: bold;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #ecf0f1;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-skip {
+            background: #f8f9fa;
+            color: #6c757d;
+            border: 2px solid #e9ecef;
+        }
+
+        .btn-skip:hover {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            min-width: 200px;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 8px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background: #fee;
+            border: 1px solid #fcc;
+            color: #c33;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .category-学习 { background: #3498db; }
+        .category-工具 { background: #95a5a6; }
+        .category-生活 { background: #e74c3c; }
+        .category-娱乐 { background: #f39c12; }
+        .category-创作 { background: #9b59b6; }
+        .category-职业 { background: #1abc9c; }
+        .category-资讯 { background: #34495e; }
+        .category-学术 { background: #8e44ad; }
+
+        @media (max-width: 768px) {
+            .interests-container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="interestsApp" class="interests-container">
+        <div class="header">
+            <h1>🎯 选择您的兴趣标签</h1>
+            <p>选择3-10个您感兴趣的标签，我们将为您推荐个性化的内容</p>
+        </div>
+
+        <div class="progress-indicator">
+            <div class="progress-text">
+                已选择: {{ selectedTags.length }} / 10
+            </div>
+        </div>
+
+        <div v-if="errorMessage" class="error-message">
+            {{ errorMessage }}
+        </div>
+
+        <div class="loading" v-if="loading && !interestCategories">
+            加载中...
+        </div>
+
+        <div v-else>
+            <div v-for="(tags, category) in interestCategories" :key="category" class="category-section">
+                <h3 class="category-title">
+                    <span :class="'category-icon category-' + category"></span>
+                    {{ category }}
+                </h3>
+                <div class="tag-group">
+                    <div 
+                        v-for="tag in tags" 
+                        :key="tag.id"
+                        class="interest-tag"
+                        :class="{ selected: selectedTags.includes(tag.id) }"
+                        @click="toggleTag(tag.id)"
+                        :title="tag.description">
+                        {{ tag.name }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn btn-skip" @click="skipSelection" :disabled="loading">
+                暂时跳过
+            </button>
+            <button 
+                class="btn btn-primary" 
+                :class="{ loading: loading }"
+                @click="saveSelection" 
+                :disabled="selectedTags.length < 3 || loading">
+                完成选择 ({{ selectedTags.length }})
+            </button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        new Vue({
+            el: '#interestsApp',
+            data: {
+                interestCategories: null,
+                selectedTags: [],
+                loading: false,
+                errorMessage: ''
+            },
+            mounted() {
+                this.loadInterestTags();
+                this.setupAuth();
+            },
+            methods: {
+                setupAuth() {
+                    // 设置axios认证头
+                    const token = localStorage.getItem('token');
+                    if (token) {
+                        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                        axios.defaults.headers.common['X-Auth-Token'] = token;
+                    }
+                },
+                
+                async loadInterestTags() {
+                    this.loading = true;
+                    this.errorMessage = '';
+                    
+                    try {
+                        const response = await axios.get('/accounts/interests/tags/');
+                        if (response.data.success) {
+                            this.interestCategories = response.data.categories;
+                        } else {
+                            this.errorMessage = '加载兴趣标签失败';
+                        }
+                    } catch (error) {
+                        console.error('加载兴趣标签失败:', error);
+                        this.errorMessage = '网络错误，请检查网络连接';
+                    } finally {
+                        this.loading = false;
+                    }
+                },
+                
+                toggleTag(tagId) {
+                    const index = this.selectedTags.indexOf(tagId);
+                    if (index > -1) {
+                        // 如果已选择，则取消选择
+                        this.selectedTags.splice(index, 1);
+                    } else {
+                        // 如果未选择，检查是否超过限制
+                        if (this.selectedTags.length >= 10) {
+                            this.errorMessage = '最多只能选择10个标签';
+                            setTimeout(() => {
+                                this.errorMessage = '';
+                            }, 3000);
+                            return;
+                        }
+                        this.selectedTags.push(tagId);
+                    }
+                    this.errorMessage = '';
+                },
+                
+                async saveSelection() {
+                    if (this.selectedTags.length < 3) {
+                        this.errorMessage = '至少选择3个兴趣标签';
+                        return;
+                    }
+                    
+                    this.loading = true;
+                    this.errorMessage = '';
+                    
+                    try {
+                        const response = await axios.post('/accounts/interests/select/', {
+                            interest_ids: this.selectedTags
+                        });
+                        
+                        if (response.data.success) {
+                            // 选择成功，跳转到首页
+                            window.location.href = '/accounts/';
+                        } else {
+                            this.errorMessage = response.data.error || '保存失败';
+                        }
+                    } catch (error) {
+                        console.error('保存兴趣标签失败:', error);
+                        if (error.response && error.response.data && error.response.data.error) {
+                            this.errorMessage = error.response.data.error;
+                        } else {
+                            this.errorMessage = '保存失败，请重试';
+                        }
+                    } finally {
+                        this.loading = false;
+                    }
+                },
+                
+                async skipSelection() {
+                    if (!confirm('确定要跳过兴趣标签选择吗？这样我们无法为您推荐个性化内容。')) {
+                        return;
+                    }
+                    
+                    this.loading = true;
+                    
+                    try {
+                        const response = await axios.post('/accounts/interests/skip/');
+                        if (response.data.success) {
+                            // 跳过成功，跳转到首页
+                            window.location.href = '/accounts/';
+                        } else {
+                            this.errorMessage = response.data.error || '操作失败';
+                        }
+                    } catch (error) {
+                        console.error('跳过失败:', error);
+                        this.errorMessage = '操作失败，请重试';
+                    } finally {
+                        this.loading = false;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html> 

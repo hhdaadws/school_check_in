@@ -229,3 +229,282 @@ INFO 2025-06-25 22:20:37,245 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
 INFO 2025-06-25 22:20:37,252 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
 INFO 2025-06-25 22:20:37,259 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
 INFO 2025-06-25 22:20:37,267 basehttp "GET /focus/stats/ HTTP/1.1" 200 339
+INFO 2025-06-27 21:00:58,098 autoreload Watching for file changes with StatReloader
+INFO 2025-06-27 21:02:58,636 basehttp "GET /accounts/interests/tags/ HTTP/1.1" 200 5849
+INFO 2025-06-27 21:03:03,143 basehttp - Broken pipe from ('127.0.0.1', 64264)
+INFO 2025-06-27 21:06:07,650 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-06-27 21:06:07,654 basehttp "GET /accounts/ HTTP/1.1" 200 107966
+INFO 2025-06-27 21:06:07,829 basehttp "GET /static/accounts/css/styles.css HTTP/1.1" 200 1864
+INFO 2025-06-27 21:06:09,551 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+WARNING 2025-06-27 21:06:09,556 log Not Found: /checkin/checkins/
+WARNING 2025-06-27 21:06:09,559 log Not Found: /checkin/community/
+WARNING 2025-06-27 21:06:09,562 basehttp "GET /checkin/checkins/ HTTP/1.1" 404 3506
+WARNING 2025-06-27 21:06:09,562 basehttp "GET /checkin/community/ HTTP/1.1" 404 3509
+INFO 2025-06-27 21:06:09,567 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-06-27 21:06:09,573 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-06-27 21:06:09,574 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-27 21:06:09,583 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
+INFO 2025-06-27 21:06:09,587 basehttp "GET /focus/stats/ HTTP/1.1" 200 338
+WARNING 2025-06-27 21:06:09,593 log Not Found: /checkin/checkins/
+WARNING 2025-06-27 21:06:09,599 log Not Found: /checkin/community/
+WARNING 2025-06-27 21:06:09,600 basehttp "GET /checkin/checkins/ HTTP/1.1" 404 3506
+WARNING 2025-06-27 21:06:09,601 basehttp "GET /checkin/community/ HTTP/1.1" 404 3509
+WARNING 2025-06-27 21:06:10,209 log Not Found: /favicon.ico
+WARNING 2025-06-27 21:06:10,211 basehttp "GET /favicon.ico HTTP/1.1" 404 3639
+INFO 2025-06-27 21:06:14,009 basehttp "GET /accounts/auth/ HTTP/1.1" 200 7666
+INFO 2025-06-27 21:06:14,032 basehttp "GET /static/accounts/js/auth.js HTTP/1.1" 200 12015
+INFO 2025-06-27 21:06:36,689 basehttp "POST /accounts/send-verification-code/ HTTP/1.1" 200 104
+INFO 2025-06-27 21:08:17,853 basehttp "POST /accounts/register/ HTTP/1.1" 200 70
+INFO 2025-06-27 23:47:32,512 autoreload Watching for file changes with StatReloader
+INFO 2025-06-27 23:47:37,103 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-06-27 23:47:37,107 basehttp "GET /accounts/ HTTP/1.1" 200 107966
+WARNING 2025-06-27 23:47:37,794 log Not Found: /checkin/checkins/
+WARNING 2025-06-27 23:47:37,802 log Not Found: /checkin/community/
+WARNING 2025-06-27 23:47:37,802 basehttp "GET /checkin/checkins/ HTTP/1.1" 404 3506
+WARNING 2025-06-27 23:47:37,803 basehttp "GET /checkin/community/ HTTP/1.1" 404 3509
+INFO 2025-06-27 23:47:37,804 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+ERROR 2025-06-27 23:47:37,816 log Internal Server Error: /accounts/profile/
+Traceback (most recent call last):
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Github\Arx\accounts\views.py", line 221, in user_profile
+    'id': user.id,
+          ^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'id'
+ERROR 2025-06-27 23:47:37,819 basehttp "GET /accounts/profile/ HTTP/1.1" 500 75596
+WARNING 2025-06-27 23:47:37,829 log Not Found: /checkin/checkins/
+WARNING 2025-06-27 23:47:37,832 log Not Found: /checkin/community/
+WARNING 2025-06-27 23:47:37,832 basehttp "GET /checkin/checkins/ HTTP/1.1" 404 3506
+WARNING 2025-06-27 23:47:37,832 basehttp "GET /checkin/community/ HTTP/1.1" 404 3509
+WARNING 2025-06-27 23:47:37,838 log Not Found: /favicon.ico
+WARNING 2025-06-27 23:47:37,838 basehttp "GET /favicon.ico HTTP/1.1" 404 3639
+INFO 2025-06-27 23:47:41,565 basehttp "GET /accounts/auth/ HTTP/1.1" 200 7666
+INFO 2025-06-27 23:47:41,583 basehttp "GET /static/accounts/js/auth.js HTTP/1.1" 304 0
+WARNING 2025-06-27 23:47:54,823 log Unauthorized: /accounts/login/
+WARNING 2025-06-27 23:47:54,825 basehttp "POST /accounts/login/ HTTP/1.1" 401 82
+INFO 2025-06-27 23:48:00,876 basehttp "POST /accounts/login/ HTTP/1.1" 200 388
+INFO 2025-06-27 23:48:00,899 basehttp "GET /accounts/interests/ HTTP/1.1" 200 13975
+INFO 2025-06-27 23:48:02,024 basehttp "GET /accounts/interests/tags/ HTTP/1.1" 200 5849
+INFO 2025-06-27 23:48:12,169 basehttp "POST /accounts/interests/select/ HTTP/1.1" 200 80
+INFO 2025-06-27 23:48:12,193 basehttp "GET /accounts/ HTTP/1.1" 200 107966
+INFO 2025-06-27 23:48:12,301 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+WARNING 2025-06-27 23:48:12,307 log Not Found: /checkin/checkins/
+WARNING 2025-06-27 23:48:12,312 basehttp "GET /checkin/checkins/ HTTP/1.1" 404 3506
+WARNING 2025-06-27 23:48:12,316 log Not Found: /checkin/community/
+INFO 2025-06-27 23:48:12,320 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+WARNING 2025-06-27 23:48:12,323 basehttp "GET /checkin/community/ HTTP/1.1" 404 3509
+INFO 2025-06-27 23:48:12,323 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-06-27 23:48:12,329 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
+INFO 2025-06-27 23:48:12,329 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-27 23:48:12,337 basehttp "GET /focus/stats/ HTTP/1.1" 200 338
+WARNING 2025-06-27 23:48:12,351 log Not Found: /checkin/checkins/
+WARNING 2025-06-27 23:48:12,355 log Not Found: /checkin/community/
+WARNING 2025-06-27 23:48:12,355 basehttp "GET /checkin/checkins/ HTTP/1.1" 404 3506
+WARNING 2025-06-27 23:48:12,355 basehttp "GET /checkin/community/ HTTP/1.1" 404 3509
+INFO 2025-06-27 23:48:19,304 basehttp "GET /forum/posts/?school_id=1 HTTP/1.1" 200 2
+ERROR 2025-06-27 23:48:19,307 log Internal Server Error: /forum/posts/user/
+ERROR 2025-06-27 23:48:19,310 basehttp "GET /forum/posts/user/ HTTP/1.1" 500 79
+INFO 2025-06-28 01:00:54,423 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 01:01:56,599 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-06-28 01:01:56,605 basehttp "GET /accounts/ HTTP/1.1" 200 107966
+INFO 2025-06-28 01:01:56,716 basehttp "GET /static/accounts/css/styles.css HTTP/1.1" 200 1864
+INFO 2025-06-28 01:01:58,263 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-06-28 01:01:58,274 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-06-28 01:01:58,281 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-06-28 01:01:58,282 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-06-28 01:01:58,289 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
+INFO 2025-06-28 01:01:58,292 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-28 01:01:58,293 basehttp "GET /checkin/community/ HTTP/1.1" 200 1102
+INFO 2025-06-28 01:01:58,308 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-06-28 01:01:58,309 basehttp "GET /checkin/community/ HTTP/1.1" 200 1102
+INFO 2025-06-28 01:01:58,321 basehttp "GET /focus/stats/ HTTP/1.1" 200 338
+INFO 2025-06-28 01:02:02,253 basehttp "GET /accounts/auth/ HTTP/1.1" 302 0
+INFO 2025-06-28 01:02:02,260 basehttp "GET /accounts/ HTTP/1.1" 200 107966
+INFO 2025-06-28 01:02:02,352 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-06-28 01:02:02,356 basehttp "GET /checkin/community/ HTTP/1.1" 200 1102
+INFO 2025-06-28 01:02:02,356 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-06-28 01:02:02,358 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-28 01:02:02,376 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-06-28 01:02:02,376 basehttp "GET /checkin/community/ HTTP/1.1" 200 1102
+INFO 2025-06-28 01:02:07,159 basehttp "GET /accounts/auth/ HTTP/1.1" 302 0
+INFO 2025-06-28 01:02:07,167 basehttp "GET /accounts/ HTTP/1.1" 200 107966
+INFO 2025-06-28 01:02:07,245 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-06-28 01:02:07,251 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-28 01:02:07,252 basehttp "GET /checkin/community/ HTTP/1.1" 200 1102
+INFO 2025-06-28 01:02:07,257 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-06-28 01:02:07,264 basehttp "GET /checkin/community/ HTTP/1.1" 200 1102
+INFO 2025-06-28 01:02:07,271 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-06-28 01:02:09,523 basehttp "GET /checkin/community/ HTTP/1.1" 200 1102
+INFO 2025-06-28 01:02:14,382 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-06-28 01:02:15,745 basehttp "GET /forum/posts/?school_id=1 HTTP/1.1" 200 2
+ERROR 2025-06-28 01:02:15,749 log Internal Server Error: /forum/posts/user/
+ERROR 2025-06-28 01:02:15,750 basehttp "GET /forum/posts/user/ HTTP/1.1" 500 79
+INFO 2025-06-28 01:02:17,361 basehttp "GET /checkin/community/ HTTP/1.1" 200 1102
+INFO 2025-06-28 01:02:18,829 basehttp "GET /forum/posts/?school_id=1 HTTP/1.1" 200 2
+ERROR 2025-06-28 01:02:18,829 log Internal Server Error: /forum/posts/user/
+ERROR 2025-06-28 01:02:18,830 basehttp "GET /forum/posts/user/ HTTP/1.1" 500 79
+INFO 2025-06-28 01:02:23,268 basehttp "GET /accounts/ HTTP/1.1" 200 107966
+INFO 2025-06-28 01:02:23,340 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-06-28 01:02:23,343 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-28 01:02:23,346 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-06-28 01:02:23,347 basehttp "GET /checkin/community/ HTTP/1.1" 200 1102
+INFO 2025-06-28 01:02:23,357 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-06-28 01:02:23,358 basehttp "GET /checkin/community/ HTTP/1.1" 200 1102
+INFO 2025-06-28 01:02:29,282 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-06-28 01:02:29,291 basehttp "GET /accounts/ HTTP/1.1" 200 107966
+INFO 2025-06-28 01:02:29,536 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-28 01:02:29,536 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-06-28 01:02:29,542 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-06-28 01:02:29,543 basehttp "GET /checkin/community/ HTTP/1.1" 200 1102
+INFO 2025-06-28 01:02:29,593 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-06-28 01:02:29,595 basehttp "GET /checkin/community/ HTTP/1.1" 200 1102
+INFO 2025-06-28 01:02:33,593 basehttp "GET /accounts/auth/ HTTP/1.1" 302 0
+INFO 2025-06-28 01:02:33,600 basehttp "GET /accounts/ HTTP/1.1" 200 107966
+INFO 2025-06-28 01:02:33,685 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-06-28 01:02:33,694 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-06-28 01:02:33,701 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-28 01:02:33,701 basehttp "GET /checkin/community/ HTTP/1.1" 200 1102
+INFO 2025-06-28 01:02:33,716 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-06-28 01:02:33,717 basehttp "GET /checkin/community/ HTTP/1.1" 200 1102
+INFO 2025-06-28 01:03:30,241 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-06-28 01:03:30,247 basehttp "GET /accounts/ HTTP/1.1" 200 107966
+INFO 2025-06-28 01:03:31,063 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-06-28 01:03:31,064 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-28 01:03:31,066 basehttp "GET /checkin/community/ HTTP/1.1" 200 1102
+INFO 2025-06-28 01:03:31,077 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-06-28 01:03:31,092 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-06-28 01:03:31,093 basehttp "GET /checkin/community/ HTTP/1.1" 200 1102
+INFO 2025-06-28 01:03:38,037 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 255
+INFO 2025-06-28 01:03:39,063 basehttp "POST /checkin/checkins/9/check/ HTTP/1.1" 200 241
+INFO 2025-06-28 01:03:39,079 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 01:10:36,851 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 01:11:05,739 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-06-28 01:11:05,748 basehttp "GET /accounts/ HTTP/1.1" 200 108303
+INFO 2025-06-28 01:11:06,613 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-06-28 01:11:06,620 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-28 01:11:06,624 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 01:11:06,625 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 01:11:06,641 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 01:11:06,641 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 01:11:10,259 basehttp "GET /accounts/auth/ HTTP/1.1" 200 7666
+INFO 2025-06-28 01:11:10,282 basehttp "GET /static/accounts/js/auth.js HTTP/1.1" 200 12029
+WARNING 2025-06-28 01:11:35,705 log Unauthorized: /accounts/login/
+WARNING 2025-06-28 01:11:35,705 basehttp "POST /accounts/login/ HTTP/1.1" 401 82
+INFO 2025-06-28 01:11:43,064 basehttp "POST /accounts/login/ HTTP/1.1" 200 387
+INFO 2025-06-28 01:11:43,077 basehttp "GET /accounts/ HTTP/1.1" 200 108303
+INFO 2025-06-28 01:11:43,179 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-06-28 01:11:43,193 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-06-28 01:11:43,193 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-06-28 01:11:43,194 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
+INFO 2025-06-28 01:11:43,197 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 01:11:43,198 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 01:11:43,200 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-28 01:11:43,203 basehttp "GET /focus/stats/ HTTP/1.1" 200 338
+INFO 2025-06-28 01:11:43,213 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 01:11:43,215 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 01:11:44,868 basehttp "GET /forum/posts/?school_id=1 HTTP/1.1" 200 2
+ERROR 2025-06-28 01:11:44,870 log Internal Server Error: /forum/posts/user/
+ERROR 2025-06-28 01:11:44,870 basehttp "GET /forum/posts/user/ HTTP/1.1" 500 79
+INFO 2025-06-28 01:11:46,164 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 01:34:04,800 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 01:46:09,281 basehttp "GET /accounts/ HTTP/1.1" 200 108303
+INFO 2025-06-28 01:47:56,516 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 01:48:00,565 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-06-28 01:48:00,570 basehttp "GET /accounts/ HTTP/1.1" 200 108303
+INFO 2025-06-28 01:48:03,515 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-06-28 01:48:03,527 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-06-28 01:48:03,527 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-06-28 01:48:03,532 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-28 01:48:03,533 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 01:48:03,540 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 01:48:03,544 basehttp "GET /focus/stats/ HTTP/1.1" 200 338
+INFO 2025-06-28 01:48:03,551 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
+INFO 2025-06-28 01:48:03,562 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 01:48:03,563 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 01:48:12,980 basehttp "GET /admin HTTP/1.1" 301 0
+INFO 2025-06-28 01:48:12,987 basehttp "GET /admin/ HTTP/1.1" 302 0
+INFO 2025-06-28 01:48:12,999 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4368
+INFO 2025-06-28 01:48:13,461 basehttp "GET /static/admin/simpleui-x/img/logo.png HTTP/1.1" 200 115997
+INFO 2025-06-28 01:48:13,466 basehttp "GET /static/admin/simpleui-x/img/bg.svg HTTP/1.1" 200 9547
+INFO 2025-06-28 01:48:13,468 basehttp "GET /static/admin/simpleui-x/js/vue.min.js?_=2025.06.24 HTTP/1.1" 200 93675
+INFO 2025-06-28 01:48:13,470 basehttp "GET /static/admin/simpleui-x/elementui/umd/locale/en.js?_=2025.06.24 HTTP/1.1" 200 3516
+INFO 2025-06-28 01:48:13,475 basehttp "GET /static/admin/simpleui-x/js/login.js?_=3.3 HTTP/1.1" 200 669
+INFO 2025-06-28 01:48:13,477 basehttp "GET /static/admin/simpleui-x/particles/particles.js HTTP/1.1" 200 51264
+INFO 2025-06-28 01:48:13,479 basehttp "GET /static/admin/simpleui-x/particles/app.js HTTP/1.1" 200 3728
+INFO 2025-06-28 01:48:13,482 basehttp "GET /static/admin/simpleui-x/fontawesome-free-6.2.0-web/css/all.min.css HTTP/1.1" 200 101784
+INFO 2025-06-28 01:48:13,484 basehttp "GET /static/admin/simpleui-x/css/login.css?_=2.1 HTTP/1.1" 200 500
+INFO 2025-06-28 01:48:13,498 basehttp "GET /static/admin/simpleui-x/elementui/theme-chalk/index.css HTTP/1.1" 200 240033
+INFO 2025-06-28 01:48:13,563 basehttp "GET /static/admin/simpleui-x/elementui/index.js?_=2025.06.24 HTTP/1.1" 200 664912
+INFO 2025-06-28 01:48:13,621 basehttp "GET /static/admin/simpleui-x/fontawesome-free-6.2.0-web/webfonts/fa-solid-900.woff2 HTTP/1.1" 200 150472
+INFO 2025-06-28 01:48:17,941 basehttp "GET /static/admin/simpleui-x/elementui/theme-chalk/fonts/element-icons.woff HTTP/1.1" 200 28200
+INFO 2025-06-28 01:48:20,365 basehttp "POST /admin/login/?next=/admin/ HTTP/1.1" 200 4629
+INFO 2025-06-28 01:48:37,699 basehttp "POST /admin/login/?next=/admin/ HTTP/1.1" 200 4629
+INFO 2025-06-28 01:48:46,484 basehttp "POST /admin/login/?next=/admin/ HTTP/1.1" 200 4629
+INFO 2025-06-28 01:48:51,123 basehttp "POST /admin/login/?next=/admin/ HTTP/1.1" 200 4629
+INFO 2025-06-28 01:49:45,092 basehttp "POST /admin/login/?next=/admin/ HTTP/1.1" 200 4629
+INFO 2025-06-28 01:49:52,252 basehttp "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO 2025-06-28 01:49:52,292 basehttp "GET /admin/ HTTP/1.1" 200 20638
+INFO 2025-06-28 01:49:52,323 basehttp "GET /static/admin/simpleui-x/automatic/dicts.js?_=2025.06.24 HTTP/1.1" 200 12677
+INFO 2025-06-28 01:49:52,324 basehttp "GET /static/admin/simpleui-x/automatic/segment.js?_=2025.06.24 HTTP/1.1" 200 1194
+INFO 2025-06-28 01:49:52,324 basehttp "GET /static/admin/simpleui-x/waves/waves.min.css?_=2.1 HTTP/1.1" 200 3861
+INFO 2025-06-28 01:49:52,325 basehttp "GET /static/admin/simpleui-x/css/index.css?_=3.2 HTTP/1.1" 200 6994
+INFO 2025-06-28 01:49:52,345 basehttp "GET /static/admin/simpleui-x/waves/waves.min.js?_=2025.06.24 HTTP/1.1" 200 6329
+INFO 2025-06-28 01:49:52,346 basehttp "GET /static/admin/simpleui-x/theme/theme.js?_=2025.06.24 HTTP/1.1" 200 4274
+INFO 2025-06-28 01:49:52,346 basehttp "GET /static/admin/simpleui-x/locale/en-us.js?_=2025.06.24 HTTP/1.1" 200 811
+INFO 2025-06-28 01:49:52,348 basehttp "GET /static/admin/simpleui-x/js/menu.js?_=2025.06.24 HTTP/1.1" 200 1177
+INFO 2025-06-28 01:49:52,348 basehttp "GET /static/admin/simpleui-x/locale/zh-hans.js?_=2025.06.24 HTTP/1.1" 200 1254
+INFO 2025-06-28 01:49:52,348 basehttp "GET /static/admin/simpleui-x/js/cookie.js?_=2025.06.24 HTTP/1.1" 200 524
+INFO 2025-06-28 01:49:52,351 basehttp "GET /static/admin/simpleui-x/js/index.js?_=2025.06.24 HTTP/1.1" 200 21589
+INFO 2025-06-28 01:49:52,400 basehttp "GET /static/admin/simpleui-x/fontawesome-free-6.2.0-web/webfonts/fa-regular-400.woff2 HTTP/1.1" 200 25096
+INFO 2025-06-28 01:49:52,403 basehttp "GET /static/admin/simpleui-x/fontawesome-free-6.2.0-web/webfonts/fa-brands-400.woff2 HTTP/1.1" 200 107460
+INFO 2025-06-28 01:50:01,023 basehttp "GET /admin/forum/violationword/ HTTP/1.1" 200 60300
+INFO 2025-06-28 01:50:01,034 basehttp "GET /static/admin/simpleui-x/locale/en-us.js?_=2.1.2 HTTP/1.1" 200 811
+INFO 2025-06-28 01:50:01,036 basehttp "GET /static/admin/simpleui-x/locale/zh-hans.js HTTP/1.1" 200 1254
+INFO 2025-06-28 01:50:01,037 basehttp "GET /static/admin/simpleui-x/js/language.js?_=2.1.2 HTTP/1.1" 200 189
+INFO 2025-06-28 01:50:01,037 basehttp "GET /static/admin/simpleui-x/theme/simpleui.css HTTP/1.1" 200 4270
+INFO 2025-06-28 01:50:01,039 basehttp "GET /static/admin/simpleui-x/css/base.css?_=2.7 HTTP/1.1" 200 4867
+INFO 2025-06-28 01:50:01,045 basehttp "GET /static/admin/css/forms.css HTTP/1.1" 200 8794
+INFO 2025-06-28 01:50:01,046 basehttp "GET /static/admin/simpleui-x/js/cookie.js HTTP/1.1" 200 524
+INFO 2025-06-28 01:50:01,047 basehttp "GET /static/admin/css/base.css?_=2.7 HTTP/1.1" 200 22092
+INFO 2025-06-28 01:50:01,051 basehttp "GET /static/admin/css/changelists.css?_=20180905 HTTP/1.1" 200 6878
+INFO 2025-06-28 01:50:01,054 basehttp "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO 2025-06-28 01:50:01,056 basehttp "GET /static/admin/js/core.js HTTP/1.1" 200 6208
+INFO 2025-06-28 01:50:01,056 basehttp "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9097
+INFO 2025-06-28 01:50:01,059 basehttp "GET /static/admin/css/responsive.css?_=20180905 HTTP/1.1" 200 17972
+INFO 2025-06-28 01:50:01,062 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 9327
+INFO 2025-06-28 01:50:01,063 basehttp "GET /static/admin/js/actions.js HTTP/1.1" 200 8076
+INFO 2025-06-28 01:50:01,066 basehttp "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+INFO 2025-06-28 01:50:01,069 basehttp "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+INFO 2025-06-28 01:50:01,071 basehttp "GET /static/admin/simpleui-x/automatic/dicts.js HTTP/1.1" 200 12677
+INFO 2025-06-28 01:50:01,073 basehttp "GET /static/admin/simpleui-x/automatic/segment.js HTTP/1.1" 200 1194
+INFO 2025-06-28 01:50:01,074 basehttp "GET /static/admin/simpleui-x/js/axios.min.js HTTP/1.1" 200 14237
+INFO 2025-06-28 01:50:01,075 basehttp "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 200 87533
+INFO 2025-06-28 01:50:01,076 basehttp "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+INFO 2025-06-28 01:50:01,077 basehttp "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171
+INFO 2025-06-28 01:50:01,084 basehttp "GET /static/admin/css/widgets.css HTTP/1.1" 200 11564
+INFO 2025-06-28 01:50:01,161 basehttp "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+INFO 2025-06-28 01:50:14,903 basehttp "POST /admin/forum/violationword/ HTTP/1.1" 302 0
+INFO 2025-06-28 01:50:14,935 basehttp "GET /admin/forum/violationword/ HTTP/1.1" 200 60300
+INFO 2025-06-28 01:50:14,958 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 9327
+INFO 2025-06-28 01:50:17,101 basehttp "GET /admin/forum/violationword/add/ HTTP/1.1" 200 12874
+INFO 2025-06-28 01:50:17,121 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 9327
+INFO 2025-06-28 01:50:17,121 basehttp "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO 2025-06-28 01:50:17,121 basehttp "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 586
+INFO 2025-06-28 01:55:57,747 basehttp "POST /admin/forum/violationword/add/ HTTP/1.1" 302 0
+INFO 2025-06-28 01:55:57,762 basehttp "GET /admin/forum/violationword/15/change/ HTTP/1.1" 200 13905
+INFO 2025-06-28 01:55:57,779 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 9327
+INFO 2025-06-28 01:56:04,775 basehttp "GET /admin/forum/violationword/add/ HTTP/1.1" 200 12884
+INFO 2025-06-28 01:56:04,801 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 9327
+INFO 2025-06-28 01:56:06,097 basehttp "GET /admin/forum/violationword/15/change/ HTTP/1.1" 200 13636
+INFO 2025-06-28 01:56:06,112 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 9327
+INFO 2025-06-28 01:56:06,773 basehttp "GET /admin/forum/violationword/add/ HTTP/1.1" 200 12884
+INFO 2025-06-28 01:56:06,795 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 9327
+INFO 2025-06-28 01:56:07,306 basehttp "GET /admin/forum/violationword/15/change/ HTTP/1.1" 200 13636
+INFO 2025-06-28 01:56:07,323 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 9327
+INFO 2025-06-28 01:56:12,686 basehttp "POST /admin/forum/violationword/15/change/ HTTP/1.1" 302 0
+INFO 2025-06-28 01:56:12,719 basehttp "GET /admin/forum/violationword/ HTTP/1.1" 200 61646
+INFO 2025-06-28 01:56:12,739 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 9327

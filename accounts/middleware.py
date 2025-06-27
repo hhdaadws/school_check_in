@@ -1,4 +1,8 @@
 from .models import User
+import logging
+
+# 设置日志记录器
+logger = logging.getLogger(__name__)
 
 class JWTAuthMiddleware:
     """
@@ -12,10 +16,10 @@ class JWTAuthMiddleware:
     def __call__(self, request):
         # 跳过Django admin路径的认证中间件
         if request.path.startswith('/admin/'):
-            print(f"Skipping JWT auth for Django admin path: {request.path}")
+            logger.debug(f"Skipping JWT auth for Django admin path: {request.path}")
             return self.get_response(request)
             
-        print(f"JWT middleware processing: {request.path}")
+        logger.debug(f"JWT middleware processing: {request.path}")
             
         # 从请求头中获取JWT令牌
         auth_header = request.headers.get('Authorization')
@@ -31,24 +35,50 @@ class JWTAuthMiddleware:
         request.auth = None
         
         token = None
+        token_source = None
         
         # 按优先级尝试获取token
         if auth_header and auth_header.startswith('Bearer '):
             # 提取令牌
             token = auth_header.split(' ')[1]
+            token_source = 'Authorization header'
         elif auth_ls:
             token = auth_ls
+            token_source = 'X-Auth-Token header'
         elif auth_cookie:
             token = auth_cookie
+            token_source = 'Cookie'
             
         if token:
-            # 验证令牌
-            user = User.verify_token(token)
-            
-            if user:
-                # 将用户信息添加到请求对象
-                request.user = user
-                request.auth = token
+            try:
+                # 验证令牌
+                user = User.verify_token(token)
+                
+                if user:
+                    # 将用户信息添加到请求对象
+                    request.user = user
+                    request.auth = token
+                    logger.debug(f"User authenticated: {user.username} via {token_source}")
+                else:
+                    logger.warning(f"Token verification failed for token from {token_source}")
+                    # 确保user为None
+                    request.user = None
+                    request.auth = None
+            except Exception as e:
+                logger.error(f"Token verification error: {str(e)} (token from {token_source})")
+                # 确保在异常情况下user为None
+                request.user = None
+                request.auth = None
+        else:
+            logger.debug(f"No token found for path: {request.path}")
+            # 确保在没有token的情况下user为None
+            request.user = None
+            request.auth = None
+        
+        # 确保request.user始终有一个明确的值
+        if not hasattr(request, 'user') or request.user is None:
+            request.user = None
+            logger.debug("Set request.user to None (no user found)")
         
         # 如果是直接访问管理员页面并有特殊参数，确保设置cookie
         if request.path == '/accounts/admin/' and request.GET.get('direct_access') == 'true' and auth_header:
