@@ -1,0 +1,48 @@
+# Django项目.gitignore文件
+
+# 日志文件
+*.log
+debug.log
+
+# 数据库文件
+db.sqlite3
+*.sqlite3
+
+# Python缓存文件
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Django静态文件收集目录
+staticfiles/
+
+# 虚拟环境
+venv/
+env/
+ENV/
+
+# IDE文件
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+
+# 临时文件
+*.tmp
+*.bak
+
+# 密钥和配置文件（如果包含敏感信息）
+# .env
+# local_settings.py
+
+# 媒体文件（根据需要）
+# media/
+
+# 测试覆盖率报告
+htmlcov/
+.coverage 

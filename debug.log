@@ -835,3 +835,27 @@ INFO 2025-06-28 02:50:57,541 autoreload D:\Github\Arx\forum\urls.py changed, rel
 INFO 2025-06-28 02:50:58,507 autoreload Watching for file changes with StatReloader
 INFO 2025-06-28 02:50:58,567 autoreload Watching for file changes with StatReloader
 INFO 2025-06-28 02:50:58,576 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:52:08,364 autoreload D:\Github\Arx\forum\urls.py changed, reloading.
+INFO 2025-06-28 02:52:08,365 autoreload D:\Github\Arx\forum\urls.py changed, reloading.
+INFO 2025-06-28 02:52:08,650 autoreload D:\Github\Arx\forum\views.py changed, reloading.
+INFO 2025-06-28 02:52:09,367 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:52:09,368 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:52:09,644 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:52:38,437 autoreload D:\Github\Arx\forum\views.py changed, reloading.
+INFO 2025-06-28 02:52:38,443 autoreload D:\Github\Arx\forum\views.py changed, reloading.
+INFO 2025-06-28 02:52:38,451 autoreload D:\Github\Arx\forum\views.py changed, reloading.
+INFO 2025-06-28 02:52:39,444 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:52:39,479 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:52:39,481 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:53:16,634 autoreload D:\Github\Arx\forum\migrations\0004_postcomment_postlike.py changed, reloading.
+INFO 2025-06-28 02:53:17,171 autoreload D:\Github\Arx\forum\urls.py changed, reloading.
+INFO 2025-06-28 02:53:17,171 autoreload D:\Github\Arx\forum\views.py changed, reloading.
+INFO 2025-06-28 02:53:17,564 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:53:18,187 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:53:18,205 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:54:45,800 autoreload D:\Github\Arx\Arx\settings.py changed, reloading.
+INFO 2025-06-28 02:54:45,805 autoreload D:\Github\Arx\Arx\settings.py changed, reloading.
+INFO 2025-06-28 02:54:45,859 autoreload D:\Github\Arx\Arx\settings.py changed, reloading.
+INFO 2025-06-28 02:55:01,799 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:55:02,013 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:55:02,098 autoreload Watching for file changes with StatReloader
