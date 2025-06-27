@@ -121,9 +121,12 @@ def create_post(request):
         return JsonResponse({"error": "只支持POST请求"}, status=405)
     
     try:
+        # 导入审核服务
+        from .moderation import moderation_service
+        
         data = json.loads(request.body)
         title = data.get('title')
-        content = data.get('content')
+        content = data.get('content', '')
         school_id = data.get('school_id')
         
         if not all([title, school_id]):
@@ -134,19 +137,38 @@ def create_post(request):
         except School.DoesNotExist:
             return JsonResponse({"error": "指定的学校不存在"}, status=400)
         
-        # 创建帖子（默认为待审核状态）
+        # 🎯 新增：内容审核检测
+        is_valid, error_message, violations_info = moderation_service.check_post(
+            user=request.user,
+            title=title,
+            content=content
+        )
+        
+        # 如果检测到违规内容，直接拒绝发布
+        if not is_valid:
+            return JsonResponse({
+                "error": error_message,
+                "violation_details": violations_info
+            }, status=400)
+        
+        # 通过审核，直接发布帖子
         post = Post.objects.create(
             title=title,
-            content=content or "",
+            content=content,
             school=school,
             author=request.user.username,
             user=request.user,
-            status='pending'  # 默认为待审核状态
+            status='approved',  # 🎯 修改：自动审核通过，直接发布
+            auto_approved=True,  # 标记为自动审核通过
+            moderation_result='auto_approved'  # 记录审核结果
         )
+        
+        # 如果帖子审核通过，生成HTML页面
+        create_post_html(post)
         
         return JsonResponse({
             "success": True,
-            "message": "发布成功，等待管理员审核",
+            "message": "发布成功！帖子已通过自动审核",
             "post": post.to_dict()
         })
     except json.JSONDecodeError:

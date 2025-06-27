@@ -1,5 +1,6 @@
 from django.db import models
 from accounts.models import School, User
+import json
 
 # Create your models here.
 
@@ -21,6 +22,8 @@ class Post(models.Model):
     reviewed_by = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='reviewed_posts', verbose_name='审核人', null=True, blank=True)
     reviewed_time = models.DateTimeField(null=True, blank=True, verbose_name='审核时间')
     reject_reason = models.TextField(verbose_name='拒绝原因', blank=True)
+    auto_approved = models.BooleanField(default=False, verbose_name='自动审核通过')
+    moderation_result = models.CharField(max_length=50, blank=True, verbose_name='审核结果详情')
     
     class Meta:
         verbose_name = '论坛帖子'
@@ -65,4 +68,116 @@ class PostTag(models.Model):
             'tag_name': self.interest_tag.name,
             'tag_color': self.interest_tag.color,
             'tag_category': self.interest_tag.category
+        }
+
+
+# 违规词库模型
+class ViolationWord(models.Model):
+    MATCH_TYPE_CHOICES = [
+        ('exact', '精确匹配'),
+        ('contains', '包含匹配'), 
+        ('regex', '正则表达式'),
+        ('fuzzy', '模糊匹配')
+    ]
+    
+    CATEGORY_CHOICES = [
+        ('political', '政治敏感'),
+        ('adult', '色情内容'),
+        ('violence', '暴力血腥'),
+        ('advertisement', '垃圾广告'),
+        ('abuse', '恶意谩骂'),
+        ('other', '其他违规')
+    ]
+    
+    word = models.CharField(max_length=200, verbose_name='违规词/模式')
+    pattern = models.TextField(blank=True, verbose_name='正则表达式')
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, verbose_name='违规类别')
+    severity = models.IntegerField(default=2, verbose_name='严重程度', 
+                                 help_text='1-警告，2-拒绝，3-严重违规')
+    match_type = models.CharField(max_length=10, choices=MATCH_TYPE_CHOICES, 
+                                default='contains', verbose_name='匹配方式')
+    is_active = models.BooleanField(default=True, verbose_name='是否启用')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='更新时间')
+    
+    class Meta:
+        verbose_name = '违规词库'
+        verbose_name_plural = '违规词库'
+        ordering = ['-created_at']
+        
+    def __str__(self):
+        return f"{self.word} ({self.get_category_display()})"
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'word': self.word,
+            'pattern': self.pattern,
+            'category': self.category,
+            'category_display': self.get_category_display(),
+            'severity': self.severity,
+            'match_type': self.match_type,
+            'match_type_display': self.get_match_type_display(),
+            'is_active': self.is_active
+        }
+
+
+# 内容审核日志模型
+class ModerationLog(models.Model):
+    ACTION_CHOICES = [
+        ('approved', '通过'),
+        ('blocked', '拒绝'),
+        ('warning', '警告')
+    ]
+    
+    CONTENT_TYPE_CHOICES = [
+        ('title', '标题'),
+        ('content', '正文'),
+        ('both', '标题和正文')
+    ]
+    
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='用户')
+    content_type = models.CharField(max_length=20, choices=CONTENT_TYPE_CHOICES, 
+                                  verbose_name='内容类型')
+    original_content = models.TextField(verbose_name='原始内容')
+    detected_words = models.TextField(default='[]', verbose_name='检测到的违规词',
+                                    help_text='JSON格式存储')
+    action = models.CharField(max_length=20, choices=ACTION_CHOICES, verbose_name='处理动作')
+    violation_category = models.CharField(max_length=20, blank=True, verbose_name='违规类别')
+    post = models.ForeignKey(Post, on_delete=models.SET_NULL, null=True, blank=True, 
+                           verbose_name='关联帖子')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='检测时间')
+    
+    class Meta:
+        verbose_name = '内容审核日志'
+        verbose_name_plural = '内容审核日志'
+        ordering = ['-created_at']
+        
+    def __str__(self):
+        return f"{self.user.username} - {self.get_action_display()} - {self.created_at}"
+    
+    def get_detected_words_list(self):
+        """获取检测到的违规词列表"""
+        try:
+            return json.loads(self.detected_words)
+        except (json.JSONDecodeError, TypeError):
+            return []
+    
+    def set_detected_words_list(self, words_list):
+        """设置检测到的违规词列表"""
+        self.detected_words = json.dumps(words_list, ensure_ascii=False)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user.id,
+            'username': self.user.username,
+            'content_type': self.content_type,
+            'content_type_display': self.get_content_type_display(),
+            'original_content': self.original_content[:100] + '...' if len(self.original_content) > 100 else self.original_content,
+            'detected_words': self.get_detected_words_list(),
+            'action': self.action,
+            'action_display': self.get_action_display(),
+            'violation_category': self.violation_category,
+            'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S')
         }

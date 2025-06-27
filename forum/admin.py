@@ -1,12 +1,115 @@
 from django.contrib import admin
-from .models import Post
+from django.utils import timezone
+from .models import Post, ViolationWord, ModerationLog
 
 # Register your models here.
 
 # 注册Post模型到admin
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'school', 'time')
-    list_filter = ('school', 'time')
+    list_display = ('title', 'author', 'school', 'status', 'auto_approved', 'time')
+    list_filter = ('status', 'auto_approved', 'school', 'time')
     search_fields = ('title', 'content', 'author')
+    readonly_fields = ['time', 'auto_approved', 'moderation_result']
     date_hierarchy = 'time'
+    
+    fieldsets = (
+        ('基本信息', {
+            'fields': ('title', 'author', 'content', 'school', 'user')
+        }),
+        ('审核信息', {
+            'fields': ('status', 'reviewed_by', 'reviewed_time', 'reject_reason', 'auto_approved', 'moderation_result')
+        }),
+        ('时间信息', {
+            'fields': ('time',)
+        })
+    )
+    
+    def save_model(self, request, obj, form, change):
+        if obj.status == 'approved' and not obj.reviewed_by and not obj.auto_approved:
+            obj.reviewed_by = request.user
+            obj.reviewed_time = timezone.now()
+        super().save_model(request, obj, form, change)
+
+
+@admin.register(ViolationWord)
+class ViolationWordAdmin(admin.ModelAdmin):
+    list_display = ['word', 'category', 'severity', 'match_type', 'is_active', 'created_at']
+    list_filter = ['category', 'severity', 'match_type', 'is_active', 'created_at']
+    search_fields = ['word', 'pattern']
+    list_editable = ['is_active', 'severity']
+    
+    fieldsets = (
+        ('违规词信息', {
+            'fields': ('word', 'pattern', 'category', 'severity', 'match_type')
+        }),
+        ('状态设置', {
+            'fields': ('is_active',)
+        })
+    )
+    
+    actions = ['enable_words', 'disable_words', 'test_detection']
+    
+    def enable_words(self, request, queryset):
+        """批量启用违规词"""
+        updated = queryset.update(is_active=True)
+        self.message_user(request, f'已启用 {updated} 个违规词')
+        # 刷新缓存
+        from .moderation import TextModerationService
+        TextModerationService.refresh_cache()
+    enable_words.short_description = "启用选中的违规词"
+    
+    def disable_words(self, request, queryset):
+        """批量禁用违规词"""
+        updated = queryset.update(is_active=False)
+        self.message_user(request, f'已禁用 {updated} 个违规词')
+        # 刷新缓存
+        from .moderation import TextModerationService
+        TextModerationService.refresh_cache()
+    disable_words.short_description = "禁用选中的违规词"
+    
+    def test_detection(self, request, queryset):
+        """测试违规词检测功能"""
+        test_text = "这是一个包含测试政治词和广告的测试文本"
+        from .moderation import moderation_service
+        
+        is_valid, violations = moderation_service.check_text(test_text)
+        result = "通过" if is_valid else f"检测到违规: {violations}"
+        
+        self.message_user(request, f'测试结果: {result}')
+    test_detection.short_description = "测试违规检测功能"
+    
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        # 保存后刷新缓存
+        from .moderation import TextModerationService
+        TextModerationService.refresh_cache()
+
+
+@admin.register(ModerationLog)
+class ModerationLogAdmin(admin.ModelAdmin):
+    list_display = ['user', 'content_type', 'action', 'violation_category', 'created_at']
+    list_filter = ['action', 'content_type', 'violation_category', 'created_at']
+    search_fields = ['user__username', 'original_content']
+    readonly_fields = ['user', 'content_type', 'original_content', 'detected_words', 
+                      'action', 'violation_category', 'post', 'created_at']
+    
+    fieldsets = (
+        ('基本信息', {
+            'fields': ('user', 'content_type', 'action', 'violation_category')
+        }),
+        ('检测内容', {
+            'fields': ('original_content', 'detected_words')
+        }),
+        ('关联信息', {
+            'fields': ('post', 'created_at')
+        })
+    )
+    
+    def has_add_permission(self, request):
+        """禁止手动添加日志"""
+        return False
+    
+    def has_change_permission(self, request, obj=None):
+        """禁止修改日志"""
+        return False
