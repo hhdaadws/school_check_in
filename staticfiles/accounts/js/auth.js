@@ -125,12 +125,13 @@ window.app = new Vue({
                         // 保存用户信息和令牌
                         localStorage.setItem('token', response.data.token);
                         
-                        // 确保用户信息包含is_staff属性
+                        // 确保用户信息包含is_staff属性和兴趣标签选择状态
                         const userInfo = {
                             username: response.data.username,
                             email: response.data.email,
                             is_staff: response.data.is_staff || false,
-                            id: response.data.user_id
+                            id: response.data.user_id,
+                            interests_selected: response.data.interests_selected || false
                         };
                         
                         console.log('保存用户信息:', userInfo);
@@ -142,8 +143,14 @@ window.app = new Vue({
                         // 设置默认请求头
                         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
                         
-                        // 跳转到主页
-                        window.location.href = '/accounts/';
+                        // 检查是否需要选择兴趣标签
+                        if (!response.data.interests_selected) {
+                            // 如果用户还没有选择兴趣标签，跳转到兴趣选择页面
+                            window.location.href = '/accounts/interests/';
+                        } else {
+                            // 跳转到主页
+                            window.location.href = '/accounts/';
+                        }
                     } else {
                         this.$message.error(response.data.message);
                         // 重置验证码
@@ -196,14 +203,15 @@ window.app = new Vue({
                         localStorage.setItem('token', response.data.token);
                         localStorage.setItem('user', JSON.stringify({
                             username: response.data.username,
-                            email: response.data.email
+                            email: response.data.email,
+                            interests_selected: false  // 新注册用户默认未选择兴趣标签
                         }));
                         
                         // 设置默认请求头
                         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
                         
-                        // 跳转到主页
-                        window.location.href = '/accounts/';
+                        // 新注册用户需要选择兴趣标签
+                        window.location.href = '/accounts/interests/';
                     } else {
                         this.$message.error(response.data.message);
                         // 重置验证码

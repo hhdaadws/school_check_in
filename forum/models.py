@@ -39,5 +39,30 @@ class Post(models.Model):
             'content': self.content,
             'time': self.time.strftime('%Y-%m-%d %H:%M'),
             'status': self.status,
-            'status_display': self.get_status_display()
+            'status_display': self.get_status_display(),
+            'tags': [tag.to_dict() for tag in self.post_tags.all()]
+        }
+
+# 帖子标签关联模型
+class PostTag(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post_tags', verbose_name="帖子")
+    interest_tag = models.ForeignKey('accounts.InterestTag', on_delete=models.CASCADE, verbose_name="兴趣标签")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="添加时间")
+    
+    class Meta:
+        verbose_name = "帖子标签"
+        verbose_name_plural = "帖子标签"
+        unique_together = ('post', 'interest_tag')
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"{self.post.title} - {self.interest_tag.name}"
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'tag_id': self.interest_tag.id,
+            'tag_name': self.interest_tag.name,
+            'tag_color': self.interest_tag.color,
+            'tag_category': self.interest_tag.category
         }

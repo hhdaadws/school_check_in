@@ -229,3 +229,82 @@ INFO 2025-06-25 22:20:37,245 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
 INFO 2025-06-25 22:20:37,252 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
 INFO 2025-06-25 22:20:37,259 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
 INFO 2025-06-25 22:20:37,267 basehttp "GET /focus/stats/ HTTP/1.1" 200 339
+INFO 2025-06-27 21:00:58,098 autoreload Watching for file changes with StatReloader
+INFO 2025-06-27 21:02:58,636 basehttp "GET /accounts/interests/tags/ HTTP/1.1" 200 5849
+INFO 2025-06-27 21:03:03,143 basehttp - Broken pipe from ('127.0.0.1', 64264)
+INFO 2025-06-27 21:06:07,650 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-06-27 21:06:07,654 basehttp "GET /accounts/ HTTP/1.1" 200 107966
+INFO 2025-06-27 21:06:07,829 basehttp "GET /static/accounts/css/styles.css HTTP/1.1" 200 1864
+INFO 2025-06-27 21:06:09,551 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+WARNING 2025-06-27 21:06:09,556 log Not Found: /checkin/checkins/
+WARNING 2025-06-27 21:06:09,559 log Not Found: /checkin/community/
+WARNING 2025-06-27 21:06:09,562 basehttp "GET /checkin/checkins/ HTTP/1.1" 404 3506
+WARNING 2025-06-27 21:06:09,562 basehttp "GET /checkin/community/ HTTP/1.1" 404 3509
+INFO 2025-06-27 21:06:09,567 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-06-27 21:06:09,573 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-06-27 21:06:09,574 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-27 21:06:09,583 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
+INFO 2025-06-27 21:06:09,587 basehttp "GET /focus/stats/ HTTP/1.1" 200 338
+WARNING 2025-06-27 21:06:09,593 log Not Found: /checkin/checkins/
+WARNING 2025-06-27 21:06:09,599 log Not Found: /checkin/community/
+WARNING 2025-06-27 21:06:09,600 basehttp "GET /checkin/checkins/ HTTP/1.1" 404 3506
+WARNING 2025-06-27 21:06:09,601 basehttp "GET /checkin/community/ HTTP/1.1" 404 3509
+WARNING 2025-06-27 21:06:10,209 log Not Found: /favicon.ico
+WARNING 2025-06-27 21:06:10,211 basehttp "GET /favicon.ico HTTP/1.1" 404 3639
+INFO 2025-06-27 21:06:14,009 basehttp "GET /accounts/auth/ HTTP/1.1" 200 7666
+INFO 2025-06-27 21:06:14,032 basehttp "GET /static/accounts/js/auth.js HTTP/1.1" 200 12015
+INFO 2025-06-27 21:06:36,689 basehttp "POST /accounts/send-verification-code/ HTTP/1.1" 200 104
+INFO 2025-06-27 21:08:17,853 basehttp "POST /accounts/register/ HTTP/1.1" 200 70
+INFO 2025-06-27 23:47:32,512 autoreload Watching for file changes with StatReloader
+INFO 2025-06-27 23:47:37,103 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-06-27 23:47:37,107 basehttp "GET /accounts/ HTTP/1.1" 200 107966
+WARNING 2025-06-27 23:47:37,794 log Not Found: /checkin/checkins/
+WARNING 2025-06-27 23:47:37,802 log Not Found: /checkin/community/
+WARNING 2025-06-27 23:47:37,802 basehttp "GET /checkin/checkins/ HTTP/1.1" 404 3506
+WARNING 2025-06-27 23:47:37,803 basehttp "GET /checkin/community/ HTTP/1.1" 404 3509
+INFO 2025-06-27 23:47:37,804 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+ERROR 2025-06-27 23:47:37,816 log Internal Server Error: /accounts/profile/
+Traceback (most recent call last):
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Github\Arx\accounts\views.py", line 221, in user_profile
+    'id': user.id,
+          ^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'id'
+ERROR 2025-06-27 23:47:37,819 basehttp "GET /accounts/profile/ HTTP/1.1" 500 75596
+WARNING 2025-06-27 23:47:37,829 log Not Found: /checkin/checkins/
+WARNING 2025-06-27 23:47:37,832 log Not Found: /checkin/community/
+WARNING 2025-06-27 23:47:37,832 basehttp "GET /checkin/checkins/ HTTP/1.1" 404 3506
+WARNING 2025-06-27 23:47:37,832 basehttp "GET /checkin/community/ HTTP/1.1" 404 3509
+WARNING 2025-06-27 23:47:37,838 log Not Found: /favicon.ico
+WARNING 2025-06-27 23:47:37,838 basehttp "GET /favicon.ico HTTP/1.1" 404 3639
+INFO 2025-06-27 23:47:41,565 basehttp "GET /accounts/auth/ HTTP/1.1" 200 7666
+INFO 2025-06-27 23:47:41,583 basehttp "GET /static/accounts/js/auth.js HTTP/1.1" 304 0
+WARNING 2025-06-27 23:47:54,823 log Unauthorized: /accounts/login/
+WARNING 2025-06-27 23:47:54,825 basehttp "POST /accounts/login/ HTTP/1.1" 401 82
+INFO 2025-06-27 23:48:00,876 basehttp "POST /accounts/login/ HTTP/1.1" 200 388
+INFO 2025-06-27 23:48:00,899 basehttp "GET /accounts/interests/ HTTP/1.1" 200 13975
+INFO 2025-06-27 23:48:02,024 basehttp "GET /accounts/interests/tags/ HTTP/1.1" 200 5849
+INFO 2025-06-27 23:48:12,169 basehttp "POST /accounts/interests/select/ HTTP/1.1" 200 80
+INFO 2025-06-27 23:48:12,193 basehttp "GET /accounts/ HTTP/1.1" 200 107966
+INFO 2025-06-27 23:48:12,301 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+WARNING 2025-06-27 23:48:12,307 log Not Found: /checkin/checkins/
+WARNING 2025-06-27 23:48:12,312 basehttp "GET /checkin/checkins/ HTTP/1.1" 404 3506
+WARNING 2025-06-27 23:48:12,316 log Not Found: /checkin/community/
+INFO 2025-06-27 23:48:12,320 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+WARNING 2025-06-27 23:48:12,323 basehttp "GET /checkin/community/ HTTP/1.1" 404 3509
+INFO 2025-06-27 23:48:12,323 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-06-27 23:48:12,329 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
+INFO 2025-06-27 23:48:12,329 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-27 23:48:12,337 basehttp "GET /focus/stats/ HTTP/1.1" 200 338
+WARNING 2025-06-27 23:48:12,351 log Not Found: /checkin/checkins/
+WARNING 2025-06-27 23:48:12,355 log Not Found: /checkin/community/
+WARNING 2025-06-27 23:48:12,355 basehttp "GET /checkin/checkins/ HTTP/1.1" 404 3506
+WARNING 2025-06-27 23:48:12,355 basehttp "GET /checkin/community/ HTTP/1.1" 404 3509
+INFO 2025-06-27 23:48:19,304 basehttp "GET /forum/posts/?school_id=1 HTTP/1.1" 200 2
+ERROR 2025-06-27 23:48:19,307 log Internal Server Error: /forum/posts/user/
+ERROR 2025-06-27 23:48:19,310 basehttp "GET /forum/posts/user/ HTTP/1.1" 500 79
