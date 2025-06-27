@@ -823,3 +823,15 @@ INFO 2025-06-28 02:44:41,319 basehttp "POST /forum/posts/47/comments/create/ HTT
 INFO 2025-06-28 02:44:44,629 basehttp "POST /forum/posts/47/comments/create/ HTTP/1.1" 200 309
 WARNING 2025-06-28 02:44:48,541 log Bad Request: /forum/posts/47/comments/create/
 WARNING 2025-06-28 02:44:48,542 basehttp "POST /forum/posts/47/comments/create/ HTTP/1.1" 400 234
+INFO 2025-06-28 02:46:29,956 autoreload D:\Github\Arx\forum\urls.py changed, reloading.
+INFO 2025-06-28 02:46:29,967 autoreload D:\Github\Arx\forum\admin.py changed, reloading.
+INFO 2025-06-28 02:46:29,976 autoreload D:\Github\Arx\forum\urls.py changed, reloading.
+INFO 2025-06-28 02:46:31,051 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:46:31,072 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:46:31,089 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:50:57,516 autoreload D:\Github\Arx\forum\admin.py changed, reloading.
+INFO 2025-06-28 02:50:57,533 autoreload D:\Github\Arx\forum\admin.py changed, reloading.
+INFO 2025-06-28 02:50:57,541 autoreload D:\Github\Arx\forum\urls.py changed, reloading.
+INFO 2025-06-28 02:50:58,507 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:50:58,567 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:50:58,576 autoreload Watching for file changes with StatReloader
