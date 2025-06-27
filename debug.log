@@ -508,3 +508,163 @@ INFO 2025-06-28 01:56:07,323 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 9327
 INFO 2025-06-28 01:56:12,686 basehttp "POST /admin/forum/violationword/15/change/ HTTP/1.1" 302 0
 INFO 2025-06-28 01:56:12,719 basehttp "GET /admin/forum/violationword/ HTTP/1.1" 200 61646
 INFO 2025-06-28 01:56:12,739 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 9327
+INFO 2025-06-28 02:16:50,975 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:16:52,031 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-06-28 02:16:52,038 basehttp "GET /accounts/ HTTP/1.1" 200 108303
+INFO 2025-06-28 02:16:52,905 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-06-28 02:16:52,913 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-06-28 02:16:52,918 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-06-28 02:16:52,924 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 02:16:52,926 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
+INFO 2025-06-28 02:16:52,931 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-28 02:16:52,931 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:16:52,940 basehttp "GET /focus/stats/ HTTP/1.1" 200 338
+INFO 2025-06-28 02:16:52,945 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 02:16:52,946 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:16:55,004 basehttp "GET /forum/posts/?school_id=1 HTTP/1.1" 200 2
+ERROR 2025-06-28 02:16:55,005 log Internal Server Error: /forum/posts/user/
+ERROR 2025-06-28 02:16:55,005 basehttp "GET /forum/posts/user/ HTTP/1.1" 500 79
+INFO 2025-06-28 02:17:00,401 basehttp "GET /forum/posts/?school_id=1 HTTP/1.1" 200 2
+ERROR 2025-06-28 02:17:00,403 log Internal Server Error: /forum/posts/user/
+ERROR 2025-06-28 02:17:00,403 basehttp "GET /forum/posts/user/ HTTP/1.1" 500 79
+INFO 2025-06-28 02:17:02,272 basehttp "GET /accounts/ HTTP/1.1" 200 108303
+INFO 2025-06-28 02:17:02,380 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-06-28 02:17:02,380 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-06-28 02:17:02,390 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 02:17:02,393 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
+INFO 2025-06-28 02:17:02,400 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-06-28 02:17:02,400 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-28 02:17:02,401 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:17:02,413 basehttp "GET /focus/stats/ HTTP/1.1" 200 338
+INFO 2025-06-28 02:17:02,422 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:17:02,435 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 02:17:03,847 basehttp "GET /forum/posts/?school_id=1 HTTP/1.1" 200 2
+ERROR 2025-06-28 02:17:03,847 log Internal Server Error: /forum/posts/user/
+ERROR 2025-06-28 02:17:03,849 basehttp "GET /forum/posts/user/ HTTP/1.1" 500 79
+ERROR 2025-06-28 02:17:11,808 log Internal Server Error: /forum/posts/create/
+ERROR 2025-06-28 02:17:11,808 basehttp "POST /forum/posts/create/ HTTP/1.1" 500 67
+ERROR 2025-06-28 02:17:16,706 log Internal Server Error: /forum/posts/create/
+ERROR 2025-06-28 02:17:16,708 basehttp "POST /forum/posts/create/ HTTP/1.1" 500 67
+ERROR 2025-06-28 02:17:20,989 log Internal Server Error: /forum/posts/create/
+ERROR 2025-06-28 02:17:20,990 basehttp "POST /forum/posts/create/ HTTP/1.1" 500 67
+ERROR 2025-06-28 02:17:21,605 log Internal Server Error: /forum/posts/create/
+ERROR 2025-06-28 02:17:21,606 basehttp "POST /forum/posts/create/ HTTP/1.1" 500 67
+ERROR 2025-06-28 02:17:21,798 log Internal Server Error: /forum/posts/create/
+ERROR 2025-06-28 02:17:21,799 basehttp "POST /forum/posts/create/ HTTP/1.1" 500 67
+ERROR 2025-06-28 02:17:21,979 log Internal Server Error: /forum/posts/create/
+ERROR 2025-06-28 02:17:21,981 basehttp "POST /forum/posts/create/ HTTP/1.1" 500 67
+ERROR 2025-06-28 02:17:22,162 log Internal Server Error: /forum/posts/create/
+ERROR 2025-06-28 02:17:22,163 basehttp "POST /forum/posts/create/ HTTP/1.1" 500 67
+ERROR 2025-06-28 02:17:22,330 log Internal Server Error: /forum/posts/create/
+ERROR 2025-06-28 02:17:22,331 basehttp "POST /forum/posts/create/ HTTP/1.1" 500 67
+ERROR 2025-06-28 02:17:22,510 log Internal Server Error: /forum/posts/create/
+ERROR 2025-06-28 02:17:22,511 basehttp "POST /forum/posts/create/ HTTP/1.1" 500 67
+ERROR 2025-06-28 02:17:22,687 log Internal Server Error: /forum/posts/create/
+ERROR 2025-06-28 02:17:22,687 basehttp "POST /forum/posts/create/ HTTP/1.1" 500 67
+ERROR 2025-06-28 02:17:31,444 log Internal Server Error: /forum/posts/create/
+ERROR 2025-06-28 02:17:31,445 basehttp "POST /forum/posts/create/ HTTP/1.1" 500 67
+ERROR 2025-06-28 02:17:32,035 log Internal Server Error: /forum/posts/create/
+ERROR 2025-06-28 02:17:32,036 basehttp "POST /forum/posts/create/ HTTP/1.1" 500 67
+ERROR 2025-06-28 02:17:32,201 log Internal Server Error: /forum/posts/create/
+ERROR 2025-06-28 02:17:32,202 basehttp "POST /forum/posts/create/ HTTP/1.1" 500 67
+ERROR 2025-06-28 02:17:48,009 log Internal Server Error: /forum/posts/create/
+ERROR 2025-06-28 02:17:48,010 basehttp "POST /forum/posts/create/ HTTP/1.1" 500 67
+ERROR 2025-06-28 02:17:48,659 log Internal Server Error: /forum/posts/create/
+ERROR 2025-06-28 02:17:48,660 basehttp "POST /forum/posts/create/ HTTP/1.1" 500 67
+ERROR 2025-06-28 02:17:48,848 log Internal Server Error: /forum/posts/create/
+ERROR 2025-06-28 02:17:48,849 basehttp "POST /forum/posts/create/ HTTP/1.1" 500 67
+ERROR 2025-06-28 02:17:49,000 log Internal Server Error: /forum/posts/create/
+ERROR 2025-06-28 02:17:49,000 basehttp "POST /forum/posts/create/ HTTP/1.1" 500 67
+ERROR 2025-06-28 02:17:49,163 log Internal Server Error: /forum/posts/create/
+ERROR 2025-06-28 02:17:49,163 basehttp "POST /forum/posts/create/ HTTP/1.1" 500 67
+INFO 2025-06-28 02:17:50,719 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:17:51,364 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+ERROR 2025-06-28 02:17:52,222 log Internal Server Error: /forum/posts/user/
+ERROR 2025-06-28 02:17:52,234 basehttp "GET /forum/posts/user/ HTTP/1.1" 500 79
+ERROR 2025-06-28 02:17:52,281 log Internal Server Error: /forum/posts/
+Traceback (most recent call last):
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\backends\sqlite3\base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: forum_posttag
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Github\Arx\forum\views.py", line 25, in get_posts
+    data = [post.to_dict() for post in posts]
+            ^^^^^^^^^^^^^^
+  File "D:\Github\Arx\forum\models.py", line 46, in to_dict
+    'tags': [tag.to_dict() for tag in self.post_tags.all()]
+                                      ^^^^^^^^^^^^^^^^^^^^
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\models\query.py", line 400, in __iter__
+    self._fetch_all()
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\models\query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\models\sql\compiler.py", line 1574, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\backends\sqlite3\base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: forum_posttag
+ERROR 2025-06-28 02:17:52,296 basehttp "GET /forum/posts/?school_id=1 HTTP/1.1" 500 143767
+INFO 2025-06-28 02:20:08,679 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 02:20:11,415 basehttp "GET /accounts/ HTTP/1.1" 200 108303
+INFO 2025-06-28 02:20:12,358 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-06-28 02:20:12,375 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
+INFO 2025-06-28 02:20:12,376 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-06-28 02:20:12,376 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 02:20:12,376 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-06-28 02:20:12,386 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:20:12,386 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-28 02:20:12,390 basehttp "GET /focus/stats/ HTTP/1.1" 200 338
+INFO 2025-06-28 02:20:12,396 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 02:20:12,409 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:20:13,947 basehttp "GET /forum/posts/?school_id=1 HTTP/1.1" 200 3941
+INFO 2025-06-28 02:20:13,947 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 4169
+WARNING 2025-06-28 02:20:27,780 log Bad Request: /forum/posts/create/
+WARNING 2025-06-28 02:20:27,782 basehttp "POST /forum/posts/create/ HTTP/1.1" 400 362
+INFO 2025-06-28 02:20:33,045 basehttp "POST /forum/posts/create/ HTTP/1.1" 200 328
+INFO 2025-06-28 02:20:45,194 basehttp "GET /accounts/ HTTP/1.1" 200 108303
+INFO 2025-06-28 02:20:45,304 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-06-28 02:20:45,309 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-06-28 02:20:45,319 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
+INFO 2025-06-28 02:20:45,326 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 02:20:45,327 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:20:45,329 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-06-28 02:20:45,333 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-28 02:20:45,339 basehttp "GET /focus/stats/ HTTP/1.1" 200 338
+INFO 2025-06-28 02:20:45,349 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 02:20:45,349 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 02:20:46,694 basehttp "GET /forum/posts/?school_id=1 HTTP/1.1" 200 4145
+INFO 2025-06-28 02:20:46,694 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 4373
