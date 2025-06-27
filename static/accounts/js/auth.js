@@ -138,7 +138,7 @@ window.app = new Vue({
                         localStorage.setItem('user', JSON.stringify(userInfo));
                         
                         // 在cookie中也存储token (用于服务器端读取)
-                        document.cookie = `token=${response.data.token}; path=/; max-age=604800`;
+                        document.cookie = `token=${response.data.token}; path=/; max-age=604800; SameSite=Lax`;
                         
                         // 设置默认请求头
                         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;

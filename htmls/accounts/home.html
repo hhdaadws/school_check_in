@@ -1600,9 +1600,16 @@
                         this.dialogVisible = true;
                     },
                     logout() {
+                        // 清除localStorage中的数据
                         localStorage.removeItem('user');
                         localStorage.removeItem('token');
+                        
+                        // 清除axios默认请求头
                         delete axios.defaults.headers.common['Authorization'];
+                        
+                        // 清除cookie中的token
+                        document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+                        
                         this.$message.success('已退出登录');
                         setTimeout(() => { window.location.href = '/accounts/auth/'; }, 500);
                     },

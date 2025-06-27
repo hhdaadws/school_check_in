@@ -381,3 +381,32 @@ INFO 2025-06-28 01:03:31,093 basehttp "GET /checkin/community/ HTTP/1.1" 200 110
 INFO 2025-06-28 01:03:38,037 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 255
 INFO 2025-06-28 01:03:39,063 basehttp "POST /checkin/checkins/9/check/ HTTP/1.1" 200 241
 INFO 2025-06-28 01:03:39,079 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 01:10:36,851 autoreload Watching for file changes with StatReloader
+INFO 2025-06-28 01:11:05,739 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-06-28 01:11:05,748 basehttp "GET /accounts/ HTTP/1.1" 200 108303
+INFO 2025-06-28 01:11:06,613 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-06-28 01:11:06,620 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-28 01:11:06,624 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 01:11:06,625 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 01:11:06,641 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 01:11:06,641 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 01:11:10,259 basehttp "GET /accounts/auth/ HTTP/1.1" 200 7666
+INFO 2025-06-28 01:11:10,282 basehttp "GET /static/accounts/js/auth.js HTTP/1.1" 200 12029
+WARNING 2025-06-28 01:11:35,705 log Unauthorized: /accounts/login/
+WARNING 2025-06-28 01:11:35,705 basehttp "POST /accounts/login/ HTTP/1.1" 401 82
+INFO 2025-06-28 01:11:43,064 basehttp "POST /accounts/login/ HTTP/1.1" 200 387
+INFO 2025-06-28 01:11:43,077 basehttp "GET /accounts/ HTTP/1.1" 200 108303
+INFO 2025-06-28 01:11:43,179 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-06-28 01:11:43,193 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-06-28 01:11:43,193 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-06-28 01:11:43,194 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
+INFO 2025-06-28 01:11:43,197 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 01:11:43,198 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 01:11:43,200 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-06-28 01:11:43,203 basehttp "GET /focus/stats/ HTTP/1.1" 200 338
+INFO 2025-06-28 01:11:43,213 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-06-28 01:11:43,215 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-06-28 01:11:44,868 basehttp "GET /forum/posts/?school_id=1 HTTP/1.1" 200 2
+ERROR 2025-06-28 01:11:44,870 log Internal Server Error: /forum/posts/user/
+ERROR 2025-06-28 01:11:44,870 basehttp "GET /forum/posts/user/ HTTP/1.1" 500 79
+INFO 2025-06-28 01:11:46,164 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
