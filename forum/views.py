@@ -4,8 +4,11 @@ from .models import Post
 from accounts.models import School, User
 from accounts.decorators import login_required, admin_required
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q, Case, When, IntegerField, Count
 import json
 import os
+import math
+import time
 from django.conf import settings
 from django.utils import timezone
 
@@ -20,14 +23,152 @@ def get_posts(request):
     
     try:
         school_id = int(school_id)
-        # 只返回已审核通过的帖子
-        posts = Post.objects.filter(school_id=school_id, status='approved').order_by('-time')
+        
+        # 获取分页参数
+        page = int(request.GET.get('page', 1))
+        page_size = int(request.GET.get('page_size', 10))
+        
+        # 验证参数
+        if page < 1:
+            page = 1
+        if page_size < 1 or page_size > 100:  # 限制最大每页数量
+            page_size = 10
+        
+        # 计算偏移量
+        offset = (page - 1) * page_size
+        
+        # 查询帖子总数
+        total_posts = Post.objects.filter(school_id=school_id, status='approved').count()
+        
+        # 查询当前页的帖子
+        posts = Post.objects.filter(school_id=school_id, status='approved').order_by('-time')[offset:offset + page_size]
+        
         # 获取当前登录用户（如果有的话）
         current_user = getattr(request, 'user', None) if hasattr(request, 'user') else None
-        data = [post.to_dict(user=current_user) for post in posts]
+        
+        # 构造响应数据
+        data = {
+            'posts': [post.to_dict(user=current_user) for post in posts],
+            'pagination': {
+                'page': page,
+                'page_size': page_size,
+                'total': total_posts,
+                'total_pages': math.ceil(total_posts / page_size) if total_posts > 0 else 1,
+                'has_next': page < math.ceil(total_posts / page_size) if total_posts > 0 else False,
+                'has_prev': page > 1
+            }
+        }
+        
         return JsonResponse(data, safe=False)
     except (ValueError, School.DoesNotExist):
         return JsonResponse({"error": "无效的学校ID"}, status=400)
+
+# 搜索帖子
+def search_posts(request):
+    """搜索帖子API"""
+    # 获取搜索参数
+    query = request.GET.get('q', '').strip()
+    school_id = request.GET.get('school_id')
+    
+    if not query:
+        return JsonResponse({"error": "搜索关键词不能为空"}, status=400)
+    
+    if not school_id:
+        return JsonResponse({"error": "需要提供school_id参数"}, status=400)
+    
+    try:
+        school_id = int(school_id)
+        start_time = time.time()
+        
+        # 获取分页参数
+        page = int(request.GET.get('page', 1))
+        page_size = int(request.GET.get('page_size', 10))
+        
+        # 验证参数
+        if page < 1:
+            page = 1
+        if page_size < 1 or page_size > 100:
+            page_size = 10
+        
+        # 计算偏移量
+        offset = (page - 1) * page_size
+        
+        # 处理搜索关键词（支持多关键词）
+        keywords = [keyword.strip() for keyword in query.split() if keyword.strip()]
+        
+        # 构建搜索查询
+        search_query = Q()
+        
+        # 为每个关键词构建查询条件
+        for keyword in keywords:
+            keyword_query = (
+                Q(title__icontains=keyword) |
+                Q(content__icontains=keyword) |
+                Q(author__icontains=keyword)
+            )
+            search_query &= keyword_query  # AND逻辑：所有关键词都必须匹配
+        
+        # 基础查询：限制学校和状态
+        base_query = Post.objects.filter(
+            school_id=school_id,
+            status='approved'
+        )
+        
+        # 添加搜索条件
+        posts_query = base_query.filter(search_query)
+        
+        # 计算相关性评分并排序
+        posts_query = posts_query.annotate(
+            relevance_score=Case(
+                # 标题匹配得分最高
+                *[When(title__icontains=keyword, then=10) for keyword in keywords],
+                # 内容匹配得分中等
+                *[When(content__icontains=keyword, then=5) for keyword in keywords],
+                # 作者匹配得分较低
+                *[When(author__icontains=keyword, then=3) for keyword in keywords],
+                default=0,
+                output_field=IntegerField()
+            )
+        ).order_by('-relevance_score', '-time')
+        
+        # 获取总数
+        total_posts = posts_query.count()
+        
+        # 获取当前页的帖子
+        posts = posts_query[offset:offset + page_size]
+        
+        # 获取当前登录用户
+        current_user = getattr(request, 'user', None) if hasattr(request, 'user') else None
+        
+        # 计算搜索用时
+        search_time = time.time() - start_time
+        
+        # 构造响应数据
+        data = {
+            'posts': [post.to_dict(user=current_user) for post in posts],
+            'pagination': {
+                'page': page,
+                'page_size': page_size,
+                'total': total_posts,
+                'total_pages': math.ceil(total_posts / page_size) if total_posts > 0 else 1,
+                'has_next': page < math.ceil(total_posts / page_size) if total_posts > 0 else False,
+                'has_prev': page > 1
+            },
+            'search_info': {
+                'query': query,
+                'keywords': keywords,
+                'total_found': total_posts,
+                'search_time': f"{search_time:.3f}s",
+                'highlight_fields': ['title', 'content', 'author']
+            }
+        }
+        
+        return JsonResponse(data, safe=False)
+        
+    except (ValueError, School.DoesNotExist) as e:
+        return JsonResponse({"error": f"参数错误: {str(e)}"}, status=400)
+    except Exception as e:
+        return JsonResponse({"error": f"搜索失败: {str(e)}"}, status=500)
 
 # 管理员获取待审核帖子
 @csrf_exempt
@@ -327,6 +468,118 @@ def create_post_html(post):
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             line-height: 1.6;
             white-space: pre-wrap;
+            margin-bottom: 20px;
+        }
+        
+        .interaction-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .post-actions {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+        
+        .action-group {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 12px;
+            border: none;
+            background: #f5f5f5;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        
+        .action-btn:hover {
+            background: #e6e6e6;
+        }
+        
+        .action-btn.liked {
+            background: #f39c12;
+            color: white;
+        }
+        
+        .action-btn.liked:hover {
+            background: #e67e22;
+        }
+        
+        .comments-section {
+            margin-top: 20px;
+        }
+        
+        .comment-form {
+            margin-bottom: 20px;
+        }
+        
+        .comment-item {
+            background: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .comment-author {
+            font-weight: bold;
+            color: #409EFF;
+        }
+        
+        .comment-time {
+            color: #999;
+            font-size: 12px;
+        }
+        
+        .comment-content {
+            line-height: 1.5;
+            color: #333;
+        }
+        
+        .comment-reply {
+            margin-left: 20px;
+            margin-top: 10px;
+            border-left: 3px solid #409EFF;
+            padding-left: 15px;
+        }
+        
+        .login-tip {
+            text-align: center;
+            padding: 20px;
+            background: #f0f9ff;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .login-tip a {
+            color: #409EFF;
+            text-decoration: none;
+        }
+        
+        .login-tip a:hover {
+            text-decoration: underline;
         }
         
         .back-button {
@@ -350,7 +603,7 @@ def create_post_html(post):
     </style>
 </head>
 <body>
-    <div class="container">
+    <div id="app" class="container">
         <div class="post-header">
             <div class="post-title">{{title}}</div>
             <div class="post-meta">
@@ -361,10 +614,286 @@ def create_post_html(post):
         <div class="post-content">
             {{content}}
         </div>
+        
+        <!-- 交互功能区域 -->
+        <div class="interaction-section">
+            <!-- 点赞和评论操作 -->
+            <div class="post-actions">
+                <div class="action-group">
+                    <button 
+                        v-if="isLoggedIn"
+                        class="action-btn" 
+                        :class="{ liked: post.user_liked }"
+                        @click="toggleLike"
+                        :disabled="likeLoading">
+                        <i class="el-icon-star-off" v-if="!post.user_liked"></i>
+                        <i class="el-icon-star-on" v-else></i>
+                        <span>{{ post.user_liked ? '已点赞' : '点赞' }} ({{ post.likes_count || 0 }})</span>
+                    </button>
+                    <div v-else class="action-btn">
+                        <i class="el-icon-star-off"></i>
+                        <span>点赞 ({{ post.likes_count || 0 }})</span>
+                    </div>
+                    
+                    <div class="action-btn">
+                        <i class="el-icon-chat-line-round"></i>
+                        <span>评论 ({{ comments.length }})</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 评论区域 -->
+            <div class="comments-section">
+                <h4 style="margin-bottom: 15px;">评论区</h4>
+                
+                <!-- 登录提示 -->
+                <div v-if="!isLoggedIn" class="login-tip">
+                    <p>请先<a href="/accounts/">登录</a>后再进行评论和点赞</p>
+                </div>
+                
+                <!-- 评论表单 -->
+                <div v-if="isLoggedIn" class="comment-form">
+                    <el-input
+                        type="textarea"
+                        v-model="newComment.content"
+                        placeholder="写下你的评论..."
+                        :rows="3"
+                        maxlength="500"
+                        show-word-limit>
+                    </el-input>
+                    <div style="margin-top: 10px; text-align: right;">
+                        <el-button 
+                            type="primary" 
+                            size="small" 
+                            @click="addComment"
+                            :loading="commentLoading"
+                            :disabled="!newComment.content.trim()">
+                            发表评论
+                        </el-button>
+                    </div>
+                </div>
+                
+                <!-- 评论列表 -->
+                <div v-if="comments.length > 0">
+                    <div v-for="comment in comments" :key="comment.id" class="comment-item">
+                        <div class="comment-header">
+                            <span class="comment-author">{{ comment.username }}</span>
+                            <span class="comment-time">{{ comment.created_at }}</span>
+                        </div>
+                        <div class="comment-content">{{ comment.content }}</div>
+                        
+                        <!-- 回复 -->
+                        <div v-if="comment.replies && comment.replies.length > 0">
+                            <div v-for="reply in comment.replies" :key="reply.id" class="comment-reply">
+                                <div class="comment-header">
+                                    <span class="comment-author">{{ reply.username }}</span>
+                                    <span class="comment-time">{{ reply.created_at }}</span>
+                                </div>
+                                <div class="comment-content">{{ reply.content }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div v-else-if="!commentsLoading" style="text-align: center; color: #999; padding: 20px;">
+                    暂无评论，快来发表第一条评论吧！
+                </div>
+                
+                <div v-if="commentsLoading" style="text-align: center; padding: 20px;">
+                    <i class="el-icon-loading"></i> 加载评论中...
+                </div>
+            </div>
+        </div>
+        
         <div class="back-button">
-            <a href="/accounts/" class="back-link">返回首页</a>
+            <button @click="goBack" class="back-link">返回上页</button>
         </div>
     </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                postId: {{post_id}},
+                post: {
+                    id: {{post_id}},
+                    title: '{{title}}',
+                    author: '{{author}}',
+                    content: '{{content}}',
+                    time: '{{time}}',
+                    likes_count: 0,
+                    user_liked: false
+                },
+                comments: [],
+                newComment: {
+                    content: '',
+                    parent_id: null
+                },
+                isLoggedIn: false,
+                currentUser: null,
+                likeLoading: false,
+                commentLoading: false,
+                commentsLoading: false
+            },
+            mounted() {
+                this.checkLoginStatus();
+                this.loadPostInteractions();
+                this.loadComments();
+            },
+            methods: {
+                checkLoginStatus() {
+                    // 检查用户登录状态
+                    const user = localStorage.getItem('user');
+                    if (user) {
+                        try {
+                            this.currentUser = JSON.parse(user);
+                            this.isLoggedIn = true;
+                        } catch (e) {
+                            console.error('解析用户信息失败:', e);
+                            localStorage.removeItem('user');
+                        }
+                    }
+                },
+                
+                loadPostInteractions() {
+                    // 加载帖子点赞状态
+                    if (this.isLoggedIn) {
+                        axios.get(`/forum/posts/${this.postId}/like-status/`)
+                            .then(response => {
+                                this.post.likes_count = response.data.likes_count;
+                                this.post.user_liked = response.data.user_liked;
+                            })
+                            .catch(error => {
+                                console.error('加载点赞状态失败:', error);
+                            });
+                    } else {
+                        // 未登录用户只获取点赞数
+                        axios.get(`/forum/posts/${this.postId}/`)
+                            .then(response => {
+                                this.post.likes_count = response.data.likes_count || 0;
+                                this.post.user_liked = false;
+                            })
+                            .catch(error => {
+                                console.error('加载帖子信息失败:', error);
+                            });
+                    }
+                },
+                
+                loadComments() {
+                    this.commentsLoading = true;
+                    axios.get(`/forum/posts/${this.postId}/comments/`)
+                        .then(response => {
+                            this.comments = response.data.comments || [];
+                            this.commentsLoading = false;
+                        })
+                        .catch(error => {
+                            console.error('加载评论失败:', error);
+                            this.commentsLoading = false;
+                            this.$message.error('加载评论失败');
+                        });
+                },
+                
+                toggleLike() {
+                    if (!this.isLoggedIn) {
+                        this.$message.warning('请先登录');
+                        return;
+                    }
+                    
+                    this.likeLoading = true;
+                    
+                    axios.post(`/forum/posts/${this.postId}/like/`)
+                        .then(response => {
+                            if (response.data.success) {
+                                this.post.user_liked = response.data.user_liked;
+                                this.post.likes_count = response.data.likes_count;
+                                this.$message.success(response.data.message);
+                            }
+                            this.likeLoading = false;
+                        })
+                        .catch(error => {
+                            console.error('点赞操作失败:', error);
+                            this.$message.error('操作失败，请重试');
+                            this.likeLoading = false;
+                        });
+                },
+                
+                addComment() {
+                    if (!this.isLoggedIn) {
+                        this.$message.warning('请先登录');
+                        return;
+                    }
+                    
+                    if (!this.newComment.content.trim()) {
+                        this.$message.warning('请输入评论内容');
+                        return;
+                    }
+                    
+                    this.commentLoading = true;
+                    
+                    const commentData = {
+                        content: this.newComment.content.trim(),
+                        parent_id: this.newComment.parent_id
+                    };
+                    
+                    axios.post(`/forum/posts/${this.postId}/comments/create/`, commentData)
+                        .then(response => {
+                            if (response.data.success) {
+                                this.$message.success('评论发表成功');
+                                this.newComment.content = '';
+                                this.newComment.parent_id = null;
+                                this.loadComments(); // 重新加载评论列表
+                            }
+                            this.commentLoading = false;
+                        })
+                        .catch(error => {
+                            console.error('发表评论失败:', error);
+                            const errorMsg = error.response?.data?.error || '发表评论失败';
+                            this.$message.error(errorMsg);
+                            this.commentLoading = false;
+                        });
+                },
+                
+                goBack() {
+                    // 智能返回功能
+                    try {
+                        // 检查是否有可用的历史记录
+                        if (window.history.length > 1 && document.referrer) {
+                            // 检查来源是否为本站
+                            const referrer = new URL(document.referrer);
+                            const currentHost = window.location.host;
+                            
+                            if (referrer.host === currentHost) {
+                                // 来源是本站，使用history.back()
+                                window.history.back();
+                                return;
+                            }
+                        }
+                        
+                        // Fallback：跳转到论坛tab
+                        this.goToForumTab();
+                        
+                    } catch (error) {
+                        console.error('返回操作失败:', error);
+                        // 出错时的fallback
+                        this.goToForumTab();
+                    }
+                },
+                
+                goToForumTab() {
+                    // 跳转到论坛tab的方法
+                    const url = '/accounts/';
+                    
+                    // 检查用户上次使用的tab，优先返回到论坛，其次是用户上次的tab
+                    const lastTab = localStorage.getItem('lastActiveTab');
+                    const targetTab = 'forum'; // 默认返回论坛，因为用户是从帖子详情返回的
+                    
+                    // 使用localStorage来标记要显示的tab
+                    localStorage.setItem('activeTab', targetTab);
+                    window.location.href = url;
+                }
+            }
+        });
+    </script>
 </body>
 </html>
         """
@@ -373,10 +902,10 @@ def create_post_html(post):
     html_content = template_content.replace('{{title}}', post.title)
     html_content = html_content.replace('{{author}}', post.author)
     html_content = html_content.replace('{{time}}', post.time.strftime('%Y-%m-%d %H:%M'))
+    html_content = html_content.replace('{{post_id}}', str(post.id))
     
-    # 替换内容时保留换行
-    content_with_breaks = post.content.replace('\n', '<br>')
-    html_content = html_content.replace('{{content}}', content_with_breaks)
+    # 替换内容时保留换行，但保持原有格式
+    html_content = html_content.replace('{{content}}', post.content)
     
     try:
         # 写入HTML文件
