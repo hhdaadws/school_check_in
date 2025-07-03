@@ -20,7 +20,7 @@ TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverif
 
 # 验证Cloudflare Turnstile令牌
 def verify_turnstile(token, remote_ip=None):
-    # 开发环境中自动通过验证
+    #  开发环境中自动通过验证
     if getattr(settings, 'DEV_ENVIRONMENT', False):
         print("[开发环境] 人机验证自动通过")
         return True
