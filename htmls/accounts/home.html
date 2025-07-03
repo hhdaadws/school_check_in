@@ -1778,7 +1778,7 @@
             
             <!-- 完成弹窗 -->
             <el-dialog 
-                :title="completionType === 'study' ? '学习完成' : '运动完成'" 
+                :title="completionType === 'study' ? '学习完成' : completionType === 'sport' ? '运动完成' : completionType === 'manual' ? '打卡完成' : '任务完成'" 
                 :visible.sync="completionDialogVisible"
                 width="90%"
                 :close-on-click-modal="false">
@@ -1811,13 +1811,44 @@
                     </div>
                 </div>
                 
+                <!-- 计时任务完成 (timer类型) -->
+                <div v-else-if="completionType === 'timer' && completionData">
+                    <div style="text-align: center; padding: 20px;">
+                        <i class="el-icon-circle-check" style="font-size: 60px; color: #67C23A;"></i>
+                        <h2 style="margin: 20px 0;">{{ completionData.title }}</h2>
+                        <div style="font-size: 18px; margin: 10px 0;">
+                            完成时长：{{ formatStudyTime(completionData.duration) }}
+                        </div>
+                        <div v-if="completionData.targetDuration > 0" style="color: #999;">
+                            目标时长：{{ completionData.targetDuration }}分钟
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 手动打卡完成 -->
+                <div v-else-if="completionType === 'manual' && completionData">
+                    <div style="text-align: center; padding: 20px;">
+                        <i class="el-icon-circle-check" style="font-size: 60px; color: #67C23A;"></i>
+                        <h2 style="margin: 20px 0;">{{ completionData.title }}</h2>
+                        <div style="font-size: 18px; margin: 10px 0; color: #67C23A;">
+                            ✅ 打卡成功！
+                        </div>
+                        <div style="color: #999; margin: 10px 0;">
+                            {{ new Date().toLocaleString() }}
+                        </div>
+                        <div style="color: #409EFF; margin: 15px 0; font-size: 14px;">
+                            💡 可以分享到社区，让大家看到你的坚持！
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- 分享选项 -->
                 <div style="margin-top: 20px;">
                     <el-divider>分享到社区</el-divider>
                     <el-input 
                         type="textarea" 
                         v-model="shareNotes" 
-                        placeholder="写下你的感想..."
+                        :placeholder="completionType === 'manual' ? '分享你的打卡心得...' : '写下你的感想...'"
                         :rows="3"
                         maxlength="200"
                         show-word-limit>
@@ -2134,6 +2165,13 @@
                                     this.checkins[index].today_checkin_id = response.data.checkin_record.id;
                                     this.$message.success('打卡成功！');
                                 }
+                                
+                                // 显示完成弹窗，提供分享选项
+                                this.showCompletionDialog('manual', {
+                                    title: checkin.title,
+                                    duration: 0,
+                                    type: 'manual'
+                                }, response.data.checkin_record.id, checkin);
                                 
                                 // 刷新社区动态
                                 this.refreshCommunity();
@@ -2844,7 +2882,7 @@
                         this.completionDialogVisible = true;
                         
                         // 状态清理已经在stopStudyTimer/stopSportTracking中完成
-                        console.log('显示完成弹窗，记录ID:', checkinRecordId);
+                        console.log('显示完成弹窗 - 类型:', type, '记录ID:', checkinRecordId, '数据:', data);
                     },
                     
 
@@ -2863,18 +2901,24 @@
                             notes: notes
                         })
                         .then(response => {
-                            this.$message.success('已分享到社区！');
+                            // 根据分享类型显示不同的成功提示
+                            if (this.completionType === 'manual') {
+                                this.$message.success('打卡动态已分享到社区！');
+                            } else {
+                                this.$message.success('已分享到社区！');
+                            }
+                            
                             this.completionDialogVisible = false;
                             this.shareNotes = '';
                             
-                            // 确保清理所有可能的计时器状态
+                            // 确保清理所有可能的计时器状态（仅对计时任务有效）
                             if (this.currentCheckinRecordId) {
                                 // 遍历所有checkins，清理匹配的任务状态
                                 this.checkins.forEach((checkin, index) => {
                                     if (checkin.today_checkin_id === this.currentCheckinRecordId || 
                                         (checkin.today_checkin_data && checkin.today_checkin_data.id === this.currentCheckinRecordId)) {
                                         
-                                        // 清理计时器
+                                        // 清理计时器（仅对计时任务）
                                         if (this.studyTimers && this.studyTimers[checkin.id]) {
                                             const timer = this.studyTimers[checkin.id];
                                             if (timer.interval) {
@@ -2891,8 +2935,10 @@
                                         // 使用Vue.set更新数组元素
                                         this.$set(this.checkins, index, cleanCheckin);
                                         
-                                        // 清理localStorage中的进度
-                                        this.removeStudyProgress(checkin.id);
+                                        // 清理localStorage中的进度（仅对计时任务）
+                                        if (this.completionType !== 'manual') {
+                                            this.removeStudyProgress(checkin.id);
+                                        }
                                     }
                                 });
                             }
@@ -3226,7 +3272,10 @@
                                 this.posts = responseData;
                             }
                             
-                            this.userPosts = userPostsResponse.data;
+                            // 修复用户帖子数据格式不匹配问题
+                            // 支持新格式 {posts: [...], pagination: {...}} 和旧格式 [...]
+                            this.userPosts = userPostsResponse.data.posts || userPostsResponse.data || [];
+                            console.log('用户帖子数据:', this.userPosts.length, '条帖子');
                             
                             setTimeout(() => {
                                 this.loading = false;
@@ -3675,15 +3724,20 @@
                         this.userPostsLoading = true;
                         axios.get(`/forum/posts/user/?page=${page}&page_size=${this.userPostsPagination.pageSize}`)
                             .then(response => {
-                                this.userPosts = response.data.posts || [];
-                                this.userPostsPagination = {
-                                    ...this.userPostsPagination,
-                                    page: response.data.pagination.page,
-                                    total: response.data.pagination.total,
-                                    totalPages: response.data.pagination.total_pages,
-                                    hasNext: response.data.pagination.has_next,
-                                    hasPrev: response.data.pagination.has_prev
-                                };
+                                // 修复数据格式兼容性问题
+                                this.userPosts = response.data.posts || response.data || [];
+                                
+                                // 处理分页信息（如果存在）
+                                if (response.data.pagination) {
+                                    this.userPostsPagination = {
+                                        ...this.userPostsPagination,
+                                        page: response.data.pagination.page,
+                                        total: response.data.pagination.total,
+                                        totalPages: response.data.pagination.total_pages,
+                                        hasNext: response.data.pagination.has_next,
+                                        hasPrev: response.data.pagination.has_prev
+                                    };
+                                }
                                 this.userPostsLoading = false;
                             })
                             .catch(error => {

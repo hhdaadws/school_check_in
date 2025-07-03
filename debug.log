@@ -1,0 +1,200 @@
+INFO 2025-07-03 18:34:17,052 autoreload Watching for file changes with StatReloader
+ERROR 2025-07-03 18:34:29,319 log Internal Server Error: /checkin/checkins/10/study/update/
+ERROR 2025-07-03 18:34:29,320 basehttp "POST /checkin/checkins/10/study/update/ HTTP/1.1" 500 83
+ERROR 2025-07-03 18:34:29,320 log Internal Server Error: /checkin/checkins/10/study/update/
+ERROR 2025-07-03 18:34:29,321 log Internal Server Error: /checkin/checkins/10/study/update/
+ERROR 2025-07-03 18:34:29,322 basehttp "POST /checkin/checkins/10/study/update/ HTTP/1.1" 500 83
+ERROR 2025-07-03 18:34:29,322 log Internal Server Error: /checkin/checkins/10/study/update/
+ERROR 2025-07-03 18:34:29,322 basehttp "POST /checkin/checkins/10/study/update/ HTTP/1.1" 500 83
+ERROR 2025-07-03 18:34:29,324 basehttp "POST /checkin/checkins/10/study/update/ HTTP/1.1" 500 83
+ERROR 2025-07-03 18:34:29,338 log Internal Server Error: /checkin/checkins/10/study/update/
+ERROR 2025-07-03 18:34:29,338 basehttp "POST /checkin/checkins/10/study/update/ HTTP/1.1" 500 83
+ERROR 2025-07-03 18:34:57,131 log Internal Server Error: /checkin/checkins/
+Traceback (most recent call last):
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\backends\sqlite3\base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: checkin_checkin.target_duration
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Github\Arx\accounts\decorators.py", line 31, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Github\Arx\checkin\views.py", line 32, in get_checkins
+    for checkin in user_created_checkins:
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\models\query.py", line 400, in __iter__
+    self._fetch_all()
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\models\query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\models\sql\compiler.py", line 1574, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\db\backends\sqlite3\base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: checkin_checkin.target_duration
+ERROR 2025-07-03 18:34:57,137 basehttp "GET /checkin/checkins/ HTTP/1.1" 500 145491
+ERROR 2025-07-03 18:34:58,594 log Internal Server Error: /checkin/checkins/10/study/update/
+ERROR 2025-07-03 18:34:58,595 basehttp "POST /checkin/checkins/10/study/update/ HTTP/1.1" 500 83
+ERROR 2025-07-03 18:34:58,674 log Internal Server Error: /checkin/checkins/10/study/update/
+ERROR 2025-07-03 18:34:58,674 basehttp "POST /checkin/checkins/10/study/update/ HTTP/1.1" 500 83
+ERROR 2025-07-03 18:34:58,706 log Internal Server Error: /checkin/checkins/10/study/update/
+ERROR 2025-07-03 18:34:58,707 basehttp "POST /checkin/checkins/10/study/update/ HTTP/1.1" 500 83
+ERROR 2025-07-03 18:34:58,905 log Internal Server Error: /checkin/checkins/10/study/update/
+ERROR 2025-07-03 18:34:58,906 basehttp "POST /checkin/checkins/10/study/update/ HTTP/1.1" 500 83
+ERROR 2025-07-03 18:34:59,080 log Internal Server Error: /checkin/checkins/10/study/update/
+ERROR 2025-07-03 18:34:59,081 basehttp "POST /checkin/checkins/10/study/update/ HTTP/1.1" 500 83
+ERROR 2025-07-03 18:35:14,381 log Internal Server Error: /checkin/checkins/create/
+ERROR 2025-07-03 18:35:14,382 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 500 96
+ERROR 2025-07-03 18:35:15,879 log Internal Server Error: /checkin/checkins/create/
+ERROR 2025-07-03 18:35:15,880 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 500 96
+ERROR 2025-07-03 18:35:16,062 log Internal Server Error: /checkin/checkins/create/
+ERROR 2025-07-03 18:35:16,063 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 500 96
+ERROR 2025-07-03 18:35:16,252 log Internal Server Error: /checkin/checkins/create/
+ERROR 2025-07-03 18:35:16,254 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 500 96
+ERROR 2025-07-03 18:35:16,440 log Internal Server Error: /checkin/checkins/create/
+ERROR 2025-07-03 18:35:16,441 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 500 96
+ERROR 2025-07-03 18:35:16,621 log Internal Server Error: /checkin/checkins/create/
+ERROR 2025-07-03 18:35:16,622 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 500 96
+ERROR 2025-07-03 18:35:16,825 log Internal Server Error: /checkin/checkins/create/
+ERROR 2025-07-03 18:35:16,829 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 500 96
+ERROR 2025-07-03 18:35:17,000 log Internal Server Error: /checkin/checkins/create/
+ERROR 2025-07-03 18:35:17,001 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 500 96
+ERROR 2025-07-03 18:35:17,208 log Internal Server Error: /checkin/checkins/create/
+ERROR 2025-07-03 18:35:17,209 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 500 96
+ERROR 2025-07-03 18:35:17,384 log Internal Server Error: /checkin/checkins/create/
+ERROR 2025-07-03 18:35:17,385 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 500 96
+ERROR 2025-07-03 18:35:17,565 log Internal Server Error: /checkin/checkins/create/
+ERROR 2025-07-03 18:35:17,566 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 500 96
+WARNING 2025-07-03 18:35:29,327 log Not Found: /checkin/checkins/10/study/update/
+WARNING 2025-07-03 18:35:29,330 log Not Found: /checkin/checkins/10/study/update/
+WARNING 2025-07-03 18:35:29,331 basehttp "POST /checkin/checkins/10/study/update/ HTTP/1.1" 404 55
+WARNING 2025-07-03 18:35:29,331 log Not Found: /checkin/checkins/10/study/update/
+WARNING 2025-07-03 18:35:29,332 log Not Found: /checkin/checkins/10/study/update/
+WARNING 2025-07-03 18:35:29,332 basehttp "POST /checkin/checkins/10/study/update/ HTTP/1.1" 404 55
+WARNING 2025-07-03 18:35:29,333 basehttp "POST /checkin/checkins/10/study/update/ HTTP/1.1" 404 55
+WARNING 2025-07-03 18:35:29,333 basehttp "POST /checkin/checkins/10/study/update/ HTTP/1.1" 404 55
+WARNING 2025-07-03 18:35:29,341 log Not Found: /checkin/checkins/10/study/update/
+WARNING 2025-07-03 18:35:29,342 basehttp "POST /checkin/checkins/10/study/update/ HTTP/1.1" 404 55
+INFO 2025-07-03 18:35:33,395 basehttp "GET /accounts/ HTTP/1.1" 200 180051
+INFO 2025-07-03 18:35:33,947 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-07-03 18:35:33,948 basehttp "GET /checkin/community/ HTTP/1.1" 200 128
+INFO 2025-07-03 18:35:33,948 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 18:35:33,949 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 282
+INFO 2025-07-03 18:35:33,961 basehttp "GET /checkin/community/ HTTP/1.1" 200 128
+INFO 2025-07-03 18:35:33,963 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 282
+INFO 2025-07-03 18:35:36,391 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 3797
+INFO 2025-07-03 18:35:36,398 basehttp "GET /forum/posts/user/?page=1&page_size=10 HTTP/1.1" 200 3797
+INFO 2025-07-03 18:35:36,402 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=10 HTTP/1.1" 200 3797
+INFO 2025-07-03 18:35:46,604 basehttp "GET /forum/posts/?school_id=1&page=3&page_size=10 HTTP/1.1" 200 1266
+INFO 2025-07-03 18:35:46,633 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 3797
+INFO 2025-07-03 18:35:48,978 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 3797
+INFO 2025-07-03 18:35:48,988 basehttp "GET /forum/posts/?school_id=1&page=2&page_size=10 HTTP/1.1" 200 2994
+INFO 2025-07-03 18:35:50,234 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=10 HTTP/1.1" 200 3797
+INFO 2025-07-03 18:35:50,238 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 3797
+INFO 2025-07-03 18:35:52,716 basehttp "GET /forum/posts/user/?page=2&page_size=10 HTTP/1.1" 200 2994
+INFO 2025-07-03 18:35:55,012 basehttp "GET /forum/posts/user/?page=3&page_size=10 HTTP/1.1" 200 1577
+INFO 2025-07-03 18:35:59,068 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 282
+INFO 2025-07-03 18:36:04,213 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 342
+INFO 2025-07-03 18:36:05,430 basehttp "POST /checkin/checkins/10/check/ HTTP/1.1" 200 300
+INFO 2025-07-03 18:36:05,444 basehttp "GET /checkin/community/?page=1&page_size=10 HTTP/1.1" 200 128
+INFO 2025-07-03 18:36:07,342 basehttp "GET /checkin/community/?page=1&page_size=10 HTTP/1.1" 200 128
+INFO 2025-07-03 18:36:08,070 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 767
+INFO 2025-07-03 18:36:16,247 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 342
+INFO 2025-07-03 18:36:18,426 basehttp "POST /checkin/checkins/11/check/ HTTP/1.1" 200 318
+INFO 2025-07-03 18:36:18,438 basehttp "GET /checkin/community/?page=1&page_size=10 HTTP/1.1" 200 128
+INFO 2025-07-03 18:36:49,331 basehttp "POST /checkin/checkins/11/study/update/ HTTP/1.1" 200 313
+INFO 2025-07-03 18:37:05,767 basehttp "GET /forum/posts/user/?page=1&page_size=10 HTTP/1.1" 200 3797
+INFO 2025-07-03 18:37:05,767 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=10 HTTP/1.1" 200 3797
+INFO 2025-07-03 18:37:05,787 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 3797
+INFO 2025-07-03 18:37:06,636 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1574
+INFO 2025-07-03 18:37:18,448 basehttp "POST /checkin/checkins/11/study/update/ HTTP/1.1" 200 313
+INFO 2025-07-03 18:37:18,642 basehttp "POST /checkin/checkins/11/study/update/ HTTP/1.1" 200 313
+INFO 2025-07-03 18:37:20,226 basehttp "POST /checkin/checkins/11/study/update/ HTTP/1.1" 200 330
+INFO 2025-07-03 18:37:25,561 basehttp "POST /checkin/checkins/records/10/share/ HTTP/1.1" 200 340
+INFO 2025-07-03 18:37:25,682 basehttp "GET /checkin/community/?page=1&page_size=10 HTTP/1.1" 200 386
+INFO 2025-07-03 18:37:25,688 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1293
+INFO 2025-07-03 18:37:34,438 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 356
+INFO 2025-07-03 18:37:37,021 basehttp "POST /checkin/checkins/12/check/ HTTP/1.1" 200 332
+INFO 2025-07-03 18:37:37,034 basehttp "GET /checkin/community/?page=1&page_size=10 HTTP/1.1" 200 386
+INFO 2025-07-03 18:37:38,171 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=10 HTTP/1.1" 200 3797
+INFO 2025-07-03 18:37:38,176 basehttp "GET /forum/posts/user/?page=1&page_size=10 HTTP/1.1" 200 3797
+INFO 2025-07-03 18:37:38,184 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 3797
+INFO 2025-07-03 18:37:38,557 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2140
+INFO 2025-07-03 18:37:47,316 basehttp "GET /accounts/ HTTP/1.1" 200 180051
+INFO 2025-07-03 18:37:47,849 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-07-03 18:37:47,851 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 18:37:47,857 basehttp "GET /checkin/community/ HTTP/1.1" 200 386
+INFO 2025-07-03 18:37:47,872 basehttp "GET /checkin/community/ HTTP/1.1" 200 386
+INFO 2025-07-03 18:37:47,872 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2141
+INFO 2025-07-03 18:37:47,888 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2141
+INFO 2025-07-03 18:38:07,345 basehttp "POST /checkin/checkins/12/study/update/ HTTP/1.1" 200 327
+INFO 2025-07-03 18:38:28,673 basehttp "GET /checkin/community/?page=1&page_size=10 HTTP/1.1" 200 386
+INFO 2025-07-03 18:38:30,685 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2142
+INFO 2025-07-03 18:38:37,353 basehttp "POST /checkin/checkins/12/study/update/ HTTP/1.1" 200 327
+INFO 2025-07-03 18:38:53,830 basehttp "POST /checkin/checkins/12/study/update/ HTTP/1.1" 200 344
+INFO 2025-07-03 18:38:57,517 basehttp "POST /checkin/checkins/records/11/share/ HTTP/1.1" 200 354
+INFO 2025-07-03 18:38:57,642 basehttp "GET /checkin/community/?page=1&page_size=10 HTTP/1.1" 200 660
+INFO 2025-07-03 18:38:57,650 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1847
+INFO 2025-07-03 18:39:03,508 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=10 HTTP/1.1" 200 3797
+INFO 2025-07-03 18:39:03,514 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 3797
+INFO 2025-07-03 18:39:03,539 basehttp "GET /forum/posts/user/?page=1&page_size=10 HTTP/1.1" 200 3797
+INFO 2025-07-03 18:39:04,338 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1847
+INFO 2025-07-03 18:39:11,024 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 350
+INFO 2025-07-03 18:39:12,311 basehttp "POST /checkin/checkins/13/check/ HTTP/1.1" 200 309
+INFO 2025-07-03 18:39:12,326 basehttp "GET /checkin/community/?page=1&page_size=10 HTTP/1.1" 200 660
+INFO 2025-07-03 18:46:06,189 basehttp "GET /accounts/ HTTP/1.1" 200 183035
+INFO 2025-07-03 18:46:06,729 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-07-03 18:46:06,733 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 18:46:06,739 basehttp "GET /checkin/community/ HTTP/1.1" 200 660
+INFO 2025-07-03 18:46:06,749 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2350
+INFO 2025-07-03 18:46:06,752 basehttp "GET /checkin/community/ HTTP/1.1" 200 660
+INFO 2025-07-03 18:46:06,762 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2350
+INFO 2025-07-03 18:46:15,713 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 342
+INFO 2025-07-03 18:46:16,625 basehttp "POST /checkin/checkins/14/check/ HTTP/1.1" 200 301
+INFO 2025-07-03 18:46:16,661 basehttp "GET /checkin/community/?page=1&page_size=10 HTTP/1.1" 200 660
+INFO 2025-07-03 18:46:24,069 basehttp "POST /checkin/checkins/records/13/share/ HTTP/1.1" 200 305
+INFO 2025-07-03 18:46:24,195 basehttp "GET /checkin/community/?page=1&page_size=10 HTTP/1.1" 200 885
+INFO 2025-07-03 18:46:24,209 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2841
+INFO 2025-07-03 18:46:29,675 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 342
+INFO 2025-07-03 18:46:31,794 basehttp "POST /checkin/checkins/15/check/ HTTP/1.1" 200 318
+INFO 2025-07-03 18:46:31,808 basehttp "GET /checkin/community/?page=1&page_size=10 HTTP/1.1" 200 885
+INFO 2025-07-03 18:47:02,353 basehttp "POST /checkin/checkins/15/study/update/ HTTP/1.1" 200 313
+INFO 2025-07-03 18:47:31,836 basehttp "POST /checkin/checkins/15/study/update/ HTTP/1.1" 200 313
+INFO 2025-07-03 18:47:34,968 basehttp "POST /checkin/checkins/15/study/update/ HTTP/1.1" 200 330
+INFO 2025-07-03 18:47:40,451 basehttp "POST /checkin/checkins/records/14/share/ HTTP/1.1" 200 341
+INFO 2025-07-03 18:47:40,578 basehttp "GET /checkin/community/?page=1&page_size=10 HTTP/1.1" 200 1146
+INFO 2025-07-03 18:47:40,588 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3368
+INFO 2025-07-03 18:47:41,685 basehttp "GET /checkin/community/?page=1&page_size=10 HTTP/1.1" 200 1146
