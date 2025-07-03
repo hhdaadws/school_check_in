@@ -5,6 +5,7 @@ urlpatterns = [
     # API 路由
     path('api/schools/', views.get_schools, name='get_schools'),
     path('posts/', views.get_posts, name='get_posts'),
+    path('posts/search/', views.search_posts, name='search_posts'),
     path('posts/create/', views.create_post, name='create_post'),
     path('posts/user/', views.get_user_posts, name='get_user_posts'),
     path('posts/<int:post_id>/', views.get_post_detail, name='get_post_detail'),
