@@ -101,3 +101,107 @@ def chat_history(request, room_name):
         return HttpResponse(data, content_type='application/json')
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
+
+@login_required
+@csrf_exempt
+def clear_chat_messages(request, room_name):
+    """
+    清除聊天室消息
+    支持两种模式：
+    1. 管理员可以清空整个聊天室
+    2. 普通用户可以删除自己的消息
+    """
+    if request.method != 'POST':
+        return JsonResponse({'error': '只支持POST请求'}, status=405)
+    
+    try:
+        # 获取请求参数
+        data = json.loads(request.body)
+        clear_type = data.get('type', 'own')  # 'all' 或 'own'
+        
+        # 检查用户权限
+        is_admin = getattr(request.user, 'is_staff', False)
+        
+        if clear_type == 'all':
+            # 清空整个聊天室（仅管理员）
+            if not is_admin:
+                return JsonResponse({'error': '权限不足，只有管理员可以清空聊天室'}, status=403)
+            
+            # 删除指定聊天室的所有消息
+            deleted_count = ChatMessage.objects.filter(room_name=room_name).count()
+            ChatMessage.objects.filter(room_name=room_name).delete()
+            
+            return JsonResponse({
+                'success': True,
+                'message': f'已清空聊天室，删除了 {deleted_count} 条消息',
+                'deleted_count': deleted_count,
+                'type': 'all'
+            })
+            
+        elif clear_type == 'own':
+            # 删除用户自己的消息
+            deleted_count = ChatMessage.objects.filter(
+                room_name=room_name,
+                sender=request.user
+            ).count()
+            
+            ChatMessage.objects.filter(
+                room_name=room_name,
+                sender=request.user
+            ).delete()
+            
+            return JsonResponse({
+                'success': True,
+                'message': f'已删除您的 {deleted_count} 条消息',
+                'deleted_count': deleted_count,
+                'type': 'own'
+            })
+        else:
+            return JsonResponse({'error': '无效的清除类型'}, status=400)
+            
+    except json.JSONDecodeError:
+        return JsonResponse({'error': '无效的JSON数据'}, status=400)
+    except Exception as e:
+        return JsonResponse({'error': f'清除失败: {str(e)}'}, status=500)
+
+@login_required
+@csrf_exempt
+def send_message(request, room_name):
+    """
+    发送聊天消息到数据库
+    """
+    if request.method != 'POST':
+        return JsonResponse({'error': '只支持POST请求'}, status=405)
+    
+    try:
+        # 获取请求参数
+        data = json.loads(request.body)
+        content = data.get('content', '').strip()
+        
+        if not content:
+            return JsonResponse({'error': '消息内容不能为空'}, status=400)
+        
+        # 创建消息记录
+        message = ChatMessage.objects.create(
+            room_name=room_name,
+            sender=request.user,
+            content=content,
+            timestamp=timezone.now()
+        )
+        
+        # 返回保存的消息数据
+        return JsonResponse({
+            'success': True,
+            'message': {
+                'id': message.id,
+                'content': message.content,
+                'sender': message.sender.username,
+                'timestamp': message.timestamp.isoformat(),
+                'isOwn': True
+            }
+        })
+        
+    except json.JSONDecodeError:
+        return JsonResponse({'error': '无效的JSON数据'}, status=400)
+    except Exception as e:
+        return JsonResponse({'error': f'发送消息失败: {str(e)}'}, status=500)

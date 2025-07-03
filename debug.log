@@ -970,3 +970,217 @@ INFO 2025-07-03 10:55:04,698 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 6685
 INFO 2025-07-03 10:55:06,300 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=10 HTTP/1.1" 200 3944
 INFO 2025-07-03 10:55:06,324 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 6685
 INFO 2025-07-03 10:55:09,480 basehttp "GET /forum/posts/search/?q=%E6%B5%8B%E8%AF%95&school_id=1&page=1&page_size=10 HTTP/1.1" 200 1809
+INFO 2025-07-03 11:27:32,922 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 11:27:36,484 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-07-03 11:27:36,491 basehttp "GET /accounts/ HTTP/1.1" 200 150595
+INFO 2025-07-03 11:27:37,296 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-07-03 11:27:37,304 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 11:27:37,312 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 11:27:37,313 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-07-03 11:27:37,313 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
+INFO 2025-07-03 11:27:37,322 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 11:27:37,322 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-07-03 11:27:37,327 basehttp "GET /focus/stats/ HTTP/1.1" 200 336
+INFO 2025-07-03 11:27:37,345 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-07-03 11:27:37,355 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-07-03 11:27:39,907 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-07-03 11:27:41,267 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=10 HTTP/1.1" 200 3944
+INFO 2025-07-03 11:27:41,314 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 6685
+INFO 2025-07-03 11:27:53,643 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-07-03 11:27:54,735 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-07-03 11:27:59,337 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=10 HTTP/1.1" 200 3944
+INFO 2025-07-03 11:27:59,377 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 6685
+ERROR 2025-07-03 11:28:01,518 log Internal Server Error: /chat/room/1/
+Traceback (most recent call last):
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\anaconda\envs\machineL\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Github\Arx\accounts\decorators.py", line 31, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Github\Arx\chat\views.py", line 26, in chat_room
+    html_content = f.read()
+                   ^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
+ERROR 2025-07-03 11:28:01,524 basehttp "GET /chat/room/1/ HTTP/1.1" 500 97307
+INFO 2025-07-03 11:28:51,297 basehttp "GET /forum/posts/search/?q=%E5%8D%93%E5%86%95%E9%92%A7&school_id=1&page=1&page_size=10 HTTP/1.1" 200 304
+INFO 2025-07-03 11:28:53,295 basehttp "GET /forum/posts/search/?q=zmj&school_id=1&page=1&page_size=10 HTTP/1.1" 200 4094
+INFO 2025-07-03 11:29:04,637 basehttp "POST /forum/posts/create/ HTTP/1.1" 200 399
+INFO 2025-07-03 11:29:12,088 basehttp "GET /forum/posts/search/?q=hello&school_id=1&page=1&page_size=10 HTTP/1.1" 200 2316
+INFO 2025-07-03 11:34:07,714 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 11:34:09,016 basehttp "GET /accounts/ HTTP/1.1" 200 150595
+INFO 2025-07-03 11:34:09,797 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-07-03 11:34:09,814 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 11:34:09,815 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 11:34:09,816 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-07-03 11:34:09,820 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
+INFO 2025-07-03 11:34:09,821 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-07-03 11:34:09,826 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 11:34:09,828 basehttp "GET /focus/stats/ HTTP/1.1" 200 336
+INFO 2025-07-03 11:34:09,840 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-07-03 11:34:09,841 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-07-03 11:34:11,481 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=10 HTTP/1.1" 200 3937
+INFO 2025-07-03 11:34:11,506 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 6960
+INFO 2025-07-03 11:34:13,196 basehttp "GET /chat/room/1/ HTTP/1.1" 200 18173
+INFO 2025-07-03 11:34:13,274 basehttp "GET /chat/room/data/1/ HTTP/1.1" 200 94
+INFO 2025-07-03 11:34:13,294 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-07-03 11:34:13,316 basehttp "GET /chat/history/school_1/ HTTP/1.1" 200 2066
+INFO 2025-07-03 11:35:27,055 basehttp "GET /forum/posts/search/?q=hello&school_id=1&page=1&page_size=10 HTTP/1.1" 200 2316
+INFO 2025-07-03 11:35:31,341 basehttp "GET /forum/posts/search/?q=%E5%8D%93%E5%86%95%E9%92%A7&school_id=1&page=1&page_size=10 HTTP/1.1" 200 304
+INFO 2025-07-03 11:35:37,632 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 6960
+INFO 2025-07-03 11:35:37,649 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=20 HTTP/1.1" 200 6773
+INFO 2025-07-03 11:36:42,368 basehttp "GET /chat/room/1/ HTTP/1.1" 200 18173
+INFO 2025-07-03 11:36:43,176 basehttp "GET /chat/room/data/1/ HTTP/1.1" 200 94
+INFO 2025-07-03 11:36:43,190 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-07-03 11:36:43,210 basehttp "GET /chat/history/school_1/ HTTP/1.1" 200 2066
+INFO 2025-07-03 11:37:55,348 basehttp "GET /chat/room/1/ HTTP/1.1" 200 18173
+INFO 2025-07-03 11:37:56,081 basehttp "GET /chat/room/data/1/ HTTP/1.1" 200 94
+INFO 2025-07-03 11:37:56,093 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-07-03 11:37:56,110 basehttp "GET /chat/history/school_1/ HTTP/1.1" 200 2066
+INFO 2025-07-03 11:37:58,489 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-07-03 11:37:59,945 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-07-03 11:38:01,194 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=20 HTTP/1.1" 200 6773
+INFO 2025-07-03 11:38:01,220 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 6960
+INFO 2025-07-03 11:38:05,179 basehttp "GET /post_47.html HTTP/1.1" 200 17810
+INFO 2025-07-03 11:38:05,255 basehttp "GET /forum/posts/47/like-status/ HTTP/1.1" 200 38
+INFO 2025-07-03 11:38:05,262 basehttp "GET /forum/posts/47/comments/ HTTP/1.1" 200 931
+INFO 2025-07-03 11:38:06,569 basehttp "POST /forum/posts/47/like/ HTTP/1.1" 200 128
+INFO 2025-07-03 11:38:08,543 basehttp "POST /forum/posts/47/like/ HTTP/1.1" 200 113
+INFO 2025-07-03 11:38:13,088 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-07-03 11:38:13,991 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=20 HTTP/1.1" 200 6773
+INFO 2025-07-03 11:38:13,993 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 6960
+INFO 2025-07-03 11:40:18,525 basehttp "GET /chat/room/1/ HTTP/1.1" 200 18173
+INFO 2025-07-03 11:40:19,288 basehttp "GET /chat/room/data/1/ HTTP/1.1" 200 94
+INFO 2025-07-03 11:40:19,295 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-07-03 11:40:19,321 basehttp "GET /chat/history/school_1/ HTTP/1.1" 200 2066
+INFO 2025-07-03 11:40:24,242 basehttp "GET /chat/room/1/ HTTP/1.1" 200 18173
+INFO 2025-07-03 11:40:24,320 basehttp "GET /chat/room/data/1/ HTTP/1.1" 200 94
+INFO 2025-07-03 11:40:24,333 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-07-03 11:40:24,358 basehttp "GET /chat/history/school_1/ HTTP/1.1" 200 2066
+INFO 2025-07-03 11:40:28,320 basehttp "GET /chat/room/1/ HTTP/1.1" 200 18173
+INFO 2025-07-03 11:40:28,387 basehttp "GET /chat/room/data/1/ HTTP/1.1" 200 94
+INFO 2025-07-03 11:40:28,394 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-07-03 11:40:28,418 basehttp "GET /chat/history/school_1/ HTTP/1.1" 200 2066
+INFO 2025-07-03 11:41:50,964 autoreload D:\Github\Arx\chat\views.py changed, reloading.
+INFO 2025-07-03 11:41:51,790 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 11:42:03,616 autoreload D:\Github\Arx\chat\urls.py changed, reloading.
+INFO 2025-07-03 11:42:04,420 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 11:42:06,464 autoreload D:\Github\Arx\chat\urls.py changed, reloading.
+INFO 2025-07-03 11:42:07,248 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 11:42:29,982 autoreload D:\Github\Arx\chat\views.py changed, reloading.
+INFO 2025-07-03 11:42:30,792 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 11:42:32,893 autoreload D:\Github\Arx\chat\urls.py changed, reloading.
+INFO 2025-07-03 11:42:33,785 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 11:44:47,100 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 11:44:49,108 basehttp "GET /accounts/ HTTP/1.1" 200 150595
+INFO 2025-07-03 11:44:49,930 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-07-03 11:44:49,947 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 11:44:49,949 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 11:44:49,954 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-07-03 11:44:49,957 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
+INFO 2025-07-03 11:44:49,965 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 11:44:49,966 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-07-03 11:44:49,971 basehttp "GET /focus/stats/ HTTP/1.1" 200 336
+INFO 2025-07-03 11:44:49,979 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-07-03 11:44:49,979 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-07-03 11:44:51,534 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=10 HTTP/1.1" 200 3937
+INFO 2025-07-03 11:44:51,551 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 6960
+INFO 2025-07-03 11:44:52,594 basehttp "GET /chat/room/1/ HTTP/1.1" 200 24358
+INFO 2025-07-03 11:44:52,672 basehttp "GET /chat/room/data/1/ HTTP/1.1" 200 94
+INFO 2025-07-03 11:44:52,691 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-07-03 11:44:52,713 basehttp "GET /chat/history/school_1/ HTTP/1.1" 200 2066
+INFO 2025-07-03 11:45:19,010 basehttp "POST /forum/posts/create/ HTTP/1.1" 200 384
+INFO 2025-07-03 11:45:22,755 basehttp "POST /forum/posts/create/ HTTP/1.1" 200 384
+INFO 2025-07-03 11:45:25,559 basehttp "POST /forum/posts/create/ HTTP/1.1" 200 384
+INFO 2025-07-03 11:45:28,394 basehttp "POST /forum/posts/create/ HTTP/1.1" 200 384
+INFO 2025-07-03 11:45:30,895 basehttp "GET /accounts/ HTTP/1.1" 200 150595
+INFO 2025-07-03 11:45:31,024 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-07-03 11:45:31,026 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 11:45:31,036 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
+INFO 2025-07-03 11:45:31,040 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-07-03 11:45:31,041 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-07-03 11:45:31,044 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 11:45:31,047 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 11:45:31,050 basehttp "GET /focus/stats/ HTTP/1.1" 200 336
+INFO 2025-07-03 11:45:31,082 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-07-03 11:45:31,083 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-07-03 11:45:32,392 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=10 HTTP/1.1" 200 3797
+INFO 2025-07-03 11:45:32,458 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 8000
+INFO 2025-07-03 11:45:35,583 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=20 HTTP/1.1" 200 6669
+INFO 2025-07-03 11:45:35,595 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 8000
+INFO 2025-07-03 11:45:37,778 basehttp "GET /forum/posts/?school_id=1&page=2&page_size=20 HTTP/1.1" 200 1266
+INFO 2025-07-03 11:45:37,870 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 8000
+INFO 2025-07-03 11:49:37,483 basehttp "GET /accounts/ HTTP/1.1" 200 150595
+INFO 2025-07-03 11:49:38,267 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-07-03 11:49:38,272 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 11:49:38,275 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-07-03 11:49:38,280 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 11:49:38,281 basehttp "GET /focus/history/ HTTP/1.1" 200 2334
+INFO 2025-07-03 11:49:38,284 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 11:49:38,286 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-07-03 11:49:38,291 basehttp "GET /focus/stats/ HTTP/1.1" 200 336
+INFO 2025-07-03 11:49:38,296 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-07-03 11:49:38,297 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-07-03 11:49:39,524 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=10 HTTP/1.1" 200 3797
+INFO 2025-07-03 11:49:39,559 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 8000
+INFO 2025-07-03 11:49:40,531 basehttp "GET /chat/room/1/ HTTP/1.1" 200 26147
+INFO 2025-07-03 11:49:40,613 basehttp "GET /chat/room/data/1/ HTTP/1.1" 200 94
+INFO 2025-07-03 11:49:40,626 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-07-03 11:49:40,642 basehttp "GET /chat/history/school_1/ HTTP/1.1" 200 2066
+WARNING 2025-07-03 11:49:53,491 log Forbidden (CSRF token missing.): /chat/clear/school_1/
+WARNING 2025-07-03 11:49:53,493 basehttp "POST /chat/clear/school_1/ HTTP/1.1" 403 2486
+INFO 2025-07-03 11:50:35,167 autoreload D:\Github\Arx\chat\views.py changed, reloading.
+INFO 2025-07-03 11:50:35,203 autoreload D:\Github\Arx\chat\views.py changed, reloading.
+INFO 2025-07-03 11:50:36,044 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 11:50:36,057 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 11:50:48,175 autoreload D:\Github\Arx\chat\views.py changed, reloading.
+INFO 2025-07-03 11:50:48,190 autoreload D:\Github\Arx\chat\views.py changed, reloading.
+INFO 2025-07-03 11:50:49,070 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 11:50:49,082 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 11:51:35,640 basehttp "GET /chat/room/1/ HTTP/1.1" 200 26477
+INFO 2025-07-03 11:51:36,407 basehttp "GET /chat/room/data/1/ HTTP/1.1" 200 94
+INFO 2025-07-03 11:51:36,415 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-07-03 11:51:36,442 basehttp "GET /chat/history/school_1/ HTTP/1.1" 200 2066
+INFO 2025-07-03 11:51:43,523 basehttp "POST /chat/clear/school_1/ HTTP/1.1" 200 118
+INFO 2025-07-03 11:51:43,555 basehttp "GET /chat/history/school_1/ HTTP/1.1" 200 2066
+INFO 2025-07-03 11:53:15,119 autoreload D:\Github\Arx\chat\views.py changed, reloading.
+INFO 2025-07-03 11:53:15,455 autoreload D:\Github\Arx\chat\views.py changed, reloading.
+INFO 2025-07-03 11:53:15,997 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 11:53:16,294 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 11:53:23,892 autoreload D:\Github\Arx\chat\urls.py changed, reloading.
+INFO 2025-07-03 11:53:24,677 autoreload D:\Github\Arx\chat\urls.py changed, reloading.
+INFO 2025-07-03 11:53:24,732 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 11:53:25,519 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 11:53:30,882 autoreload D:\Github\Arx\chat\views.py changed, reloading.
+INFO 2025-07-03 11:53:31,140 autoreload D:\Github\Arx\chat\views.py changed, reloading.
+INFO 2025-07-03 11:53:31,755 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 11:53:32,000 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 11:53:33,907 autoreload D:\Github\Arx\chat\urls.py changed, reloading.
+INFO 2025-07-03 11:53:34,130 autoreload D:\Github\Arx\chat\urls.py changed, reloading.
+INFO 2025-07-03 11:53:34,793 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 11:53:35,002 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 11:54:05,944 basehttp "GET /chat/room/1/ HTTP/1.1" 200 27902
+INFO 2025-07-03 11:54:06,641 basehttp "GET /chat/room/data/1/ HTTP/1.1" 200 94
+INFO 2025-07-03 11:54:06,655 basehttp "GET /accounts/profile/ HTTP/1.1" 200 141
+INFO 2025-07-03 11:54:06,672 basehttp "GET /chat/history/school_1/ HTTP/1.1" 200 2066
+INFO 2025-07-03 11:54:10,060 basehttp "POST /chat/send/school_1/ HTTP/1.1" 200 145
+INFO 2025-07-03 11:54:13,866 basehttp "POST /chat/clear/school_1/ HTTP/1.1" 200 118
+INFO 2025-07-03 11:54:13,883 basehttp "GET /chat/history/school_1/ HTTP/1.1" 200 2066
+INFO 2025-07-03 11:54:18,723 basehttp "POST /chat/send/school_1/ HTTP/1.1" 200 140
+INFO 2025-07-03 11:54:19,721 basehttp "POST /chat/send/school_1/ HTTP/1.1" 200 140
+INFO 2025-07-03 11:54:20,609 basehttp "POST /chat/send/school_1/ HTTP/1.1" 200 140
+INFO 2025-07-03 11:54:21,409 basehttp "POST /chat/send/school_1/ HTTP/1.1" 200 139
+INFO 2025-07-03 11:54:22,471 basehttp "POST /chat/send/school_1/ HTTP/1.1" 200 140
+INFO 2025-07-03 11:54:23,237 basehttp "POST /chat/send/school_1/ HTTP/1.1" 200 139
+INFO 2025-07-03 11:54:25,901 basehttp "POST /chat/clear/school_1/ HTTP/1.1" 200 118
+INFO 2025-07-03 11:54:25,915 basehttp "GET /chat/history/school_1/ HTTP/1.1" 200 2066
+INFO 2025-07-03 11:55:02,102 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
+INFO 2025-07-03 11:55:02,971 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=10 HTTP/1.1" 200 3797
+INFO 2025-07-03 11:55:03,023 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 8000
+INFO 2025-07-03 11:55:03,528 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-07-03 11:55:07,437 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-07-03 11:55:08,364 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 225
