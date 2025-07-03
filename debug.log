@@ -2904,3 +2904,27 @@ INFO 2025-07-03 17:53:11,831 autoreload C:\Users\h1933\Desktop\school_check_in\f
 INFO 2025-07-03 17:53:11,871 autoreload C:\Users\h1933\Desktop\school_check_in\forum\views.py changed, reloading.
 INFO 2025-07-03 17:53:13,088 autoreload Watching for file changes with StatReloader
 INFO 2025-07-03 17:53:13,300 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 17:55:53,538 basehttp "GET /accounts/ HTTP/1.1" 200 179415
+INFO 2025-07-03 17:55:55,155 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 17:55:55,179 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 17:55:55,209 basehttp "GET /checkin/community/ HTTP/1.1" 200 2806
+INFO 2025-07-03 17:55:55,270 basehttp "GET /checkin/community/ HTTP/1.1" 200 2806
+INFO 2025-07-03 17:55:55,270 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9856
+INFO 2025-07-03 17:55:55,346 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9856
+INFO 2025-07-03 17:55:55,820 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 125
+INFO 2025-07-03 17:55:55,820 basehttp "GET /forum/posts/user/?page=1&page_size=10 HTTP/1.1" 200 125
+INFO 2025-07-03 17:55:55,926 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=10 HTTP/1.1" 200 3946
+INFO 2025-07-03 17:55:58,585 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 125
+INFO 2025-07-03 17:55:58,678 basehttp "GET /forum/posts/?school_id=1&page=2&page_size=10 HTTP/1.1" 200 2676
+INFO 2025-07-03 17:56:02,077 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 125
+INFO 2025-07-03 17:56:02,226 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=10 HTTP/1.1" 200 3946
+INFO 2025-07-03 17:56:07,785 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 125
+INFO 2025-07-03 17:56:07,788 basehttp "GET /forum/posts/user/?page=1&page_size=10 HTTP/1.1" 200 125
+INFO 2025-07-03 17:56:07,974 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=10 HTTP/1.1" 200 3946
+INFO 2025-07-03 17:56:10,205 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 125
+INFO 2025-07-03 17:56:10,291 basehttp "GET /forum/posts/?school_id=1&page=2&page_size=10 HTTP/1.1" 200 2676
+INFO 2025-07-03 17:56:13,538 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 125
+INFO 2025-07-03 17:56:13,672 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=10 HTTP/1.1" 200 3946
+INFO 2025-07-03 17:56:18,184 basehttp "GET /forum/posts/search/?q=%E8%BF%90%E5%8A%A8&school_id=1&page=1&page_size=10 HTTP/1.1" 200 2065
+INFO 2025-07-03 17:56:29,666 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 125
+INFO 2025-07-03 17:56:29,759 basehttp "GET /forum/posts/?school_id=1&page=2&page_size=10 HTTP/1.1" 200 2676
