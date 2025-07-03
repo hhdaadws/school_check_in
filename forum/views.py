@@ -927,9 +927,39 @@ def get_user_posts(request):
         # 额外的安全检查
         if not request.user or not hasattr(request.user, 'id') or request.user.id is None:
             return JsonResponse({"error": "用户未登录"}, status=401)
-            
-        posts = Post.objects.filter(user=request.user).order_by('-time')
-        data = [post.to_dict(user=request.user) for post in posts]
+        
+        # 获取分页参数
+        page = int(request.GET.get('page', 1))
+        page_size = int(request.GET.get('page_size', 10))
+        
+        # 验证参数
+        if page < 1:
+            page = 1
+        if page_size < 1 or page_size > 100:  # 限制最大每页数量
+            page_size = 10
+        
+        # 计算偏移量
+        offset = (page - 1) * page_size
+        
+        # 查询帖子总数
+        total_posts = Post.objects.filter(user=request.user).count()
+        
+        # 查询当前页的帖子
+        posts = Post.objects.filter(user=request.user).order_by('-time')[offset:offset + page_size]
+        
+        # 构造响应数据
+        data = {
+            'posts': [post.to_dict(user=request.user) for post in posts],
+            'pagination': {
+                'page': page,
+                'page_size': page_size,
+                'total': total_posts,
+                'total_pages': math.ceil(total_posts / page_size) if total_posts > 0 else 1,
+                'has_next': page < math.ceil(total_posts / page_size) if total_posts > 0 else False,
+                'has_prev': page > 1
+            }
+        }
+        
         return JsonResponse(data, safe=False)
     except Exception as e:
         return JsonResponse({"error": f"获取帖子失败: {str(e)}"}, status=500)

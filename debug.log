@@ -970,3 +970,1937 @@ INFO 2025-07-03 10:55:04,698 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 6685
 INFO 2025-07-03 10:55:06,300 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=10 HTTP/1.1" 200 3944
 INFO 2025-07-03 10:55:06,324 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 6685
 INFO 2025-07-03 10:55:09,480 basehttp "GET /forum/posts/search/?q=%E6%B5%8B%E8%AF%95&school_id=1&page=1&page_size=10 HTTP/1.1" 200 1809
+INFO 2025-07-03 13:45:23,645 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 13:45:25,713 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-07-03 13:45:25,728 basehttp "GET /accounts/ HTTP/1.1" 200 150595
+INFO 2025-07-03 13:45:25,904 basehttp "GET /static/accounts/css/styles.css HTTP/1.1" 200 1864
+WARNING 2025-07-03 13:45:27,377 log Unauthorized: /accounts/profile/
+WARNING 2025-07-03 13:45:27,379 log Unauthorized: /checkin/checkins/
+WARNING 2025-07-03 13:45:27,380 basehttp "GET /accounts/profile/ HTTP/1.1" 401 73
+WARNING 2025-07-03 13:45:27,382 log Unauthorized: /checkin/community/
+WARNING 2025-07-03 13:45:27,383 basehttp "GET /checkin/checkins/ HTTP/1.1" 401 73
+WARNING 2025-07-03 13:45:27,384 basehttp "GET /checkin/community/ HTTP/1.1" 401 73
+INFO 2025-07-03 13:45:27,385 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+WARNING 2025-07-03 13:45:27,457 log Unauthorized: /checkin/checkins/
+WARNING 2025-07-03 13:45:27,458 log Unauthorized: /checkin/community/
+WARNING 2025-07-03 13:45:27,459 basehttp "GET /checkin/checkins/ HTTP/1.1" 401 73
+WARNING 2025-07-03 13:45:27,459 basehttp "GET /checkin/community/ HTTP/1.1" 401 73
+WARNING 2025-07-03 13:45:28,252 log Not Found: /favicon.ico
+WARNING 2025-07-03 13:45:28,253 basehttp "GET /favicon.ico HTTP/1.1" 404 3639
+INFO 2025-07-03 13:45:30,917 basehttp "GET /accounts/auth/ HTTP/1.1" 200 7666
+INFO 2025-07-03 13:45:30,960 basehttp "GET /static/accounts/js/auth.js HTTP/1.1" 200 12029
+WARNING 2025-07-03 13:45:32,119 log Unauthorized: /accounts/login/
+WARNING 2025-07-03 13:45:32,120 basehttp "POST /accounts/login/ HTTP/1.1" 401 82
+WARNING 2025-07-03 13:45:44,614 log Unauthorized: /accounts/login/
+WARNING 2025-07-03 13:45:44,615 basehttp "POST /accounts/login/ HTTP/1.1" 401 82
+WARNING 2025-07-03 13:45:51,886 log Unauthorized: /accounts/login/
+WARNING 2025-07-03 13:45:51,888 basehttp "POST /accounts/login/ HTTP/1.1" 401 82
+INFO 2025-07-03 13:46:03,637 basehttp "GET /accounts/auth/ HTTP/1.1" 200 7666
+INFO 2025-07-03 13:46:03,701 basehttp "GET /static/accounts/css/styles.css HTTP/1.1" 304 0
+INFO 2025-07-03 13:46:03,707 basehttp "GET /static/accounts/js/auth.js HTTP/1.1" 304 0
+WARNING 2025-07-03 13:46:05,344 log Unauthorized: /accounts/login/
+WARNING 2025-07-03 13:46:05,345 basehttp "POST /accounts/login/ HTTP/1.1" 401 82
+INFO 2025-07-03 13:46:36,736 basehttp "POST /accounts/send-verification-code/ HTTP/1.1" 200 104
+INFO 2025-07-03 13:46:50,264 basehttp "POST /accounts/register/ HTTP/1.1" 200 70
+INFO 2025-07-03 13:47:01,957 basehttp "POST /accounts/login/ HTTP/1.1" 200 402
+INFO 2025-07-03 13:47:02,041 basehttp "GET /accounts/interests/ HTTP/1.1" 200 13975
+INFO 2025-07-03 13:47:02,891 basehttp "GET /accounts/interests/tags/ HTTP/1.1" 200 5849
+INFO 2025-07-03 13:47:08,045 basehttp "POST /accounts/interests/skip/ HTTP/1.1" 200 86
+INFO 2025-07-03 13:47:08,100 basehttp "GET /accounts/ HTTP/1.1" 200 150595
+INFO 2025-07-03 13:47:08,155 basehttp "GET /static/accounts/css/styles.css HTTP/1.1" 304 0
+INFO 2025-07-03 13:47:08,529 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 13:47:08,555 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 13:47:08,590 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 13:47:08,591 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-07-03 13:47:08,595 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 13:47:08,603 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 13:47:08,607 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-07-03 13:47:08,637 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 13:47:08,641 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-07-03 13:47:08,654 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-07-03 13:47:10,093 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-07-03 13:47:14,218 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-07-03 13:47:29,372 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 281
+INFO 2025-07-03 13:47:31,826 basehttp "GET /checkin/community/ HTTP/1.1" 200 1263
+INFO 2025-07-03 13:47:32,422 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 252
+INFO 2025-07-03 13:47:34,979 basehttp "POST /checkin/checkins/10/check/ HTTP/1.1" 200 267
+INFO 2025-07-03 13:47:35,008 basehttp "GET /checkin/community/ HTTP/1.1" 200 1450
+INFO 2025-07-03 13:47:36,866 basehttp "GET /accounts/ HTTP/1.1" 200 150595
+INFO 2025-07-03 13:47:37,025 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 13:47:37,033 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 13:47:37,034 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 13:47:37,066 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 13:47:37,073 basehttp "GET /checkin/community/ HTTP/1.1" 200 1450
+INFO 2025-07-03 13:47:37,082 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 13:47:37,088 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 251
+INFO 2025-07-03 13:47:37,104 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 13:47:37,130 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 251
+INFO 2025-07-03 13:47:37,134 basehttp "GET /checkin/community/ HTTP/1.1" 200 1450
+WARNING 2025-07-03 13:47:37,964 log Bad Request: /checkin/checkins/10/check/
+WARNING 2025-07-03 13:47:37,966 basehttp "POST /checkin/checkins/10/check/ HTTP/1.1" 400 61
+WARNING 2025-07-03 13:47:38,578 log Bad Request: /checkin/checkins/10/check/
+WARNING 2025-07-03 13:47:38,579 basehttp "POST /checkin/checkins/10/check/ HTTP/1.1" 400 61
+WARNING 2025-07-03 13:48:18,378 log Bad Request: /checkin/checkins/10/check/
+WARNING 2025-07-03 13:48:18,380 basehttp "POST /checkin/checkins/10/check/ HTTP/1.1" 400 61
+INFO 2025-07-03 13:52:05,052 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 13:52:06,115 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 13:52:52,862 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 13:52:54,048 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 13:53:08,584 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\urls.py changed, reloading.
+INFO 2025-07-03 13:53:09,715 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 13:54:35,140 basehttp "GET /accounts/ HTTP/1.1" 200 150595
+INFO 2025-07-03 13:54:35,195 basehttp "GET /static/accounts/css/styles.css HTTP/1.1" 304 0
+INFO 2025-07-03 13:54:36,058 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 13:54:36,097 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 13:54:36,114 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 13:54:36,135 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 13:54:36,144 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 13:54:36,183 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+ERROR 2025-07-03 13:54:36,265 log Internal Server Error: /checkin/checkins/
+Traceback (most recent call last):
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\sqlite3\base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: checkin_checkin.task_type
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\Desktop\school_check_in\accounts\decorators.py", line 31, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\Desktop\school_check_in\checkin\views.py", line 31, in get_checkins
+    for checkin in user_created_checkins:
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\query.py", line 400, in __iter__
+    self._fetch_all()
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\sql\compiler.py", line 1574, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\sqlite3\base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: checkin_checkin.task_type
+ERROR 2025-07-03 13:54:36,277 log Internal Server Error: /checkin/community/
+Traceback (most recent call last):
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\sqlite3\base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: checkin_usercheckin.study_duration
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\Desktop\school_check_in\accounts\decorators.py", line 31, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\Desktop\school_check_in\checkin\views.py", line 47, in get_community_checkins
+    for checkin in community_checkins:
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\query.py", line 400, in __iter__
+    self._fetch_all()
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\sql\compiler.py", line 1574, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\sqlite3\base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: checkin_usercheckin.study_duration
+ERROR 2025-07-03 13:54:36,306 basehttp "GET /checkin/checkins/ HTTP/1.1" 500 153603
+ERROR 2025-07-03 13:54:36,316 basehttp "GET /checkin/community/ HTTP/1.1" 500 157610
+ERROR 2025-07-03 13:54:36,433 log Internal Server Error: /checkin/checkins/
+Traceback (most recent call last):
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\sqlite3\base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: checkin_checkin.task_type
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\Desktop\school_check_in\accounts\decorators.py", line 31, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\Desktop\school_check_in\checkin\views.py", line 31, in get_checkins
+    for checkin in user_created_checkins:
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\query.py", line 400, in __iter__
+    self._fetch_all()
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\sql\compiler.py", line 1574, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\sqlite3\base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: checkin_checkin.task_type
+ERROR 2025-07-03 13:54:36,440 basehttp "GET /checkin/checkins/ HTTP/1.1" 500 153603
+ERROR 2025-07-03 13:54:36,479 log Internal Server Error: /checkin/community/
+Traceback (most recent call last):
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\sqlite3\base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: checkin_usercheckin.study_duration
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\Desktop\school_check_in\accounts\decorators.py", line 31, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\Desktop\school_check_in\checkin\views.py", line 47, in get_community_checkins
+    for checkin in community_checkins:
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\query.py", line 400, in __iter__
+    self._fetch_all()
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\sql\compiler.py", line 1574, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\sqlite3\base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: checkin_usercheckin.study_duration
+ERROR 2025-07-03 13:54:36,485 basehttp "GET /checkin/community/ HTTP/1.1" 500 157610
+ERROR 2025-07-03 13:54:39,218 log Internal Server Error: /checkin/community/
+Traceback (most recent call last):
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\sqlite3\base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: checkin_usercheckin.study_duration
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\Desktop\school_check_in\accounts\decorators.py", line 31, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\Desktop\school_check_in\checkin\views.py", line 47, in get_community_checkins
+    for checkin in community_checkins:
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\query.py", line 400, in __iter__
+    self._fetch_all()
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\sql\compiler.py", line 1574, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\sqlite3\base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: checkin_usercheckin.study_duration
+ERROR 2025-07-03 13:54:39,229 basehttp "GET /checkin/community/ HTTP/1.1" 500 157610
+ERROR 2025-07-03 13:54:43,523 log Internal Server Error: /checkin/checkins/
+Traceback (most recent call last):
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\sqlite3\base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: checkin_checkin.task_type
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\Desktop\school_check_in\accounts\decorators.py", line 31, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\Desktop\school_check_in\checkin\views.py", line 31, in get_checkins
+    for checkin in user_created_checkins:
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\query.py", line 400, in __iter__
+    self._fetch_all()
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\models\sql\compiler.py", line 1574, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\h1933\anaconda3\envs\Arx\Lib\site-packages\django\db\backends\sqlite3\base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: checkin_checkin.task_type
+ERROR 2025-07-03 13:54:43,532 basehttp "GET /checkin/checkins/ HTTP/1.1" 500 153603
+INFO 2025-07-03 13:59:11,936 basehttp "GET /accounts/ HTTP/1.1" 200 152794
+INFO 2025-07-03 13:59:11,976 basehttp "GET /static/accounts/css/styles.css HTTP/1.1" 304 0
+INFO 2025-07-03 13:59:12,459 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 13:59:12,474 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 13:59:12,477 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 13:59:12,508 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 746
+INFO 2025-07-03 13:59:12,509 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 13:59:12,521 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 13:59:12,540 basehttp "GET /checkin/community/ HTTP/1.1" 200 3817
+INFO 2025-07-03 13:59:12,541 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 13:59:12,565 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 746
+INFO 2025-07-03 13:59:12,588 basehttp "GET /checkin/community/ HTTP/1.1" 200 3817
+INFO 2025-07-03 13:59:16,593 basehttp "DELETE /checkin/checkins/10/delete/ HTTP/1.1" 200 62
+INFO 2025-07-03 13:59:36,469 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 404
+INFO 2025-07-03 13:59:40,445 basehttp "GET /accounts/ HTTP/1.1" 200 152794
+INFO 2025-07-03 13:59:40,609 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 13:59:40,626 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 13:59:40,628 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 357
+INFO 2025-07-03 13:59:40,636 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 13:59:40,650 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 13:59:40,659 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 13:59:40,685 basehttp "GET /checkin/community/ HTTP/1.1" 200 3817
+INFO 2025-07-03 13:59:40,694 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 357
+INFO 2025-07-03 13:59:40,695 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 13:59:40,738 basehttp "GET /checkin/community/ HTTP/1.1" 200 3817
+INFO 2025-07-03 13:59:41,831 basehttp "POST /checkin/checkins/11/check/ HTTP/1.1" 200 473
+INFO 2025-07-03 13:59:41,923 basehttp "GET /checkin/community/ HTTP/1.1" 200 4275
+INFO 2025-07-03 13:59:44,281 basehttp "GET /accounts/ HTTP/1.1" 200 152794
+INFO 2025-07-03 13:59:44,449 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 13:59:44,449 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 13:59:44,450 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 13:59:44,459 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 741
+INFO 2025-07-03 13:59:44,469 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 13:59:44,500 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 13:59:44,505 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 13:59:44,512 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 741
+INFO 2025-07-03 13:59:44,519 basehttp "GET /checkin/community/ HTTP/1.1" 200 4275
+INFO 2025-07-03 13:59:44,567 basehttp "GET /checkin/community/ HTTP/1.1" 200 4275
+INFO 2025-07-03 13:59:45,172 basehttp "GET /checkin/community/ HTTP/1.1" 200 4275
+INFO 2025-07-03 13:59:46,004 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 741
+INFO 2025-07-03 13:59:47,760 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 2
+INFO 2025-07-03 13:59:47,934 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=10 HTTP/1.1" 200 3946
+INFO 2025-07-03 13:59:48,683 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 741
+INFO 2025-07-03 13:59:49,599 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 2
+INFO 2025-07-03 13:59:49,708 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=10 HTTP/1.1" 200 3946
+INFO 2025-07-03 13:59:52,534 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 741
+INFO 2025-07-03 13:59:57,522 basehttp "DELETE /checkin/checkins/11/delete/ HTTP/1.1" 200 62
+INFO 2025-07-03 14:11:52,329 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 14:11:54,536 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-07-03 14:11:54,546 basehttp "GET /accounts/ HTTP/1.1" 200 176716
+INFO 2025-07-03 14:11:54,604 basehttp "GET /static/accounts/css/styles.css HTTP/1.1" 304 0
+INFO 2025-07-03 14:11:55,501 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 14:11:55,503 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-07-03 14:11:55,509 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 14:11:55,515 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 14:11:55,535 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 14:11:55,540 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 14:11:55,569 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-07-03 14:11:55,590 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+WARNING 2025-07-03 14:11:55,601 log Not Found: /favicon.ico
+WARNING 2025-07-03 14:11:55,608 basehttp "GET /favicon.ico HTTP/1.1" 404 3639
+INFO 2025-07-03 14:11:55,609 basehttp "GET /checkin/community/ HTTP/1.1" 200 4269
+INFO 2025-07-03 14:11:55,639 basehttp "GET /checkin/community/ HTTP/1.1" 200 4269
+INFO 2025-07-03 14:11:57,151 basehttp "GET /checkin/community/ HTTP/1.1" 200 4269
+INFO 2025-07-03 14:11:59,828 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-07-03 14:12:19,613 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 402
+INFO 2025-07-03 14:12:23,537 basehttp "POST /checkin/checkins/12/check/ HTTP/1.1" 200 471
+INFO 2025-07-03 14:12:23,647 basehttp "GET /checkin/community/ HTTP/1.1" 200 4725
+INFO 2025-07-03 14:12:53,594 basehttp "POST /checkin/checkins/12/study/update/ HTTP/1.1" 200 466
+INFO 2025-07-03 14:13:18,624 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 403
+INFO 2025-07-03 14:13:23,559 basehttp "POST /checkin/checkins/12/study/update/ HTTP/1.1" 200 466
+INFO 2025-07-03 14:13:24,526 basehttp "POST /checkin/checkins/13/check/ HTTP/1.1" 200 516
+INFO 2025-07-03 14:13:24,561 basehttp "GET /checkin/community/ HTTP/1.1" 200 5227
+INFO 2025-07-03 14:13:24,614 basehttp "POST /checkin/checkins/13/sport/update/ HTTP/1.1" 200 625
+INFO 2025-07-03 14:13:53,583 basehttp "POST /checkin/checkins/12/study/update/ HTTP/1.1" 200 466
+INFO 2025-07-03 14:13:54,163 basehttp "POST /checkin/checkins/13/sport/update/ HTTP/1.1" 200 874
+INFO 2025-07-03 14:13:54,206 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1862
+INFO 2025-07-03 14:14:23,957 basehttp "POST /checkin/checkins/12/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:14:53,972 basehttp "POST /checkin/checkins/12/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:23:53,959 basehttp "POST /checkin/checkins/12/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:24:23,968 basehttp "POST /checkin/checkins/12/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:28:56,401 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-07-03 14:28:56,422 basehttp "GET /accounts/ HTTP/1.1" 200 189714
+INFO 2025-07-03 14:28:56,499 basehttp "GET /static/accounts/css/styles.css HTTP/1.1" 304 0
+INFO 2025-07-03 14:28:57,161 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 14:28:57,185 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 14:28:57,215 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 14:28:57,224 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 14:28:57,225 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1863
+INFO 2025-07-03 14:28:57,226 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+WARNING 2025-07-03 14:28:57,277 log Not Found: /favicon.ico
+WARNING 2025-07-03 14:28:57,289 basehttp "GET /favicon.ico HTTP/1.1" 404 3639
+INFO 2025-07-03 14:28:57,297 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 14:28:57,313 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1863
+INFO 2025-07-03 14:28:57,328 basehttp "GET /checkin/community/ HTTP/1.1" 200 5569
+INFO 2025-07-03 14:28:57,380 basehttp "GET /checkin/community/ HTTP/1.1" 200 5569
+INFO 2025-07-03 14:29:12,134 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 403
+INFO 2025-07-03 14:29:16,492 basehttp "POST /checkin/checkins/14/check/ HTTP/1.1" 200 500
+INFO 2025-07-03 14:29:16,560 basehttp "GET /checkin/community/ HTTP/1.1" 200 6054
+INFO 2025-07-03 14:29:16,619 basehttp "POST /checkin/checkins/14/sport/update/ HTTP/1.1" 200 593
+INFO 2025-07-03 14:30:32,012 basehttp "POST /checkin/checkins/14/sport/update/ HTTP/1.1" 200 1033
+INFO 2025-07-03 14:30:32,094 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3146
+INFO 2025-07-03 14:31:27,650 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 403
+INFO 2025-07-03 14:31:30,993 basehttp "POST /checkin/checkins/15/check/ HTTP/1.1" 200 471
+INFO 2025-07-03 14:31:31,078 basehttp "GET /checkin/community/ HTTP/1.1" 200 7026
+INFO 2025-07-03 14:31:34,944 basehttp "GET /accounts/ HTTP/1.1" 200 189714
+INFO 2025-07-03 14:31:35,817 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 14:31:35,841 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 14:31:35,891 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 14:31:35,900 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 14:31:35,918 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 14:31:35,979 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 14:31:35,986 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3884
+INFO 2025-07-03 14:31:36,052 basehttp "GET /checkin/community/ HTTP/1.1" 200 7026
+INFO 2025-07-03 14:31:36,094 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3884
+INFO 2025-07-03 14:31:36,141 basehttp "GET /checkin/community/ HTTP/1.1" 200 7026
+INFO 2025-07-03 14:31:40,671 basehttp "GET /accounts/ HTTP/1.1" 200 189714
+INFO 2025-07-03 14:31:40,907 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 14:31:40,911 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 14:31:40,945 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 14:31:40,993 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 14:31:41,002 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 14:31:41,040 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 14:31:41,050 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3884
+INFO 2025-07-03 14:31:41,108 basehttp "GET /checkin/community/ HTTP/1.1" 200 7026
+INFO 2025-07-03 14:31:41,162 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3884
+INFO 2025-07-03 14:31:41,203 basehttp "GET /checkin/community/ HTTP/1.1" 200 7026
+INFO 2025-07-03 14:40:41,303 basehttp "GET /accounts/ HTTP/1.1" 200 218603
+INFO 2025-07-03 14:40:41,349 basehttp "GET /static/accounts/css/styles.css HTTP/1.1" 304 0
+INFO 2025-07-03 14:40:41,992 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 14:40:42,044 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 14:40:42,050 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 14:40:42,054 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 14:40:42,085 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3884
+INFO 2025-07-03 14:40:42,099 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 14:40:42,116 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 14:40:42,134 basehttp "GET /checkin/community/ HTTP/1.1" 200 7026
+INFO 2025-07-03 14:40:42,180 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3884
+INFO 2025-07-03 14:40:42,193 basehttp "GET /checkin/community/ HTTP/1.1" 200 7026
+INFO 2025-07-03 14:40:54,492 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 401
+INFO 2025-07-03 14:40:57,909 basehttp "POST /checkin/checkins/16/check/ HTTP/1.1" 200 471
+INFO 2025-07-03 14:40:58,037 basehttp "GET /checkin/community/ HTTP/1.1" 200 7482
+INFO 2025-07-03 14:41:05,680 basehttp "GET /accounts/ HTTP/1.1" 200 218603
+INFO 2025-07-03 14:41:05,991 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 14:41:06,022 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 14:41:06,028 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 14:41:06,092 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 14:41:06,097 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 14:41:06,160 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4620
+INFO 2025-07-03 14:41:06,169 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 14:41:06,209 basehttp "GET /checkin/community/ HTTP/1.1" 200 7482
+INFO 2025-07-03 14:41:06,268 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4620
+INFO 2025-07-03 14:41:06,326 basehttp "GET /checkin/community/ HTTP/1.1" 200 7482
+INFO 2025-07-03 14:41:20,358 basehttp "GET /accounts/ HTTP/1.1" 200 218603
+INFO 2025-07-03 14:41:20,607 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 14:41:20,610 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 14:41:20,653 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 14:41:20,671 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 14:41:20,680 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 14:41:20,733 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 14:41:20,760 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4620
+INFO 2025-07-03 14:41:20,838 basehttp "GET /checkin/community/ HTTP/1.1" 200 7482
+INFO 2025-07-03 14:41:20,868 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4620
+INFO 2025-07-03 14:41:20,936 basehttp "GET /checkin/community/ HTTP/1.1" 200 7482
+INFO 2025-07-03 14:41:31,535 basehttp "DELETE /checkin/checkins/16/delete/ HTTP/1.1" 200 62
+INFO 2025-07-03 14:41:34,215 basehttp "GET /accounts/ HTTP/1.1" 200 218603
+INFO 2025-07-03 14:41:34,450 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 14:41:34,458 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 14:41:34,464 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 14:41:34,516 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 14:41:34,557 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 14:41:34,596 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 14:41:34,597 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3884
+INFO 2025-07-03 14:41:34,643 basehttp "GET /checkin/community/ HTTP/1.1" 200 7476
+INFO 2025-07-03 14:41:34,699 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3884
+INFO 2025-07-03 14:41:34,745 basehttp "GET /checkin/community/ HTTP/1.1" 200 7476
+INFO 2025-07-03 14:41:48,511 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 408
+INFO 2025-07-03 14:41:53,090 basehttp "POST /checkin/checkins/17/check/ HTTP/1.1" 200 508
+INFO 2025-07-03 14:41:53,285 basehttp "GET /checkin/community/ HTTP/1.1" 200 7969
+INFO 2025-07-03 14:42:48,936 basehttp "GET /accounts/ HTTP/1.1" 200 218603
+INFO 2025-07-03 14:42:49,572 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 14:42:49,598 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 14:42:49,617 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 14:42:49,655 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 14:42:49,716 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 14:42:49,746 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 14:42:49,773 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4664
+INFO 2025-07-03 14:42:49,857 basehttp "GET /checkin/community/ HTTP/1.1" 200 7969
+INFO 2025-07-03 14:42:49,930 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4664
+INFO 2025-07-03 14:42:50,009 basehttp "GET /checkin/community/ HTTP/1.1" 200 7969
+INFO 2025-07-03 14:44:57,363 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 14:44:58,947 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 14:45:11,846 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 14:45:13,001 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 14:45:55,162 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 14:45:56,745 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 14:46:04,233 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 14:46:05,479 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 14:46:27,215 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 14:46:28,722 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 14:46:42,637 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\urls.py changed, reloading.
+INFO 2025-07-03 14:46:43,861 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 14:46:46,028 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 14:46:47,496 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 14:46:52,311 basehttp "GET /accounts/ HTTP/1.1" 200 218402
+INFO 2025-07-03 14:46:52,362 basehttp "GET /static/accounts/css/styles.css HTTP/1.1" 304 0
+INFO 2025-07-03 14:46:52,914 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 14:46:52,946 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 14:46:52,998 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 14:46:53,039 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 14:46:53,054 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4814
+INFO 2025-07-03 14:46:53,058 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 14:46:53,114 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 14:46:53,164 basehttp "GET /checkin/community/ HTTP/1.1" 200 7969
+INFO 2025-07-03 14:46:53,172 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4814
+INFO 2025-07-03 14:46:53,233 basehttp "GET /checkin/community/ HTTP/1.1" 200 7969
+INFO 2025-07-03 14:46:58,790 basehttp "DELETE /checkin/checkins/17/delete/ HTTP/1.1" 200 62
+INFO 2025-07-03 14:47:00,346 basehttp "DELETE /checkin/checkins/15/delete/ HTTP/1.1" 200 62
+INFO 2025-07-03 14:47:04,640 basehttp "DELETE /checkin/checkins/13/delete/ HTTP/1.1" 200 62
+INFO 2025-07-03 14:47:06,527 basehttp "DELETE /checkin/checkins/12/delete/ HTTP/1.1" 200 62
+INFO 2025-07-03 14:47:08,461 basehttp "DELETE /checkin/checkins/14/delete/ HTTP/1.1" 200 62
+INFO 2025-07-03 14:47:09,185 basehttp "GET /checkin/community/ HTTP/1.1" 200 7939
+INFO 2025-07-03 14:47:15,890 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-07-03 14:47:16,630 basehttp "GET /checkin/community/ HTTP/1.1" 200 7939
+INFO 2025-07-03 14:47:17,050 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-07-03 14:47:18,026 basehttp "GET /checkin/community/ HTTP/1.1" 200 7939
+INFO 2025-07-03 14:47:18,492 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-07-03 14:51:05,206 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 14:51:06,561 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 14:51:31,269 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 14:51:32,799 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 14:51:33,515 basehttp "GET /accounts/ HTTP/1.1" 200 209491
+INFO 2025-07-03 14:51:34,083 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 14:51:34,095 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-07-03 14:51:34,126 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 14:51:34,132 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 14:51:34,146 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 14:51:34,183 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-07-03 14:51:34,184 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 14:51:34,205 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 14:51:34,208 basehttp "GET /checkin/community/ HTTP/1.1" 200 7939
+INFO 2025-07-03 14:51:34,255 basehttp "GET /checkin/community/ HTTP/1.1" 200 7939
+INFO 2025-07-03 14:51:35,254 basehttp "GET /checkin/community/ HTTP/1.1" 200 7939
+INFO 2025-07-03 14:51:36,571 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-07-03 14:51:49,004 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 431
+INFO 2025-07-03 14:51:51,976 basehttp "POST /checkin/checkins/18/check/ HTTP/1.1" 200 471
+INFO 2025-07-03 14:51:52,107 basehttp "GET /checkin/community/ HTTP/1.1" 200 8395
+INFO 2025-07-03 14:51:59,695 basehttp "GET /accounts/ HTTP/1.1" 200 209491
+INFO 2025-07-03 14:51:59,950 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 14:51:59,956 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 14:51:59,960 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 14:51:59,968 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 766
+INFO 2025-07-03 14:52:00,024 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 14:52:00,025 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 14:52:00,055 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 14:52:00,096 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 766
+INFO 2025-07-03 14:52:00,128 basehttp "GET /checkin/community/ HTTP/1.1" 200 8395
+INFO 2025-07-03 14:52:00,219 basehttp "GET /checkin/community/ HTTP/1.1" 200 8395
+INFO 2025-07-03 14:52:04,443 basehttp "GET /accounts/ HTTP/1.1" 200 209491
+INFO 2025-07-03 14:52:04,691 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 14:52:04,697 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 14:52:04,702 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 14:52:04,724 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 766
+INFO 2025-07-03 14:52:04,756 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 14:52:04,763 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 14:52:04,816 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 14:52:04,849 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 766
+INFO 2025-07-03 14:52:04,876 basehttp "GET /checkin/community/ HTTP/1.1" 200 8395
+INFO 2025-07-03 14:52:04,973 basehttp "GET /checkin/community/ HTTP/1.1" 200 8395
+INFO 2025-07-03 14:52:09,620 basehttp "GET /accounts/ HTTP/1.1" 200 209491
+INFO 2025-07-03 14:52:09,902 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 14:52:09,938 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 14:52:09,944 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 14:52:09,969 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 14:52:09,971 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 766
+INFO 2025-07-03 14:52:10,007 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 14:52:10,026 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 14:52:10,083 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 766
+INFO 2025-07-03 14:52:10,111 basehttp "GET /checkin/community/ HTTP/1.1" 200 8395
+INFO 2025-07-03 14:52:10,184 basehttp "GET /checkin/community/ HTTP/1.1" 200 8395
+INFO 2025-07-03 14:52:19,290 basehttp "GET /accounts/ HTTP/1.1" 200 209491
+INFO 2025-07-03 14:52:19,531 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 14:52:19,572 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 14:52:19,576 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 14:52:19,601 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 766
+INFO 2025-07-03 14:52:19,616 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 14:52:19,645 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 14:52:19,682 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 14:52:19,704 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 766
+INFO 2025-07-03 14:52:19,740 basehttp "GET /checkin/community/ HTTP/1.1" 200 8395
+INFO 2025-07-03 14:52:19,828 basehttp "GET /checkin/community/ HTTP/1.1" 200 8395
+INFO 2025-07-03 14:52:29,550 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 466
+INFO 2025-07-03 14:52:59,527 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 466
+INFO 2025-07-03 14:52:59,544 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 466
+INFO 2025-07-03 14:52:59,569 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 466
+INFO 2025-07-03 14:53:00,214 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 466
+INFO 2025-07-03 14:53:06,559 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 431
+INFO 2025-07-03 14:53:12,302 basehttp "POST /checkin/checkins/19/check/ HTTP/1.1" 200 516
+INFO 2025-07-03 14:53:12,416 basehttp "GET /checkin/community/ HTTP/1.1" 200 8897
+INFO 2025-07-03 14:53:17,339 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2020
+INFO 2025-07-03 14:53:22,344 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2021
+INFO 2025-07-03 14:53:27,342 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2021
+INFO 2025-07-03 14:53:29,544 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 466
+INFO 2025-07-03 14:53:29,584 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 466
+INFO 2025-07-03 14:53:29,608 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 466
+INFO 2025-07-03 14:53:30,220 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 466
+INFO 2025-07-03 14:53:32,348 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2021
+INFO 2025-07-03 14:53:37,341 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2021
+INFO 2025-07-03 14:53:42,339 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2021
+INFO 2025-07-03 14:53:47,345 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2021
+INFO 2025-07-03 14:53:48,773 basehttp "POST /checkin/checkins/19/sport/pause/ HTTP/1.1" 200 538
+INFO 2025-07-03 14:53:48,832 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2037
+INFO 2025-07-03 14:53:50,228 basehttp "POST /checkin/checkins/19/sport/resume/ HTTP/1.1" 200 516
+INFO 2025-07-03 14:53:50,280 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2021
+INFO 2025-07-03 14:53:55,269 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2021
+INFO 2025-07-03 14:53:55,340 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2021
+INFO 2025-07-03 14:53:59,575 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:53:59,588 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:53:59,614 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:54:00,231 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:54:00,277 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2022
+INFO 2025-07-03 14:54:00,330 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2022
+INFO 2025-07-03 14:54:05,284 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2022
+INFO 2025-07-03 14:54:05,337 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2022
+INFO 2025-07-03 14:54:10,279 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2022
+INFO 2025-07-03 14:54:10,326 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2022
+INFO 2025-07-03 14:54:15,276 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2022
+INFO 2025-07-03 14:54:15,327 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2022
+INFO 2025-07-03 14:54:20,277 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2022
+INFO 2025-07-03 14:54:20,334 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2022
+INFO 2025-07-03 14:54:25,275 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2022
+INFO 2025-07-03 14:54:25,315 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2022
+INFO 2025-07-03 14:54:29,545 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:54:29,575 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:54:29,596 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:54:30,224 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:54:30,274 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2022
+INFO 2025-07-03 14:54:30,329 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2022
+INFO 2025-07-03 14:54:35,280 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2022
+INFO 2025-07-03 14:54:35,322 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2022
+INFO 2025-07-03 14:54:40,277 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2022
+INFO 2025-07-03 14:54:40,335 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2022
+INFO 2025-07-03 14:54:45,244 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2022
+INFO 2025-07-03 14:54:45,308 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2022
+INFO 2025-07-03 14:54:46,795 basehttp "POST /checkin/checkins/19/sport/pause/ HTTP/1.1" 200 538
+INFO 2025-07-03 14:54:46,827 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2038
+INFO 2025-07-03 14:54:50,254 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2038
+INFO 2025-07-03 14:54:55,272 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2038
+INFO 2025-07-03 14:54:59,423 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:54:59,551 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:54:59,582 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:54:59,608 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:55:00,204 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:55:00,269 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2038
+INFO 2025-07-03 14:55:05,268 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2038
+INFO 2025-07-03 14:55:10,272 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2038
+INFO 2025-07-03 14:55:15,264 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2038
+INFO 2025-07-03 14:55:20,282 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2038
+INFO 2025-07-03 14:55:25,264 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2038
+INFO 2025-07-03 14:55:29,435 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:55:29,525 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:55:29,546 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:55:29,574 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:55:30,195 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:55:30,278 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2038
+INFO 2025-07-03 14:55:34,247 basehttp "DELETE /checkin/checkins/18/delete/ HTTP/1.1" 200 62
+INFO 2025-07-03 14:55:35,251 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1270
+INFO 2025-07-03 14:55:37,661 basehttp "DELETE /checkin/checkins/19/delete/ HTTP/1.1" 200 62
+INFO 2025-07-03 14:55:48,284 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 430
+INFO 2025-07-03 14:55:50,949 basehttp "POST /checkin/checkins/20/check/ HTTP/1.1" 200 471
+INFO 2025-07-03 14:55:51,082 basehttp "GET /checkin/community/ HTTP/1.1" 200 9342
+INFO 2025-07-03 14:56:00,003 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:56:00,013 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:56:00,030 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:56:00,045 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:56:00,058 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:56:20,992 basehttp "POST /checkin/checkins/20/study/update/ HTTP/1.1" 200 466
+INFO 2025-07-03 14:56:29,422 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:56:29,529 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:56:29,542 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:56:29,572 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:56:30,186 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:56:51,003 basehttp "POST /checkin/checkins/20/study/update/ HTTP/1.1" 200 466
+INFO 2025-07-03 14:56:54,048 basehttp "POST /checkin/checkins/20/study/update/ HTTP/1.1" 200 483
+INFO 2025-07-03 14:56:54,073 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 783
+INFO 2025-07-03 14:56:59,432 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:56:59,507 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:56:59,529 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:56:59,563 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:57:00,189 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:57:02,118 basehttp "GET /checkin/community/ HTTP/1.1" 200 9360
+INFO 2025-07-03 14:57:05,521 basehttp "GET /checkin/community/ HTTP/1.1" 200 9360
+INFO 2025-07-03 14:57:12,426 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 783
+INFO 2025-07-03 14:57:15,589 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 783
+INFO 2025-07-03 14:57:21,525 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 783
+INFO 2025-07-03 14:57:24,283 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 783
+INFO 2025-07-03 14:57:25,402 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 2
+INFO 2025-07-03 14:57:25,571 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=10 HTTP/1.1" 200 3946
+INFO 2025-07-03 14:57:26,133 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 783
+INFO 2025-07-03 14:57:26,817 basehttp "GET /checkin/community/ HTTP/1.1" 200 9360
+INFO 2025-07-03 14:57:27,343 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 783
+INFO 2025-07-03 14:57:29,419 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:57:29,554 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:57:29,579 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:57:29,606 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:57:30,195 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:57:59,426 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:57:59,544 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:57:59,561 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:57:59,578 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:58:00,203 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:58:29,409 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:58:29,522 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:58:29,540 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:58:29,558 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:58:30,202 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:58:31,839 basehttp "GET /checkin/community/ HTTP/1.1" 200 9360
+INFO 2025-07-03 14:58:34,078 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 783
+INFO 2025-07-03 14:58:36,185 basehttp "GET /checkin/community/ HTTP/1.1" 200 9360
+INFO 2025-07-03 14:58:36,835 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 783
+INFO 2025-07-03 14:58:59,435 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:58:59,524 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:58:59,540 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:58:59,562 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:59:00,205 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:59:30,004 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:59:30,035 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:59:30,051 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:59:30,065 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:59:30,082 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:59:46,748 basehttp "GET /checkin/community/ HTTP/1.1" 200 9360
+INFO 2025-07-03 14:59:47,522 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 783
+INFO 2025-07-03 14:59:48,120 basehttp "GET /checkin/community/ HTTP/1.1" 200 9360
+INFO 2025-07-03 14:59:51,541 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 783
+INFO 2025-07-03 14:59:59,405 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:59:59,510 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:59:59,525 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 14:59:59,549 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 15:00:00,174 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 15:00:29,988 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 15:00:30,001 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 15:00:30,033 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 15:00:30,051 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 15:00:30,075 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 15:01:00,018 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 15:01:00,036 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 15:01:00,049 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 15:01:00,066 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 15:01:00,081 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 467
+INFO 2025-07-03 15:01:13,097 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 15:01:14,209 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:01:25,945 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 15:01:27,188 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:01:43,387 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 15:01:44,495 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:02:05,590 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 15:02:06,875 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:02:14,864 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 15:02:16,039 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:02:22,956 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 15:02:24,247 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:02:25,889 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 15:02:27,027 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:02:35,085 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 15:02:36,419 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:02:49,948 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 15:02:50,822 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:03:11,608 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:03:13,048 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:03:26,950 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:03:28,164 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:03:30,138 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:03:31,321 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:03:36,241 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:03:37,437 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:03:40,279 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:03:41,463 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:03:52,052 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:03:53,229 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:03:54,806 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:03:55,995 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:04:07,148 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:04:08,404 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:04:27,239 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:04:28,377 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:04:42,748 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:04:44,234 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:04:45,875 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:04:46,980 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:04:52,710 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:04:54,272 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:04:57,116 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\urls.py changed, reloading.
+INFO 2025-07-03 15:04:58,318 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:12:29,421 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 313
+INFO 2025-07-03 15:12:29,518 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 313
+INFO 2025-07-03 15:12:29,538 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 313
+INFO 2025-07-03 15:12:29,554 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 313
+INFO 2025-07-03 15:12:30,177 basehttp "POST /checkin/checkins/18/study/update/ HTTP/1.1" 200 313
+INFO 2025-07-03 15:12:30,319 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:12:30,752 basehttp "GET /accounts/ HTTP/1.1" 200 204732
+INFO 2025-07-03 15:12:30,801 basehttp "GET /static/accounts/css/styles.css HTTP/1.1" 304 0
+INFO 2025-07-03 15:12:31,324 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 15:12:31,352 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 582
+INFO 2025-07-03 15:12:31,389 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 15:12:31,397 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 15:12:31,417 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 15:12:31,478 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 15:12:31,491 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 582
+INFO 2025-07-03 15:12:31,528 basehttp "GET /checkin/community/ HTTP/1.1" 200 5528
+INFO 2025-07-03 15:12:31,583 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 15:12:31,599 basehttp "GET /checkin/community/ HTTP/1.1" 200 5528
+INFO 2025-07-03 15:12:34,564 basehttp "DELETE /checkin/checkins/20/delete/ HTTP/1.1" 200 62
+ERROR 2025-07-03 15:12:45,123 log Internal Server Error: /checkin/checkins/create/
+ERROR 2025-07-03 15:12:45,123 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 500 100
+ERROR 2025-07-03 15:12:46,762 log Internal Server Error: /checkin/checkins/create/
+ERROR 2025-07-03 15:12:46,763 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 500 100
+ERROR 2025-07-03 15:13:10,912 log Internal Server Error: /checkin/checkins/create/
+ERROR 2025-07-03 15:13:10,913 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 500 100
+INFO 2025-07-03 15:13:40,662 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:13:42,190 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:13:56,493 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:13:58,338 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 395
+INFO 2025-07-03 15:14:02,441 basehttp "POST /checkin/checkins/21/check/ HTTP/1.1" 200 325
+INFO 2025-07-03 15:14:02,525 basehttp "GET /checkin/community/ HTTP/1.1" 200 5832
+INFO 2025-07-03 15:14:15,266 basehttp "GET /accounts/ HTTP/1.1" 200 204732
+INFO 2025-07-03 15:14:15,963 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 15:14:15,975 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 15:14:16,003 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 15:14:16,009 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 15:14:16,013 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 908
+INFO 2025-07-03 15:14:16,035 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 15:14:16,058 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 15:14:16,093 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 908
+INFO 2025-07-03 15:14:16,103 basehttp "GET /checkin/community/ HTTP/1.1" 200 5832
+INFO 2025-07-03 15:14:16,163 basehttp "GET /checkin/community/ HTTP/1.1" 200 5832
+INFO 2025-07-03 15:14:25,862 basehttp "GET /accounts/ HTTP/1.1" 200 204732
+INFO 2025-07-03 15:14:26,058 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 15:14:26,061 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 15:14:26,061 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 15:14:26,088 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 15:14:26,088 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 908
+INFO 2025-07-03 15:14:26,116 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 15:14:26,139 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 15:14:26,178 basehttp "GET /checkin/community/ HTTP/1.1" 200 5832
+INFO 2025-07-03 15:14:26,192 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 908
+INFO 2025-07-03 15:14:26,255 basehttp "GET /checkin/community/ HTTP/1.1" 200 5832
+INFO 2025-07-03 15:14:54,912 basehttp "GET /accounts/ HTTP/1.1" 200 204732
+INFO 2025-07-03 15:14:55,103 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 15:14:55,106 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 15:14:55,123 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 15:14:55,135 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 15:14:55,141 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 15:14:55,151 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 908
+INFO 2025-07-03 15:14:55,169 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 15:14:55,204 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 908
+INFO 2025-07-03 15:14:55,253 basehttp "GET /checkin/community/ HTTP/1.1" 200 5832
+INFO 2025-07-03 15:14:55,352 basehttp "GET /checkin/community/ HTTP/1.1" 200 5832
+INFO 2025-07-03 15:15:09,111 basehttp "POST /checkin/checkins/21/study/update/ HTTP/1.1" 200 320
+INFO 2025-07-03 15:15:39,119 basehttp "POST /checkin/checkins/21/study/update/ HTTP/1.1" 200 320
+INFO 2025-07-03 15:15:50,290 basehttp "POST /checkin/checkins/21/study/update/ HTTP/1.1" 200 337
+INFO 2025-07-03 15:15:50,316 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 927
+INFO 2025-07-03 15:15:54,973 basehttp "GET /checkin/community/ HTTP/1.1" 200 5850
+INFO 2025-07-03 15:15:55,339 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 927
+INFO 2025-07-03 15:15:56,808 basehttp "GET /checkin/community/ HTTP/1.1" 200 5850
+INFO 2025-07-03 15:15:58,747 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 927
+INFO 2025-07-03 15:16:00,208 basehttp "GET /checkin/community/ HTTP/1.1" 200 5850
+INFO 2025-07-03 15:16:00,360 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 927
+INFO 2025-07-03 15:16:00,706 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 927
+INFO 2025-07-03 15:16:02,002 basehttp "GET /accounts/ HTTP/1.1" 200 204732
+INFO 2025-07-03 15:16:02,704 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 15:16:02,715 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 15:16:02,716 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 15:16:02,737 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 927
+INFO 2025-07-03 15:16:02,769 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 15:16:02,773 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 15:16:02,798 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 15:16:02,841 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 927
+INFO 2025-07-03 15:16:02,847 basehttp "GET /checkin/community/ HTTP/1.1" 200 5850
+INFO 2025-07-03 15:16:02,904 basehttp "GET /checkin/community/ HTTP/1.1" 200 5850
+INFO 2025-07-03 15:16:12,231 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:16:12,236 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:16:13,341 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:16:13,341 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:16:17,309 basehttp "GET /accounts/ HTTP/1.1" 200 204732
+INFO 2025-07-03 15:16:17,565 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 15:16:17,599 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 15:16:17,616 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 927
+INFO 2025-07-03 15:16:17,639 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 15:16:17,640 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 15:16:17,645 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 15:16:17,698 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 15:16:17,705 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 927
+INFO 2025-07-03 15:16:17,732 basehttp "GET /checkin/community/ HTTP/1.1" 200 5850
+INFO 2025-07-03 15:16:17,782 basehttp "GET /checkin/community/ HTTP/1.1" 200 5850
+INFO 2025-07-03 15:16:18,905 basehttp "GET /checkin/community/ HTTP/1.1" 200 5850
+INFO 2025-07-03 15:16:19,729 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 927
+INFO 2025-07-03 15:16:24,744 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 927
+INFO 2025-07-03 15:16:27,532 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 396
+INFO 2025-07-03 15:16:29,759 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:16:34,953 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:16:39,963 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:16:44,964 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:16:49,968 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:16:54,969 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:16:59,964 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:17:04,957 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:17:08,623 basehttp "GET /checkin/community/ HTTP/1.1" 200 5850
+INFO 2025-07-03 15:17:09,729 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:17:09,749 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:17:14,948 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:17:14,965 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:17:19,970 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:17:19,991 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:17:24,939 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:17:24,961 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:17:29,977 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:17:29,990 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:17:34,975 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:17:34,997 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:17:39,967 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:17:39,981 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:17:44,974 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:17:44,999 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:17:49,959 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:17:49,977 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:17:54,974 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:17:54,992 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:17:59,966 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:17:59,976 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:18:04,968 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:18:04,990 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:18:09,951 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:18:09,960 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:18:14,965 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:18:14,986 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:18:19,963 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:18:19,987 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:18:24,961 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:18:24,979 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:19:20,978 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:19:20,996 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:20:20,985 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:20:21,002 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:21:20,971 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:21:20,984 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1276
+INFO 2025-07-03 15:24:26,380 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 15:24:26,404 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 15:24:27,461 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:24:27,464 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:24:41,643 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:24:41,701 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:24:43,065 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:24:43,075 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:24:54,647 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:24:54,651 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:24:55,885 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:24:55,888 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:25:02,345 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:25:02,424 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:25:03,512 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:25:03,519 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:25:27,831 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 15:25:27,834 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 15:25:28,847 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:25:28,863 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:25:41,754 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:25:41,780 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:25:43,014 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:25:43,014 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:25:52,359 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\urls.py changed, reloading.
+INFO 2025-07-03 15:25:52,367 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\urls.py changed, reloading.
+INFO 2025-07-03 15:25:53,457 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:25:53,468 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:26:16,641 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:26:16,698 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:26:17,793 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:26:17,801 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:26:22,862 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:26:22,916 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:26:23,864 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:26:23,866 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:31:28,938 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:32:00,676 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-07-03 15:32:00,695 basehttp "GET /accounts/ HTTP/1.1" 200 206199
+INFO 2025-07-03 15:32:00,775 basehttp "GET /static/accounts/css/styles.css HTTP/1.1" 304 0
+INFO 2025-07-03 15:32:01,215 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 15:32:01,227 basehttp "GET /checkin/community/ HTTP/1.1" 200 2
+INFO 2025-07-03 15:32:01,235 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 15:32:01,239 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 15:32:01,246 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 15:32:01,247 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1277
+INFO 2025-07-03 15:32:01,250 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 15:32:01,257 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 15:32:01,317 basehttp "GET /checkin/community/ HTTP/1.1" 200 2
+WARNING 2025-07-03 15:32:01,336 log Not Found: /favicon.ico
+WARNING 2025-07-03 15:32:01,341 basehttp "GET /favicon.ico HTTP/1.1" 404 3639
+INFO 2025-07-03 15:32:01,341 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1277
+INFO 2025-07-03 15:33:25,884 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 409
+INFO 2025-07-03 15:33:27,170 basehttp "POST /checkin/checkins/23/check/ HTTP/1.1" 200 309
+INFO 2025-07-03 15:33:27,189 basehttp "GET /checkin/community/ HTTP/1.1" 200 2
+INFO 2025-07-03 15:33:33,116 basehttp "POST /checkin/checkins/22/check/ HTTP/1.1" 200 316
+INFO 2025-07-03 15:33:33,138 basehttp "GET /checkin/community/ HTTP/1.1" 200 2
+INFO 2025-07-03 15:33:48,057 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 423
+INFO 2025-07-03 15:33:50,964 basehttp "POST /checkin/checkins/24/check/ HTTP/1.1" 200 333
+INFO 2025-07-03 15:33:50,994 basehttp "GET /checkin/community/ HTTP/1.1" 200 2
+INFO 2025-07-03 15:34:21,019 basehttp "POST /checkin/checkins/24/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 15:34:51,021 basehttp "POST /checkin/checkins/24/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 15:34:51,897 basehttp "POST /checkin/checkins/24/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 15:34:55,180 basehttp "POST /checkin/checkins/24/study/update/ HTTP/1.1" 200 345
+INFO 2025-07-03 15:34:55,243 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3016
+INFO 2025-07-03 15:35:00,292 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3016
+INFO 2025-07-03 15:35:00,331 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3016
+INFO 2025-07-03 15:35:01,547 basehttp "POST /checkin/checkins/records/23/share/ HTTP/1.1" 200 363
+INFO 2025-07-03 15:35:01,571 basehttp "GET /checkin/community/ HTTP/1.1" 200 348
+INFO 2025-07-03 15:35:03,896 basehttp "GET /checkin/community/ HTTP/1.1" 200 348
+INFO 2025-07-03 15:35:05,297 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3028
+INFO 2025-07-03 15:35:05,351 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3028
+INFO 2025-07-03 15:35:05,615 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3028
+INFO 2025-07-03 15:35:06,234 basehttp "GET /checkin/community/ HTTP/1.1" 200 348
+INFO 2025-07-03 15:35:09,387 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3028
+INFO 2025-07-03 15:35:10,304 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3028
+INFO 2025-07-03 15:35:10,345 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3028
+INFO 2025-07-03 15:35:10,641 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3028
+INFO 2025-07-03 15:35:10,678 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3028
+INFO 2025-07-03 15:35:13,668 basehttp "DELETE /checkin/checkins/24/delete/ HTTP/1.1" 200 62
+INFO 2025-07-03 15:35:14,412 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2066
+INFO 2025-07-03 15:35:15,280 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2066
+INFO 2025-07-03 15:35:15,431 basehttp "DELETE /checkin/checkins/23/delete/ HTTP/1.1" 200 62
+INFO 2025-07-03 15:35:15,639 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1504
+INFO 2025-07-03 15:35:18,177 basehttp "DELETE /checkin/checkins/22/delete/ HTTP/1.1" 200 62
+INFO 2025-07-03 15:35:19,439 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 928
+INFO 2025-07-03 15:35:20,276 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 928
+INFO 2025-07-03 15:35:20,566 basehttp "DELETE /checkin/checkins/21/delete/ HTTP/1.1" 200 62
+INFO 2025-07-03 15:35:25,656 basehttp "GET /checkin/community/ HTTP/1.1" 200 342
+INFO 2025-07-03 15:35:26,372 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-07-03 15:35:26,778 basehttp "GET /checkin/community/ HTTP/1.1" 200 342
+INFO 2025-07-03 15:35:27,857 basehttp "GET /checkin/community/ HTTP/1.1" 200 342
+INFO 2025-07-03 15:35:28,370 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-07-03 15:35:29,379 basehttp "GET /checkin/community/ HTTP/1.1" 200 342
+INFO 2025-07-03 15:35:29,967 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-07-03 15:35:31,718 basehttp "GET /checkin/community/ HTTP/1.1" 200 342
+INFO 2025-07-03 15:35:35,155 basehttp "GET /checkin/community/ HTTP/1.1" 200 342
+INFO 2025-07-03 15:35:35,790 basehttp "GET /checkin/community/ HTTP/1.1" 200 342
+INFO 2025-07-03 15:35:36,875 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2
+INFO 2025-07-03 15:36:11,613 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 448
+INFO 2025-07-03 15:43:41,015 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:43:44,717 basehttp "GET /accounts/ HTTP/1.1" 200 194791
+INFO 2025-07-03 15:43:44,774 basehttp "GET /static/accounts/css/styles.css HTTP/1.1" 304 0
+INFO 2025-07-03 15:43:45,364 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 15:43:45,388 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 381
+INFO 2025-07-03 15:43:45,394 basehttp "GET /checkin/community/ HTTP/1.1" 200 342
+INFO 2025-07-03 15:43:45,397 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 15:43:45,400 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 15:43:45,406 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 15:43:45,426 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 15:43:45,458 basehttp "GET /checkin/community/ HTTP/1.1" 200 342
+INFO 2025-07-03 15:43:45,461 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 15:43:45,461 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 381
+INFO 2025-07-03 15:43:49,873 basehttp "POST /checkin/checkins/25/check/ HTTP/1.1" 200 347
+INFO 2025-07-03 15:43:49,921 basehttp "GET /checkin/community/ HTTP/1.1" 200 342
+INFO 2025-07-03 15:44:00,947 basehttp "GET /accounts/ HTTP/1.1" 200 194791
+INFO 2025-07-03 15:44:01,176 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 15:44:01,183 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 15:44:01,194 basehttp "GET /checkin/community/ HTTP/1.1" 200 342
+INFO 2025-07-03 15:44:01,232 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 15:44:01,233 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 15:44:01,241 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 15:44:01,293 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 985
+INFO 2025-07-03 15:44:01,303 basehttp "GET /checkin/community/ HTTP/1.1" 200 342
+INFO 2025-07-03 15:44:01,309 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 15:44:01,322 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 985
+INFO 2025-07-03 15:44:11,950 basehttp "GET /accounts/ HTTP/1.1" 200 194791
+INFO 2025-07-03 15:44:12,152 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 15:44:12,156 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 15:44:12,159 basehttp "GET /checkin/community/ HTTP/1.1" 200 342
+INFO 2025-07-03 15:44:12,160 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 15:44:12,189 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 15:44:12,189 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 985
+INFO 2025-07-03 15:44:12,193 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 15:44:12,207 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 15:44:12,223 basehttp "GET /checkin/community/ HTTP/1.1" 200 342
+INFO 2025-07-03 15:44:12,231 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 985
+INFO 2025-07-03 15:44:48,884 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 423
+INFO 2025-07-03 15:44:50,858 basehttp "POST /checkin/checkins/26/check/ HTTP/1.1" 200 333
+INFO 2025-07-03 15:44:50,876 basehttp "GET /checkin/community/ HTTP/1.1" 200 342
+INFO 2025-07-03 15:48:26,102 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 15:48:27,092 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:48:47,366 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 15:48:48,451 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:49:08,453 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 15:49:09,459 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:50:38,707 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 15:50:39,728 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:51:01,227 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:51:02,772 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:51:12,150 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:51:13,294 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:51:23,684 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:51:24,926 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 15:52:09,632 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 15:52:10,630 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 16:08:32,792 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 16:08:36,602 basehttp "GET /accounts/ HTTP/1.1" 200 189412
+INFO 2025-07-03 16:08:36,662 basehttp "GET /static/accounts/css/styles.css HTTP/1.1" 304 0
+INFO 2025-07-03 16:08:39,070 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 16:08:39,116 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 16:08:39,120 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 16:08:39,122 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 16:08:39,134 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1747
+INFO 2025-07-03 16:08:39,139 basehttp "GET /checkin/community/ HTTP/1.1" 200 283
+INFO 2025-07-03 16:08:39,141 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 16:08:39,164 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 16:08:39,198 basehttp "GET /checkin/community/ HTTP/1.1" 200 283
+INFO 2025-07-03 16:08:39,219 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1747
+ERROR 2025-07-03 16:08:41,956 log Internal Server Error: /checkin/checkins/25/session/end/
+ERROR 2025-07-03 16:08:41,956 basehttp "POST /checkin/checkins/25/session/end/ HTTP/1.1" 500 91
+WARNING 2025-07-03 16:08:44,351 log Not Found: /checkin/checkins/25/session/end/
+WARNING 2025-07-03 16:08:44,352 basehttp "POST /checkin/checkins/25/session/end/ HTTP/1.1" 404 55
+WARNING 2025-07-03 16:08:44,903 log Not Found: /checkin/checkins/25/session/end/
+WARNING 2025-07-03 16:08:44,903 basehttp "POST /checkin/checkins/25/session/end/ HTTP/1.1" 404 55
+INFO 2025-07-03 16:08:52,302 basehttp "DELETE /checkin/checkins/25/delete/ HTTP/1.1" 200 62
+INFO 2025-07-03 16:08:54,050 basehttp "DELETE /checkin/checkins/26/delete/ HTTP/1.1" 200 62
+INFO 2025-07-03 16:09:00,475 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 357
+INFO 2025-07-03 16:09:03,246 basehttp "POST /checkin/checkins/27/check/ HTTP/1.1" 200 333
+INFO 2025-07-03 16:09:03,265 basehttp "GET /checkin/community/ HTTP/1.1" 200 283
+INFO 2025-07-03 16:09:33,292 basehttp "POST /checkin/checkins/27/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 16:10:03,285 basehttp "POST /checkin/checkins/27/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 16:10:05,957 basehttp "POST /checkin/checkins/27/study/update/ HTTP/1.1" 200 345
+INFO 2025-07-03 16:10:05,991 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 862
+INFO 2025-07-03 16:10:11,798 basehttp "POST /checkin/checkins/records/26/share/ HTTP/1.1" 200 363
+INFO 2025-07-03 16:10:11,825 basehttp "GET /checkin/community/ HTTP/1.1" 200 566
+ERROR 2025-07-03 16:10:14,445 log Internal Server Error: /checkin/checkins/27/session/end/
+ERROR 2025-07-03 16:10:14,446 basehttp "POST /checkin/checkins/27/session/end/ HTTP/1.1" 500 91
+INFO 2025-07-03 16:10:16,356 basehttp "GET /checkin/community/ HTTP/1.1" 200 565
+INFO 2025-07-03 16:10:18,443 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 563
+INFO 2025-07-03 16:13:48,624 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 16:13:50,119 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 16:14:00,738 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 16:14:02,110 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 16:14:03,013 basehttp "GET /accounts/ HTTP/1.1" 200 189631
+INFO 2025-07-03 16:14:03,460 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 16:14:04,542 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 16:14:04,588 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 563
+INFO 2025-07-03 16:14:04,589 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 16:14:04,612 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 16:14:04,619 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 16:14:04,622 basehttp "GET /checkin/community/ HTTP/1.1" 200 565
+INFO 2025-07-03 16:14:04,654 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 16:14:04,699 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 16:14:04,699 basehttp "GET /checkin/community/ HTTP/1.1" 200 565
+INFO 2025-07-03 16:14:04,712 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 563
+INFO 2025-07-03 16:14:16,113 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 358
+INFO 2025-07-03 16:14:17,992 basehttp "POST /checkin/checkins/28/check/ HTTP/1.1" 200 333
+INFO 2025-07-03 16:14:18,013 basehttp "GET /checkin/community/ HTTP/1.1" 200 565
+INFO 2025-07-03 16:14:48,020 basehttp "POST /checkin/checkins/28/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 16:15:18,052 basehttp "POST /checkin/checkins/28/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 16:15:23,401 basehttp "POST /checkin/checkins/28/study/update/ HTTP/1.1" 200 345
+INFO 2025-07-03 16:15:23,451 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1426
+INFO 2025-07-03 16:15:25,476 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1426
+INFO 2025-07-03 16:15:26,831 basehttp "GET /accounts/ HTTP/1.1" 200 189631
+INFO 2025-07-03 16:15:27,542 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 16:15:27,563 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 16:15:27,573 basehttp "GET /checkin/community/ HTTP/1.1" 200 565
+INFO 2025-07-03 16:15:27,575 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 16:15:27,593 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 16:15:27,603 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 16:15:27,635 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1426
+INFO 2025-07-03 16:15:27,638 basehttp "GET /checkin/community/ HTTP/1.1" 200 565
+INFO 2025-07-03 16:15:27,641 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 16:15:27,663 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1426
+INFO 2025-07-03 16:15:28,615 basehttp "POST /checkin/checkins/28/session/end/ HTTP/1.1" 200 344
+INFO 2025-07-03 16:15:28,675 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1115
+INFO 2025-07-03 16:15:29,367 basehttp "POST /checkin/checkins/records/27/share/ HTTP/1.1" 200 350
+INFO 2025-07-03 16:15:29,436 basehttp "GET /checkin/community/ HTTP/1.1" 200 835
+INFO 2025-07-03 16:15:29,452 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1115
+INFO 2025-07-03 16:15:32,305 basehttp "GET /checkin/community/ HTTP/1.1" 200 835
+INFO 2025-07-03 16:15:34,530 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1115
+INFO 2025-07-03 16:15:35,818 basehttp "GET /checkin/community/ HTTP/1.1" 200 835
+INFO 2025-07-03 16:15:36,355 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1115
+INFO 2025-07-03 16:19:48,583 basehttp "GET /accounts/ HTTP/1.1" 200 190356
+INFO 2025-07-03 16:19:50,090 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 16:19:50,105 basehttp "GET /checkin/community/ HTTP/1.1" 200 835
+INFO 2025-07-03 16:19:50,105 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 16:19:50,106 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 16:19:50,110 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 16:19:50,125 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 16:19:50,133 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1115
+INFO 2025-07-03 16:19:50,150 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 16:19:50,155 basehttp "GET /checkin/community/ HTTP/1.1" 200 835
+INFO 2025-07-03 16:19:50,168 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1115
+INFO 2025-07-03 16:19:54,786 basehttp "GET /checkin/community/ HTTP/1.1" 200 835
+INFO 2025-07-03 16:19:55,735 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1115
+INFO 2025-07-03 16:20:06,432 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 358
+INFO 2025-07-03 16:20:09,163 basehttp "POST /checkin/checkins/29/check/ HTTP/1.1" 200 333
+INFO 2025-07-03 16:20:09,184 basehttp "GET /checkin/community/ HTTP/1.1" 200 835
+INFO 2025-07-03 16:20:39,208 basehttp "POST /checkin/checkins/29/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 16:21:09,209 basehttp "POST /checkin/checkins/29/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 16:21:12,203 basehttp "POST /checkin/checkins/29/study/update/ HTTP/1.1" 200 345
+INFO 2025-07-03 16:21:12,261 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1978
+INFO 2025-07-03 16:21:14,184 basehttp "POST /checkin/checkins/records/28/share/ HTTP/1.1" 200 351
+INFO 2025-07-03 16:21:14,218 basehttp "GET /checkin/community/ HTTP/1.1" 200 1106
+INFO 2025-07-03 16:21:14,240 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1978
+INFO 2025-07-03 16:21:18,196 basehttp "POST /checkin/checkins/29/session/end/ HTTP/1.1" 200 344
+INFO 2025-07-03 16:21:18,218 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1667
+WARNING 2025-07-03 16:21:19,737 log Bad Request: /checkin/checkins/records/28/share/
+WARNING 2025-07-03 16:21:19,739 basehttp "POST /checkin/checkins/records/28/share/ HTTP/1.1" 400 79
+INFO 2025-07-03 16:21:21,029 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1667
+INFO 2025-07-03 16:23:33,454 basehttp "GET /accounts/ HTTP/1.1" 200 193702
+INFO 2025-07-03 16:23:33,501 basehttp "GET /static/accounts/css/styles.css HTTP/1.1" 304 0
+INFO 2025-07-03 16:23:34,919 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 16:23:34,928 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 16:23:34,933 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 16:23:34,940 basehttp "GET /checkin/community/ HTTP/1.1" 200 1105
+INFO 2025-07-03 16:23:34,956 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 16:23:35,001 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 16:23:35,018 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 16:23:35,024 basehttp "GET /checkin/community/ HTTP/1.1" 200 1105
+INFO 2025-07-03 16:23:35,025 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1667
+INFO 2025-07-03 16:23:35,065 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 1667
+INFO 2025-07-03 16:23:42,623 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 358
+INFO 2025-07-03 16:23:45,171 basehttp "POST /checkin/checkins/30/check/ HTTP/1.1" 200 333
+INFO 2025-07-03 16:23:45,195 basehttp "GET /checkin/community/ HTTP/1.1" 200 1105
+INFO 2025-07-03 16:24:15,215 basehttp "POST /checkin/checkins/30/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 16:24:45,220 basehttp "POST /checkin/checkins/30/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 16:24:47,940 basehttp "POST /checkin/checkins/30/study/update/ HTTP/1.1" 200 345
+INFO 2025-07-03 16:24:47,997 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2530
+INFO 2025-07-03 16:24:49,536 basehttp "POST /checkin/checkins/records/29/share/ HTTP/1.1" 200 351
+INFO 2025-07-03 16:24:49,564 basehttp "GET /checkin/community/ HTTP/1.1" 200 1376
+INFO 2025-07-03 16:24:49,579 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2530
+INFO 2025-07-03 16:24:53,238 basehttp "POST /checkin/checkins/30/session/end/ HTTP/1.1" 200 344
+INFO 2025-07-03 16:24:53,305 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2219
+WARNING 2025-07-03 16:24:54,078 log Bad Request: /checkin/checkins/records/29/share/
+WARNING 2025-07-03 16:24:54,080 basehttp "POST /checkin/checkins/records/29/share/ HTTP/1.1" 400 79
+INFO 2025-07-03 16:24:54,821 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2219
+INFO 2025-07-03 16:24:57,468 basehttp "GET /accounts/ HTTP/1.1" 200 193702
+INFO 2025-07-03 16:24:58,173 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 16:24:58,181 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 16:24:58,193 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 16:24:58,207 basehttp "GET /checkin/community/ HTTP/1.1" 200 1375
+INFO 2025-07-03 16:24:58,223 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 16:24:58,232 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 16:24:58,252 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 16:24:58,279 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2219
+INFO 2025-07-03 16:24:58,298 basehttp "GET /checkin/community/ HTTP/1.1" 200 1375
+INFO 2025-07-03 16:24:58,330 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2219
+INFO 2025-07-03 16:29:26,443 basehttp "GET /accounts/ HTTP/1.1" 200 191643
+INFO 2025-07-03 16:29:28,203 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 16:29:28,227 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 16:29:28,233 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 16:29:28,268 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 16:29:28,275 basehttp "GET /checkin/community/ HTTP/1.1" 200 1375
+INFO 2025-07-03 16:29:28,299 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 16:29:28,326 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 16:29:28,351 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2219
+INFO 2025-07-03 16:29:28,361 basehttp "GET /checkin/community/ HTTP/1.1" 200 1375
+INFO 2025-07-03 16:29:28,418 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2219
+INFO 2025-07-03 16:29:37,518 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 358
+INFO 2025-07-03 16:29:40,052 basehttp "POST /checkin/checkins/31/check/ HTTP/1.1" 200 333
+INFO 2025-07-03 16:29:40,088 basehttp "GET /checkin/community/ HTTP/1.1" 200 1375
+INFO 2025-07-03 16:30:10,119 basehttp "POST /checkin/checkins/31/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 16:30:40,109 basehttp "POST /checkin/checkins/31/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 16:30:41,129 basehttp "POST /checkin/checkins/31/study/update/ HTTP/1.1" 200 345
+INFO 2025-07-03 16:30:41,230 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3082
+INFO 2025-07-03 16:30:42,418 basehttp "POST /checkin/checkins/records/30/share/ HTTP/1.1" 200 351
+INFO 2025-07-03 16:30:42,447 basehttp "GET /checkin/community/ HTTP/1.1" 200 1646
+INFO 2025-07-03 16:30:45,047 basehttp "POST /checkin/checkins/31/session/end/ HTTP/1.1" 200 344
+INFO 2025-07-03 16:30:45,134 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2771
+WARNING 2025-07-03 16:30:47,048 log Bad Request: /checkin/checkins/records/30/share/
+WARNING 2025-07-03 16:30:47,049 basehttp "POST /checkin/checkins/records/30/share/ HTTP/1.1" 400 79
+INFO 2025-07-03 16:37:22,844 basehttp "GET /accounts/ HTTP/1.1" 200 192408
+INFO 2025-07-03 16:37:24,426 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 16:37:24,439 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 16:37:24,449 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 16:37:24,477 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 16:37:24,496 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 16:37:24,507 basehttp "GET /checkin/community/ HTTP/1.1" 200 1645
+INFO 2025-07-03 16:37:24,535 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2771
+INFO 2025-07-03 16:37:24,556 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 16:37:24,574 basehttp "GET /checkin/community/ HTTP/1.1" 200 1645
+INFO 2025-07-03 16:37:24,597 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 2771
+INFO 2025-07-03 16:37:32,360 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 348
+INFO 2025-07-03 16:37:36,284 basehttp "POST /checkin/checkins/32/check/ HTTP/1.1" 200 323
+INFO 2025-07-03 16:37:36,333 basehttp "GET /checkin/community/ HTTP/1.1" 200 1645
+INFO 2025-07-03 16:38:06,424 basehttp "POST /checkin/checkins/32/study/update/ HTTP/1.1" 200 318
+INFO 2025-07-03 16:38:36,360 basehttp "POST /checkin/checkins/32/study/update/ HTTP/1.1" 200 318
+INFO 2025-07-03 16:38:39,068 basehttp "POST /checkin/checkins/32/study/update/ HTTP/1.1" 200 335
+INFO 2025-07-03 16:38:39,174 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3605
+INFO 2025-07-03 16:38:40,264 basehttp "POST /checkin/checkins/records/31/share/ HTTP/1.1" 200 341
+INFO 2025-07-03 16:38:40,314 basehttp "GET /checkin/community/ HTTP/1.1" 200 1906
+INFO 2025-07-03 16:38:40,375 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3605
+INFO 2025-07-03 16:38:43,859 basehttp "POST /checkin/checkins/32/session/end/ HTTP/1.1" 200 334
+INFO 2025-07-03 16:38:43,952 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3303
+INFO 2025-07-03 16:42:29,857 basehttp "GET /accounts/ HTTP/1.1" 200 192643
+INFO 2025-07-03 16:42:29,898 basehttp "GET /static/accounts/css/styles.css HTTP/1.1" 304 0
+INFO 2025-07-03 16:42:31,511 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 16:42:31,540 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 16:42:31,571 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 16:42:31,577 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 16:42:31,598 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 16:42:31,614 basehttp "GET /checkin/community/ HTTP/1.1" 200 1905
+INFO 2025-07-03 16:42:31,630 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3303
+INFO 2025-07-03 16:42:31,657 basehttp "GET /checkin/community/ HTTP/1.1" 200 1905
+INFO 2025-07-03 16:42:31,671 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 16:42:31,701 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3303
+INFO 2025-07-03 16:42:39,332 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 358
+INFO 2025-07-03 16:42:41,304 basehttp "POST /checkin/checkins/33/check/ HTTP/1.1" 200 333
+INFO 2025-07-03 16:42:41,354 basehttp "GET /checkin/community/ HTTP/1.1" 200 1905
+INFO 2025-07-03 16:43:11,363 basehttp "POST /checkin/checkins/33/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 16:43:41,363 basehttp "POST /checkin/checkins/33/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 16:43:43,749 basehttp "POST /checkin/checkins/33/study/update/ HTTP/1.1" 200 345
+INFO 2025-07-03 16:43:43,871 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4167
+INFO 2025-07-03 16:43:45,150 basehttp "POST /checkin/checkins/records/32/share/ HTTP/1.1" 200 351
+INFO 2025-07-03 16:43:45,224 basehttp "GET /checkin/community/ HTTP/1.1" 200 2176
+INFO 2025-07-03 16:43:45,279 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4167
+INFO 2025-07-03 16:43:48,173 basehttp "POST /checkin/checkins/33/session/end/ HTTP/1.1" 200 344
+INFO 2025-07-03 16:43:48,283 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 3855
+INFO 2025-07-03 16:44:14,151 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 347
+INFO 2025-07-03 16:44:26,484 basehttp "POST /checkin/checkins/34/check/ HTTP/1.1" 200 322
+INFO 2025-07-03 16:44:26,520 basehttp "GET /checkin/community/ HTTP/1.1" 200 2175
+INFO 2025-07-03 16:44:56,558 basehttp "POST /checkin/checkins/34/study/update/ HTTP/1.1" 200 317
+INFO 2025-07-03 16:45:26,556 basehttp "POST /checkin/checkins/34/study/update/ HTTP/1.1" 200 317
+INFO 2025-07-03 16:45:56,981 basehttp "POST /checkin/checkins/34/study/update/ HTTP/1.1" 200 317
+INFO 2025-07-03 16:46:26,972 basehttp "POST /checkin/checkins/34/study/update/ HTTP/1.1" 200 318
+INFO 2025-07-03 16:47:09,925 basehttp "GET /accounts/ HTTP/1.1" 200 191524
+INFO 2025-07-03 16:47:11,788 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 16:47:11,810 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 16:47:11,877 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 16:47:11,878 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 16:47:11,897 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 16:47:12,115 basehttp "GET /checkin/community/ HTTP/1.1" 200 2175
+INFO 2025-07-03 16:47:12,123 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4671
+INFO 2025-07-03 16:47:12,157 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 16:47:12,160 basehttp "GET /checkin/community/ HTTP/1.1" 200 2175
+INFO 2025-07-03 16:47:12,384 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4671
+INFO 2025-07-03 16:47:13,541 basehttp "POST /checkin/checkins/34/session/end/ HTTP/1.1" 200 333
+INFO 2025-07-03 16:47:13,756 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4385
+INFO 2025-07-03 16:47:17,249 basehttp "POST /checkin/checkins/records/33/share/ HTTP/1.1" 200 339
+INFO 2025-07-03 16:47:17,350 basehttp "GET /checkin/community/ HTTP/1.1" 200 2434
+INFO 2025-07-03 16:47:17,488 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4385
+INFO 2025-07-03 16:47:19,646 basehttp "GET /accounts/ HTTP/1.1" 200 191524
+INFO 2025-07-03 16:47:20,368 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 16:47:20,371 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 16:47:20,397 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 16:47:20,461 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 16:47:20,462 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 16:47:20,473 basehttp "GET /checkin/community/ HTTP/1.1" 200 2434
+INFO 2025-07-03 16:47:20,517 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 16:47:20,608 basehttp "GET /checkin/community/ HTTP/1.1" 200 2434
+INFO 2025-07-03 16:47:20,708 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4385
+INFO 2025-07-03 16:47:20,870 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4385
+INFO 2025-07-03 16:47:24,446 basehttp "POST /checkin/checkins/34/study/update/ HTTP/1.1" 200 335
+WARNING 2025-07-03 16:47:25,539 log Bad Request: /checkin/checkins/records/33/share/
+WARNING 2025-07-03 16:47:25,539 basehttp "POST /checkin/checkins/records/33/share/ HTTP/1.1" 400 79
+INFO 2025-07-03 16:47:28,298 basehttp "GET /checkin/community/ HTTP/1.1" 200 2436
+INFO 2025-07-03 16:47:33,387 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4387
+INFO 2025-07-03 16:47:43,788 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 349
+INFO 2025-07-03 16:47:46,461 basehttp "POST /checkin/checkins/35/check/ HTTP/1.1" 200 324
+INFO 2025-07-03 16:47:46,503 basehttp "GET /checkin/community/ HTTP/1.1" 200 2436
+INFO 2025-07-03 16:48:06,474 basehttp "GET /accounts/ HTTP/1.1" 200 195438
+INFO 2025-07-03 16:48:07,118 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 16:48:07,131 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 16:48:07,146 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 16:48:07,201 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 16:48:07,201 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 16:48:07,216 basehttp "GET /checkin/community/ HTTP/1.1" 200 2436
+INFO 2025-07-03 16:48:07,250 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 16:48:07,313 basehttp "GET /checkin/community/ HTTP/1.1" 200 2436
+INFO 2025-07-03 16:48:07,346 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 5206
+INFO 2025-07-03 16:48:07,453 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 5206
+INFO 2025-07-03 16:48:18,829 basehttp "GET /accounts/ HTTP/1.1" 200 195438
+INFO 2025-07-03 16:48:19,532 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 16:48:19,541 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 16:48:19,554 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 16:48:19,576 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 16:48:19,581 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 16:48:19,590 basehttp "GET /checkin/community/ HTTP/1.1" 200 2436
+INFO 2025-07-03 16:48:19,612 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 16:48:19,630 basehttp "GET /checkin/community/ HTTP/1.1" 200 2436
+INFO 2025-07-03 16:48:19,651 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 5206
+INFO 2025-07-03 16:48:19,699 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 5206
+INFO 2025-07-03 16:48:25,272 basehttp "GET /accounts/ HTTP/1.1" 200 195438
+INFO 2025-07-03 16:48:25,920 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 16:48:25,938 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 16:48:25,941 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 16:48:26,006 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 16:48:26,017 basehttp "GET /checkin/community/ HTTP/1.1" 200 2436
+INFO 2025-07-03 16:48:26,020 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 16:48:26,030 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 16:48:26,104 basehttp "GET /checkin/community/ HTTP/1.1" 200 2436
+INFO 2025-07-03 16:48:26,124 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 5206
+INFO 2025-07-03 16:48:26,227 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 5206
+INFO 2025-07-03 16:48:29,875 basehttp "GET /accounts/ HTTP/1.1" 200 195438
+INFO 2025-07-03 16:48:30,593 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 16:48:30,635 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 16:48:30,636 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 16:48:30,651 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 16:48:30,669 basehttp "GET /checkin/community/ HTTP/1.1" 200 2436
+INFO 2025-07-03 16:48:30,704 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 16:48:30,710 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 16:48:30,784 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 5206
+INFO 2025-07-03 16:48:30,792 basehttp "GET /checkin/community/ HTTP/1.1" 200 2436
+INFO 2025-07-03 16:48:30,886 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 5206
+INFO 2025-07-03 16:48:36,508 basehttp "GET /accounts/ HTTP/1.1" 200 195438
+INFO 2025-07-03 16:48:37,153 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 16:48:37,154 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 16:48:37,162 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 16:48:37,215 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 16:48:37,218 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 16:48:37,218 basehttp "GET /checkin/community/ HTTP/1.1" 200 2436
+INFO 2025-07-03 16:48:37,265 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 16:48:37,295 basehttp "GET /checkin/community/ HTTP/1.1" 200 2436
+INFO 2025-07-03 16:48:37,359 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 5206
+INFO 2025-07-03 16:48:37,471 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 5206
+INFO 2025-07-03 16:48:53,653 basehttp "GET /accounts/ HTTP/1.1" 200 195438
+INFO 2025-07-03 16:48:54,377 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 16:48:54,378 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 16:48:54,388 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 16:48:54,437 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 16:48:54,438 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 16:48:54,438 basehttp "GET /checkin/community/ HTTP/1.1" 200 2436
+INFO 2025-07-03 16:48:54,463 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 16:48:54,514 basehttp "GET /checkin/community/ HTTP/1.1" 200 2436
+INFO 2025-07-03 16:48:54,545 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 5206
+INFO 2025-07-03 16:48:54,649 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 5206
+INFO 2025-07-03 16:48:56,341 basehttp "POST /checkin/checkins/35/session/end/ HTTP/1.1" 200 335
+INFO 2025-07-03 16:48:57,522 basehttp "POST /checkin/checkins/records/34/share/ HTTP/1.1" 200 341
+INFO 2025-07-03 16:48:57,710 basehttp "GET /checkin/community/ HTTP/1.1" 200 2697
+INFO 2025-07-03 16:48:57,765 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4921
+INFO 2025-07-03 16:49:05,226 basehttp "GET /accounts/ HTTP/1.1" 200 195438
+INFO 2025-07-03 16:49:05,913 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 16:49:05,924 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 16:49:05,925 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 16:49:05,955 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 16:49:05,970 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 16:49:06,005 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 16:49:06,010 basehttp "GET /checkin/community/ HTTP/1.1" 200 2697
+INFO 2025-07-03 16:49:06,071 basehttp "GET /checkin/community/ HTTP/1.1" 200 2697
+INFO 2025-07-03 16:49:06,094 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4921
+INFO 2025-07-03 16:49:06,185 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4921
+INFO 2025-07-03 16:49:11,486 basehttp "GET /checkin/community/ HTTP/1.1" 200 2697
+INFO 2025-07-03 16:49:15,387 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4921
+INFO 2025-07-03 16:49:16,917 basehttp "POST /checkin/checkins/35/study/update/ HTTP/1.1" 200 336
+INFO 2025-07-03 16:49:18,610 basehttp "POST /checkin/checkins/35/study/update/ HTTP/1.1" 200 336
+WARNING 2025-07-03 16:49:19,723 log Bad Request: /checkin/checkins/records/34/share/
+WARNING 2025-07-03 16:49:19,724 basehttp "POST /checkin/checkins/records/34/share/ HTTP/1.1" 400 79
+INFO 2025-07-03 16:49:20,725 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4922
+INFO 2025-07-03 16:49:30,799 basehttp "GET /checkin/community/ HTTP/1.1" 200 2698
+INFO 2025-07-03 16:53:03,219 basehttp "GET /accounts/ HTTP/1.1" 200 197762
+INFO 2025-07-03 16:53:04,896 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 16:53:04,903 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 16:53:04,903 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 16:53:04,941 basehttp "GET /checkin/community/ HTTP/1.1" 200 2698
+INFO 2025-07-03 16:53:04,970 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 16:53:04,974 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 16:53:04,981 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 16:53:05,066 basehttp "GET /checkin/community/ HTTP/1.1" 200 2698
+INFO 2025-07-03 16:53:05,071 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4922
+INFO 2025-07-03 16:53:05,146 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 4922
+INFO 2025-07-03 16:53:13,805 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 346
+INFO 2025-07-03 16:53:16,561 basehttp "POST /checkin/checkins/36/check/ HTTP/1.1" 200 322
+INFO 2025-07-03 16:53:16,615 basehttp "GET /checkin/community/ HTTP/1.1" 200 2698
+INFO 2025-07-03 16:53:46,630 basehttp "POST /checkin/checkins/36/study/update/ HTTP/1.1" 200 317
+INFO 2025-07-03 16:54:16,651 basehttp "POST /checkin/checkins/36/study/update/ HTTP/1.1" 200 317
+INFO 2025-07-03 16:54:18,577 basehttp "POST /checkin/checkins/36/study/update/ HTTP/1.1" 200 334
+INFO 2025-07-03 16:54:20,564 basehttp "POST /checkin/checkins/records/35/share/ HTTP/1.1" 200 340
+INFO 2025-07-03 16:54:20,741 basehttp "GET /checkin/community/ HTTP/1.1" 200 2958
+INFO 2025-07-03 16:54:20,844 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 5752
+INFO 2025-07-03 16:54:27,040 basehttp "GET /accounts/ HTTP/1.1" 200 197762
+INFO 2025-07-03 16:54:28,607 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 16:54:28,673 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 16:54:28,687 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 16:54:28,705 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 16:54:28,780 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 16:54:28,805 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 16:54:28,812 basehttp "GET /checkin/community/ HTTP/1.1" 200 2958
+INFO 2025-07-03 16:54:28,899 basehttp "GET /checkin/community/ HTTP/1.1" 200 2958
+INFO 2025-07-03 16:54:28,930 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 5752
+INFO 2025-07-03 16:54:29,051 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 5752
+INFO 2025-07-03 16:55:09,725 basehttp "POST /checkin/checkins/36/session/end/ HTTP/1.1" 200 333
+INFO 2025-07-03 16:55:10,924 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 5451
+INFO 2025-07-03 16:55:12,591 basehttp "GET /checkin/community/ HTTP/1.1" 200 2957
+INFO 2025-07-03 16:57:00,772 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 16:57:00,778 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 16:57:02,570 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 16:57:02,573 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 16:58:18,711 basehttp "GET /accounts/ HTTP/1.1" 200 199139
+INFO 2025-07-03 16:58:20,219 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 16:58:20,262 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 16:58:20,279 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 16:58:20,322 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 16:58:20,357 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 16:58:20,384 basehttp "GET /checkin/community/ HTTP/1.1" 200 2957
+INFO 2025-07-03 16:58:20,427 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 16:58:20,492 basehttp "GET /checkin/community/ HTTP/1.1" 200 2957
+INFO 2025-07-03 16:58:20,506 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 5451
+INFO 2025-07-03 16:58:20,614 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 5451
+INFO 2025-07-03 16:58:28,977 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 347
+INFO 2025-07-03 16:58:31,430 basehttp "POST /checkin/checkins/37/check/ HTTP/1.1" 200 322
+INFO 2025-07-03 16:58:31,520 basehttp "GET /checkin/community/ HTTP/1.1" 200 2957
+INFO 2025-07-03 16:59:01,513 basehttp "POST /checkin/checkins/37/study/update/ HTTP/1.1" 200 317
+INFO 2025-07-03 16:59:31,476 basehttp "POST /checkin/checkins/37/study/update/ HTTP/1.1" 200 317
+INFO 2025-07-03 16:59:33,128 basehttp "POST /checkin/checkins/37/study/update/ HTTP/1.1" 200 334
+INFO 2025-07-03 16:59:34,749 basehttp "POST /checkin/checkins/records/36/share/ HTTP/1.1" 200 340
+INFO 2025-07-03 16:59:35,090 basehttp "GET /checkin/community/ HTTP/1.1" 200 3217
+INFO 2025-07-03 16:59:35,156 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 5982
+INFO 2025-07-03 16:59:38,870 basehttp "GET /checkin/community/ HTTP/1.1" 200 3217
+INFO 2025-07-03 16:59:47,246 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 5982
+INFO 2025-07-03 17:00:00,095 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 360
+INFO 2025-07-03 17:00:04,625 basehttp "POST /checkin/checkins/38/check/ HTTP/1.1" 200 324
+INFO 2025-07-03 17:00:04,699 basehttp "GET /checkin/community/ HTTP/1.1" 200 3217
+INFO 2025-07-03 17:00:34,701 basehttp "POST /checkin/checkins/38/study/update/ HTTP/1.1" 200 319
+INFO 2025-07-03 17:01:04,682 basehttp "POST /checkin/checkins/38/study/update/ HTTP/1.1" 200 319
+INFO 2025-07-03 17:01:06,590 basehttp "POST /checkin/checkins/38/study/update/ HTTP/1.1" 200 336
+INFO 2025-07-03 17:01:08,183 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 6528
+INFO 2025-07-03 17:01:11,527 basehttp "GET /checkin/community/ HTTP/1.1" 200 3217
+INFO 2025-07-03 17:01:14,643 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 6528
+INFO 2025-07-03 17:01:15,853 basehttp "GET /checkin/community/ HTTP/1.1" 200 3217
+INFO 2025-07-03 17:01:17,831 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 6528
+INFO 2025-07-03 17:01:20,737 basehttp "GET /checkin/community/ HTTP/1.1" 200 3217
+INFO 2025-07-03 17:01:22,255 basehttp "GET /accounts/ HTTP/1.1" 200 199139
+INFO 2025-07-03 17:01:22,301 basehttp "GET /static/accounts/css/styles.css HTTP/1.1" 304 0
+INFO 2025-07-03 17:01:23,784 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 17:01:23,803 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 17:01:23,847 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 17:01:23,849 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 17:01:23,886 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 17:01:23,899 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 17:01:23,901 basehttp "GET /checkin/community/ HTTP/1.1" 200 3217
+INFO 2025-07-03 17:01:23,976 basehttp "GET /checkin/community/ HTTP/1.1" 200 3217
+INFO 2025-07-03 17:01:23,984 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 6528
+INFO 2025-07-03 17:01:24,090 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 6528
+INFO 2025-07-03 17:01:25,204 basehttp "GET /checkin/community/ HTTP/1.1" 200 3217
+INFO 2025-07-03 17:01:30,822 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 6528
+INFO 2025-07-03 17:01:32,386 basehttp "GET /checkin/community/ HTTP/1.1" 200 3217
+INFO 2025-07-03 17:01:40,670 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 6528
+INFO 2025-07-03 17:01:53,194 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 357
+INFO 2025-07-03 17:01:55,840 basehttp "POST /checkin/checkins/39/check/ HTTP/1.1" 200 333
+INFO 2025-07-03 17:01:55,889 basehttp "GET /checkin/community/ HTTP/1.1" 200 3217
+INFO 2025-07-03 17:02:25,917 basehttp "POST /checkin/checkins/39/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 17:02:55,911 basehttp "POST /checkin/checkins/39/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 17:03:05,755 basehttp "POST /checkin/checkins/39/study/update/ HTTP/1.1" 200 345
+INFO 2025-07-03 17:03:11,926 basehttp "POST /checkin/checkins/records/38/share/ HTTP/1.1" 200 363
+INFO 2025-07-03 17:03:12,123 basehttp "GET /checkin/community/ HTTP/1.1" 200 3500
+INFO 2025-07-03 17:03:12,191 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 7092
+INFO 2025-07-03 17:03:16,771 basehttp "GET /checkin/community/ HTTP/1.1" 200 3500
+INFO 2025-07-03 17:03:19,087 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 7092
+INFO 2025-07-03 17:03:30,902 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 358
+INFO 2025-07-03 17:03:33,678 basehttp "POST /checkin/checkins/40/check/ HTTP/1.1" 200 333
+INFO 2025-07-03 17:03:33,726 basehttp "GET /checkin/community/ HTTP/1.1" 200 3500
+INFO 2025-07-03 17:03:35,424 basehttp "GET /checkin/community/ HTTP/1.1" 200 3500
+INFO 2025-07-03 17:03:36,877 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 7937
+INFO 2025-07-03 17:03:37,684 basehttp "GET /checkin/community/ HTTP/1.1" 200 3500
+INFO 2025-07-03 17:03:38,944 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 7937
+INFO 2025-07-03 17:04:03,741 basehttp "POST /checkin/checkins/40/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 17:04:21,403 basehttp "GET /accounts/ HTTP/1.1" 200 199139
+INFO 2025-07-03 17:04:22,165 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 17:04:22,168 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 17:04:22,169 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 17:04:22,224 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 17:04:22,245 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 17:04:22,249 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 17:04:22,260 basehttp "GET /checkin/community/ HTTP/1.1" 200 3500
+INFO 2025-07-03 17:04:22,349 basehttp "GET /checkin/community/ HTTP/1.1" 200 3500
+INFO 2025-07-03 17:04:22,379 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 7939
+INFO 2025-07-03 17:04:22,509 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 7939
+INFO 2025-07-03 17:05:00,566 basehttp "GET /accounts/ HTTP/1.1" 200 199139
+INFO 2025-07-03 17:05:01,227 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 17:05:01,248 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 17:05:01,254 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 17:05:01,275 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 17:05:01,309 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 17:05:01,326 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 17:05:01,342 basehttp "GET /checkin/community/ HTTP/1.1" 200 3500
+INFO 2025-07-03 17:05:01,395 basehttp "GET /checkin/community/ HTTP/1.1" 200 3500
+INFO 2025-07-03 17:05:01,405 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 7939
+INFO 2025-07-03 17:05:01,478 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 7939
+INFO 2025-07-03 17:05:02,296 basehttp "POST /checkin/checkins/40/session/end/ HTTP/1.1" 200 344
+INFO 2025-07-03 17:05:05,753 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 7644
+INFO 2025-07-03 17:05:07,452 basehttp "GET /checkin/community/ HTTP/1.1" 200 3500
+INFO 2025-07-03 17:05:08,639 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 7644
+INFO 2025-07-03 17:05:58,985 basehttp "GET /accounts/ HTTP/1.1" 200 199139
+INFO 2025-07-03 17:05:59,716 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 17:05:59,739 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 17:05:59,739 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 17:05:59,747 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 17:05:59,794 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 17:05:59,815 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 17:05:59,815 basehttp "GET /checkin/community/ HTTP/1.1" 200 3500
+INFO 2025-07-03 17:05:59,861 basehttp "GET /checkin/community/ HTTP/1.1" 200 3500
+INFO 2025-07-03 17:05:59,876 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 7644
+INFO 2025-07-03 17:05:59,959 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 7644
+INFO 2025-07-03 17:06:19,622 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 347
+INFO 2025-07-03 17:06:23,098 basehttp "POST /checkin/checkins/41/check/ HTTP/1.1" 200 323
+INFO 2025-07-03 17:06:23,162 basehttp "GET /checkin/community/ HTTP/1.1" 200 3500
+INFO 2025-07-03 17:06:26,573 basehttp "GET /accounts/ HTTP/1.1" 200 199139
+INFO 2025-07-03 17:06:27,229 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 17:06:27,236 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 17:06:27,238 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 17:06:27,321 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 17:06:27,328 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 17:06:27,363 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 17:06:27,390 basehttp "GET /checkin/community/ HTTP/1.1" 200 3500
+INFO 2025-07-03 17:06:27,503 basehttp "GET /checkin/community/ HTTP/1.1" 200 3500
+INFO 2025-07-03 17:06:27,554 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 8458
+INFO 2025-07-03 17:06:27,680 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 8458
+INFO 2025-07-03 17:06:32,883 basehttp "GET /accounts/ HTTP/1.1" 200 199139
+INFO 2025-07-03 17:06:33,638 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 17:06:33,666 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 17:06:33,691 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 17:06:33,728 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 17:06:33,730 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 17:06:33,903 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 17:06:33,930 basehttp "GET /checkin/community/ HTTP/1.1" 200 3500
+INFO 2025-07-03 17:06:34,065 basehttp "GET /checkin/community/ HTTP/1.1" 200 3500
+INFO 2025-07-03 17:06:34,082 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 8459
+INFO 2025-07-03 17:06:34,270 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 8459
+INFO 2025-07-03 17:15:37,083 basehttp "GET /accounts/ HTTP/1.1" 200 208256
+INFO 2025-07-03 17:15:38,725 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 17:15:38,792 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 17:15:38,824 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 17:15:38,835 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 17:15:38,856 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 17:15:38,898 basehttp "GET /checkin/community/ HTTP/1.1" 200 3500
+INFO 2025-07-03 17:15:38,949 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 17:15:38,983 basehttp "GET /checkin/community/ HTTP/1.1" 200 3500
+INFO 2025-07-03 17:15:39,031 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 8460
+INFO 2025-07-03 17:15:39,138 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 8460
+INFO 2025-07-03 17:15:40,366 basehttp "POST /checkin/checkins/41/session/end/ HTTP/1.1" 200 334
+INFO 2025-07-03 17:15:46,441 basehttp "POST /checkin/checkins/records/40/share/ HTTP/1.1" 200 352
+INFO 2025-07-03 17:15:46,656 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:15:59,759 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 358
+INFO 2025-07-03 17:16:02,374 basehttp "POST /checkin/checkins/42/check/ HTTP/1.1" 200 333
+INFO 2025-07-03 17:16:02,467 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:16:04,217 basehttp "GET /accounts/ HTTP/1.1" 200 208256
+INFO 2025-07-03 17:16:04,999 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 17:16:05,010 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 17:16:05,023 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 17:16:05,080 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 17:16:05,103 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 17:16:05,160 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 17:16:05,178 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:16:05,317 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:16:05,356 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9032
+INFO 2025-07-03 17:16:05,539 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9032
+INFO 2025-07-03 17:16:09,553 basehttp "GET /accounts/ HTTP/1.1" 200 208256
+INFO 2025-07-03 17:16:10,297 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 17:16:10,308 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 17:16:10,332 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 17:16:10,394 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 17:16:10,433 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 17:16:10,450 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 17:16:10,473 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:16:10,591 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:16:10,638 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9032
+INFO 2025-07-03 17:16:10,836 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9032
+INFO 2025-07-03 17:16:16,763 basehttp "GET /accounts/ HTTP/1.1" 200 208256
+INFO 2025-07-03 17:16:17,593 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 17:16:17,656 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 17:16:17,659 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 17:16:17,661 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 17:16:17,742 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 17:16:17,758 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 17:16:17,805 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:16:17,910 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:16:17,950 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9033
+INFO 2025-07-03 17:16:18,132 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9033
+INFO 2025-07-03 17:20:24,402 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 17:20:24,617 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\models.py changed, reloading.
+INFO 2025-07-03 17:20:25,631 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 17:20:25,853 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 17:24:04,255 basehttp "GET /accounts/ HTTP/1.1" 200 202533
+INFO 2025-07-03 17:24:04,342 basehttp "GET /static/accounts/css/styles.css HTTP/1.1" 304 0
+INFO 2025-07-03 17:24:05,887 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 17:24:06,037 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 17:24:06,076 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 17:24:06,215 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:24:06,235 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 17:24:06,299 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 17:24:06,435 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 17:24:06,491 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:24:06,624 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9034
+INFO 2025-07-03 17:24:06,851 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9034
+INFO 2025-07-03 17:24:18,379 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 358
+INFO 2025-07-03 17:24:20,822 basehttp "POST /checkin/checkins/43/check/ HTTP/1.1" 200 333
+INFO 2025-07-03 17:24:20,891 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:24:24,697 basehttp "GET /accounts/ HTTP/1.1" 200 203333
+INFO 2025-07-03 17:24:25,352 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 17:24:25,362 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 17:24:25,369 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 17:24:25,423 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 17:24:25,444 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 17:24:25,485 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:24:25,489 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 17:24:25,585 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:24:25,674 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9879
+INFO 2025-07-03 17:24:25,841 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9879
+INFO 2025-07-03 17:24:31,474 basehttp "POST /checkin/checkins/42/session/end/ HTTP/1.1" 200 344
+INFO 2025-07-03 17:24:33,109 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9585
+INFO 2025-07-03 17:24:51,132 basehttp "POST /checkin/checkins/43/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 17:24:51,321 basehttp "POST /checkin/checkins/43/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 17:24:51,633 basehttp "POST /checkin/checkins/43/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 17:25:21,013 basehttp "POST /checkin/checkins/43/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 17:25:21,045 basehttp "POST /checkin/checkins/43/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 17:25:21,061 basehttp "POST /checkin/checkins/43/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 17:25:21,078 basehttp "POST /checkin/checkins/43/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 17:25:21,094 basehttp "POST /checkin/checkins/43/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 17:25:42,320 basehttp "POST /checkin/checkins/43/study/update/ HTTP/1.1" 200 345
+INFO 2025-07-03 17:25:43,642 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9292
+INFO 2025-07-03 17:25:44,794 basehttp "GET /accounts/ HTTP/1.1" 200 199139
+INFO 2025-07-03 17:25:45,547 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 17:25:45,578 basehttp "GET /focus/settings/ HTTP/1.1" 200 236
+INFO 2025-07-03 17:25:45,579 basehttp "GET /focus/history/ HTTP/1.1" 200 45
+INFO 2025-07-03 17:25:45,622 basehttp "GET /focus/session/active/ HTTP/1.1" 200 34
+INFO 2025-07-03 17:25:45,651 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 17:25:45,682 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:25:45,720 basehttp "GET /focus/stats/ HTTP/1.1" 200 335
+INFO 2025-07-03 17:25:45,817 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:25:45,893 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9292
+INFO 2025-07-03 17:25:46,040 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9292
+INFO 2025-07-03 17:25:48,401 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:25:49,481 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9292
+INFO 2025-07-03 17:25:50,070 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:25:51,831 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:25:58,284 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:27:36,487 autoreload C:\Users\h1933\Desktop\school_check_in\Arx\settings.py changed, reloading.
+INFO 2025-07-03 17:27:36,490 autoreload C:\Users\h1933\Desktop\school_check_in\Arx\settings.py changed, reloading.
+INFO 2025-07-03 17:27:38,255 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 17:27:38,256 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 17:27:52,464 autoreload C:\Users\h1933\Desktop\school_check_in\Arx\urls.py changed, reloading.
+INFO 2025-07-03 17:27:52,478 autoreload C:\Users\h1933\Desktop\school_check_in\Arx\urls.py changed, reloading.
+INFO 2025-07-03 17:27:53,733 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 17:27:53,748 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 17:28:23,909 autoreload C:\Users\h1933\Desktop\school_check_in\accounts\models.py changed, reloading.
+INFO 2025-07-03 17:28:23,962 autoreload C:\Users\h1933\Desktop\school_check_in\accounts\models.py changed, reloading.
+INFO 2025-07-03 17:28:25,344 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 17:28:25,382 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 17:30:26,701 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 17:30:27,587 basehttp "GET /accounts/ HTTP/1.1" 200 199139
+INFO 2025-07-03 17:30:30,010 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+WARNING 2025-07-03 17:30:30,091 log Not Found: /focus/settings/
+WARNING 2025-07-03 17:30:30,118 log Not Found: /focus/session/active/
+WARNING 2025-07-03 17:30:30,132 basehttp "GET /focus/settings/ HTTP/1.1" 404 3502
+WARNING 2025-07-03 17:30:30,147 basehttp "GET /focus/session/active/ HTTP/1.1" 404 3520
+WARNING 2025-07-03 17:30:30,212 log Not Found: /focus/stats/
+INFO 2025-07-03 17:30:30,223 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+WARNING 2025-07-03 17:30:30,226 basehttp "GET /focus/stats/ HTTP/1.1" 404 3493
+INFO 2025-07-03 17:30:30,272 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+WARNING 2025-07-03 17:30:30,294 log Not Found: /focus/history/
+WARNING 2025-07-03 17:30:30,305 basehttp "GET /focus/history/ HTTP/1.1" 404 3499
+INFO 2025-07-03 17:30:30,409 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:30:30,504 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9292
+INFO 2025-07-03 17:30:30,654 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9292
+INFO 2025-07-03 17:30:31,729 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+WARNING 2025-07-03 17:30:36,452 log Not Found: /focus/session/start/
+WARNING 2025-07-03 17:30:36,454 basehttp "POST /focus/session/start/ HTTP/1.1" 404 3518
+INFO 2025-07-03 17:39:49,628 basehttp "GET /accounts/ HTTP/1.1" 200 164121
+INFO 2025-07-03 17:39:51,452 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 17:39:51,483 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 17:39:51,519 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:39:51,562 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:39:51,569 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9292
+INFO 2025-07-03 17:39:51,656 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9292
+INFO 2025-07-03 17:39:53,111 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:40:02,492 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9292
+INFO 2025-07-03 17:40:11,530 basehttp "POST /checkin/checkins/create/ HTTP/1.1" 200 357
+INFO 2025-07-03 17:40:14,280 basehttp "POST /checkin/checkins/44/check/ HTTP/1.1" 200 333
+INFO 2025-07-03 17:40:14,346 basehttp "GET /checkin/community/ HTTP/1.1" 200 3772
+INFO 2025-07-03 17:40:44,365 basehttp "POST /checkin/checkins/44/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 17:41:14,339 basehttp "POST /checkin/checkins/44/study/update/ HTTP/1.1" 200 328
+INFO 2025-07-03 17:41:18,470 basehttp "POST /checkin/checkins/44/study/update/ HTTP/1.1" 200 345
+INFO 2025-07-03 17:41:23,905 basehttp "POST /checkin/checkins/records/43/share/ HTTP/1.1" 200 363
+INFO 2025-07-03 17:41:24,127 basehttp "GET /checkin/community/ HTTP/1.1" 200 4055
+INFO 2025-07-03 17:41:24,268 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9856
+INFO 2025-07-03 17:41:24,909 basehttp "GET /checkin/community/ HTTP/1.1" 200 4055
+INFO 2025-07-03 17:44:26,850 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 17:44:26,877 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 17:44:27,247 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 17:44:28,199 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 17:44:28,208 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 17:44:28,383 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 17:45:28,464 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 17:45:28,480 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 17:45:28,505 autoreload C:\Users\h1933\Desktop\school_check_in\checkin\views.py changed, reloading.
+INFO 2025-07-03 17:45:29,813 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 17:45:29,858 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 17:45:29,881 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 17:49:38,616 basehttp "GET /accounts/ HTTP/1.1" 200 174483
+INFO 2025-07-03 17:49:38,667 basehttp "GET /static/accounts/css/styles.css HTTP/1.1" 304 0
+INFO 2025-07-03 17:49:40,288 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 17:49:40,305 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 17:49:40,332 basehttp "GET /checkin/community/ HTTP/1.1" 200 2806
+INFO 2025-07-03 17:49:40,378 basehttp "GET /checkin/community/ HTTP/1.1" 200 2806
+INFO 2025-07-03 17:49:40,412 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9856
+INFO 2025-07-03 17:49:40,487 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9856
+INFO 2025-07-03 17:49:41,071 basehttp "GET /checkin/community/?page=1&page_size=10 HTTP/1.1" 200 2806
+INFO 2025-07-03 17:49:42,899 basehttp "GET /checkin/community/?page=2&page_size=10 HTTP/1.1" 200 1501
+INFO 2025-07-03 17:49:45,124 basehttp "GET /checkin/community/?page=1&page_size=10 HTTP/1.1" 200 2806
+INFO 2025-07-03 17:49:48,606 basehttp "GET /checkin/community/?page=1&page_size=50 HTTP/1.1" 200 4182
+INFO 2025-07-03 17:49:52,028 basehttp "GET /accounts/ HTTP/1.1" 200 174483
+INFO 2025-07-03 17:49:52,814 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 17:49:52,826 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 17:49:52,876 basehttp "GET /checkin/community/ HTTP/1.1" 200 2806
+INFO 2025-07-03 17:49:52,961 basehttp "GET /checkin/community/ HTTP/1.1" 200 2806
+INFO 2025-07-03 17:49:53,022 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9856
+INFO 2025-07-03 17:49:53,175 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9856
+INFO 2025-07-03 17:49:54,522 basehttp "GET /checkin/community/?page=1&page_size=10 HTTP/1.1" 200 2806
+INFO 2025-07-03 17:49:57,246 basehttp "GET /checkin/community/?page=1&page_size=20 HTTP/1.1" 200 4182
+INFO 2025-07-03 17:50:00,939 basehttp "GET /accounts/ HTTP/1.1" 200 174483
+INFO 2025-07-03 17:50:01,651 basehttp "GET /accounts/profile/ HTTP/1.1" 200 149
+INFO 2025-07-03 17:50:01,664 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 17:50:01,751 basehttp "GET /checkin/community/ HTTP/1.1" 200 2806
+INFO 2025-07-03 17:50:01,839 basehttp "GET /checkin/community/ HTTP/1.1" 200 2806
+INFO 2025-07-03 17:50:01,910 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9856
+INFO 2025-07-03 17:50:02,063 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 9856
+INFO 2025-07-03 17:53:11,831 autoreload C:\Users\h1933\Desktop\school_check_in\forum\views.py changed, reloading.
+INFO 2025-07-03 17:53:11,871 autoreload C:\Users\h1933\Desktop\school_check_in\forum\views.py changed, reloading.
+INFO 2025-07-03 17:53:13,088 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 17:53:13,300 autoreload Watching for file changes with StatReloader

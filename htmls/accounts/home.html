@@ -10,6 +10,8 @@
     <!-- 引入Element UI -->
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!-- 高德地图API - 请替换为您的实际KEY，申请地址：https://lbs.amap.com/dev/key -->
+    <script src="https://webapi.amap.com/maps?v=1.4.15&key=9ca613717390ebddd7fd7c1c107bb353"></script>
     <!-- 引入自定义样式 -->
     <link rel="stylesheet" href="/static/accounts/css/styles.css">
     
@@ -582,7 +584,7 @@
         }
         
         /* 分页样式 */
-        .forum-pagination {
+        .forum-pagination, .community-pagination {
             border-top: 1px solid #eee;
             padding-top: 15px;
             margin-top: 15px;
@@ -927,141 +929,7 @@
             color: #e0e0e0;
                     }
             
-            /* 专注模式样式 */
-            .focus-stats {
-                display: flex;
-                justify-content: space-around;
-                padding: 20px 0;
-                margin-bottom: 20px;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                border-radius: 12px;
-                color: white;
-            }
-            
-            .stat-item {
-                text-align: center;
-            }
-            
-            .stat-number {
-                font-size: 24px;
-                font-weight: bold;
-                margin-bottom: 4px;
-            }
-            
-            .stat-label {
-                font-size: 12px;
-                opacity: 0.8;
-            }
-            
-            .focus-session-container {
-                padding: 40px 20px;
-                text-align: center;
-                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-                border-radius: 20px;
-                color: white;
-                min-height: 60vh;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-            }
-            
-            .focus-header h2 {
-                font-size: 28px;
-                margin-bottom: 10px;
-                color: white;
-            }
-            
-            .focus-header p {
-                font-size: 16px;
-                opacity: 0.9;
-                margin-bottom: 40px;
-            }
-            
-            .focus-timer {
-                margin: 40px 0;
-            }
-            
-            .timer-circle {
-                width: 200px;
-                height: 200px;
-                border: 8px solid rgba(255, 255, 255, 0.3);
-                border-radius: 50%;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                margin: 0 auto;
-                background: rgba(255, 255, 255, 0.1);
-                backdrop-filter: blur(10px);
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            }
-            
-            .timer-display {
-                font-size: 48px;
-                font-weight: bold;
-                font-family: 'Courier New', monospace;
-                margin-bottom: 8px;
-            }
-            
-            .timer-type {
-                font-size: 14px;
-                opacity: 0.8;
-            }
-            
-            .focus-controls {
-                display: flex;
-                gap: 15px;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-            
-            .focus-controls .el-button {
-                border: 2px solid rgba(255, 255, 255, 0.3);
-                background: rgba(255, 255, 255, 0.1);
-                backdrop-filter: blur(10px);
-                color: white;
-                font-weight: bold;
-                min-width: 100px;
-            }
-            
-            .focus-controls .el-button:hover {
-                background: rgba(255, 255, 255, 0.2);
-                border-color: rgba(255, 255, 255, 0.5);
-            }
-            
-            .focus-history-item {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 12px 0;
-                border-bottom: 1px solid #f0f0f0;
-            }
-            
-            .history-main {
-                flex: 1;
-            }
-            
-            .history-title {
-                font-weight: 500;
-                margin-bottom: 4px;
-            }
-            
-            .history-time {
-                font-size: 12px;
-                color: #999;
-            }
-            
-            .history-status {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-end;
-                gap: 4px;
-            }
-            
-            .history-duration {
-                font-size: 12px;
-                color: #666;
-            }
+            /* 专注模式样式已删除 */
         </style>
 </head>
 <body>
@@ -1088,7 +956,6 @@
                 <div class="title" v-if="currentTab === 'profile'">个人中心</div>
                 <div class="title" v-else-if="currentTab === 'checkin'">打卡</div>
                 <div class="title" v-else-if="currentTab === 'tasks'">打卡动态</div>
-                <div class="title" v-else-if="currentTab === 'focus'">专注模式</div>
                 <div class="title" v-else-if="currentTab === 'forum'"></div>
                 
                 <!-- 右侧按钮区域 -->
@@ -1100,9 +967,6 @@
                 </div>
                 <div class="action-btn" v-else-if="currentTab === 'tasks'">
                     <i class="el-icon-refresh" @click="refreshCommunity"></i>
-                </div>
-                <div class="action-btn" v-else-if="currentTab === 'focus' && !focusMode.inSession">
-                    <i class="el-icon-setting" @click="showFocusSettings"></i>
                 </div>
                 <div v-else style="width: 20px;"></div>
             </div>
@@ -1258,42 +1122,71 @@
                         </div>
                         
                         <!-- 用户自己发布的帖子 (包括待审核的) -->
-                        <div class="card" v-if="userPosts.length > 0">
+                        <div class="card" v-if="userPosts.length > 0 || userPostsLoading">
                             <div class="card-title">
                                 我的帖子
+                                <el-button type="text" size="mini" @click="refreshUserPosts">刷新</el-button>
                             </div>
-                            <div class="post-item" v-for="post in userPosts" :key="post.id">
-                                <div class="post-title" @click="viewPostDetail(post)">
-                                    <span class="title-text">{{ post.title }}</span>
-                                    <el-tag size="mini" :type="getStatusType(post.status)" style="margin-left: 10px;">
-                                        {{ post.status_display }}
-                                    </el-tag>
-                                </div>
-                                <div class="post-meta" @click="viewPostDetail(post)">
-                                    <span><i class="el-icon-user" style="margin-right: 4px;"></i>{{ post.author }}</span>
-                                    <span><i class="el-icon-time" style="margin-right: 4px;"></i>{{ post.time }}</span>
-                                </div>
-                                <!-- 点赞和评论区域 -->
-                                <div class="post-actions" @click.stop v-if="post.status === 'approved'">
-                                    <div class="action-group">
-                                        <el-button 
-                                            type="text" 
-                                            size="mini" 
-                                            :class="{ 'liked': post.user_liked }"
-                                            @click="toggleLike(post)"
-                                            :disabled="!isLoggedIn">
-                                            <i class="el-icon-star-off" v-if="!post.user_liked"></i>
-                                            <i class="el-icon-star-on" v-else style="color: #f39c12;"></i>
-                                            {{ post.likes_count || 0 }}
-                                        </el-button>
-                                        <el-button 
-                                            type="text" 
-                                            size="mini"
-                                            @click="showComments(post)">
-                                            <i class="el-icon-chat-line-round"></i>
-                                            {{ post.comments_count || 0 }}
-                                        </el-button>
+                            <div v-if="userPostsLoading" class="loading-container" style="text-align: center; padding: 20px;">
+                                <i class="el-icon-loading"></i> 加载中...
+                            </div>
+                            <div v-else>
+                                <div class="post-item" v-for="post in userPosts" :key="post.id">
+                                    <div class="post-title" @click="viewPostDetail(post)">
+                                        <span class="title-text">{{ post.title }}</span>
+                                        <el-tag size="mini" :type="getStatusType(post.status)" style="margin-left: 10px;">
+                                            {{ post.status_display }}
+                                        </el-tag>
                                     </div>
+                                    <div class="post-meta" @click="viewPostDetail(post)">
+                                        <span><i class="el-icon-user" style="margin-right: 4px;"></i>{{ post.author }}</span>
+                                        <span><i class="el-icon-time" style="margin-right: 4px;"></i>{{ post.time }}</span>
+                                    </div>
+                                    <!-- 点赞和评论区域 -->
+                                    <div class="post-actions" @click.stop v-if="post.status === 'approved'">
+                                        <div class="action-group">
+                                            <el-button 
+                                                type="text" 
+                                                size="mini" 
+                                                :class="{ 'liked': post.user_liked }"
+                                                @click="toggleLike(post)"
+                                                :disabled="!isLoggedIn">
+                                                <i class="el-icon-star-off" v-if="!post.user_liked"></i>
+                                                <i class="el-icon-star-on" v-else style="color: #f39c12;"></i>
+                                                {{ post.likes_count || 0 }}
+                                            </el-button>
+                                            <el-button 
+                                                type="text" 
+                                                size="mini"
+                                                @click="showComments(post)">
+                                                <i class="el-icon-chat-line-round"></i>
+                                                {{ post.comments_count || 0 }}
+                                            </el-button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div v-if="userPosts.length === 0" style="text-align: center; padding: 20px 0; color: #999;">
+                                    您还没有发布过帖子
+                                </div>
+                                <!-- 分页组件 -->
+                                <div v-if="userPostsPagination.totalPages > 1" class="forum-pagination">
+                                    <div v-if="userPostsLoading" class="pagination-loading">
+                                        <i class="el-icon-loading"></i>
+                                        加载中...
+                                    </div>
+                                    <el-pagination
+                                        v-else
+                                        @size-change="handleUserPostsPageSizeChange"
+                                        @current-change="handleUserPostsPageChange"
+                                        :current-page="userPostsPagination.page"
+                                        :page-sizes="[10, 20, 50]"
+                                        :page-size="userPostsPagination.pageSize"
+                                        layout="total, sizes, prev, pager, next, jumper"
+                                        :total="userPostsPagination.total"
+                                        :pager-count="5"
+                                        style="text-align: center; margin-top: 20px;"
+                                        small>
+                                    </el-pagination>
                                 </div>
                             </div>
                         </div>
@@ -1309,17 +1202,142 @@
                                 </el-button>
                             </div>
                             <div class="task-item" v-for="checkin in filteredCheckins" :key="checkin.id">
-                                <div class="task-title">{{ checkin.title }}</div>
+                                <div class="task-header" style="display: flex; align-items: center; margin-bottom: 8px;">
+                                    <div class="task-title" style="flex: 1;">{{ checkin.title }}</div>
+                                    
+                                </div>
                                 <div class="task-info" v-if="checkin.time">时间要求: {{ checkin.time }}</div>
+                                <div class="task-info" v-if="checkin.target_duration > 0">
+                                    目标时长: {{ checkin.target_duration }}分钟
+                                </div>
                                 <div class="task-info" v-if="checkin.description">{{ checkin.description }}</div>
                                 <div class="task-info" v-if="checkin.created_at">创建于: {{ checkin.created_at }}</div>
+                                
+                                <!-- 任务进行中的计时显示 -->
+                                <div v-if="checkin.checked_today && checkin.studyTimer && checkin.studyTimer.duration >= 0" 
+                                     class="task-progress" style="margin: 10px 0; padding: 10px; background: #f0f9ff; border-radius: 4px;">
+                                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                                            <span style="font-size: 16px; font-weight: bold;">
+                                                计时时长: {{ formatStudyTime(checkin.studyTimer.duration || 0) }}
+                                            </span>
+                                            <span v-if="checkin.target_duration > 0" style="color: #999;">
+                                                目标: {{ checkin.target_duration }}分钟
+                                            </span>
+                                        </div>
+                                        <div v-if="checkin.target_duration > 0" style="margin: 5px 0;">
+                                            <el-progress 
+                                                :percentage="Math.min(100, Math.round((checkin.studyTimer.duration / 60) / checkin.target_duration * 100))"
+                                                :status="checkin.studyTimer.duration >= checkin.target_duration * 60 ? 'success' : ''"
+                                            ></el-progress>
+                                        </div>
+                                        <div style="display: flex; gap: 10px;">
+                                            <el-button 
+                                                v-if="!checkin.studyTimer.isPaused" 
+                                                size="mini" 
+                                                type="warning" 
+                                                @click="pauseStudyTimer(checkin)"
+                                                style="flex: 1;">
+                                                <i class="el-icon-video-pause"></i> 暂停
+                                            </el-button>
+                                            <el-button 
+                                                v-else 
+                                                size="mini" 
+                                                type="success" 
+                                                @click="resumeStudyTimer(checkin)"
+                                                style="flex: 1;">
+                                                <i class="el-icon-video-play"></i> 继续
+                                            </el-button>
+                                        </div>
+                                        <div v-if="checkin.studyTimer.duration >= (checkin.target_duration || 25) * 60" 
+                                             style="text-align: center; color: #67C23A;">
+                                            <i class="el-icon-circle-check"></i> 已达到目标时长，您可以继续计时或结束
+                                            <el-button 
+                                                size="mini" 
+                                                type="success" 
+                                                @click="stopStudyTimer(checkin)"
+                                                style="margin-top: 10px; width: 100%;">
+                                                完成任务
+                                            </el-button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- 会话进行中的轨迹显示 -->
+                                <div v-if="checkin.checked_today && checkin.active_session && checkin.active_session.current_duration >= 0 && (!checkin.today_checkin_data || !checkin.today_checkin_data.end_time)" 
+                                     class="task-progress" style="margin: 10px 0; padding: 10px; background: #f0f9ff; border-radius: 4px;">
+                                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                                            <div style="display: flex; flex-direction: column; gap: 5px;">
+                                                <span style="font-size: 16px; font-weight: bold;">
+                                                    计时时长: {{ formatStudyTime(checkin.active_session.current_duration || 0) }}
+                                                </span>
+                                                <span v-if="checkin.target_duration > 0" style="color: #999; font-size: 14px;">
+                                                    目标: {{ checkin.target_duration }}分钟
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div v-if="checkin.target_duration > 0" style="margin: 5px 0;">
+                                            <el-progress 
+                                                :percentage="Math.min(100, Math.round((checkin.active_session.current_duration / 60) / checkin.target_duration * 100))"
+                                                :status="checkin.active_session.current_duration >= checkin.target_duration * 60 ? 'success' : ''"
+                                            ></el-progress>
+                                        </div>
+
+                                        <div style="display: flex; gap: 10px;">
+                                            <el-button 
+                                                v-if="!checkin.active_session.is_paused" 
+                                                size="mini" 
+                                                type="warning" 
+                                                @click="pauseSportTracking(checkin)"
+                                                style="flex: 1;">
+                                                <i class="el-icon-video-pause"></i> 暂停
+                                            </el-button>
+                                            <el-button 
+                                                v-else 
+                                                size="mini" 
+                                                type="success" 
+                                                @click="resumeSportTracking(checkin)"
+                                                style="flex: 1;">
+                                                <i class="el-icon-video-play"></i> 继续
+                                            </el-button>
+                                        </div>
+                                        <div v-if="checkin.active_session.current_duration >= (checkin.target_duration || 25) * 60" 
+                                             style="text-align: center; color: #67C23A;">
+                                            <i class="el-icon-circle-check"></i> 已达到目标时长，您可以继续计时或结束
+                                            <el-button 
+                                                size="mini" 
+                                                type="success" 
+                                                @click="stopSportTracking(checkin)"
+                                                style="margin-top: 10px; width: 100%;">
+                                                完成任务
+                                            </el-button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- 已完成的打卡数据显示 -->
+                                <div v-if="checkin.checked_today && checkin.today_checkin_data && !checkin.studyTimer && !checkin.active_session" 
+                                     class="task-complete" style="margin: 10px 0; padding: 10px; background: #f0f9ff; border-radius: 4px;">
+                                    <div v-if="checkin.today_checkin_data && checkin.today_checkin_data.duration > 0">
+                                        完成时长: {{ formatStudyTime(checkin.today_checkin_data.duration) }}
+                                        <br>打卡时间: {{ checkin.today_checkin_data.checked_at }}
+                                    </div>
+                                    <div v-else-if="checkin.today_checkin_data && checkin.today_checkin_data.checked_at">
+                                        打卡时间: {{ checkin.today_checkin_data.checked_at }}
+                                    </div>
+                                    <div v-else style="color: #999; font-size: 12px;">
+                                        ✓ 今日已打卡
+                                    </div>
+                                </div>
+                                
                                 <div class="task-actions">
                                     <el-button 
                                         size="mini" 
                                         type="success" 
-                                        :disabled="checkin.checked_today" 
+                                        :disabled="checkin.checked_today && !hasProgressInStorage(checkin)" 
                                         @click="doCheckin(checkin)">
-                                        {{ checkin.checked_today ? '今日已打卡' : '打卡' }}
+                                        {{ getCheckinButtonText(checkin) }}
                                     </el-button>
                                     <el-button 
                                         size="mini" 
@@ -1352,128 +1370,46 @@
                                     <span class="community-time">{{ record.checked_at }}</span>
                                 </div>
                                 <div class="community-content">
-                                    打卡了 <span class="community-task">{{ record.checkin_title }}</span>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span>打卡了</span>
+                                        <span class="community-task">{{ record.checkin_title }}</span>
+                                    </div>
+                                    <!-- 显示完成时长 -->
+                                    <div v-if="record.duration > 0" 
+                                         style="margin-top: 5px; font-size: 12px; color: #999;">
+                                        完成时长: {{ formatStudyTime(record.duration) }}
+                                    </div>
+                                    <!-- 显示备注 -->
+                                    <div v-if="record.notes" 
+                                         style="margin-top: 5px; font-size: 12px; color: #666;">
+                                        {{ record.notes }}
+                                    </div>
                                 </div>
+                            </div>
+                            <!-- 分页组件 -->
+                            <div v-if="communityPagination.totalPages > 1" class="community-pagination">
+                                <div v-if="communityLoading" class="pagination-loading">
+                                    <i class="el-icon-loading"></i>
+                                    加载中...
+                                </div>
+                                <el-pagination
+                                    v-else
+                                    @size-change="handleCommunityPageSizeChange"
+                                    @current-change="handleCommunityPageChange"
+                                    :current-page="communityPagination.page"
+                                    :page-sizes="[10, 20, 50]"
+                                    :page-size="communityPagination.pageSize"
+                                    layout="total, sizes, prev, pager, next, jumper"
+                                    :total="communityPagination.total"
+                                    :pager-count="5"
+                                    style="text-align: center; margin-top: 20px;"
+                                    small>
+                                </el-pagination>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- 专注模式板块 -->
-                    <div v-if="currentTab === 'focus'">
-                        <!-- 非专注状态 - 显示开始界面 -->
-                        <div v-if="!focusMode.inSession">
-                            <div class="card">
-                                <div class="card-title">
-                                    🎯 专注模式
-                                    <el-button type="text" size="mini" @click="showFocusSettings">设置</el-button>
-                                </div>
-                                
-                                <!-- 今日统计 -->
-                                <div class="focus-stats">
-                                    <div class="stat-item">
-                                        <div class="stat-number">{{ focusMode.stats.today.completed_sessions || 0 }}</div>
-                                        <div class="stat-label">今日完成</div>
-                                    </div>
-                                    <div class="stat-item">
-                                        <div class="stat-number">{{ formatDuration(focusMode.stats.today.total_minutes || 0) }}</div>
-                                        <div class="stat-label">今日时长</div>
-                                    </div>
-                                    <div class="stat-item">
-                                        <div class="stat-number">{{ focusMode.stats.total.completed_sessions || 0 }}</div>
-                                        <div class="stat-label">总完成</div>
-                                    </div>
-                                </div>
-                                
-                                <!-- 开始专注按钮 -->
-                                <div class="focus-start-section">
-                                    <el-button 
-                                        type="primary" 
-                                        size="large" 
-                                        round
-                                        @click="showStartFocusDialog"
-                                        style="width: 100%; height: 60px; font-size: 18px; margin-top: 20px;">
-                                        <i class="el-icon-timer" style="margin-right: 8px;"></i>
-                                        开始专注
-                                    </el-button>
-                                </div>
-                            </div>
-                            
-                            <!-- 历史记录 -->
-                            <div class="card" v-if="focusHistory.length > 0">
-                                <div class="card-title">
-                                    📊 最近记录
-                                    <el-button type="text" size="mini" @click="showAllHistory">查看全部</el-button>
-                                </div>
-                                <div class="focus-history-item" v-for="session in focusHistory.slice(0, 5)" :key="session.id">
-                                    <div class="history-main">
-                                        <div class="history-title">{{ session.task_title }}</div>
-                                        <div class="history-time">{{ session.start_time }}</div>
-                                    </div>
-                                    <div class="history-status">
-                                        <el-tag 
-                                            size="mini" 
-                                            :type="session.completed ? 'success' : (session.interrupted ? 'danger' : 'info')">
-                                            {{ session.completed ? '完成' : (session.interrupted ? '中断' : '进行中') }}
-                                        </el-tag>
-                                        <div class="history-duration">{{ session.actual_duration || session.planned_duration }}分钟</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 专注状态 - 显示计时器 -->
-                        <div v-else class="focus-session-container">
-                            <div class="focus-header">
-                                <h2>{{ focusMode.currentSession.task_title }}</h2>
-                                <p v-if="focusMode.currentSession.task_description">{{ focusMode.currentSession.task_description }}</p>
-                            </div>
-                            
-                            <div class="focus-timer">
-                                <div class="timer-circle">
-                                    <div class="timer-display">
-                                        {{ formatTime(focusMode.timer.remaining) }}
-                                    </div>
-                                    <div class="timer-type">
-                                        {{ focusMode.currentSession.session_type === 'work' ? '专注时间' : '休息时间' }}
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="focus-controls">
-                                <el-button 
-                                    v-if="!focusMode.timer.isRunning" 
-                                    type="success" 
-                                    size="large" 
-                                    round
-                                    @click="startTimer">
-                                    <i class="el-icon-video-play"></i> 开始
-                                </el-button>
-                                <el-button 
-                                    v-else-if="!focusMode.timer.isPaused" 
-                                    type="warning" 
-                                    size="large" 
-                                    round
-                                    @click="pauseTimer">
-                                    <i class="el-icon-video-pause"></i> 暂停
-                                </el-button>
-                                <el-button 
-                                    v-else 
-                                    type="success" 
-                                    size="large" 
-                                    round
-                                    @click="resumeTimer">
-                                    <i class="el-icon-video-play"></i> 继续
-                                </el-button>
-                                <el-button 
-                                    type="danger" 
-                                    size="large" 
-                                    round
-                                    @click="stopSession">
-                                    <i class="el-icon-close"></i> 结束
-                                </el-button>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- 专注模式板块已删除 -->
                     
                     <!-- 个人中心板块 -->
                     <div v-if="currentTab === 'profile'">
@@ -1550,13 +1486,6 @@
                     @click="currentTab = 'tasks'">
                     <i class="nav-icon el-icon-s-data"></i>
                     <span>动态</span>
-                </div>
-                <div 
-                    class="nav-item" 
-                    :class="{ active: currentTab === 'focus' }" 
-                    @click="currentTab = 'focus'">
-                    <i class="nav-icon el-icon-timer"></i>
-                    <span>专注</span>
                 </div>
                 <div 
                     class="nav-item" 
@@ -1653,8 +1582,20 @@
                         <el-form-item label="任务名称" required>
                             <el-input v-model="newTask.title" placeholder="请输入任务名称"></el-input>
                         </el-form-item>
+
                         <el-form-item label="时间要求">
                             <el-input v-model="newTask.time" placeholder="如：每天早上8点"></el-input>
+                        </el-form-item>
+                        <!-- 目标时长 -->
+                        <el-form-item label="目标时长">
+                            <el-input-number 
+                                v-model="newTask.target_duration" 
+                                :min="0" 
+                                :max="480"
+                                style="width: 100%;"
+                                placeholder="分钟">
+                            </el-input-number>
+                            <span style="color: #999; font-size: 12px; margin-left: 10px;">分钟（设置为0表示手动打卡）</span>
                         </el-form-item>
                         <el-form-item label="任务描述">
                             <el-input 
@@ -1727,122 +1668,7 @@
                         <el-button type="primary" @click="createPost">发 布</el-button>
                     </span>
                 </div>
-                <div v-else-if="dialogType === 'startFocus'">
-                    <el-form :model="focusTaskForm" label-width="80px">
-                        <el-form-item label="任务标题" required>
-                            <el-input v-model="focusTaskForm.title" placeholder="请输入要专注的任务"></el-input>
-                        </el-form-item>
-                        <el-form-item label="任务描述">
-                            <el-input 
-                                type="textarea" 
-                                v-model="focusTaskForm.description" 
-                                placeholder="任务的详细描述（可选）"
-                                :rows="3"></el-input>
-                        </el-form-item>
-                        <el-form-item label="专注时长">
-                            <el-select v-model="focusTaskForm.duration" style="width: 100%;">
-                                <el-option label="15分钟" :value="15"></el-option>
-                                <el-option label="25分钟 (推荐)" :value="25"></el-option>
-                                <el-option label="30分钟" :value="30"></el-option>
-                                <el-option label="45分钟" :value="45"></el-option>
-                                <el-option label="60分钟" :value="60"></el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-form>
-                    <span slot="footer" class="dialog-footer">
-                        <el-button @click="dialogVisible = false">取 消</el-button>
-                        <el-button type="primary" @click="startFocusSession">开始专注</el-button>
-                    </span>
-                </div>
-                <div v-else-if="dialogType === 'focusSettings'">
-                    <el-form :model="focusMode.settings" label-width="120px">
-                        <el-form-item label="工作时长">
-                            <el-input-number 
-                                v-model="focusMode.settings.work_duration" 
-                                :min="5" 
-                                :max="120" 
-                                style="width: 100%;"
-                                controls-position="right">
-                            </el-input-number>
-                            <span style="color: #999; font-size: 12px;">分钟</span>
-                        </el-form-item>
-                        <el-form-item label="短休息时长">
-                            <el-input-number 
-                                v-model="focusMode.settings.break_duration" 
-                                :min="1" 
-                                :max="30" 
-                                style="width: 100%;"
-                                controls-position="right">
-                            </el-input-number>
-                            <span style="color: #999; font-size: 12px;">分钟</span>
-                        </el-form-item>
-                        <el-form-item label="长休息时长">
-                            <el-input-number 
-                                v-model="focusMode.settings.long_break_duration" 
-                                :min="5" 
-                                :max="60" 
-                                style="width: 100%;"
-                                controls-position="right">
-                            </el-input-number>
-                            <span style="color: #999; font-size: 12px;">分钟</span>
-                        </el-form-item>
-                        <el-form-item label="长休息间隔">
-                            <el-input-number 
-                                v-model="focusMode.settings.sessions_before_long_break" 
-                                :min="2" 
-                                :max="8" 
-                                style="width: 100%;"
-                                controls-position="right">
-                            </el-input-number>
-                            <span style="color: #999; font-size: 12px;">个专注会话后</span>
-                        </el-form-item>
-                        <el-form-item label="声音提醒">
-                            <el-switch v-model="focusMode.settings.sound_enabled"></el-switch>
-                        </el-form-item>
-                        <el-form-item label="自动开始休息">
-                            <el-switch v-model="focusMode.settings.auto_start_breaks"></el-switch>
-                        </el-form-item>
-                        <el-form-item label="自动开始工作">
-                            <el-switch v-model="focusMode.settings.auto_start_work"></el-switch>
-                        </el-form-item>
-                    </el-form>
-                    <span slot="footer" class="dialog-footer">
-                        <el-button @click="dialogVisible = false">取 消</el-button>
-                        <el-button type="primary" @click="updateFocusSettings">保 存</el-button>
-                    </span>
-                </div>
-                <div v-else-if="dialogType === 'focusHistory'">
-                    <div style="max-height: 400px; overflow-y: auto;">
-                        <div class="focus-history-item" v-for="session in focusHistory" :key="session.id">
-                            <div class="history-main">
-                                <div class="history-title">{{ session.task_title }}</div>
-                                <div class="history-time">{{ session.start_time }}</div>
-                                <div v-if="session.task_description" style="font-size: 12px; color: #999; margin-top: 4px;">
-                                    {{ session.task_description }}
-                                </div>
-                            </div>
-                            <div class="history-status">
-                                <el-tag 
-                                    size="mini" 
-                                    :type="session.completed ? 'success' : (session.interrupted ? 'danger' : 'info')">
-                                    {{ session.completed ? '完成' : (session.interrupted ? '中断' : '进行中') }}
-                                </el-tag>
-                                <div class="history-duration">
-                                    计划: {{ session.planned_duration }}分钟
-                                </div>
-                                <div class="history-duration" v-if="session.actual_duration">
-                                    实际: {{ session.actual_duration }}分钟
-                                </div>
-                            </div>
-                        </div>
-                        <div v-if="focusHistory.length === 0" style="text-align: center; padding: 40px 0; color: #999;">
-                            暂无专注记录
-                        </div>
-                    </div>
-                    <span slot="footer" class="dialog-footer">
-                        <el-button @click="dialogVisible = false">关 闭</el-button>
-                    </span>
-                </div>
+                <!-- 专注相关对话框已删除 -->
             </el-dialog>
             
             <!-- 评论对话框 -->
@@ -1949,6 +1775,60 @@
                     </div>
                 </div>
             </el-dialog>
+            
+            <!-- 完成弹窗 -->
+            <el-dialog 
+                :title="completionType === 'study' ? '学习完成' : '运动完成'" 
+                :visible.sync="completionDialogVisible"
+                width="90%"
+                :close-on-click-modal="false">
+                
+                <!-- 学习完成 -->
+                <div v-if="completionType === 'study' && completionData">
+                    <div style="text-align: center; padding: 20px;">
+                        <i class="el-icon-circle-check" style="font-size: 60px; color: #67C23A;"></i>
+                        <h2 style="margin: 20px 0;">{{ completionData.title }}</h2>
+                        <div style="font-size: 18px; margin: 10px 0;">
+                            学习时长：{{ formatStudyTime(completionData.duration) }}
+                        </div>
+                        <div v-if="completionData.targetDuration > 0" style="color: #999;">
+                            目标时长：{{ completionData.targetDuration }}分钟
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 运动完成 -->
+                <div v-else-if="completionType === 'sport' && completionData">
+                    <div style="text-align: center; padding: 20px;">
+                        <i class="el-icon-circle-check" style="font-size: 60px; color: #67C23A;"></i>
+                        <h2 style="margin: 20px 0;">{{ completionData.title }}</h2>
+                        <div style="display: flex; justify-content: center; margin: 20px 0;">
+                            <div>
+                                <div style="font-size: 24px; font-weight: bold;">{{ formatStudyTime(completionData.duration) }}</div>
+                                <div style="color: #999;">运动时长</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 分享选项 -->
+                <div style="margin-top: 20px;">
+                    <el-divider>分享到社区</el-divider>
+                    <el-input 
+                        type="textarea" 
+                        v-model="shareNotes" 
+                        placeholder="写下你的感想..."
+                        :rows="3"
+                        maxlength="200"
+                        show-word-limit>
+                    </el-input>
+                </div>
+                
+                <span slot="footer" class="dialog-footer">
+                    <el-button @click="closeCompletionDialog">稍后再说</el-button>
+                    <el-button type="primary" @click="shareToCommunit">分享到社区</el-button>
+                </span>
+            </el-dialog>
         </div>
     </div>
 
@@ -2030,7 +1910,8 @@
                     newTask: {
                         title: '',
                         time: '',
-                        description: ''
+                        description: '',
+                        target_duration: 0
                     },
                     emailForm: {
                         oldCode: '',
@@ -2046,41 +1927,7 @@
                         content: ''
                     },
                     userPosts: [],
-                    // 专注模式相关数据
-                    focusMode: {
-                        enabled: false,
-                        inSession: false,
-                        currentSession: null,
-                        timer: {
-                            duration: 0,
-                            remaining: 0,
-                            isRunning: false,
-                            isPaused: false
-                        },
-                        settings: {
-                            work_duration: 25,
-                            break_duration: 5,
-                            long_break_duration: 15,
-                            sessions_before_long_break: 4,
-                            sound_enabled: true,
-                            auto_start_breaks: false,
-                            auto_start_work: false,
-                            focus_theme: 'default'
-                        },
-                        stats: {
-                            today: { sessions_count: 0, completed_sessions: 0, total_minutes: 0 },
-                            week: { sessions_count: 0, completed_sessions: 0, total_minutes: 0 },
-                            month: { sessions_count: 0, completed_sessions: 0, total_minutes: 0 },
-                            total: { sessions_count: 0, completed_sessions: 0, total_minutes: 0 }
-                        }
-                    },
-                    focusTaskForm: {
-                        title: '',
-                        description: '',
-                        duration: 25
-                    },
-                    timerInterval: null,
-                    focusHistory: [],
+                    // 专注模式相关数据已删除
                     // 评论相关数据
                     commentsDialogVisible: false,
                     currentPost: null,
@@ -2089,7 +1936,34 @@
                         content: '',
                         parent_id: null
                     },
-                    commentsLoading: false
+                    commentsLoading: false,
+                    // 学习和运动追踪器
+                    studyTimers: {},
+                    sportTrackers: {},
+                    // 完成弹窗相关
+                    completionDialogVisible: false,
+                    completionType: '',
+                    completionData: {},
+                    shareNotes: '',
+                    currentCheckinRecordId: null,
+                    communityPagination: {
+                        page: 1,
+                        pageSize: 10,
+                        total: 0,
+                        totalPages: 1,
+                        hasNext: false,
+                        hasPrev: false
+                    },
+                    communityLoading: false,
+                    userPostsPagination: {
+                        page: 1,
+                        pageSize: 10,
+                        total: 0,
+                        totalPages: 1,
+                        hasNext: false,
+                        hasPrev: false
+                    },
+                    userPostsLoading: false
                 },
                 computed: {
                     avatarInitial() {
@@ -2124,6 +1998,9 @@
                         // 当切换到论坛标签时，加载论坛数据
                         if (newTab === 'forum' && this.selectedSchool.id) {
                             this.fetchForumData();
+                            if (this.isLoggedIn) {
+                                this.fetchUserPosts(1);
+                            }
                         }
                         // 当切换到打卡标签时，加载打卡数据
                         else if (newTab === 'checkin') {
@@ -2229,37 +2106,116 @@
                         setTimeout(() => { window.location.href = '/accounts/auth/'; }, 500);
                     },
                     doCheckin(checkin) {
+                        // 如果已经打卡且有保存的进度，恢复进度
+                        if (checkin.checked_today && this.hasProgressInStorage(checkin)) {
+                            this.restoreStudyProgress(checkin);
+                            return;
+                        }
+                        
+                        // 如果设置了目标时长，开始计时打卡
+                        if (checkin.target_duration > 0) {
+                            this.startTimerCheckin(checkin);
+                        } else {
+                            // 手动打卡
+                            this.normalCheckin(checkin);
+                        }
+                    },
+                    
+                    // 普通打卡
+                    normalCheckin(checkin) {
                         this.loading = true;
-                        // 调用后端API进行打卡
                         axios.post(`/checkin/checkins/${checkin.id}/check/`)
                             .then(response => {
                                 // 更新本地打卡状态
                                 const index = this.checkins.findIndex(c => c.id === checkin.id);
                                 if (index !== -1) {
                                     this.checkins[index].checked_today = true;
-                                    // 确保返回的数据包含checkin_record，并安全获取ID
-                                    const checkinRecord = response.data.checkin_record || {};
-                                    this.checkins[index].today_checkin_id = checkinRecord.id;
+                                    this.checkins[index].today_checkin_data = response.data.checkin_record;
+                                    this.checkins[index].today_checkin_id = response.data.checkin_record.id;
                                     this.$message.success('打卡成功！');
                                 }
                                 
                                 // 刷新社区动态
                                 this.refreshCommunity();
-                                
                                 this.loading = false;
                             })
                             .catch(error => {
                                 console.error('打卡失败:', error);
                                 this.loading = false;
-                                this.$message.error('操作失败，请重试');
+                                if (error.response && error.response.data && error.response.data.error) {
+                                    this.$message.error(error.response.data.error);
+                                } else {
+                                    this.$message.error('操作失败，请重试');
+                                }
                             });
                     },
+                    
+                    // 计时打卡
+                    startTimerCheckin(checkin) {
+                        this.$confirm('开始打卡将启动计时器，确定开始吗？', '计时打卡', {
+                            confirmButtonText: '开始计时',
+                            cancelButtonText: '取消',
+                            type: 'info'
+                        }).then(() => {
+                            this.loading = true;
+                            axios.post(`/checkin/checkins/${checkin.id}/check/`)
+                                .then(response => {
+                                    const index = this.checkins.findIndex(c => c.id === checkin.id);
+                                    if (index !== -1) {
+                                        this.checkins[index].checked_today = true;
+                                        this.checkins[index].today_checkin_data = response.data.checkin_record;
+                                        this.checkins[index].today_checkin_id = response.data.checkin_record.id;
+                                        
+                                        // 开始计时
+                                        this.startStudyTimer(this.checkins[index]);
+                                        this.$message.success('计时打卡已开始，请专注任务！');
+                                    }
+                                    
+                                    this.refreshCommunity();
+                                    this.loading = false;
+                                })
+                                .catch(error => {
+                                    console.error('打卡失败:', error);
+                                    this.loading = false;
+                                    if (error.response && error.response.data && error.response.data.error) {
+                                        this.$message.error(error.response.data.error);
+                                    } else {
+                                        this.$message.error('操作失败，请重试');
+                                    }
+                                });
+                        });
+                    },
+                    
+
                     refreshCheckins() {
                         // 重新获取打卡数据
                         this.loading = true;
                         axios.get(`/checkin/checkins/`)
                             .then(response => {
+                                // 保存当前已清理的任务ID
+                                const clearedTaskIds = new Set();
+                                this.checkins.forEach(checkin => {
+                                    if (!checkin.studyTimer && !checkin.active_session) {
+                                        clearedTaskIds.add(checkin.id);
+                                    }
+                                });
+                                
+                                // 更新数据
                                 this.checkins = response.data;
+                                
+                                // 确保已清理的任务不会恢复状态
+                                this.checkins.forEach((checkin, index) => {
+                                    if (clearedTaskIds.has(checkin.id)) {
+                                        // 如果这个任务之前已经清理过状态，确保不显示active_session
+                                        if (checkin.active_session) {
+                                            const cleanCheckin = { ...checkin };
+                                            delete cleanCheckin.active_session;
+                                            delete cleanCheckin.studyTimer;
+                                            this.$set(this.checkins, index, cleanCheckin);
+                                        }
+                                    }
+                                });
+                                
                                 setTimeout(() => {
                                     this.loading = false;
                                 }, 200); // 添加短暂延迟，确保动画平滑
@@ -2271,6 +2227,25 @@
                                 this.$message.error('刷新失败，请重试');
                             });
                     },
+                    
+                    // 刷新单个打卡任务数据
+                    refreshSingleCheckin(checkinId) {
+                        const index = this.checkins.findIndex(c => c.id === checkinId);
+                        if (index !== -1) {
+                            axios.get(`/checkin/checkins/`)
+                                .then(response => {
+                                    const updatedCheckin = response.data.find(c => c.id === checkinId);
+                                    if (updatedCheckin) {
+                                        this.$set(this.checkins, index, updatedCheckin);
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('刷新单个打卡任务失败:', error);
+                                });
+                        }
+                    },
+                    
+                    // 运动状态通过数据库管理，不需要本地恢复
                     checkLoginStatus() {
                         const token = localStorage.getItem('token');
                         const user = localStorage.getItem('user');
@@ -2330,282 +2305,7 @@
                         }
                     },
                     
-                    // ===== 专注模式相关方法 =====
-                    loadFocusData() {
-                        this.loadFocusSettings();
-                        this.loadFocusStats();
-                        this.loadFocusHistory();
-                        this.checkActiveSession();
-                    },
-                    loadFocusSettings() {
-                        axios.get('/focus/settings/')
-                            .then(response => {
-                                if (response.data.success) {
-                                    this.focusMode.settings = response.data.settings;
-                                }
-                            })
-                            .catch(error => {
-                                console.error('获取专注设置失败:', error);
-                            });
-                    },
-                    loadFocusStats() {
-                        axios.get('/focus/stats/')
-                            .then(response => {
-                                if (response.data.success) {
-                                    this.focusMode.stats = response.data.stats;
-                                }
-                            })
-                            .catch(error => {
-                                console.error('获取专注统计失败:', error);
-                            });
-                    },
-                    loadFocusHistory() {
-                        axios.get('/focus/history/')
-                            .then(response => {
-                                if (response.data.success) {
-                                    this.focusHistory = response.data.sessions;
-                                }
-                            })
-                            .catch(error => {
-                                console.error('获取专注历史失败:', error);
-                            });
-                    },
-                    checkActiveSession() {
-                        axios.get('/focus/session/active/')
-                            .then(response => {
-                                if (response.data.success && response.data.session) {
-                                    this.focusMode.currentSession = response.data.session;
-                                    this.focusMode.inSession = true;
-                                    this.setupTimerFromSession(response.data.session);
-                                }
-                            })
-                            .catch(error => {
-                                console.error('检查活动会话失败:', error);
-                            });
-                    },
-                    showStartFocusDialog() {
-                        this.focusTaskForm = {
-                            title: '',
-                            description: '',
-                            duration: this.focusMode.settings.work_duration
-                        };
-                        this.dialogType = 'startFocus';
-                        this.dialogTitle = '开始专注';
-                        this.dialogVisible = true;
-                    },
-                    startFocusSession() {
-                        if (!this.focusTaskForm.title) {
-                            this.$message.error('请输入任务标题');
-                            return;
-                        }
-                        
-                        const data = {
-                            task_title: this.focusTaskForm.title,
-                            task_description: this.focusTaskForm.description,
-                            planned_duration: this.focusTaskForm.duration,
-                            session_type: 'work'
-                        };
-                        
-                        axios.post('/focus/session/start/', data)
-                            .then(response => {
-                                if (response.data.success) {
-                                    this.focusMode.currentSession = response.data.session;
-                                    this.focusMode.inSession = true;
-                                    this.initTimer(this.focusTaskForm.duration * 60);
-                                    this.dialogVisible = false;
-                                    this.$message.success('专注会话已创建，点击开始按钮开始计时');
-                                    // 注意：这里不自动开始计时器，等用户手动点击开始
-                                } else {
-                                    this.$message.error(response.data.error || '开始失败');
-                                }
-                            })
-                            .catch(error => {
-                                console.error('开始专注失败:', error);
-                                this.$message.error('开始专注失败');
-                            });
-                    },
-                    initTimer(seconds) {
-                        this.focusMode.timer.duration = seconds;
-                        this.focusMode.timer.remaining = seconds;
-                        this.focusMode.timer.isRunning = false;
-                        this.focusMode.timer.isPaused = false;
-                    },
-                    setupTimerFromSession(session) {
-                        // 计算已过去的时间
-                        const startTime = new Date(session.start_time);
-                        const now = new Date();
-                        const elapsed = Math.floor((now - startTime) / 1000);
-                        const totalDuration = session.planned_duration * 60;
-                        const remaining = Math.max(0, totalDuration - elapsed);
-                        
-                        this.initTimer(totalDuration);
-                        this.focusMode.timer.remaining = remaining;
-                        
-                        if (remaining <= 0) {
-                            // 时间已到，自动结束会话
-                            this.$message.warning('检测到未完成的专注会话已超时，已自动结束');
-                            this.endSession(false, true);
-                        } else {
-                            // 显示恢复提示
-                            this.$confirm(`检测到未完成的专注会话："${session.task_title}"，剩余 ${this.formatTime(remaining)}，是否继续？`, '恢复专注会话', {
-                                confirmButtonText: '继续专注',
-                                cancelButtonText: '结束会话',
-                                type: 'info'
-                            }).then(() => {
-                                // 用户选择继续，自动开始计时器
-                                this.startTimer();
-                            }).catch(() => {
-                                // 用户选择结束会话
-                                this.endSession(false, true);
-                            });
-                        }
-                    },
-                    startTimer() {
-                        // 防止重复启动计时器
-                        if (this.timerInterval) {
-                            clearInterval(this.timerInterval);
-                            this.timerInterval = null;
-                        }
-                        
-                        this.focusMode.timer.isRunning = true;
-                        this.focusMode.timer.isPaused = false;
-                        
-                        this.timerInterval = setInterval(() => {
-                            if (this.focusMode.timer.remaining > 0) {
-                                this.focusMode.timer.remaining--;
-                            } else {
-                                this.timerComplete();
-                            }
-                        }, 1000);
-                    },
-                    pauseTimer() {
-                        this.focusMode.timer.isPaused = true;
-                        this.focusMode.timer.isRunning = false;
-                        if (this.timerInterval) {
-                            clearInterval(this.timerInterval);
-                            this.timerInterval = null;
-                        }
-                    },
-                    resumeTimer() {
-                        // 确保之前的计时器已经清除
-                        if (this.timerInterval) {
-                            clearInterval(this.timerInterval);
-                            this.timerInterval = null;
-                        }
-                        this.startTimer();
-                    },
-                    timerComplete() {
-                        this.pauseTimer();
-                        this.endSession(true);
-                        this.$message.success('专注时间结束！');
-                        
-                        // 播放声音提醒（如果启用）
-                        if (this.focusMode.settings.sound_enabled) {
-                            this.playNotificationSound();
-                        }
-                    },
-                    stopSession() {
-                        this.$confirm('确定要结束当前专注会话吗？', '确认', {
-                            confirmButtonText: '确定',
-                            cancelButtonText: '取消',
-                            type: 'warning'
-                        }).then(() => {
-                            this.endSession(false, true);
-                        });
-                    },
-                    endSession(completed = false, interrupted = false) {
-                        if (!this.focusMode.currentSession) return;
-                        
-                        const data = {
-                            session_id: this.focusMode.currentSession.id,
-                            completed: completed,
-                            interrupted: interrupted
-                        };
-                        
-                        axios.post('/focus/session/end/', data)
-                            .then(response => {
-                                if (response.data.success) {
-                                    this.focusMode.inSession = false;
-                                    this.focusMode.currentSession = null;
-                                    this.pauseTimer();
-                                    this.loadFocusData(); // 刷新数据
-                                    this.$message.success('专注会话已结束');
-                                }
-                            })
-                            .catch(error => {
-                                console.error('结束会话失败:', error);
-                                this.$message.error('结束会话失败');
-                            });
-                    },
-                    formatTime(seconds) {
-                        // 确保seconds是一个有效的数字
-                        if (isNaN(seconds) || seconds < 0) {
-                            seconds = 0;
-                        }
-                        const minutes = Math.floor(seconds / 60);
-                        const remainingSeconds = seconds % 60;
-                        return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
-                    },
-                    formatDuration(minutes) {
-                        // 格式化时长显示，如 "1h 30m" 或 "25m"
-                        if (isNaN(minutes) || minutes < 0) {
-                            minutes = 0;
-                        }
-                        const hours = Math.floor(minutes / 60);
-                        const remainingMinutes = minutes % 60;
-                        
-                        if (hours > 0) {
-                            return `${hours}h ${remainingMinutes}m`;
-                        } else {
-                            return `${remainingMinutes}m`;
-                        }
-                    },
-                    showFocusSettings() {
-                        this.dialogType = 'focusSettings';
-                        this.dialogTitle = '专注设置';
-                        this.dialogVisible = true;
-                    },
-                    updateFocusSettings() {
-                        axios.post('/focus/settings/update/', this.focusMode.settings)
-                            .then(response => {
-                                if (response.data.success) {
-                                    this.$message.success('设置已保存');
-                                    this.dialogVisible = false;
-                                }
-                            })
-                            .catch(error => {
-                                console.error('更新设置失败:', error);
-                                this.$message.error('保存设置失败');
-                            });
-                    },
-                    playNotificationSound() {
-                        // 简单的声音提醒实现
-                        try {
-                            const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvGIcBjuX2/LNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvGIcBjuX2/LNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvGIcBjuX2/LNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvGIcBjuX2/LNdBGdgLgVIkA=');
-                            audio.play();
-                        } catch (error) {
-                            console.log('播放提醒音失败:', error);
-                        }
-                    },
-                    showAllHistory() {
-                        this.dialogType = 'focusHistory';
-                        this.dialogTitle = '专注历史记录';
-                        this.dialogVisible = true;
-                        // 加载更多历史记录
-                        this.loadAllFocusHistory();
-                    },
-                    loadAllFocusHistory() {
-                        axios.get('/focus/history/?limit=100')
-                            .then(response => {
-                                if (response.data.success) {
-                                    this.focusHistory = response.data.sessions;
-                                }
-                            })
-                            .catch(error => {
-                                console.error('获取完整历史失败:', error);
-                                this.$message.error('获取历史记录失败');
-                            });
-                    },
+                    // ===== 专注模式相关方法已删除 =====
                     fetchTasks() {
                         this.loading = true;
                         axios.get('/checkin/checkins/')
@@ -2636,7 +2336,8 @@
                                 this.newTask = {
                                     title: '',
                                     time: '',
-                                    description: ''
+                                    description: '',
+                                    target_duration: 0
                                 };
                                 
                                 this.loading = false;
@@ -2702,21 +2403,557 @@
                         });
                     },
                     refreshCommunity() {
-                        this.loading = true;
-                        axios.get('/checkin/community/')
+                        this.fetchCommunityData(1);
+                        this.$message.success('正在刷新打卡动态');
+                    },
+                    
+                    fetchCommunityData(page = 1) {
+                        this.communityLoading = true;
+                        if (page === 1) {
+                            this.loading = true;
+                        }
+                        
+                        axios.get(`/checkin/community/?page=${page}&page_size=${this.communityPagination.pageSize}`)
                             .then(response => {
-                                this.communityCheckins = response.data;
+                                this.communityCheckins = response.data.checkins;
+                                this.communityPagination = {
+                                    ...this.communityPagination,
+                                    page: response.data.pagination.page,
+                                    total: response.data.pagination.total,
+                                    totalPages: response.data.pagination.total_pages,
+                                    hasNext: response.data.pagination.has_next,
+                                    hasPrev: response.data.pagination.has_prev
+                                };
+                                
                                 setTimeout(() => {
                                     this.loading = false;
+                                    this.communityLoading = false;
                                 }, 200); // 添加短暂延迟，确保动画平滑
-                                this.$message.success('已刷新打卡动态');
                             })
                             .catch(error => {
-                                console.error('刷新打卡动态失败:', error);
+                                console.error('获取打卡动态失败:', error);
                                 this.loading = false;
-                                this.$message.error('刷新失败，请重试');
+                                this.communityLoading = false;
+                                this.$message.error('获取打卡动态失败，请重试');
                             });
                     },
+                    
+                    handleCommunityPageChange(page) {
+                        this.fetchCommunityData(page);
+                        // 滚动到页面顶部
+                        document.querySelector('.content-area').scrollTop = 0;
+                    },
+                    
+                    handleCommunityPageSizeChange(pageSize) {
+                        this.communityPagination.pageSize = pageSize;
+                        this.communityPagination.page = 1;
+                        this.fetchCommunityData(1);
+                    },
+                    
+                    // 学习计时相关方法
+                    startStudyTimer(checkin) {
+                        // 存储当前学习任务
+                        if (!this.studyTimers) {
+                            this.studyTimers = {};
+                        }
+                        
+                        const startTime = new Date().getTime();
+                        this.studyTimers[checkin.id] = {
+                            startTime: startTime,
+                            duration: 0,
+                            isPaused: false,
+                            pausedDuration: 0, // 累计暂停的时长
+                            lastPauseTime: null,
+                            interval: null
+                        };
+                        
+                        // 开始计时
+                        this.studyTimers[checkin.id].interval = setInterval(() => {
+                            if (!this.studyTimers[checkin.id].isPaused) {
+                                const currentTime = new Date().getTime();
+                                const totalElapsed = currentTime - startTime - this.studyTimers[checkin.id].pausedDuration;
+                                const duration = Math.floor(totalElapsed / 1000);
+                                this.studyTimers[checkin.id].duration = duration;
+                                
+                                // 使用 Vue.set 确保响应式更新
+                                if (checkin.studyTimer) {
+                                    this.$set(checkin.studyTimer, 'duration', duration);
+                                }
+                                
+                                // 每30秒更新一次服务器
+                                if (duration % 30 === 0 && duration > 0) {
+                                    this.updateStudyDuration(checkin, duration);
+                                }
+                                
+                                // 自动检查是否达到目标时长
+                                if (checkin.target_duration > 0 && duration >= checkin.target_duration * 60) {
+                                    // 达到目标时长，但不自动停止，只是提示
+                                    if (!checkin.studyTimer.hasReachedTarget) {
+                                        this.$set(checkin.studyTimer, 'hasReachedTarget', true);
+                                        this.$message.success('恭喜！您已达到目标学习时长，可以继续学习或完成打卡');
+                                    }
+                                }
+                            }
+                        }, 1000);
+                        
+                        // 在任务对象上添加计时器引用，使用 Vue.set 确保响应式
+                        this.$set(checkin, 'studyTimer', this.studyTimers[checkin.id]);
+                        
+                        // 保存到localStorage，防止刷新丢失
+                        this.saveStudyProgress(checkin.id);
+                    },
+                    
+                    // 暂停学习计时
+                    pauseStudyTimer(checkin) {
+                        if (this.studyTimers && this.studyTimers[checkin.id]) {
+                            const timer = this.studyTimers[checkin.id];
+                            timer.isPaused = true;
+                            timer.lastPauseTime = new Date().getTime();
+                            
+                            if (checkin.studyTimer) {
+                                this.$set(checkin.studyTimer, 'isPaused', true);
+                            }
+                            
+                            this.$message.info('学习已暂停');
+                            this.saveStudyProgress(checkin.id);
+                        }
+                    },
+                    
+                    // 继续学习计时
+                    resumeStudyTimer(checkin) {
+                        if (this.studyTimers && this.studyTimers[checkin.id]) {
+                            const timer = this.studyTimers[checkin.id];
+                            if (timer.isPaused && timer.lastPauseTime) {
+                                // 计算暂停的时长
+                                const pauseDuration = new Date().getTime() - timer.lastPauseTime;
+                                timer.pausedDuration += pauseDuration;
+                                timer.isPaused = false;
+                                timer.lastPauseTime = null;
+                                
+                                if (checkin.studyTimer) {
+                                    this.$set(checkin.studyTimer, 'isPaused', false);
+                                }
+                                
+                                this.$message.success('继续学习');
+                                this.saveStudyProgress(checkin.id);
+                            }
+                        }
+                    },
+                    
+                    stopStudyTimer(checkin) {
+                        if (this.studyTimers && this.studyTimers[checkin.id]) {
+                            const timer = this.studyTimers[checkin.id];
+                            const duration = timer.duration;
+                            
+                            // 1. 立即停止计时器
+                            if (timer.interval) {
+                                clearInterval(timer.interval);
+                            }
+                            
+                            // 2. 立即清除所有本地状态
+                            delete this.studyTimers[checkin.id];
+                            if (checkin.studyTimer) {
+                                this.$delete(checkin, 'studyTimer');
+                            }
+                            this.removeStudyProgress(checkin.id);
+                            
+                            // 3. 立即更新checkin对象，确保UI显示"已完成"状态
+                            if (checkin.today_checkin_data) {
+                                this.$set(checkin.today_checkin_data, 'duration', duration);
+                                this.$set(checkin.today_checkin_data, 'end_time', new Date().toISOString());
+                            }
+                            
+                            // 4. 清除active_session，防止显示进行中状态
+                            if (checkin.active_session) {
+                                this.$delete(checkin, 'active_session');
+                            }
+                            
+                            // 5. 强制更新组件
+                            this.$forceUpdate();
+                            
+                            // 5. 最后更新服务器（不影响UI显示）
+                            this.updateStudyDuration(checkin, duration, true);
+                        }
+                    },
+                    
+                    // 保存学习进度到localStorage
+                    saveStudyProgress(checkinId) {
+                        if (this.studyTimers && this.studyTimers[checkinId]) {
+                            const timer = this.studyTimers[checkinId];
+                            const progressData = {
+                                startTime: timer.startTime,
+                                duration: timer.duration,
+                                isPaused: timer.isPaused,
+                                pausedDuration: timer.pausedDuration,
+                                lastPauseTime: timer.lastPauseTime,
+                                savedAt: new Date().getTime()
+                            };
+                            localStorage.setItem(`study_progress_${checkinId}`, JSON.stringify(progressData));
+                        }
+                    },
+                    
+                    // 从localStorage恢复学习进度
+                    restoreStudyProgress(checkin) {
+                        const progressData = localStorage.getItem(`study_progress_${checkin.id}`);
+                        if (progressData) {
+                            try {
+                                const data = JSON.parse(progressData);
+                                const now = new Date().getTime();
+                                
+                                // 如果保存时间超过24小时，则清除数据
+                                if (now - data.savedAt > 24 * 60 * 60 * 1000) {
+                                    this.removeStudyProgress(checkin.id);
+                                    return false;
+                                }
+                                
+                                // 恢复计时器
+                                if (!this.studyTimers) {
+                                    this.studyTimers = {};
+                                }
+                                
+                                this.studyTimers[checkin.id] = {
+                                    startTime: data.startTime,
+                                    duration: data.duration,
+                                    isPaused: data.isPaused,
+                                    pausedDuration: data.pausedDuration,
+                                    lastPauseTime: data.lastPauseTime,
+                                    interval: null
+                                };
+                                
+                                // 如果当前是暂停状态，需要更新暂停时长
+                                if (data.isPaused && data.lastPauseTime) {
+                                    const additionalPauseDuration = now - data.savedAt;
+                                    this.studyTimers[checkin.id].pausedDuration += additionalPauseDuration;
+                                }
+                                
+                                // 重新启动计时器
+                                this.studyTimers[checkin.id].interval = setInterval(() => {
+                                    if (!this.studyTimers[checkin.id].isPaused) {
+                                        const currentTime = new Date().getTime();
+                                        const totalElapsed = currentTime - this.studyTimers[checkin.id].startTime - this.studyTimers[checkin.id].pausedDuration;
+                                        const duration = Math.floor(totalElapsed / 1000);
+                                        this.studyTimers[checkin.id].duration = duration;
+                                        
+                                        // 使用 Vue.set 确保响应式更新
+                                        if (checkin.studyTimer) {
+                                            this.$set(checkin.studyTimer, 'duration', duration);
+                                        }
+                                        
+                                        // 每30秒更新一次服务器
+                                        if (duration % 30 === 0 && duration > 0) {
+                                            this.updateStudyDuration(checkin, duration);
+                                        }
+                                        
+                                        // 自动检查是否达到目标时长
+                                        if (checkin.target_duration > 0 && duration >= checkin.target_duration * 60) {
+                                            if (!checkin.studyTimer.hasReachedTarget) {
+                                                this.$set(checkin.studyTimer, 'hasReachedTarget', true);
+                                                this.$message.success('恭喜！您已达到目标学习时长，可以继续学习或完成打卡');
+                                            }
+                                        }
+                                    }
+                                }, 1000);
+                                
+                                // 在任务对象上添加计时器引用
+                                this.$set(checkin, 'studyTimer', this.studyTimers[checkin.id]);
+                                
+                                this.$message.success('已恢复学习进度');
+                                return true;
+                            } catch (error) {
+                                console.error('恢复学习进度失败:', error);
+                                this.removeStudyProgress(checkin.id);
+                                return false;
+                            }
+                        }
+                        return false;
+                    },
+                    
+                    // 移除学习进度
+                    removeStudyProgress(checkinId) {
+                        localStorage.removeItem(`study_progress_${checkinId}`);
+                    },
+                    
+                    // 恢复所有学习进度
+                    restoreAllStudyProgress() {
+                        console.log('开始恢复学习进度...');
+                        if (this.checkins && this.checkins.length > 0) {
+                            this.checkins.forEach(checkin => {
+                                console.log('检查任务:', checkin.title, {
+                                    checked_today: checkin.checked_today,
+                                    target_duration: checkin.target_duration,
+                                    active_session: checkin.active_session,
+                                    studyTimer: checkin.studyTimer,
+                                    hasProgress: this.hasProgressInStorage(checkin),
+                                    today_checkin_data: checkin.today_checkin_data
+                                });
+                                
+                                // 只恢复今天已打卡、有目标时长、没有活跃会话且没有计时器的任务
+                                // 并且今天的打卡数据没有end_time（说明还没完成）
+                                if (checkin.checked_today && 
+                                    checkin.target_duration > 0 && 
+                                    !checkin.active_session && 
+                                    !checkin.studyTimer &&
+                                    this.hasProgressInStorage(checkin) &&
+                                    checkin.today_checkin_data &&
+                                    !checkin.today_checkin_data.end_time) {
+                                    console.log('恢复进度:', checkin.title);
+                                    this.restoreStudyProgress(checkin);
+                                } else if (this.hasProgressInStorage(checkin) && 
+                                          checkin.today_checkin_data && 
+                                          checkin.today_checkin_data.end_time) {
+                                    // 如果任务已完成但localStorage还有数据，清理它
+                                    console.log('清理已完成任务的进度:', checkin.title);
+                                    this.removeStudyProgress(checkin.id);
+                                }
+                            });
+                        }
+                    },
+                    
+                    // 检查是否有进度保存在localStorage中
+                    hasProgressInStorage(checkin) {
+                        if (checkin.target_duration > 0) {
+                            return localStorage.getItem(`study_progress_${checkin.id}`) !== null;
+                        }
+                        return false;
+                    },
+                    
+                    // 获取打卡按钮文本
+                    getCheckinButtonText(checkin) {
+                        if (checkin.checked_today) {
+                            if (this.hasProgressInStorage(checkin)) {
+                                return '恢复进度';
+                            } else {
+                                return '今日已打卡';
+                            }
+                        } else {
+                            return '打卡';
+                        }
+                    },
+                    
+                    updateStudyDuration(checkin, duration, isEnd = false) {
+                        axios.post(`/checkin/checkins/${checkin.id}/study/update/`, {
+                            duration: duration,
+                            is_end: isEnd
+                        })
+                        .then(response => {
+                            if (isEnd) {
+                                // 确保清理localStorage
+                                this.removeStudyProgress(checkin.id);
+                                
+                                // 显示完成弹窗
+                                this.showCompletionDialog('timer', {
+                                    title: checkin.title,
+                                    duration: duration,
+                                    targetDuration: checkin.target_duration
+                                }, response.data.checkin_record.id, checkin);
+                                
+                                // 暂时不刷新，避免状态被恢复
+                                // this.refreshCheckins();
+                            }
+                        })
+                        .catch(error => {
+                            console.error('更新学习时长失败:', error);
+                        });
+                    },
+                    
+                    formatStudyTime(seconds) {
+                        // 确保seconds是一个有效的数字
+                        seconds = parseInt(seconds) || 0;
+                        
+                        const hours = Math.floor(seconds / 3600);
+                        const minutes = Math.floor((seconds % 3600) / 60);
+                        const secs = seconds % 60;
+                        
+                        if (hours > 0) {
+                            return `${hours}小时${minutes}分钟${secs}秒`;
+                        } else if (minutes > 0) {
+                            return `${minutes}分钟${secs}秒`;
+                        } else {
+                            return `${secs}秒`;
+                        }
+                    },
+                    
+                    // 运动类任务使用数据库管理状态，不需要本地追踪
+                    
+                    // 暂停运动
+                    pauseSportTracking(checkin) {
+                        axios.post(`/checkin/checkins/${checkin.id}/session/pause/`)
+                            .then(response => {
+                                // 刷新数据
+                                this.refreshCheckins();
+                                this.$message.info('运动已暂停');
+                            })
+                            .catch(error => {
+                                console.error('暂停运动失败:', error);
+                                this.$message.error('暂停失败，请重试');
+                            });
+                    },
+                    
+                    // 继续运动
+                    resumeSportTracking(checkin) {
+                        axios.post(`/checkin/checkins/${checkin.id}/session/resume/`)
+                            .then(response => {
+                                // 刷新数据
+                                this.refreshCheckins();
+                                this.$message.success('继续运动');
+                            })
+                            .catch(error => {
+                                console.error('继续运动失败:', error);
+                                this.$message.error('继续失败，请重试');
+                            });
+                    },
+                    
+                    // 启动本地运动追踪（用于恢复或继续）
+
+                    
+
+                    
+                    stopSportTracking(checkin) {
+                        // 结束运动会话
+                        axios.post(`/checkin/checkins/${checkin.id}/session/end/`)
+                        .then(response => {
+                            // 显示完成弹窗
+                            const checkinRecord = response.data.checkin_record;
+                            this.showCompletionDialog('timer', {
+                                title: checkin.title,
+                                duration: checkinRecord.duration
+                            }, checkinRecord.id, checkin);
+                            
+                            // 暂时不刷新，避免状态被恢复
+                            // this.refreshCheckins();
+                        })
+                        .catch(error => {
+                            console.error('结束运动失败:', error);
+                            this.$message.error('结束运动失败，请重试');
+                        });
+                    },
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+                    // 显示完成弹窗
+                    showCompletionDialog(type, data, checkinRecordId, checkin = null) {
+                        this.completionData = data;
+                        this.completionType = type;
+                        this.currentCheckinRecordId = checkinRecordId;
+                        this.completionDialogVisible = true;
+                        
+                        // 状态清理已经在stopStudyTimer/stopSportTracking中完成
+                        console.log('显示完成弹窗，记录ID:', checkinRecordId);
+                    },
+                    
+
+                    
+                    // 分享到社区
+                    shareToCommunit() {
+                        if (!this.currentCheckinRecordId) {
+                            this.$message.error('找不到打卡记录');
+                            return;
+                        }
+                        
+                        const notes = this.shareNotes || '';
+                        
+                        // 调用API分享到社区
+                        axios.post(`/checkin/checkins/records/${this.currentCheckinRecordId}/share/`, {
+                            notes: notes
+                        })
+                        .then(response => {
+                            this.$message.success('已分享到社区！');
+                            this.completionDialogVisible = false;
+                            this.shareNotes = '';
+                            
+                            // 确保清理所有可能的计时器状态
+                            if (this.currentCheckinRecordId) {
+                                // 遍历所有checkins，清理匹配的任务状态
+                                this.checkins.forEach((checkin, index) => {
+                                    if (checkin.today_checkin_id === this.currentCheckinRecordId || 
+                                        (checkin.today_checkin_data && checkin.today_checkin_data.id === this.currentCheckinRecordId)) {
+                                        
+                                        // 清理计时器
+                                        if (this.studyTimers && this.studyTimers[checkin.id]) {
+                                            const timer = this.studyTimers[checkin.id];
+                                            if (timer.interval) {
+                                                clearInterval(timer.interval);
+                                            }
+                                            delete this.studyTimers[checkin.id];
+                                        }
+                                        
+                                        // 创建一个新的checkin对象，确保没有studyTimer属性
+                                        const cleanCheckin = { ...checkin };
+                                        delete cleanCheckin.studyTimer;
+                                        delete cleanCheckin.active_session;
+                                        
+                                        // 使用Vue.set更新数组元素
+                                        this.$set(this.checkins, index, cleanCheckin);
+                                        
+                                        // 清理localStorage中的进度
+                                        this.removeStudyProgress(checkin.id);
+                                    }
+                                });
+                            }
+                            
+                            this.currentCheckinRecordId = null;
+                            
+                            // 延迟刷新，确保状态已经清理
+                            setTimeout(() => {
+                                this.refreshCheckins();
+                                this.refreshCommunity();
+                            }, 100);
+                        })
+                        .catch(error => {
+                            console.error('分享失败:', error);
+                                                         this.$message.error(error.response?.data?.error || '分享失败，请重试');
+                         });
+                    },
+                    
+                    // 关闭完成弹窗
+                    closeCompletionDialog() {
+                        this.completionDialogVisible = false;
+                        this.shareNotes = '';
+                        
+                        // 确保清理所有可能的计时器状态
+                        if (this.currentCheckinRecordId) {
+                            // 遍历所有checkins，清理匹配的任务状态
+                            this.checkins.forEach((checkin, index) => {
+                                if (checkin.today_checkin_id === this.currentCheckinRecordId || 
+                                    (checkin.today_checkin_data && checkin.today_checkin_data.id === this.currentCheckinRecordId)) {
+                                    
+                                    // 清理计时器
+                                    if (this.studyTimers && this.studyTimers[checkin.id]) {
+                                        const timer = this.studyTimers[checkin.id];
+                                        if (timer.interval) {
+                                            clearInterval(timer.interval);
+                                        }
+                                        delete this.studyTimers[checkin.id];
+                                    }
+                                    
+                                    // 创建一个新的checkin对象，确保没有studyTimer属性
+                                    const cleanCheckin = { ...checkin };
+                                    delete cleanCheckin.studyTimer;
+                                    delete cleanCheckin.active_session;
+                                    
+                                    // 使用Vue.set更新数组元素
+                                    this.$set(this.checkins, index, cleanCheckin);
+                                    
+                                    // 清理localStorage中的进度
+                                    this.removeStudyProgress(checkin.id);
+                                }
+                            });
+                        }
+                        
+                        this.currentCheckinRecordId = null;
+                        
+                        // 延迟刷新
+                        setTimeout(() => {
+                            this.refreshCheckins();
+                        }, 100);
+                    },
+                    
                     sendOldEmailCode() {
                         if (!this.userInfo.email) {
                             this.$message.error('原邮箱为空，无法发送验证码');
@@ -3305,14 +3542,174 @@
                             this.pagination.page = 1;
                             this.fetchForumData(1);
                         }
+                    },
+                    handleCommunityPageChange(page) {
+                        if (this.communityPagination.isSearchMode) {
+                            this.performCommunitySearch(this.communitySearchQuery, page);
+                        } else {
+                            this.fetchCommunityData(page);
+                        }
+                        // 滚动到页面顶部
+                        document.querySelector('.content-area').scrollTop = 0;
+                    },
+                    handleCommunityPageSizeChange(pageSize) {
+                        if (this.communityPagination.isSearchMode) {
+                            this.communityPagination.pageSize = pageSize;
+                            this.communityPagination.page = 1;
+                            this.performCommunitySearch(this.communitySearchQuery, 1);
+                        } else {
+                            this.communityPagination.pageSize = pageSize;
+                            this.communityPagination.page = 1;
+                            this.fetchCommunityData(1);
+                        }
+                    },
+                    performCommunitySearch(query, page = 1) {
+                        if (!this.selectedSchool.id) {
+                            this.$message.error('请先选择学校');
+                            return;
+                        }
+                        
+                        if (!query.trim()) {
+                            this.clearCommunitySearch();
+                            return;
+                        }
+                        
+                        // 设置搜索状态
+                        this.communityPagination.isSearchMode = true;
+                        this.communityLoading = true;
+                        
+                        // 保存搜索历史
+                        this.saveCommunitySearchHistory(query);
+                        
+                        // 发送搜索请求
+                        axios.get(`/forum/community/search/?q=${encodeURIComponent(query)}&school_id=${this.selectedSchool.id}&page=${page}&page_size=${this.communityPagination.pageSize}`)
+                            .then(response => {
+                                const data = response.data;
+                                
+                                // 更新搜索结果
+                                this.communityCheckins = data.community_posts;
+                                this.communityPagination = {
+                                    ...this.communityPagination,
+                                    page: data.pagination.page,
+                                    total: data.pagination.total,
+                                    totalPages: data.pagination.total_pages,
+                                    hasNext: data.pagination.has_next,
+                                    hasPrev: data.pagination.has_prev
+                                };
+                                
+                                // 更新搜索信息
+                                this.communitySearchInfo = data.search_info;
+                                this.communityLoading = false;
+                                
+                                // 如果是第一页，滚动到顶部
+                                if (page === 1) {
+                                    document.querySelector('.content-area').scrollTop = 0;
+                                }
+                                
+                                // 显示搜索结果提示
+                                if (data.search_info.total_found === 0) {
+                                    this.$message.info('没有找到相关帖子');
+                                } else {
+                                    this.$message.success(`找到 ${data.search_info.total_found} 条相关帖子`);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('搜索失败:', error);
+                                this.communityLoading = false;
+                                this.$message.error('搜索失败，请重试');
+                            });
+                    },
+                    clearCommunitySearch() {
+                        // 清空搜索状态
+                        this.communityPagination.isSearchMode = false;
+                        this.communitySearchQuery = '';
+                        this.communityCheckins = [];
+                        this.communitySearchInfo = null;
+                        this.communityPagination = {
+                            page: 1,
+                            pageSize: 10,
+                            total: 0,
+                            totalPages: 1,
+                            hasNext: false,
+                            hasPrev: false
+                        };
+                        
+                        // 清除搜索防抖计时器
+                        if (this.communitySearchInputTimer) {
+                            clearTimeout(this.communitySearchInputTimer);
+                            this.communitySearchInputTimer = null;
+                        }
+                        
+                        this.$message.info('已清空搜索');
+                    },
+                    saveCommunitySearchHistory(query) {
+                        // 保存搜索历史（最多保存10条）
+                        const history = this.communitySearchHistory.filter(h => h !== query);
+                        history.unshift(query);
+                        this.communitySearchHistory = history.slice(0, 10);
+                        
+                        // 保存到本地存储
+                        try {
+                            localStorage.setItem('forum_community_search_history', JSON.stringify(this.communitySearchHistory));
+                        } catch (e) {
+                            console.error('保存搜索历史失败:', e);
+                        }
+                    },
+                    loadCommunitySearchHistory() {
+                        // 从本地存储加载搜索历史
+                        try {
+                            const history = localStorage.getItem('forum_community_search_history');
+                            if (history) {
+                                this.communitySearchHistory = JSON.parse(history);
+                            }
+                        } catch (e) {
+                            console.error('加载搜索历史失败:', e);
+                        }
+                    },
+                    useCommunitySearchHistory(query) {
+                        // 使用搜索历史
+                        this.communitySearchQuery = query;
+                        this.performCommunitySearch(query);
+                    },
+                    fetchUserPosts(page = 1) {
+                        this.userPostsLoading = true;
+                        axios.get(`/forum/posts/user/?page=${page}&page_size=${this.userPostsPagination.pageSize}`)
+                            .then(response => {
+                                this.userPosts = response.data.posts || [];
+                                this.userPostsPagination = {
+                                    ...this.userPostsPagination,
+                                    page: response.data.pagination.page,
+                                    total: response.data.pagination.total,
+                                    totalPages: response.data.pagination.total_pages,
+                                    hasNext: response.data.pagination.has_next,
+                                    hasPrev: response.data.pagination.has_prev
+                                };
+                                this.userPostsLoading = false;
+                            })
+                            .catch(error => {
+                                console.error('获取用户帖子失败:', error);
+                                this.userPostsLoading = false;
+                                this.$message.error('获取用户帖子失败，请重试');
+                            });
+                    },
+                    
+                    refreshUserPosts() {
+                        this.fetchUserPosts(1);
+                        this.$message.success('正在刷新我的帖子');
+                    },
+                    handleUserPostsPageChange(page) {
+                        this.fetchUserPosts(page);
+                        // 滚动到页面顶部
+                        document.querySelector('.content-area').scrollTop = 0;
+                    },
+                    handleUserPostsPageSizeChange(pageSize) {
+                        this.userPostsPagination.pageSize = pageSize;
+                        this.userPostsPagination.page = 1;
+                        this.fetchUserPosts(1);
                     }
                 },
                 beforeDestroy() {
-                    // 清理计时器
-                    if (this.timerInterval) {
-                        clearInterval(this.timerInterval);
-                        this.timerInterval = null;
-                    }
+                    // 清理计时器代码已删除
                 },
                 mounted() {
                     console.log("Vue实例已挂载");
@@ -3329,16 +3726,28 @@
                     this.loading = true;
                     this.loadUserData();
                     
-                    // 加载专注模式数据
-                    if (this.isLoggedIn) {
-                        this.loadFocusData();
-                    }
+                    // 专注模式数据加载已删除
                     
                     // 获取学校列表
                     this.fetchSchools();
                     
                     // 加载搜索历史
                     this.loadSearchHistory();
+                    
+                    // 恢复学习进度（延迟执行，确保数据加载完成）
+                    setTimeout(() => {
+                        this.restoreAllStudyProgress();
+                    }, 1000);
+                    
+                    // 如果当前标签是动态，加载社区数据
+                    if (this.currentTab === 'tasks') {
+                        this.fetchCommunityData(1);
+                    }
+                    
+                    // 如果用户已登录，加载用户帖子
+                    if (this.isLoggedIn && this.currentTab === 'forum') {
+                        this.fetchUserPosts(1);
+                    }
                     
                     // 隐藏静态内容
                     let staticContent = document.getElementById('static-content');
