@@ -250,3 +250,26 @@ INFO 2025-07-03 22:59:06,574 basehttp "GET /forum/posts/?school_id=1&page=1&page
 INFO 2025-07-03 22:59:27,114 basehttp "POST /forum/posts/create/ HTTP/1.1" 200 421
 INFO 2025-07-03 23:00:52,715 autoreload C:\Users\tianj\Documents\GitHub\school_check_in\accounts\views.py changed, reloading.
 INFO 2025-07-03 23:00:53,612 autoreload Watching for file changes with StatReloader
+INFO 2025-07-03 23:47:18,070 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-07-03 23:47:18,127 basehttp "GET /accounts/ HTTP/1.1" 200 183035
+INFO 2025-07-03 23:47:23,863 basehttp "GET /accounts/profile/ HTTP/1.1" 200 161
+INFO 2025-07-03 23:47:23,872 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 23:47:23,882 basehttp "GET /checkin/community/ HTTP/1.1" 200 1146
+INFO 2025-07-03 23:47:23,882 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 573
+WARNING 2025-07-03 23:47:24,214 log Not Found: /favicon.ico
+WARNING 2025-07-03 23:47:24,218 basehttp "GET /favicon.ico HTTP/1.1" 404 3490
+INFO 2025-07-03 23:47:24,226 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 573
+INFO 2025-07-03 23:47:24,226 basehttp "GET /checkin/community/ HTTP/1.1" 200 1146
+INFO 2025-07-03 23:47:27,722 basehttp "GET /accounts/auth/ HTTP/1.1" 200 7666
+INFO 2025-07-03 23:47:38,620 basehttp "POST /accounts/login/ HTTP/1.1" 200 409
+INFO 2025-07-03 23:47:38,665 basehttp "GET /accounts/interests/ HTTP/1.1" 200 13975
+INFO 2025-07-03 23:47:40,788 basehttp "GET /accounts/interests/tags/ HTTP/1.1" 200 5849
+INFO 2025-07-03 23:47:44,184 basehttp "POST /accounts/interests/select/ HTTP/1.1" 200 80
+INFO 2025-07-03 23:47:44,233 basehttp "GET /accounts/ HTTP/1.1" 200 183035
+INFO 2025-07-03 23:47:47,354 basehttp "GET /accounts/profile/ HTTP/1.1" 200 161
+INFO 2025-07-03 23:47:47,354 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-03 23:47:47,357 basehttp "GET /checkin/community/ HTTP/1.1" 200 1146
+INFO 2025-07-03 23:47:47,360 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 573
+INFO 2025-07-03 23:47:47,410 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 573
+INFO 2025-07-03 23:47:47,412 basehttp "GET /checkin/community/ HTTP/1.1" 200 1146
+INFO 2025-07-03 23:47:57,952 basehttp "GET /accounts/auth/ HTTP/1.1" 200 7666
