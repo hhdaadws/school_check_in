@@ -273,3 +273,58 @@ INFO 2025-07-03 23:47:47,360 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 573
 INFO 2025-07-03 23:47:47,410 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 573
 INFO 2025-07-03 23:47:47,412 basehttp "GET /checkin/community/ HTTP/1.1" 200 1146
 INFO 2025-07-03 23:47:57,952 basehttp "GET /accounts/auth/ HTTP/1.1" 200 7666
+INFO 2025-07-04 08:58:56,650 autoreload Watching for file changes with StatReloader
+INFO 2025-07-04 08:58:59,998 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-07-04 08:59:00,011 basehttp "GET /accounts/ HTTP/1.1" 200 183035
+INFO 2025-07-04 08:59:00,299 basehttp "GET /static/accounts/css/styles.css HTTP/1.1" 304 0
+WARNING 2025-07-04 08:59:02,341 log Unauthorized: /checkin/checkins/
+WARNING 2025-07-04 08:59:02,342 log Unauthorized: /checkin/community/
+WARNING 2025-07-04 08:59:02,343 log Unauthorized: /accounts/profile/
+WARNING 2025-07-04 08:59:02,344 basehttp "GET /checkin/checkins/ HTTP/1.1" 401 73
+WARNING 2025-07-04 08:59:02,345 basehttp "GET /checkin/community/ HTTP/1.1" 401 73
+WARNING 2025-07-04 08:59:02,345 basehttp "GET /accounts/profile/ HTTP/1.1" 401 73
+INFO 2025-07-04 08:59:02,346 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+WARNING 2025-07-04 08:59:02,585 log Unauthorized: /checkin/checkins/
+WARNING 2025-07-04 08:59:02,591 log Unauthorized: /checkin/community/
+WARNING 2025-07-04 08:59:02,591 basehttp "GET /checkin/checkins/ HTTP/1.1" 401 73
+WARNING 2025-07-04 08:59:02,591 basehttp "GET /checkin/community/ HTTP/1.1" 401 73
+WARNING 2025-07-04 08:59:04,178 log Not Found: /favicon.ico
+WARNING 2025-07-04 08:59:04,178 basehttp "GET /favicon.ico HTTP/1.1" 404 3490
+INFO 2025-07-04 08:59:07,691 basehttp "GET /accounts/auth/ HTTP/1.1" 200 7666
+INFO 2025-07-04 08:59:07,798 basehttp "GET /static/accounts/js/auth.js HTTP/1.1" 200 12029
+WARNING 2025-07-04 08:59:12,293 log Unauthorized: /checkin/community/
+WARNING 2025-07-04 08:59:12,295 basehttp "GET /checkin/community/?page=1&page_size=10 HTTP/1.1" 401 73
+WARNING 2025-07-04 08:59:13,106 log Unauthorized: /checkin/checkins/
+WARNING 2025-07-04 08:59:13,106 basehttp "GET /checkin/checkins/ HTTP/1.1" 401 73
+WARNING 2025-07-04 08:59:13,578 log Unauthorized: /forum/posts/user/
+WARNING 2025-07-04 08:59:13,578 basehttp "GET /forum/posts/user/ HTTP/1.1" 401 73
+INFO 2025-07-04 08:59:13,649 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=10 HTTP/1.1" 200 3741
+INFO 2025-07-04 08:59:18,047 basehttp "GET /accounts/auth/ HTTP/1.1" 200 7666
+INFO 2025-07-04 08:59:19,452 basehttp "POST /accounts/login/ HTTP/1.1" 200 408
+INFO 2025-07-04 08:59:19,485 basehttp "GET /accounts/ HTTP/1.1" 200 183035
+INFO 2025-07-04 08:59:20,114 basehttp "GET /accounts/profile/ HTTP/1.1" 200 161
+INFO 2025-07-04 08:59:20,117 basehttp "GET /forum/api/schools/ HTTP/1.1" 200 258
+INFO 2025-07-04 08:59:20,120 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 318
+INFO 2025-07-04 08:59:20,121 basehttp "GET /checkin/community/ HTTP/1.1" 200 1146
+INFO 2025-07-04 08:59:20,169 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 318
+INFO 2025-07-04 08:59:20,172 basehttp "GET /checkin/community/ HTTP/1.1" 200 1146
+INFO 2025-07-04 08:59:21,810 basehttp "GET /forum/posts/user/ HTTP/1.1" 200 420
+INFO 2025-07-04 08:59:21,827 basehttp "GET /forum/posts/user/?page=1&page_size=10 HTTP/1.1" 200 420
+INFO 2025-07-04 08:59:21,901 basehttp "GET /forum/posts/?school_id=1&page=1&page_size=10 HTTP/1.1" 200 3741
+INFO 2025-07-04 08:59:23,672 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 318
+INFO 2025-07-04 08:59:25,164 basehttp "POST /checkin/checkins/16/check/ HTTP/1.1" 200 344
+INFO 2025-07-04 08:59:25,230 basehttp "GET /checkin/community/?page=1&page_size=10 HTTP/1.1" 200 1146
+INFO 2025-07-04 08:59:26,701 basehttp "GET /checkin/checkins/ HTTP/1.1" 200 573
+INFO 2025-07-04 08:59:27,460 basehttp "GET /checkin/community/?page=1&page_size=10 HTTP/1.1" 200 1146
+INFO 2025-07-04 08:59:30,772 basehttp "GET /accounts/auth/ HTTP/1.1" 200 7666
+INFO 2025-07-04 09:01:43,285 basehttp "POST /accounts/send-verification-code/ HTTP/1.1" 200 104
+INFO 2025-07-04 09:02:38,778 basehttp "POST /accounts/register/ HTTP/1.1" 200 70
+INFO 2025-07-04 09:02:44,349 basehttp "GET /accounts/auth/ HTTP/1.1" 200 7666
+INFO 2025-07-04 09:02:56,530 basehttp "POST /accounts/register/ HTTP/1.1" 200 76
+INFO 2025-07-04 09:03:00,446 basehttp "POST /accounts/send-verification-code/ HTTP/1.1" 200 104
+INFO 2025-07-04 09:03:03,605 basehttp "GET /accounts/auth/ HTTP/1.1" 200 7666
+INFO 2025-07-04 09:03:13,282 basehttp "POST /accounts/send-verification-code/ HTTP/1.1" 200 104
+INFO 2025-07-04 09:03:20,116 basehttp "POST /accounts/register/ HTTP/1.1" 200 64
+INFO 2025-07-04 09:03:23,299 basehttp "GET /accounts/auth/ HTTP/1.1" 200 7666
+INFO 2025-07-04 09:03:31,309 basehttp "POST /accounts/send-verification-code/ HTTP/1.1" 200 104
+INFO 2025-07-04 09:03:58,820 basehttp "POST /accounts/register/ HTTP/1.1" 200 70
